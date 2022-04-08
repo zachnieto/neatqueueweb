@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.home-header {
+  font-size: 9vw;
   color: white;
+  text-shadow: 0px 0px 20px #1e003c;
 }
 
-.App-link {
-  color: #61dafb;
+.main {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-item {
+  transition: all .3s ease-out 0s;
+}
+
+.nq-button:hover {
+  cursor: pointer;
+  transform: translateY(-2px) !important;
+  background-color: #a24dd386 !important;
+  border-color: #a24dd386 !important;
+}
+
+.nq-button {
+  box-shadow: none !important;
+  background-color: rgba(149, 53, 255, .7) !important;
+}
+
+.nq-active {
+  text-decoration: underline;
+}
+
+h1 {
+  color: white;
+  text-shadow: 0px 0px 30px #1e003c;
+}
+
+#tsparticles {
+  position: absolute !important;
+  z-index: -1 !important;
+  opacity: 50%;
+}
+
+.code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.nav-link {
+  font-size: 125%;
+  color: white !important;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ae0000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
