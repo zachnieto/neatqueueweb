@@ -5,7 +5,7 @@ import './index.css';
 import './App.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {combineReducers, createStore} from "redux";
+import {createStore} from "redux";
 import {Provider} from "react-redux";
 import reducer from './reducers/index'
 

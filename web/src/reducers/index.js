@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import discordReducer from "./discord-reducer";
 import statsReducer from "./stats-reducer";
+import sessionReducer from "./session-reducer";
 
 
 export default combineReducers({
-    discordReducer,
-    statsReducer
+    statsReducer,
+    sessionReducer
 })

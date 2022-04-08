@@ -6,3 +6,4 @@ export const getStats = async () => {
     const resp = await axios.get(`${API_BASE}/stats`)
     return resp.data;
 }
+
