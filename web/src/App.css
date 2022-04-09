@@ -71,5 +71,37 @@ h1 {
 }
 
 .nq-card {
-  border-color: red;
+  border-color: #8b00d7;
+  background-color: rgba(0,0,0,0.78);
+}
+
+.nq-card:hover {
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.02) !important;
+  transition: all 0.25s ease-out;
+  z-index: 1
+}
+
+.nq-hover-action:hover {
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.02) !important;
+  transition: all 0.25s ease-out;
+  z-index: 1
+}
+
+.nq-leaderboard-item {
+  background-color: rgba(102, 0, 155, 0.2);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.nq-green-arrow {
+  color: transparent;
+  text-shadow: 0 0 0 #2fff00;
+  transform: rotate(180deg);
+}
+
+.nq-no-symbol {
+  padding-left: 55px;
 }

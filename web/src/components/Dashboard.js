@@ -9,14 +9,14 @@ const Dashboard = () => {
     const session = useSelector(state => state.sessionReducer)
 
     useEffect(() => {
-        if (!("guilds" in session)) {
+        if (!("guilds" in session) && "auth" in session) {
             const getGuilds = async () => {
                 await discordGetGuilds(dispatch, session.auth)
             }
 
             getGuilds()
         }
-    }, [session])
+    }, [])
 
     console.log(session)
     return (

@@ -4,17 +4,20 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./components/Home";
 import Particles from "./components/Particles";
 import Navbar from "./components/Navbar";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getSession} from "./actions/server-actions";
 import Dashboard from "./components/Dashboard";
+import Manage from "./components/Manage";
+import Leaderboard from "./components/Leaderboard";
+import LeaderboardMenu from "./components/LeaderboardMenu";
 
 
 function App() {
 
-    const dispatch = useDispatch(state => state.sessionReducer)
+    const dispatch = useDispatch()
+    const session = useSelector(state => state.sessionReducer)
 
     useEffect(() => {
-        console.log("Fetching session")
         const session = async () => {
             await getSession(dispatch)
         }
@@ -23,14 +26,22 @@ function App() {
 
     return (
     <div className="container-fluid">
-        <Particles />
-        <Router>
-            <Navbar />
-            <Routes>
+        {console.log(session)}
+        { session !== "" &&
+            <>
+                <Particles/>
+                <Router>
+                <Navbar />
+                <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
-            </Routes>
-        </Router>
+                {/*<Route path="/manage/:guildID" element={<Manage/>}/>*/}
+                <Route path="/leaderboard/:guildID/:channelID" element={<Leaderboard/>}/>
+                <Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>
+                </Routes>
+                </Router>
+            </>
+        }
 
     </div>
     );

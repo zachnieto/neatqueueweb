@@ -52,7 +52,6 @@ const Navbar = () => {
 
     return (
         <ul className="nav nav-pills">
-            {JSON.stringify(session)}
             <li className="nav-item ms-auto p-4">
                 <a className="nav-link" href="/"> <AiOutlineHome style={{fontSize: "1.2em", marginBottom: "6px"}}/>Home</a>
             </li>
