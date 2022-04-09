@@ -10,7 +10,7 @@ const LeaderboardItem = ({player}) => {
         if (player.data.rank > player.num) {
             setArrowClass("nq-green-arrow")
         }
-        else if (player.data.rank === player.num) {
+        else if (!('rank' in player.data) || player.data.rank === player.num) {
             setArrow("")
             setArrowClass("nq-no-symbol")
         }
