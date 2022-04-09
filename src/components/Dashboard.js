@@ -9,6 +9,7 @@ const Dashboard = () => {
     const session = useSelector(state => state.sessionReducer)
 
     useEffect(() => {
+        console.log((!("guilds" in session) && "auth" in session))
         if (!("guilds" in session) && "auth" in session) {
             const getGuilds = async () => {
                 await discordGetGuilds(dispatch, session.auth)
@@ -16,18 +17,17 @@ const Dashboard = () => {
 
             getGuilds()
         }
-    }, [])
+    }, [session])
 
     console.log(session)
     return (
         <div>
-        {("guilds" in session) ?
+        {("guilds" in session) &&
             <div className="row text-center">{session.guilds.map(guild =>
                 <Guild key={guild.id} guild={guild} />
             )}
             </div>
-            :
-            <h1>LOADING</h1>
+
         }
         </div>
     );
