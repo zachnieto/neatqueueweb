@@ -11,7 +11,6 @@ import Dashboard from "./components/Dashboard";
 import Manage from "./components/Manage";
 import Leaderboard from "./components/Leaderboard";
 import LeaderboardMenu from "./components/LeaderboardMenu";
-import Setup from "./components/Setup";
 
 
 function App() {
@@ -42,7 +41,6 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
                 <Route path="/manage/:guildID" element={<Manage/>}/>
-                <Route path="/setup" element={<Setup/>}/>
                 <Route path="/leaderboard/:guildID/:channelID" element={<Leaderboard/>}/>
                 <Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>
                 </Routes>

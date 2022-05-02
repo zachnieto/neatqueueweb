@@ -57,7 +57,7 @@ const Navbar = () => {
                 <a className="nav-link" href="/"> <AiOutlineHome style={{fontSize: "1.2em", marginBottom: "6px"}}/>Home</a>
             </li>
             <li className="nav-item p-4 pe-sm-0 pe-md-4">
-                <a className="nav-link" href="/setup"> <FaCog style={{fontSize: "1.2em", marginBottom: "6px"}}/>Setup</a>
+                <a className="nav-link" href={process.env.REACT_APP_DOCS}> <FaCog style={{fontSize: "1.2em", marginBottom: "6px"}}/>Documentation</a>
             </li>
             <li className="nav-item p-4 pe-sm-0 pe-md-4">
                 <a className="nav-link" href={process.env.REACT_APP_DISCORD_INVITE}><RiDiscordLine style={{fontSize: "1.2em", marginBottom: "6px"}} />Invite</a>
