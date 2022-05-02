@@ -1,0 +1,4 @@
+.idea
+*- Copy
+.gitignore
+*/node_modules

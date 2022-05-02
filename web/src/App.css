@@ -1,0 +1,128 @@
+.home-header {
+  font-size: 9vw;
+  color: white;
+  text-shadow: 0px 0px 20px #1e003c;
+}
+
+.main {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+}
+
+.nav-item {
+  transition: all .3s ease-out 0s;
+}
+
+.nq-button:hover {
+  cursor: pointer;
+  transform: translateY(-2px) !important;
+  background-color: #a24dd386 !important;
+  border-color: #a24dd386 !important;
+}
+
+.nq-button {
+  box-shadow: none !important;
+  background-color: rgba(149, 53, 255, .7) !important;
+}
+
+.nq-active {
+  text-decoration: underline;
+}
+
+h1 {
+  color: white;
+  text-shadow: 0px 0px 30px #1e003c;
+}
+
+#tsparticles {
+  position: absolute !important;
+  z-index: -1 !important;
+  opacity: 50%;
+}
+
+.code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.nav-link {
+  font-size: 125%;
+  color: white !important;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ae0000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.nq-card {
+  border-color: #8b00d7;
+  background-color: rgba(0,0,0,0.78);
+}
+
+.nq-card:hover {
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.02) !important;
+  transition: all 0.25s ease-out;
+  z-index: 1
+}
+
+.nq-hover-action:hover {
+  cursor: pointer;
+  transform: translateY(-5px) scale(1.02) !important;
+  transition: all 0.25s ease-out;
+  z-index: 1
+}
+
+.nq-leaderboard-item {
+  background-color: rgba(102, 0, 155, 0.2);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.nq-leaderboard-item:hover {
+  background-color: rgba(102, 0, 155, 0.6);
+  cursor: pointer;
+  transform: scaleX(1.02);
+}
+
+.nq-leaderboard-header {
+  background-color: rgba(175, 0, 255, 0.25);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.nq-green-arrow {
+  color: transparent;
+  text-shadow: 0 0 0 #2fff00;
+  transform: rotate(180deg);
+}
+
+.nq-no-symbol {
+  padding-left: 55px;
+}
+
+h1 {
+  white-space: nowrap;
+}
+
+.code {
+  font-size: larger;
+}
