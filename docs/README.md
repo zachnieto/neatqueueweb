@@ -10,6 +10,9 @@ Also, the term MMR stands for Match Making Rating, which corresponds to the hidd
 > All stats are tied to the queue name. This means if you create multiple queues with the same queue name, they
 > will share stats.
 
+
+##### Want to Donate? Simply use `/donate` or visit https://donatebot.io/checkout/505102060119916545
+
 <hr style="border:3px solid gray">
 
 # Getting Started
@@ -74,6 +77,7 @@ Set your IGN which is shown next your name if `/requireign` is enabled.
 #### Usage: `/info`
 #### Arguments
 `page`: The specific page number you want to view. \
+
 
 <hr style="border:3px solid gray">
 
@@ -407,6 +411,11 @@ Specify an AntiCheat channel to post suspicious activity. Without this set, Anti
 #### Arguments
 `channel`: The channel to post suspicious activity to. 
 #### Description
+Specify a role to give to flagged players.
+#### Usage: `/anticheat role [role]`
+#### Arguments
+`role`: Role to assign to flagged players. 
+#### Description
 Flag players who have new Discord accounts.
 #### Usage: `/anticheat flagnewaccount [age]`
 #### Arguments
@@ -416,6 +425,11 @@ Flag players who go on long winning/losing streaks.
 #### Usage: `/anticheat flagstreak [streak]`
 #### Arguments
 `streak`: The number of wins/losses in a row.
+#### Description
+Flag players who leave + rejoin the server in an attempt to bypass manual MMR initialization.
+#### Usage: `/anticheat flagrejoins [toggle]`
+#### Arguments
+`toggle`: If you want to flag rejoin.
 
 ---
 
