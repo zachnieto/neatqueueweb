@@ -2,11 +2,11 @@
 [NeatQueue Website](https://www.neatqueue.com) \
 All NeatQueue commands are slash commands, which means they are invoked using a `/` \
 Any command that is marked as Admin Only requires the user to have `Manage Channels` permissions, or have one of the
-configured NeatQueue staff roles.
+configured NeatQueue staff roles.\
 In this documentation, anytime an argument is surrounded by `[square brackets]`, it is a required argument. If
-it is surrounded by `(parenthesis)`, it is optional.
+it is surrounded by `(parenthesis)`, it is optional.\
 Also, the term MMR stands for Match Making Rating, which corresponds to the hidden rating system used by most competitive games.
-
+All commands are queue specific unless otherwise stated.
 > All stats are tied to the queue name. This means if you create multiple queues with the same queue name, they
 > will share stats.
 
@@ -156,7 +156,7 @@ Require players to select a team when they enter the queue. This skips any team 
 Will show separate queue buttons for each team.
 #### Usage: `/queueintoteam [toggle]`
 #### Arguments
-`toggle`: If you want players to queue into teams.
+`toggle`: (Default: False) If you want players to queue into teams.
 
 ---
 
@@ -166,7 +166,7 @@ Require players to create/join a team before being able to queue. The team capta
 are automatically queued as well.
 #### Usage: `/teamqueue [toggle]`
 #### Arguments
-`toggle`: If you want players to create teams.
+`toggle`: (Default: False) If you want players to create teams.
 > Team Queue is different than Queue Into Team, since it requires players to create/join teams with `/team`. These teams
 > last forever until disbanded.
 
@@ -200,8 +200,8 @@ Lock the queue to prevent players from queueing, or unlock to allow queueing aga
 Modify the starting MMR for the given role.
 #### Usage: `/startingmmr set [role] [mmr]`
 #### Arguments
-`role`: The Discord role.  \
-`mmr`: The starting MMR for this role.
+`role`: (Default: @everyone) The Discord role.  \
+`mmr`: (Default: 1000) The starting MMR for this role.
 #### Usage: `/startingmmr remove [role]`
 #### Arguments
 `role`: The Discord role.  
@@ -213,8 +213,18 @@ Modify the starting MMR for the given role.
 Sets the average or specific MMR change per match. 
 #### Usage: `/mmrchange [mmr] (static)`
 #### Arguments
-`mmr`: The average MMR change.  \
-`static`: If you want the MMR change to ALWAYS be this value.
+`mmr`: (Default: 50) The average MMR change.  \
+`static`: (Default: False) If you want the MMR change to ALWAYS be this value.
+
+---
+
+## MMR Variance
+#### Description
+Specify the variance is MMR distribution between 1 and 5000. A higher number means that the average MMR 
+distributed sticks closer to the `/mmrchange`. A lower number means the average MMR is more drastic.
+#### Usage: `/mmrvariance [variance]`
+#### Arguments
+`variance`: (Default: 800) The MMR variance.
 
 ---
 
@@ -247,10 +257,16 @@ Sets the required MMR a player must have to enter this queue.
 
 ## Role Requirement
 #### Description
-Sets the required Discord role a player must have to enter this queue.
-#### Usage: `/mmrrequirement [role]`
+Add a required Discord role a player must have to enter this queue. The player can join the queue if they 
+have any of the required roles.
+#### Usage: `/mmrrequirement add [role]`
 #### Arguments
 `role`: The required role.
+#### Description
+Remove a required Discord role a player must have to enter this queue. 
+#### Usage: `/mmrrequirement remove [role]`
+#### Arguments
+`role`: The role to remove.
 
 ---
 
@@ -296,7 +312,7 @@ Specify Maps/Gamemodes for matches
 Toggle creating a new text channel for every queue that pops.
 #### Usage: `/tempchannels [toggle]`
 #### Arguments
-`toggle`: Whether to create new channels.
+`toggle`: (Default: True) Whether to create new channels.
 
 ---
 
@@ -305,7 +321,7 @@ Toggle creating a new text channel for every queue that pops.
 Specify game roles per team if required for your game
 #### Usage: `/roles [roles]`
 #### Arguments
-`roles`: Comma separated list of your roles.
+`roles`: (Default: None) Comma separated list of your roles.
 > Example:  \
 >Overwatch - `/roles Tank,Tank,DPS,DPS,Support,Support` \
 >This will automatically resize your teams to match the number of roles, so 6 in this example.
@@ -318,7 +334,7 @@ Toggle a waiting room which allows for roles to be overqueued. When roles are ov
 a +1 next to the role. When the match starts, players will automatically be queued from the waiting room.
 #### Usage: `/waitingroom [toggle]`
 #### Arguments
-`toggle`: Toggle the waiting room.
+`toggle`: (Default: False) Toggle the waiting room.
 > Only applies to when Roles are enabled, since otherwise queues instantly start.
 
 ---
@@ -328,7 +344,7 @@ a +1 next to the role. When the match starts, players will automatically be queu
 Specify how teams are selected
 #### Usage: `/teamselection [type]`
 #### Arguments
-`type`: Either via the default selection menu, balanced, captains, random, players choose, or unfairly.
+`type`: (Default: Selection Menu) Either via the default selection menu, balanced, captains, random, players choose, or unfairly.
 
 ---
 
@@ -337,7 +353,7 @@ Specify how teams are selected
 Specify how captains are selected
 #### Usage: `/captainselection [type]`
 #### Arguments
-`type`: Either via the default selection menu, random, two highest rated, two lowest rated, or a vote.
+`type`: (Default: Selection Menu) Either via the default selection menu, random, two highest rated, two lowest rated, or a vote.
 
 ---
 
@@ -346,7 +362,7 @@ Specify how captains are selected
 Specify whether voice channels are required to be joined, optional, or fully disabled.
 #### Usage: `/voicechannels [mode]`
 #### Arguments
-`mode`: Either required, optional, or disabled.
+`mode`: (Default: Required) Either required, optional, or disabled.
 
 ---
 
@@ -392,7 +408,8 @@ Specify the staff channel where admin match results are posted. These message ha
 
 ## Staff Role
 #### Description
-Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands as well as match outcome modifications.
+Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands as well as match outcome 
+modifications. This command is configured Server-Wide, and applies to all queues.
 #### Usage: `/staffrole add/remove [role]`
 #### Arguments
 `role`: Role to add/remove as staff.
@@ -401,7 +418,7 @@ Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands 
 
 ## AntiCheat
 #### Description
-Toggle all AntiCheat checks.
+Toggle all AntiCheat checks. This command is configured Server-Wide, and applies to all queues.
 #### Usage: `/anticheat enable [toggle]`
 #### Arguments
 `toggle`: If you want AntiCheat enabled.
@@ -438,7 +455,7 @@ Flag players who leave + rejoin the server in an attempt to bypass manual MMR in
 Toggle voting for match results. If this is disabled, most stats will not be collected!
 #### Usage: `/voteforresult [toggle]`
 #### Arguments
-`toggle`: If you want players to vote for results.
+`toggle`: (Default: True) If you want players to vote for results.
 
 ---
 
@@ -488,7 +505,7 @@ Substitute the first player for the second player
 Balanced teams using either MMR (default) or Discord role ordering.
 #### Usage: `/balanceby [type]`
 #### Arguments
-`type`: The type of balancing, either MMR or Role.
+`type`: (Default: MMR) The type of balancing, either MMR or Role.
 #### Description
 For `/balanceby roles`, specify the ordering of roles to utilize from lowest to highest ranking. 
 Omit to use the default Discord role hierarchy.
@@ -525,7 +542,7 @@ Copy the autoroles configuration from this queue to another queue since it can b
 Specify the requirements for a vote to finish.
 #### Usage: `/requiredvotes [type]`
 #### Arguments
-`type`: The voting requirement, either one, half, or majority.
+`type`: (Default: Majority) The voting requirement, either one, half, or majority.
 
 ---
 
@@ -534,7 +551,7 @@ Specify the requirements for a vote to finish.
 Either use images for the leaderboards, or just a basic textual leaderboard.
 #### Usage: `/leaderboardtype [type]`
 #### Arguments
-`type`: The leaderboard type, either Images or Text.
+`type`: (Default: Images) The leaderboard type, either Images or Text.
 > Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
 
 ---
@@ -544,7 +561,7 @@ Either use images for the leaderboards, or just a basic textual leaderboard.
 Toggle always hiding stats to avoid channel spam.
 #### Usage: `/hidestats [toggle]`
 #### Arguments
-`toggle`: Toggle stats always being hidden.
+`toggle`: (Default: False) Toggle stats always being hidden.
 
 ---
 
@@ -553,7 +570,7 @@ Toggle always hiding stats to avoid channel spam.
 Specify using Discord Names or nicknames.
 #### Usage: `/nametype [type]`
 #### Arguments
-`type`: The name type, either Discord Names or Nicknames.
+`type`: (Default: Nick) The name type, either Discord Names or Nicknames.
 
 ---
 
@@ -562,7 +579,7 @@ Specify using Discord Names or nicknames.
 The type of draft to use. See https://www.rookieroad.com/football/fantasy/draft-types/ for a more in-depth draft description.
 #### Usage: `/nametype [type]`
 #### Arguments
-`type`: The draft type, either Straight or Snake.
+`type`: (Default: Snake) The draft type, either Straight or Snake.
 
 ---
 
@@ -571,7 +588,7 @@ The type of draft to use. See https://www.rookieroad.com/football/fantasy/draft-
 The configuration for when a player can call a forcestart vote for a queue.
 #### Usage: `/forcestartsize [min_size] (max_size) (only_fair)`
 #### Arguments
-`min_size`: The minimum required players to be able to forcestart.  \
+`min_size`: (Default: -1) The minimum required players to be able to forcestart. Set to -1 to disable \
 `max_size`: The maximum required players to be able to forcestart.  \
 `only_fair`: Only allow force starting if teams will have the same number of players. 
 
@@ -613,7 +630,7 @@ Start a match using players from the given voice chat. The created match will us
 Automatically close a match after this timer has elapsed.
 #### Usage: `/cleanuptimer [duration]`
 #### Arguments
-`duration`: The maximum match length in seconds.
+`duration`: (Default: 5400) The maximum match length in seconds.
 
 ---
 
@@ -622,7 +639,7 @@ Automatically close a match after this timer has elapsed.
 Automatically reset a queue if this timer elapses without any queue activity.
 #### Usage: `/resettimer [duration]`
 #### Arguments
-`duration`: The length of time in seconds a queue can be inactive before resetting.
+`duration`: (Default: 3600) The length of time in seconds a queue can be inactive before resetting.
 
 ---
 
@@ -631,7 +648,7 @@ Automatically reset a queue if this timer elapses without any queue activity.
 The amount of time each menu vote lasts.
 #### Usage: `/menutimer [duration]`
 #### Arguments
-`duration`: The duration for votes in seconds.
+`duration`: (Default: 60) The duration for votes in seconds.
 
 ---
 
@@ -640,7 +657,7 @@ The amount of time each menu vote lasts.
 The amount of time to delay the winner message showing up to prevent players from accidentally clicking.
 #### Usage: `/delaywinnervote [duration]`
 #### Arguments
-`duration`: The length of time in seconds to wait before sending the winner message.
+`duration`: (Default: 10) The length of time in seconds to wait before sending the winner message.
 
 ---
 
@@ -649,8 +666,8 @@ The amount of time to delay the winner message showing up to prevent players fro
 The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
 #### Usage: `/afktimer [toggle] (duration)`
 #### Arguments
-`toggle`: Enable autokicking of players who are detected as AFK.  \
-`duration`: The length of time in seconds to wait before kicking an AFK player. 
+`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
+`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
 
 ---
 
@@ -682,7 +699,7 @@ Load the given configuration
 Toggle showing emojis or being lame.
 #### Usage: `/emojis [toggle]`
 #### Arguments
-`toggle`: Enable/Disable emojis in bot messages.
+`toggle`: (Default: Enabled) Enable/Disable emojis in bot messages.
 
 ---
 
@@ -691,7 +708,7 @@ Toggle showing emojis or being lame.
 Toggle allowing players to be in multiple queues at once.
 #### Usage: `/multiqueue [toggle]`
 #### Arguments
-`toggle`: If players can join multiple queues at once.
+`toggle`: (Default: True) If players can join multiple queues at once.
 > If disabled, players will be prevented by queueing if: \
 > 1. They are in queue in another channel
 > 2. Have yet to vote for a winner in an active match
@@ -700,7 +717,7 @@ Toggle allowing players to be in multiple queues at once.
 
 ## Show Rating In Name
 #### Description
-Show a players MMR in their nickname.
+Show a players MMR in their nickname. This command is configured Server-Wide, and applies to all queues.
 #### Usage: `/ratinginname toggle [toggle]`
 #### Arguments
 `toggle`: Enable/disable showing rating in names.
@@ -735,7 +752,7 @@ command allows you to explicitly specify what queues to show rating from.
 Toggle allowing rematches.
 #### Usage: `/rematches [toggle]`
 #### Arguments
-`toggle`: If rematches are enabled.
+`toggle`: (Default: True) If rematches are enabled.
 
 ---
 
@@ -744,7 +761,7 @@ Toggle allowing rematches.
 Toggle allowing ties.
 #### Usage: `/ties [toggle]`
 #### Arguments
-`toggle`: If ties are enabled.
+`toggle`: (Default: True) If ties are enabled.
 
 ---
 
@@ -753,7 +770,7 @@ Toggle allowing ties.
 Require if players must set their IGN before they can join the queue. Their IGN will appear next to their name when teams are selected.
 #### Usage: `/requireign [toggle]`
 #### Arguments
-`toggle`: If IGNs are required.
+`toggle`: (Default: False) If IGNs are required.
 > Players will be prompted to specify their IGNs with `/ign`
 
 ---
@@ -805,4 +822,4 @@ Cancel all pending team invited.
 Enable/disable channel restrictions for created channels.
 #### Usage: `/channelrestrictions [toggle]`
 #### Arguments
-`toggle`: If channel restrictions are applied.
+`toggle`: (Default: True) If channel restrictions are applied.
