@@ -376,14 +376,30 @@ Link a channel without a queue to a channel with a queue. This allows you to che
 
 ---
 
-## Default Channel
+## Lobby Channel
 #### Description
-Specify a default channel to pull players from when their queue starts. If the player is not in this voice channel,
-or is not connected to any voice channel, they will not be automatically dragged. After a queue completes, the players
-will be dragged from their team channels back to this default channel.
-#### Usage: `/defaultchannel [channel]`
+Automatically drag players to/from the lobby channel before/after matches.
+#### Usage: `/lobbychannel toggle [toggle]`
 #### Arguments
-`channel`: The channel to act as the default channel.
+`toggle`: Enable/disable the lobby channel
+#### Description
+Specify a lobby channel to pull players from when their queue starts. If the player is not in this voice channel, 
+they will not be automatically dragged. After a queue completes, the players
+will be dragged from their team channels back to this lobby channel.
+#### Usage: `/lobbychannel set [channel]`
+#### Arguments
+`channel`: The lobby channel
+#### Description
+Automatically pull the queue's players from all voice channels to the queue voice channel.
+#### Usage: `/lobbychannel pullall [toggle]`
+#### Arguments
+`toggle`: Enable/disable moving players from all channels
+#### Description
+Return users to the voice channel they were in before the match started after the winner is selected.
+#### Usage: `/lobbychannel return [toggle]`
+#### Arguments
+`toggle`: Enable/disable returning players to their voice channel
+
 
 ---
 
@@ -823,3 +839,46 @@ Enable/disable channel restrictions for created channels.
 #### Usage: `/channelrestrictions [toggle]`
 #### Arguments
 `toggle`: (Default: True) If channel restrictions are applied.
+
+---
+
+## Ban/Block Players
+#### Description
+Block a player from entering any queues.
+#### Usage: `/block [player]`
+#### Arguments
+`player`: User to block from queueing
+#### Description
+Unblock a player from entering any queues
+#### Usage: `/unblock [player]`
+#### Arguments
+`player`: User to unblock from queueing
+
+---
+
+## Game Integrations/Account Registering
+#### Description
+Require users to register their game's account.
+#### Usage: `/requireregister [game]`
+#### Arguments
+`game`: The game to register the account with
+#### Description
+Register your account
+#### Usage: `/register [account]`
+#### Arguments
+`account`: Account details to register
+
+> Currently supported games:
+> 1. Overwatch (BattleNet) `Ex: /register NeatZ#11354`
+> 2. RocketLeague (Steam or Epic) `Ex: /register neat-z`
+> 3. Rainbow 6
+
+---
+
+## Anonymous Queues
+#### Description
+Hide player names when entering/viewing a queue
+#### Usage: `/anonymousqueue [toggle]`
+#### Arguments
+`toggle`: Enable/disable anonymous queueing
+

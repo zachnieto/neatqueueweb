@@ -115,6 +115,11 @@ h1 {
   transform: rotate(180deg);
 }
 
+.nq-red-arrow {
+  color: transparent;
+  text-shadow: 0 0 0 #ff0000;
+}
+
 .nq-no-symbol {
   padding-left: 55px;
 }

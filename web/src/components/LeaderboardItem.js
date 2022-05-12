@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 const LeaderboardItem = ({player}) => {
 
     const [arrow, setArrow] = useState("🔻")
-    const [arrowClass, setArrowClass] = useState("")
+    const [arrowClass, setArrowClass] = useState("nq-red-arrow")
 
     useEffect(() => {
         console.log(player)
