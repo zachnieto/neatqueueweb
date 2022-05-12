@@ -83,352 +83,40 @@ Set your IGN which is shown next your name if `/requireign` is enabled.
 
 # Admin Commands
 
-## Start Queue
+
+
+## AFK Timer
 #### Description
-Start a new queue
-#### Usage: `/startqueue [queuename] [team_size] (number_of_teams)`
+The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
+#### Usage: `/afktimer [toggle] (duration)`
 #### Arguments
-`queuename`: The queue name. \
-`team_size`: The team size. \
-`number_of_teams`: The number of teams.
+`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
+`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
 
 ---
 
-## Setup
+## Add/Remove/Substitute Players
 #### Description
-Start the interactive queue setup
-#### Usage: `/setup`
+Add/remove the given player to/from the queue
+#### Usage: `/player add|remove [user]`
+#### Arguments
+`user`: The user to add/remove.
+#### Description
+Substitute the first player for the second player
+#### Usage: `/player sub [player1] [player2]`
+#### Arguments
+`player1`: The user to remove.  \
+`player2`: The user to add in place of player1. 
+> This is an Admin command, but players can create a substitution themselves after teams are created using `/substitute`
 
 ---
 
-## End Queue
+## Anonymous Queues
 #### Description
-End the current queue
-#### Usage: `/endqueue`
-
----
-
-## Queue Name
-#### Description
-Change the name of the queue
-#### Usage: `/queuename [name]`
-> Since stats are tied to the queue name, changing the name will make it seem like all stats are lost.\
-> If you want to change a queue name but move all stats to the new name, use `/rename [name]`.
+Hide player names when entering/viewing a queue
+#### Usage: `/anonymousqueue [toggle]`
 #### Arguments
-`name`: The queue name.
-
----
-
-## Team Size
-#### Description
-Specifies the number of players for each team
-#### Usage: `/teamsize [size]`
-#### Arguments
-`size`: The team size.
-
----
-
-## Number of Teams
-#### Description
-Specifies the number of teams for the queue
-#### Usage: `/numberofteams [number]`
-#### Arguments
-`number`: The number of teams.
-
----
-
-## Number of Lobbies
-#### Description
-Specifies the number of lobbies for the queue
-#### Usage: `/numberofteams [number]`
-#### Arguments
-`number`: The number of lobbies.
-> Example: Teamsize set to 2, numberofteams set to 2, numberoflobbies set to 2. \
-> The queue size would be 8, but when the queue fills up, two lobbies of size 4 will be created. \
-> From each lobby a 2v2 would start.  \
-> Overall, we get one 2v2 and another 2v2, both independent of each other.
-
----
-
-## Queue Into Team
-#### Description
-Require players to select a team when they enter the queue. This skips any team selection since teams are already chosen. 
-Will show separate queue buttons for each team.
-#### Usage: `/queueintoteam [toggle]`
-#### Arguments
-`toggle`: (Default: False) If you want players to queue into teams.
-
----
-
-## Team Queue
-#### Description
-Require players to create/join a team before being able to queue. The team captain selects the team upon queueing, and all team members
-are automatically queued as well.
-#### Usage: `/teamqueue [toggle]`
-#### Arguments
-`toggle`: (Default: False) If you want players to create teams.
-> Team Queue is different than Queue Into Team, since it requires players to create/join teams with `/team`. These teams
-> last forever until disbanded.
-
----
-
-## Clear Queue
-#### Description
-Clears the queue of all players
-#### Usage: `/clearqueue`
-
----
-
-## Test
-#### Description
-Toggle queue testing mode
-#### Usage: `/test`
-> Test mode behaves differently than normal to allow for testing of all features.
-
----
-
-## Locks
-#### Description
-Lock the queue to prevent players from queueing, or unlock to allow queueing again.
-#### Usage: `/lock`
-#### Usage: `/unlock`
-
----
-
-## Starting MMR
-#### Description
-Modify the starting MMR for the given role.
-#### Usage: `/startingmmr set [role] [mmr]`
-#### Arguments
-`role`: (Default: @everyone) The Discord role.  \
-`mmr`: (Default: 1000) The starting MMR for this role.
-#### Usage: `/startingmmr remove [role]`
-#### Arguments
-`role`: The Discord role.  
-
----
-
-## MMR Change
-#### Description
-Sets the average or specific MMR change per match. 
-#### Usage: `/mmrchange [mmr] (static)`
-#### Arguments
-`mmr`: (Default: 50) The average MMR change.  \
-`static`: (Default: False) If you want the MMR change to ALWAYS be this value.
-
----
-
-## MMR Variance
-#### Description
-Specify the variance is MMR distribution between 1 and 5000. A higher number means that the average MMR 
-distributed sticks closer to the `/mmrchange`. A lower number means the average MMR is more drastic.
-#### Usage: `/mmrvariance [variance]`
-#### Arguments
-`variance`: (Default: 800) The MMR variance.
-
----
-
-## MMR Floor
-#### Description
-Sets the lowest MMR a player can reach in this queue. 
-#### Usage: `/mmrfloor [mmr]`
-#### Arguments
-`mmr`: The lowest assignable MMR.
-
----
-
-## MMR Ceiling
-#### Description
-Sets the highest MMR a player can reach in this queue. 
-#### Usage: `/mmrceiling [mmr]`
-#### Arguments
-`mmr`: The highest assignable MMR.
-
----
-
-## MMR Requirement
-#### Description
-Sets the required MMR a player must have to enter this queue.
-#### Usage: `/mmrrequirement [mmr]`
-#### Arguments
-`mmr`: The required MMR.
-
----
-
-## Role Requirement
-#### Description
-Add a required Discord role a player must have to enter this queue. The player can join the queue if they 
-have any of the required roles.
-#### Usage: `/mmrrequirement add [role]`
-#### Arguments
-`role`: The required role.
-#### Description
-Remove a required Discord role a player must have to enter this queue. 
-#### Usage: `/mmrrequirement remove [role]`
-#### Arguments
-`role`: The role to remove.
-
----
-
-## Lobby Details
-#### Description
-Specify additional lobby details to show all players.
-#### Usage: `/lobbydetails set [message]`
-#### Arguments
-`message`: The message to show. Can include substitutions to dynamically generate details.
-> Currently supports three substitutions:
-> 1. `HOST`: Randomly select a player name
-> 2. `QUEUENUM`: Substitute the queue number 
-> 3. `PASSWORD#`: Generate a random string of characters, where # is the length of the password. 
->Example:  \
-> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD4"`  \
-> would substitute to  \
-> `"Host: @NeatZ, Lobby Name: 12345, Lobby Password: DjmO`  \
-> You can further enhance the visuals using Markdown formatting.
-#### Usage: `/lobbydetails location [location]`
- #### Arguments
- `location`: Where to show the lobby details, either in DMS or the Queue Channel.
- 
- ---
- 
-## Maps
-#### Description
-Specify Maps/Gamemodes for matches
-#### Usage: `/map add [map_name] (gamemode)`
-#### Arguments
-`map_name`: The name of the map.  \
-`gamemode`: The map's gamemode.
-#### Usage: `/map remove [map_name]`
-#### Arguments
-`map_name`: The name of the map to remove, or ALL to remove all maps. 
-#### Usage: `/map selection [type]`
-#### Arguments
-`type`: How the map is selected, either randomly or via a player vote. 
-
----
-
-## Temporary Setup Channels
-#### Description
-Toggle creating a new text channel for every queue that pops.
-#### Usage: `/tempchannels [toggle]`
-#### Arguments
-`toggle`: (Default: True) Whether to create new channels.
-
----
-
-## Roles
-#### Description
-Specify game roles per team if required for your game
-#### Usage: `/roles [roles]`
-#### Arguments
-`roles`: (Default: None) Comma separated list of your roles.
-> Example:  \
->Overwatch - `/roles Tank,Tank,DPS,DPS,Support,Support` \
->This will automatically resize your teams to match the number of roles, so 6 in this example.
-
----
-
-## Waiting Room
-#### Description
-Toggle a waiting room which allows for roles to be overqueued. When roles are overqueued, each extra player will show as 
-a +1 next to the role. When the match starts, players will automatically be queued from the waiting room.
-#### Usage: `/waitingroom [toggle]`
-#### Arguments
-`toggle`: (Default: False) Toggle the waiting room.
-> Only applies to when Roles are enabled, since otherwise queues instantly start.
-
----
-
-## Team Selection
-#### Description
-Specify how teams are selected
-#### Usage: `/teamselection [type]`
-#### Arguments
-`type`: (Default: Selection Menu) Either via the default selection menu, balanced, captains, random, players choose, or unfairly.
-
----
-
-## Captain Selection
-#### Description
-Specify how captains are selected
-#### Usage: `/captainselection [type]`
-#### Arguments
-`type`: (Default: Selection Menu) Either via the default selection menu, random, two highest rated, two lowest rated, or a vote.
-
----
-
-## Voice Channels
-#### Description
-Specify whether voice channels are required to be joined, optional, or fully disabled.
-#### Usage: `/voicechannels [mode]`
-#### Arguments
-`mode`: (Default: Required) Either required, optional, or disabled.
-
----
-
-## Channel Links
-#### Description
-Link a channel without a queue to a channel with a queue. This allows you to check stats/leaderboards for channels without queues.
-#### Usage: `/link [channel]`
-#### Arguments
-`channel`: The channel to link to that has a queue running.
-#### Usage: `/unlink`
-
----
-
-## Lobby Channel
-#### Description
-Automatically drag players to/from the lobby channel before/after matches.
-#### Usage: `/lobbychannel toggle [toggle]`
-#### Arguments
-`toggle`: Enable/disable the lobby channel
-#### Description
-Specify a lobby channel to pull players from when their queue starts. If the player is not in this voice channel, 
-they will not be automatically dragged. After a queue completes, the players
-will be dragged from their team channels back to this lobby channel.
-#### Usage: `/lobbychannel set [channel]`
-#### Arguments
-`channel`: The lobby channel
-#### Description
-Automatically pull the queue's players from all voice channels to the queue voice channel.
-#### Usage: `/lobbychannel pullall [toggle]`
-#### Arguments
-`toggle`: Enable/disable moving players from all channels
-#### Description
-Return users to the voice channel they were in before the match started after the winner is selected.
-#### Usage: `/lobbychannel return [toggle]`
-#### Arguments
-`toggle`: Enable/disable returning players to their voice channel
-
-
----
-
-## Results Channel
-#### Description
-Specify a channel to post the outcomes for matches. By default, this is the queue channel.
-#### Usage: `/resultschannel [channel]`
-#### Arguments
-`channel`: The channel to post match results to.
-
----
-
-## Staff Channel
-#### Description
-Specify the staff channel where admin match results are posted. These message have buttons that allow you to modify match results.
-#### Usage: `/staffchannel set [channel] (serverwide)`
-#### Arguments
-`channel`: The channel to post admin results to. \
-`serverwide`: If you want all queues to post their admin results to this channel. Defaults to True.
-
----
-
-## Staff Role
-#### Description
-Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands as well as match outcome 
-modifications. This command is configured Server-Wide, and applies to all queues.
-#### Usage: `/staffrole add/remove [role]`
-#### Arguments
-`role`: Role to add/remove as staff.
+`toggle`: Enable/disable anonymous queueing
 
 ---
 
@@ -466,72 +154,6 @@ Flag players who leave + rejoin the server in an attempt to bypass manual MMR in
 
 ---
 
-## Vote For Results
-#### Description
-Toggle voting for match results. If this is disabled, most stats will not be collected!
-#### Usage: `/voteforresult [toggle]`
-#### Arguments
-`toggle`: (Default: True) If you want players to vote for results.
-
----
-
-## Modify Player Stats
-#### Description
-Manually set the given players stats
-#### Usage: `/set wins|losses|games|mmr [user] [value]`
-#### Arguments
-`user`: The user to modify stats of.  \
-`value`: The value to set.
-
----
-
-## Reset Stats
-#### Description
-Reset stats for the given queue or the entire server
-#### Usage: `/resetstats all (queue_name)`
-#### Arguments
-`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
-#### Description
-Reset stats for the given player for the given queue or the entire server
-#### Usage: `/resetstats player [user] (queue_name)`
-#### Arguments
-`user`: The user to reset stats of. \
-`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
-
----
-
-## Add/Remove/Substitute Players
-#### Description
-Add/remove the given player to/from the queue
-#### Usage: `/player add|remove [user]`
-#### Arguments
-`user`: The user to add/remove.
-#### Description
-Substitute the first player for the second player
-#### Usage: `/player sub [player1] [player2]`
-#### Arguments
-`player1`: The user to remove.  \
-`player2`: The user to add in place of player1. 
-> This is an Admin command, but players can create a substitution themselves after teams are created using `/substitute`
-
----
-
-## Team Balance
-#### Description
-Balanced teams using either MMR (default) or Discord role ordering.
-#### Usage: `/balanceby [type]`
-#### Arguments
-`type`: (Default: MMR) The type of balancing, either MMR or Role.
-#### Description
-For `/balanceby roles`, specify the ordering of roles to utilize from lowest to highest ranking. 
-Omit to use the default Discord role hierarchy.
-#### Usage: `/balancebyroles [role1] (role2) (role3) (role4) ...`
-#### Arguments
-`role1`: The discord role.
-> As of 05/02/2022, Discord does not support variable length Role inputs, so we get around this using a bunch of optional arguments!
-
----
-
 ## Automatically Assign/Remove Roles
 #### Description
 Create conditions to automatically assign/remove Discord roles.
@@ -546,6 +168,12 @@ Remove conditions to automatically assign/remove Discord roles.
 #### Arguments
 `role`: The role to remove auto assignment for.
 #### Description
+Give the top n players the given role.
+#### Usage: `/autoroles topplayers [role] [number]`
+#### Arguments
+`role`: The role to assign. \
+`number`: The number of players to give the role.
+#### Description
 Copy the autoroles configuration from this queue to another queue since it can be tedious.
 #### Usage: `/autoroles copy [channel]`
 #### Arguments
@@ -553,12 +181,157 @@ Copy the autoroles configuration from this queue to another queue since it can b
 
 ---
 
-## Required Votes
+## Ban/Block Players
 #### Description
-Specify the requirements for a vote to finish.
-#### Usage: `/requiredvotes [type]`
+Block a player from entering any queues.
+#### Usage: `/block [player]`
 #### Arguments
-`type`: (Default: Majority) The voting requirement, either one, half, or majority.
+`player`: User to block from queueing
+#### Description
+Unblock a player from entering any queues
+#### Usage: `/unblock [player]`
+#### Arguments
+`player`: User to unblock from queueing
+
+---
+
+## Captain Selection
+#### Description
+Specify how captains are selected
+#### Usage: `/captainselection [type]`
+#### Arguments
+`type`: (Default: Selection Menu) Either via the default selection menu, random, two highest rated, two lowest rated, or a vote.
+
+---
+
+## Channel Links
+#### Description
+Link a channel without a queue to a channel with a queue. This allows you to check stats/leaderboards for channels without queues.
+#### Usage: `/link [channel]`
+#### Arguments
+`channel`: The channel to link to that has a queue running.
+#### Usage: `/unlink`
+
+---
+
+## Channel Names
+#### Description
+Automatically rename the channel when a queue is empty/not empty.
+#### Usage: `/channelname queueempty|queuenotempty [name]`
+#### Arguments
+`name`: What to set the channel name as for the given condition.
+> Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period. Therefore, this command
+> is not very helpful for servers with large amounts of queueing.
+
+---
+
+## Channel Restrictions
+#### Description
+Enable/disable channel restrictions for created channels.
+#### Usage: `/channelrestrictions [toggle]`
+#### Arguments
+`toggle`: (Default: True) If channel restrictions are applied.
+
+---
+
+## Cleanup Timer
+#### Description
+Automatically close a match after this timer has elapsed.
+#### Usage: `/cleanuptimer [duration]`
+#### Arguments
+`duration`: (Default: 5400) The maximum match length in seconds.
+
+---
+
+## Clear Queue
+#### Description
+Clears the queue of all players
+#### Usage: `/clearqueue`
+
+---
+
+## Configuration Saving/Loading
+#### Description
+Save the queue configuration to be able to load in other channels/servers
+#### Usage: `/save`
+#### Description
+Load the given configuration
+#### Usage: `/load [config]`
+#### Arguments
+`config`: The configuration ID to load from.
+
+---
+
+## Delay Winner Vote
+#### Description
+The amount of time to delay the winner message showing up to prevent players from accidentally clicking.
+#### Usage: `/delaywinnervote [duration]`
+#### Arguments
+`duration`: (Default: 10) The length of time in seconds to wait before sending the winner message.
+
+---
+
+## Draft Type
+#### Description
+The type of draft to use. See https://www.rookieroad.com/football/fantasy/draft-types/ for a more in-depth draft description.
+#### Usage: `/nametype [type]`
+#### Arguments
+`type`: (Default: Snake) The draft type, either Straight or Snake.
+
+---
+
+## Emojis
+#### Description
+Toggle showing emojis or being lame.
+#### Usage: `/emojis [toggle]`
+#### Arguments
+`toggle`: (Default: Enabled) Enable/Disable emojis in bot messages.
+
+---
+
+## End Queue
+#### Description
+End the current queue
+#### Usage: `/endqueue`
+
+---
+
+## Forcestart Size
+#### Description
+The configuration for when a player can call a forcestart vote for a queue.
+#### Usage: `/forcestartsize [min_size] (max_size) (only_fair)`
+#### Arguments
+`min_size`: (Default: -1) The minimum required players to be able to forcestart. Set to -1 to disable \
+`max_size`: The maximum required players to be able to forcestart.  \
+`only_fair`: Only allow force starting if teams will have the same number of players. 
+
+---
+
+## Game Integrations/Account Registering
+#### Description
+Require users to register their game's account.
+#### Usage: `/requireregister [game]`
+#### Arguments
+`game`: The game to register the account with
+#### Description
+Register your account
+#### Usage: `/register [account]`
+#### Arguments
+`account`: Account details to register
+
+> Currently supported games:
+> 1. Overwatch (BattleNet) `Ex: /register NeatZ#11354`
+> 2. RocketLeague (Steam or Epic) `Ex: /register neat-z`
+> 3. Rainbow 6
+
+---
+
+## Hide Stats
+#### Description
+Toggle always hiding stats to avoid channel spam.
+#### Usage: `/hidestats [toggle]`
+#### Arguments
+`toggle`: (Default: False) Toggle stats always being hidden.
 
 ---
 
@@ -572,12 +345,153 @@ Either use images for the leaderboards, or just a basic textual leaderboard.
 
 ---
 
-## Hide Stats
+## Lobby Channel
 #### Description
-Toggle always hiding stats to avoid channel spam.
-#### Usage: `/hidestats [toggle]`
+Automatically drag players to/from the lobby channel before/after matches.
+#### Usage: `/lobbychannel toggle [toggle]`
 #### Arguments
-`toggle`: (Default: False) Toggle stats always being hidden.
+`toggle`: Enable/disable the lobby channel
+#### Description
+Specify a lobby channel to pull players from when their queue starts. If the player is not in this voice channel, 
+they will not be automatically dragged. After a queue completes, the players
+will be dragged from their team channels back to this lobby channel.
+#### Usage: `/lobbychannel set [channel]`
+#### Arguments
+`channel`: The lobby channel
+#### Description
+Automatically pull the queue's players from all voice channels to the queue voice channel.
+#### Usage: `/lobbychannel pullall [toggle]`
+#### Arguments
+`toggle`: Enable/disable moving players from all channels
+#### Description
+Return users to the voice channel they were in before the match started after the winner is selected.
+#### Usage: `/lobbychannel return [toggle]`
+#### Arguments
+`toggle`: Enable/disable returning players to their voice channel
+
+
+---
+
+## Lobby Details
+#### Description
+Specify additional lobby details to show all players.
+#### Usage: `/lobbydetails set [message]`
+#### Arguments
+`message`: The message to show. Can include substitutions to dynamically generate details.
+> Currently supports three substitutions:
+> 1. `HOST`: Randomly select a player name
+> 2. `QUEUENUM`: Substitute the queue number 
+> 3. `PASSWORD#`: Generate a random string of characters, where # is the length of the password. 
+>Example:  \
+> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD4"`  \
+> would substitute to  \
+> `"Host: @NeatZ, Lobby Name: 12345, Lobby Password: DjmO`  \
+> You can further enhance the visuals using Markdown formatting.
+#### Usage: `/lobbydetails location [location]`
+ #### Arguments
+ `location`: Where to show the lobby details, either in DMS or the Queue Channel.
+ 
+ ---
+
+## Locks
+#### Description
+Lock the queue to prevent players from queueing, or unlock to allow queueing again.
+#### Usage: `/lock`
+#### Usage: `/unlock`
+
+---
+ 
+## Maps
+#### Description
+Specify Maps/Gamemodes for matches
+#### Usage: `/map add [map_name] (gamemode)`
+#### Arguments
+`map_name`: The name of the map.  \
+`gamemode`: The map's gamemode.
+#### Usage: `/map remove [map_name]`
+#### Arguments
+`map_name`: The name of the map to remove, or ALL to remove all maps. 
+#### Usage: `/map selection [type]`
+#### Arguments
+`type`: How the map is selected, either randomly or via a player vote. 
+
+---
+
+## MMR Ceiling
+#### Description
+Sets the highest MMR a player can reach in this queue. 
+#### Usage: `/mmrceiling [mmr]`
+#### Arguments
+`mmr`: The highest assignable MMR.
+
+---
+
+## MMR Change
+#### Description
+Sets the average or specific MMR change per match. 
+#### Usage: `/mmrchange [mmr] (static)`
+#### Arguments
+`mmr`: (Default: 50) The average MMR change.  \
+`static`: (Default: False) If you want the MMR change to ALWAYS be this value.
+
+---
+
+## MMR Floor
+#### Description
+Sets the lowest MMR a player can reach in this queue. 
+#### Usage: `/mmrfloor [mmr]`
+#### Arguments
+`mmr`: The lowest assignable MMR.
+
+---
+
+## MMR Requirement
+#### Description
+Sets the required MMR a player must have to enter this queue.
+#### Usage: `/mmrrequirement [mmr]`
+#### Arguments
+`mmr`: The required MMR.
+
+---
+
+## MMR Variance
+#### Description
+Specify the variance is MMR distribution between 1 and 5000. A higher number means that the average MMR 
+distributed sticks closer to the `/mmrchange`. A lower number means the average MMR is more drastic.
+#### Usage: `/mmrvariance [variance]`
+#### Arguments
+`variance`: (Default: 800) The MMR variance.
+
+---
+
+## Menu Timer
+#### Description
+The amount of time each menu vote lasts.
+#### Usage: `/menutimer [duration]`
+#### Arguments
+`duration`: (Default: 60) The duration for votes in seconds.
+
+---
+
+## Modify Player Stats
+#### Description
+Manually set the given players stats
+#### Usage: `/set wins|losses|games|mmr [user] [value]`
+#### Arguments
+`user`: The user to modify stats of.  \
+`value`: The value to set.
+
+---
+
+## MultiQueue
+#### Description
+Toggle allowing players to be in multiple queues at once.
+#### Usage: `/multiqueue [toggle]`
+#### Arguments
+`toggle`: (Default: True) If players can join multiple queues at once.
+> If disabled, players will be prevented by queueing if: \
+> 1. They are in queue in another channel
+> 2. Have yet to vote for a winner in an active match
 
 ---
 
@@ -590,23 +504,25 @@ Specify using Discord Names or nicknames.
 
 ---
 
-## Draft Type
+## Number of Lobbies
 #### Description
-The type of draft to use. See https://www.rookieroad.com/football/fantasy/draft-types/ for a more in-depth draft description.
-#### Usage: `/nametype [type]`
+Specifies the number of lobbies for the queue
+#### Usage: `/numberofteams [number]`
 #### Arguments
-`type`: (Default: Snake) The draft type, either Straight or Snake.
+`number`: The number of lobbies.
+> Example: Teamsize set to 2, numberofteams set to 2, numberoflobbies set to 2. \
+> The queue size would be 8, but when the queue fills up, two lobbies of size 4 will be created. \
+> From each lobby a 2v2 would start.  \
+> Overall, we get one 2v2 and another 2v2, both independent of each other.
 
 ---
 
-## Forcestart Size
+## Number of Teams
 #### Description
-The configuration for when a player can call a forcestart vote for a queue.
-#### Usage: `/forcestartsize [min_size] (max_size) (only_fair)`
+Specifies the number of teams for the queue
+#### Usage: `/numberofteams [number]`
 #### Arguments
-`min_size`: (Default: -1) The minimum required players to be able to forcestart. Set to -1 to disable \
-`max_size`: The maximum required players to be able to forcestart.  \
-`only_fair`: Only allow force starting if teams will have the same number of players. 
+`number`: The number of teams.
 
 ---
 
@@ -625,28 +541,67 @@ Manually revert/mark the given match as a tie.
 
 ---
 
-## Server Stats
+## Queue Into Team
 #### Description
-View specific stats to your server, including total/daily queues/players.
-#### Usage: `/serverstats`
+Require players to select a team when they enter the queue. This skips any team selection since teams are already chosen. 
+Will show separate queue buttons for each team.
+#### Usage: `/queueintoteam [toggle]`
+#### Arguments
+`toggle`: (Default: False) If you want players to queue into teams.
 
 ---
 
-## Start From Voice Chat
+## Queue Name
 #### Description
-Start a match using players from the given voice chat. The created match will use the same config as the queue channel the command was typed from.
-#### Usage: `/startfromvc [channel]`
+Change the name of the queue
+#### Usage: `/queuename [name]`
+> Since stats are tied to the queue name, changing the name will make it seem like all stats are lost.\
+> If you want to change a queue name but move all stats to the new name, use `/rename [name]`.
 #### Arguments
-`channel`: The voice channel to start a match from.
+`name`: The queue name.
 
 ---
 
-## Cleanup Timer
+## Rematches
 #### Description
-Automatically close a match after this timer has elapsed.
-#### Usage: `/cleanuptimer [duration]`
+Toggle allowing rematches.
+#### Usage: `/rematches [toggle]`
 #### Arguments
-`duration`: (Default: 5400) The maximum match length in seconds.
+`toggle`: (Default: True) If rematches are enabled.
+
+---
+
+## Require IGN (In Game Name)
+#### Description
+Require if players must set their IGN before they can join the queue. Their IGN will appear next to their name when teams are selected.
+#### Usage: `/requireign [toggle]`
+#### Arguments
+`toggle`: (Default: False) If IGNs are required.
+> Players will be prompted to specify their IGNs with `/ign`
+
+---
+
+## Required Votes
+#### Description
+Specify the requirements for a vote to finish.
+#### Usage: `/requiredvotes [type]`
+#### Arguments
+`type`: (Default: Majority) The voting requirement, either one, half, or majority.
+
+---
+
+## Reset Stats
+#### Description
+Reset stats for the given queue or the entire server
+#### Usage: `/resetstats all (queue_name)`
+#### Arguments
+`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
+#### Description
+Reset stats for the given player for the given queue or the entire server
+#### Usage: `/resetstats player [user] (queue_name)`
+#### Arguments
+`user`: The user to reset stats of. \
+`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
 
 ---
 
@@ -659,75 +614,53 @@ Automatically reset a queue if this timer elapses without any queue activity.
 
 ---
 
-## Menu Timer
+## Results Channel
 #### Description
-The amount of time each menu vote lasts.
-#### Usage: `/menutimer [duration]`
+Specify a channel to post the outcomes for matches. By default, this is the queue channel.
+#### Usage: `/resultschannel [channel]`
 #### Arguments
-`duration`: (Default: 60) The duration for votes in seconds.
+`channel`: The channel to post match results to.
 
 ---
 
-## Delay Winner Vote
+## Role Requirement
 #### Description
-The amount of time to delay the winner message showing up to prevent players from accidentally clicking.
-#### Usage: `/delaywinnervote [duration]`
+Add a required Discord role a player must have to enter this queue. The player can join the queue if they 
+have any of the required roles.
+#### Usage: `/mmrrequirement add [role]`
 #### Arguments
-`duration`: (Default: 10) The length of time in seconds to wait before sending the winner message.
+`role`: The required role.
+#### Description
+Remove a required Discord role a player must have to enter this queue. 
+#### Usage: `/mmrrequirement remove [role]`
+#### Arguments
+`role`: The role to remove.
 
 ---
 
-## AFK Timer
+## Roles
 #### Description
-The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
-#### Usage: `/afktimer [toggle] (duration)`
+Specify game roles per team if required for your game
+#### Usage: `/roles [roles]`
 #### Arguments
-`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
-`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
+`roles`: (Default: None) Comma separated list of your roles.
+> Example:  \
+>Overwatch - `/roles Tank,Tank,DPS,DPS,Support,Support` \
+>This will automatically resize your teams to match the number of roles, so 6 in this example.
 
 ---
 
-## Channel Names
+## Server Stats
 #### Description
-Automatically rename the channel when a queue is empty/not empty.
-#### Usage: `/channelname queueempty|queuenotempty [name]`
-#### Arguments
-`name`: What to set the channel name as for the given condition.
-> Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period. Therefore, this command
-> is not very helpful for servers with large amounts of queueing.
+View specific stats to your server, including total/daily queues/players.
+#### Usage: `/serverstats`
 
 ---
 
-## Configuration Saving/Loading
+## Setup
 #### Description
-Save the queue configuration to be able to load in other channels/servers
-#### Usage: `/save`
-#### Description
-Load the given configuration
-#### Usage: `/load [config]`
-#### Arguments
-`config`: The configuration ID to load from.
-
----
-
-## Emojis
-#### Description
-Toggle showing emojis or being lame.
-#### Usage: `/emojis [toggle]`
-#### Arguments
-`toggle`: (Default: Enabled) Enable/Disable emojis in bot messages.
-
----
-
-## MultiQueue
-#### Description
-Toggle allowing players to be in multiple queues at once.
-#### Usage: `/multiqueue [toggle]`
-#### Arguments
-`toggle`: (Default: True) If players can join multiple queues at once.
-> If disabled, players will be prevented by queueing if: \
-> 1. They are in queue in another channel
-> 2. Have yet to vote for a winner in an active match
+Start the interactive queue setup
+#### Usage: `/setup`
 
 ---
 
@@ -763,31 +696,111 @@ command allows you to explicitly specify what queues to show rating from.
 
 ---
 
-## Rematches
+## Spectator Role
 #### Description
-Toggle allowing rematches.
-#### Usage: `/rematches [toggle]`
+Set a spectator role which can join any created team voice channels.
+#### Usage: `/spectatorrole set [role]`
 #### Arguments
-`toggle`: (Default: True) If rematches are enabled.
+`role`: Role to set as spectators.
 
 ---
 
-## Ties
+## Staff Channel
 #### Description
-Toggle allowing ties.
-#### Usage: `/ties [toggle]`
+Specify the staff channel where admin match results are posted. These message have buttons that allow you to modify match results.
+#### Usage: `/staffchannel set [channel] (serverwide)`
 #### Arguments
-`toggle`: (Default: True) If ties are enabled.
+`channel`: The channel to post admin results to. \
+`serverwide`: If you want all queues to post their admin results to this channel. Defaults to True.
 
 ---
 
-## Require IGN (In Game Name)
+## Staff Role
 #### Description
-Require if players must set their IGN before they can join the queue. Their IGN will appear next to their name when teams are selected.
-#### Usage: `/requireign [toggle]`
+Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands as well as match outcome 
+modifications. This command is configured Server-Wide, and applies to all queues.
+#### Usage: `/staffrole add/remove [role]`
 #### Arguments
-`toggle`: (Default: False) If IGNs are required.
-> Players will be prompted to specify their IGNs with `/ign`
+`role`: Role to add/remove as staff.
+
+---
+
+## Start From Voice Chat
+#### Description
+Start a match using players from the given voice chat. The created match will use the same config as the queue channel the command was typed from.
+#### Usage: `/startfromvc [channel]`
+#### Arguments
+`channel`: The voice channel to start a match from.
+
+---
+
+## Start Queue
+#### Description
+Start a new queue
+#### Usage: `/startqueue [queuename] [team_size] (number_of_teams)`
+#### Arguments
+`queuename`: The queue name. \
+`team_size`: The team size. \
+`number_of_teams`: The number of teams.
+
+---
+
+## Starting MMR
+#### Description
+Modify the starting MMR for the given role.
+#### Usage: `/startingmmr set [role] [mmr]`
+#### Arguments
+`role`: (Default: @everyone) The Discord role.  \
+`mmr`: (Default: 1000) The starting MMR for this role.
+#### Usage: `/startingmmr remove [role]`
+#### Arguments
+`role`: The Discord role.  
+
+---
+
+## Team Balance
+#### Description
+Balanced teams using either MMR (default) or Discord role ordering.
+#### Usage: `/balanceby [type]`
+#### Arguments
+`type`: (Default: MMR) The type of balancing, either MMR or Role.
+#### Description
+For `/balanceby roles`, specify the ordering of roles to utilize from lowest to highest ranking. 
+Omit to use the default Discord role hierarchy.
+#### Usage: `/balancebyroles [role1] (role2) (role3) (role4) ...`
+#### Arguments
+`role1`: The discord role.
+> As of 05/02/2022, Discord does not support variable length Role inputs, so we get around this using a bunch of optional arguments!
+
+---
+
+## Team Queue
+#### Description
+Require players to create/join a team before being able to queue. The team captain selects the team upon queueing, and all team members
+are automatically queued as well.
+#### Usage: `/teamqueue [toggle]`
+#### Arguments
+`toggle`: (Default: False) If you want players to create teams.
+> Team Queue is different than Queue Into Team, since it requires players to create/join teams with `/team`. These teams
+> last forever until disbanded.
+
+---
+
+## Team Selection
+#### Description
+Specify how teams are selected
+#### Usage: `/teamselection [type]`
+#### Arguments
+`type`: (Default: Selection Menu) Either via the default selection menu, balanced, captains, random, players choose, or unfairly.
+
+---
+
+## Team Size
+#### Description
+Specifies the number of players for each team
+#### Usage: `/teamsize [size]`
+#### Arguments
+`size`: The team size.
 
 ---
 
@@ -833,52 +846,58 @@ Cancel all pending team invited.
 
 ---
 
-## Channel Restrictions
+## Temporary Setup Channels
 #### Description
-Enable/disable channel restrictions for created channels.
-#### Usage: `/channelrestrictions [toggle]`
+Toggle creating a new text channel for every queue that pops.
+#### Usage: `/tempchannels [toggle]`
 #### Arguments
-`toggle`: (Default: True) If channel restrictions are applied.
+`toggle`: (Default: True) Whether to create new channels.
 
 ---
 
-## Ban/Block Players
+## Test
 #### Description
-Block a player from entering any queues.
-#### Usage: `/block [player]`
-#### Arguments
-`player`: User to block from queueing
-#### Description
-Unblock a player from entering any queues
-#### Usage: `/unblock [player]`
-#### Arguments
-`player`: User to unblock from queueing
+Toggle queue testing mode
+#### Usage: `/test`
+> Test mode behaves differently than normal to allow for testing of all features.
 
 ---
 
-## Game Integrations/Account Registering
+## Ties
 #### Description
-Require users to register their game's account.
-#### Usage: `/requireregister [game]`
+Toggle allowing ties.
+#### Usage: `/ties [toggle]`
 #### Arguments
-`game`: The game to register the account with
-#### Description
-Register your account
-#### Usage: `/register [account]`
-#### Arguments
-`account`: Account details to register
-
-> Currently supported games:
-> 1. Overwatch (BattleNet) `Ex: /register NeatZ#11354`
-> 2. RocketLeague (Steam or Epic) `Ex: /register neat-z`
-> 3. Rainbow 6
+`toggle`: (Default: True) If ties are enabled.
 
 ---
 
-## Anonymous Queues
+## Voice Channels
 #### Description
-Hide player names when entering/viewing a queue
-#### Usage: `/anonymousqueue [toggle]`
+Specify whether voice channels are required to be joined, optional, or fully disabled.
+#### Usage: `/voicechannels [mode]`
 #### Arguments
-`toggle`: Enable/disable anonymous queueing
+`mode`: (Default: Required) Either required, optional, or disabled.
+
+---
+
+## Vote For Results
+#### Description
+Toggle voting for match results. If this is disabled, most stats will not be collected!
+#### Usage: `/voteforresult [toggle]`
+#### Arguments
+`toggle`: (Default: True) If you want players to vote for results.
+
+---
+
+## Waiting Room
+#### Description
+Toggle a waiting room which allows for roles to be overqueued. When roles are overqueued, each extra player will show as 
+a +1 next to the role. When the match starts, players will automatically be queued from the waiting room.
+#### Usage: `/waitingroom [toggle]`
+#### Arguments
+`toggle`: (Default: False) Toggle the waiting room.
+> Only applies to when Roles are enabled, since otherwise queues instantly start.
+
+
 
