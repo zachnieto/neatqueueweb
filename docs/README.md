@@ -60,7 +60,6 @@ ___
 #### Description
 Call a vote to cancel the current match
 #### Usage: `/cancel`
-> Teams must be created and the winner message must be visible to use this command.
 
 ___
 
@@ -107,7 +106,8 @@ Substitute the first player for the second player
 #### Arguments
 `player1`: The user to remove.  \
 `player2`: The user to add in place of player1. 
-> This is an Admin command, but players can create a substitution themselves after teams are created using `/substitute`
+> This is an Admin command, but players can create a substitution themselves after teams are created using `/substitute`  \
+> Teams must be created and the winner message must be visible to use this command.
 
 ---
 
@@ -433,6 +433,21 @@ Sets the average or specific MMR change per match.
 #### Arguments
 `mmr`: (Default: 50) The average MMR change.  \
 `static`: (Default: False) If you want the MMR change to ALWAYS be this value.
+
+---
+
+## MMR Decay
+#### Description
+Decays a player's MMR by the given amount after the elapsed period of time. Useful to prevent players from 
+parking the top of the leaderboard. 
+#### Usage: `/mmrdecay [toggle] (amount) (duration)`
+#### Arguments
+`toggle`: (Default: Disabled) Enable/disable MMR decay.  \
+`amount`: (Default: 10) The amount of MMR to decay by.  \
+`duration`: (Default: 604800) Timespan in seconds of how long before decaying  \
+> The decay timer is ONLY reset from completing a match.  \
+> Example: `/mmrdecay Enabled 10 604800`, means that players will lose 10 MMR if they have not played a match in 604800 seconds,
+> or 1 week. Upon losing that 10 MMR, the timer restarts.
 
 ---
 
@@ -839,7 +854,7 @@ Specify the new team captain.
 `player`: Player to make the captain. \
 `team_name`: The team name.
 #### Description
-Cancel all pending team invited.
+Cancel all pending team invites.
 #### Usage: `/team cancelinvites [team_name]`
 #### Arguments
 `team_name`: The team name.
