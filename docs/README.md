@@ -32,7 +32,7 @@ View your player stats
 #### Arguments
 `hidden`: If you want the stats to be only visible to you. \
 `user`: The user who you want to see stats of. Omit to see your own stats.
-> 5 minute cooldown per player
+> 30 second cooldown
 
 ___
 
@@ -45,6 +45,18 @@ View the queue's leaderboard
 `type`: The type of stats that the leaderboard sorts by. \
 `queue_name`: The specific queue name to view the leaderboard of. Omit to see the current queue's leaderboard.
 > 30 second cooldown per channel
+
+___
+
+## Compare Stats
+#### Description
+Compare the stats of two players
+#### Usage: `/compare [player1] (player2) (hidden)`
+#### Arguments
+`player1`: The player to compare against. \
+`player2`: The player to compare from. Omit to compare to yourself.  \
+`hidden`: If you want the comparison to be hidden
+> 30 second cooldown per player
 
 ___
 
