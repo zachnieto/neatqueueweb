@@ -504,11 +504,17 @@ The amount of time each menu vote lasts.
 ## Modify Player Stats
 #### Description
 Manually set the given players stats
-#### Usage: `/set wins|losses|games|mmr [user] [value]`
+#### Usage: `/set wins|losses|games|mmr|account [user] [value]`
 #### Arguments
 `user`: The user to modify stats of.  \
 `value`: The value to set.
-
+#### Description
+Manually add/subtract from the given stats
+#### Usage: `/add wins|losses|games|mmr|decaygraceperiod [user] [value]`
+#### Arguments
+`user`: The user to modify stats of.  \
+`value`: The value to add.
+> The decay grace period corresponds to `/mmrdecay`, to disable a player from decaying for the given time span.
 ---
 
 ## MultiQueue
@@ -587,6 +593,18 @@ Change the name of the queue
 > If you want to change a queue name but move all stats to the new name, use `/rename [name]`.
 #### Arguments
 `name`: The queue name.
+
+---
+
+## Reaction Roles
+#### Description
+Add a new reaction role to the given message in the given channel.
+#### Usage: `/reactionroles add [channel] [message_id] [role] [emoji]`
+#### Arguments
+`channel`: Channel of the message.  \
+`message_id`: The reaction message id.  \
+`role`: The role to assign.  \
+`emoji`: To emoji that corresponds to this role. 
 
 ---
 
