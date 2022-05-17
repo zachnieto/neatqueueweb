@@ -321,7 +321,8 @@ The configuration for when a player can call a forcestart vote for a queue.
 
 ## Game Integrations/Account Registering
 #### Description
-Require users to register their game's account.
+Require users to register their game's account. When a user registers their account, their 
+MMR will be grabbed from their account details for the respective game ONLY if they do not already have an MMR!
 #### Usage: `/requireregister [game]`
 #### Arguments
 `game`: The game to register the account with
