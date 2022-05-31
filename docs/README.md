@@ -109,9 +109,11 @@ The amount of time a player can sit AFK in a queue. This timer is reset basicall
 ## Add/Remove/Substitute Players
 #### Description
 Add/remove the given player to/from the queue
-#### Usage: `/player add|remove [user]`
+#### Usage: `/player add|remove [user] (role) (team)`
 #### Arguments
-`user`: The user to add/remove.
+`user`: The user to add/remove.  \
+`role`: The role if roles are enabled.  \
+`team`: The team number if you want to specify. 
 #### Description
 Substitute the first player for the second player
 #### Usage: `/player sub [player1] [player2]`
@@ -394,11 +396,18 @@ Specify additional lobby details to show all players.
 > Currently supports three substitutions:
 > 1. `HOST`: Randomly select a player name
 > 2. `QUEUENUM`: Substitute the queue number 
-> 3. `PASSWORD#`: Generate a random string of characters, where # is the length of the password. 
+> 3. `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, 
+> and T is the type of characters to be in the password. 
+> There are currently 5 supported password types:
+> 1. `L`: Lowercase Letters only
+> 2. `U`: Uppercase Letters only
+> 3. `N`: Numbers only
+> 4. `C`: Lowercase and Uppercase Letters
+> 5. `A`: Lowercase Letters, Uppercase Letters, and Numbers
 >Example:  \
-> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD4"`  \
-> would substitute to  \
-> `"Host: @NeatZ, Lobby Name: 12345, Lobby Password: DjmO`  \
+> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A"`  \
+> could substitute to  \
+> `"Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x`  \
 > You can further enhance the visuals using Markdown formatting.
 #### Usage: `/lobbydetails location [location]`
  #### Arguments
@@ -411,6 +420,13 @@ Specify additional lobby details to show all players.
 Lock the queue to prevent players from queueing, or unlock to allow queueing again.
 #### Usage: `/lock`
 #### Usage: `/unlock`
+
+---
+
+## Logs
+#### Description
+View the logs of previously used NeatQueue commands
+#### Usage: `/logs`
 
 ---
  
