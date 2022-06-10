@@ -460,9 +460,11 @@ Sets the highest MMR a player can reach in this queue.
 Sets the average or specific MMR change per match. 
 #### Usage: `/mmrchange [mmr] (static)`
 #### Arguments
-`mmr`: (Default: 50) The average MMR change.  \
-`static`: (Default: False) If you want the MMR change to ALWAYS be this value.
-
+`mmr`: (Default: 50) The average MMR change for winners and losers.  \
+`loser_mmr`: (Default: 50) Overwrite the loser MMR change so that it is different than the winner MMR change.  \
+`static`: (Default: False) If you want the MMR change to ALWAYS be this value.  \
+`variance`: (Default: 800) The MMR variance to use. Lower values correspond to higher variance, while higher values correspond to lower variance. 
+> Use this calculator https://www.desmos.com/calculator/ue5labtkpv to figure out the best MMR change values and variance for you!
 ---
 
 ## MMR Decay
@@ -498,15 +500,6 @@ Sets the required MMR a player must have to enter this queue.
 
 ---
 
-## MMR Variance
-#### Description
-Specify the variance is MMR distribution between 1 and 5000. A higher number means that the average MMR 
-distributed sticks closer to the `/mmrchange`. A lower number means the average MMR is more drastic.
-#### Usage: `/mmrvariance [variance]`
-#### Arguments
-`variance`: (Default: 800) The MMR variance.
-
----
 
 ## Menu Timer
 #### Description
