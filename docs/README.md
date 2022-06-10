@@ -458,7 +458,7 @@ Sets the highest MMR a player can reach in this queue.
 ## MMR Change
 #### Description
 Sets the average or specific MMR change per match. 
-#### Usage: `/mmrchange [mmr] (static)`
+#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance)`
 #### Arguments
 `mmr`: (Default: 50) The average MMR change for winners and losers.  \
 `loser_mmr`: (Default: 50) Overwrite the loser MMR change so that it is different than the winner MMR change.  \
