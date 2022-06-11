@@ -955,4 +955,55 @@ a +1 next to the role. When the match starts, players will automatically be queu
 > Only applies to when Roles are enabled, since otherwise queues instantly start.
 
 
+<hr style="border:3px solid gray">
+
+# Webhooks
+## Adding a Webhook
+#### Description
+Adds a webhook for the current queue.
+#### Usage: `/webhook add [url]`
+#### Arguments
+`url`: The URL to post requests to.
+> Currently there are 3 times when NeatQueue will send a webhook
+> 1. When a queue fills up (includes players and match number)
+> 2. When teams are created (includes teams, the match number, maps, best_of, and lobby details)
+> 3. When a winner is selected (includes teams, the match number, and the winner team number)
+>
+> Feel free to request any more information!
+## Deleting a Webhook
+#### Description
+Removes the Queue's webhook
+#### Usage: `/webhook delete`
+
+<hr style="border:3px solid gray">
+
+# API
+
+## Generating an API token
+#### Description
+Generate an API token to be able to make requests to NeatQueue endpoints
+#### Usage: `/webhook generatetoken`
+## Endpoints
+### `POST https://host.neatqueue.com:2000/outcome`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `match_number: #` 
+- `winning_team_number: # `
+
+#### Usage: 
+```
+POST /outcome HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 61
+
+{
+    "match_number": 1224,
+    "winning_team_number": 1
+}
+```
+
 
