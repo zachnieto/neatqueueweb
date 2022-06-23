@@ -197,15 +197,16 @@ Copy the autoroles configuration from this queue to another queue since it can b
 
 ## Ban/Block Players
 #### Description
-Block a player from entering any queues.
-#### Usage: `/block [player]`
+Ban a player from entering any queues.
+#### Usage: `/player ban [player] (duration)`
 #### Arguments
-`player`: User to block from queueing
+`player`: User to block from queueing  \
+`duration`: Length of time in seconds to ban for 
 #### Description
-Unblock a player from entering any queues
-#### Usage: `/unblock [player]`
+Unban a player from entering any queues
+#### Usage: `/player unban [player]`
 #### Arguments
-`player`: User to unblock from queueing
+`player`: User to unban from queueing
 
 ---
 
@@ -859,45 +860,51 @@ Specifies the number of players for each team
 
 ---
 
-## Teams
+## Parties/Clans/Teams
 #### Description
-Create a new team.
-#### Usage: `/team create [team_name]`
+Create a new party.
+#### Usage: `/party create [party_name]`
 #### Arguments
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Invite a new team member
-#### Usage: `/team invite [player] [team_name]`
+Invite a new party member
+#### Usage: `/party invite [player] [party_name]`
 #### Arguments
 `player`: Player to invite. \
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Leave the given team.
-#### Usage: `/team leave [team_name]`
+Leave the given party.
+#### Usage: `/party leave [party_name]`
 #### Arguments
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Kick the given player from the team.
-#### Usage: `/team kick [player] [team_name]`
+Kick the given player from the party.
+#### Usage: `/party kick [player] [party_name]`
 #### Arguments
 `player`: Player to kick. \
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Join the given team.
-#### Usage: `/team join [team_name]`
+Join the given party.
+#### Usage: `/party join [party_name]`
 #### Arguments
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Specify the new team captain.
-#### Usage: `/team captain [player] [team_name]`
+Specify the new party captain.
+#### Usage: `/party captain [player] [party_name]`
 #### Arguments
 `player`: Player to make the captain. \
-`team_name`: The team name.
+`party_name`: The party name.
 #### Description
-Cancel all pending team invites.
-#### Usage: `/team cancelinvites [team_name]`
+Cancel all pending party invites.
+#### Usage: `/party cancelinvites [party_name]`
 #### Arguments
-`team_name`: The team name.
+`party_name`: The party name.
+#### Description
+Select your role in the party for role queue.
+#### Usage: `/party selectrole [party_name] [role]`
+#### Arguments
+`party_name`: The party name.  \
+`role`: Your role
 
 ---
 
