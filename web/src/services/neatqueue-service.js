@@ -29,3 +29,19 @@ export const getGuildChannels = async (guildID, oauth) => {
     return resp.data;
 }
 
+export const getPremium = async (guildID) => {
+    const resp = await axios.get(`${API_BASE}/premium/${guildID}`)
+    return resp.data;
+}
+
+export const purchasePremium = async (guildID, oauth, plan) => {
+    const config = {
+        headers: {
+            authorization: `${oauth.token_type} ${oauth.access_token}`
+        }
+    }
+
+    const resp = await axios.post(`${API_BASE}/premium/${guildID}/${plan}`, {}, config)
+    return resp.data;
+}
+

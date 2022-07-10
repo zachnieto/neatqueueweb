@@ -5,6 +5,7 @@ import sessionController from "./controllers/session.js";
 import pingController from "./controllers/ping-controller.js";
 const app = express();
 import env from 'custom-env'
+import paymentController from "./controllers/payment-controller.js";
 env.env('dev')
 app.use(cors({
     credentials: true,
@@ -33,5 +34,6 @@ app.use(session(sess));
 
 pingController(app)
 sessionController(app)
+paymentController(app)
 
 app.listen(process.env.PORT || 4000);

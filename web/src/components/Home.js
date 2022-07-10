@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getStats} from "../actions/neatqueue-actions";
 import {useDispatch, useSelector} from "react-redux";
+import Particles from "./Particles";
 
 const Home = () => {
 
@@ -18,6 +19,7 @@ const Home = () => {
 
     return (
         <div>
+            <Particles/>
             <div className="h-100 row align-items-center justify-content-center main">
                 <div className="col-6">
                     <h1 className="text-center home-header"><strong>NeatQueue</strong></h1>

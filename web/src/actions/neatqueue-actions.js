@@ -31,3 +31,11 @@ export const getGuildChannels = async (dispatch, guildID, oauth) => {
         guildChannels
     })
 };
+
+export const getPremium = async (guildID) => {
+    return await service.getPremium(guildID);
+};
+
+export const purchasePremium = async (guildID, oauth, plan) => {
+    return await service.purchasePremium(guildID, oauth, plan);
+};

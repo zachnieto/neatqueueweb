@@ -34,7 +34,7 @@ function App() {
         {console.log(session)}
         { session !== {} &&
             <>
-                <Particles/>
+
                 <Router>
                 <Navbar />
                 <Routes>

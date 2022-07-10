@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@stripe/stripe-js": "^1.32.0",
     "cors": "^2.8.5",
     "custom-env": "^2.0.1",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "stripe": "^9.12.0"
   }
 }

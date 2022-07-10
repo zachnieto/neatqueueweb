@@ -459,12 +459,13 @@ Sets the highest MMR a player can reach in this queue.
 ## MMR Change
 #### Description
 Sets the average or specific MMR change per match. 
-#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance)`
+#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance) (hidden)`
 #### Arguments
 `mmr`: (Default: 50) The average MMR change for winners and losers.  \
 `loser_mmr`: (Default: 50) Overwrite the loser MMR change so that it is different than the winner MMR change.  \
 `static`: (Default: False) If you want the MMR change to ALWAYS be this value.  \
-`variance`: (Default: 800) The MMR variance to use. Lower values correspond to higher variance, while higher values correspond to lower variance. 
+`variance`: (Default: 800) The MMR variance to use. Lower values correspond to higher variance, while higher values correspond to lower variance.  \
+`hidden`: (Default: False) If MMR and MMR changes should be hidden to everyone. 
 > Use this calculator https://www.desmos.com/calculator/ue5labtkpv to figure out the best MMR change values and variance for you!
 ---
 

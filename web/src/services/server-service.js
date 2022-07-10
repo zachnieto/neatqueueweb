@@ -44,3 +44,27 @@ export const endSession = async () => {
     return resp.data;
 }
 
+export const requestCheckout = async (userId, userName, guildId, default_price, url) => {
+    console.log({
+        userId: userId,
+        userName: userName,
+        guildId: guildId,
+        defaultPrice: default_price,
+        url: url
+    })
+    const resp = await api.post(`${API_BASE}checkout`, {
+        params: {
+            userId: userId,
+            userName: userName,
+            guildId: guildId,
+            defaultPrice: default_price,
+            url: url
+        }
+    })
+    return resp.data;
+}
+
+export const getProducts = async () => {
+    const resp = await api.get(`${API_BASE}products`)
+    return resp.data;
+}
