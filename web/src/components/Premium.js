@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
-import {getPremium, purchasePremium} from "../actions/neatqueue-actions";
+import {purchasePremium} from "../actions/neatqueue-actions";
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -27,10 +27,9 @@ const Premium = ({serverData, setServerData}) => {
 
     useEffect(() => {
         const getPremiumData = async () => {
-            setServerData(await getPremium(guildID))
             setTimeLeft(calculateTimeLeft())
-            setLoading(false)
             setProducts((await getProducts()).filter(product => product.active).sort(nameCompare))
+            setLoading(false)
         }
 
         getPremiumData()

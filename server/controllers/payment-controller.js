@@ -42,7 +42,8 @@ const paymentController = (app) => {
             metadata: {
                 'discord_id': body.userId,
                 'guild_id': body.guildId
-            }
+            },
+            allow_promotion_codes: true
 
         }).catch(e => console.log(e))
 

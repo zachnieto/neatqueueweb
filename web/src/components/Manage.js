@@ -10,17 +10,19 @@ const Manage = () => {
     const [serverData, setServerData] = useState({})
     const session = useSelector(state => state.sessionReducer)
     const [section, setSection] = useState("Premium")
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
         const getPremiumData = async () => {
             setServerData(await getPremium(guildID))
+            setLoading(false)
         }
         getPremiumData()
     }, [])
 
 
-    if (!session.auth)
+    if (!session.auth || loading)
         return
 
 
