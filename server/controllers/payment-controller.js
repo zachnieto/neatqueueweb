@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 
 const paymentController = (app) => {
 
-    const stripe_obj = new Stripe('sk_test_51LJSkiJb0xMnjPScQkMfJ2VaViNO9upUzgSUjfMUq5uxXtKzBJGBR9sjNifKZL1p08sEjfVFGuSY2Dwx23dRz6Jm00itNtlzgN')
+    const stripe_obj = new Stripe(process.env.STRIPE_API_KEY)
 
     app.get('/products', async (req, res) => {
         let products = await stripe_obj.products.list()
