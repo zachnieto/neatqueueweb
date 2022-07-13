@@ -684,12 +684,12 @@ Specify a channel to post the outcomes for matches. By default, this is the queu
 #### Description
 Add a required Discord role a player must have to enter this queue. The player can join the queue if they 
 have any of the required roles.
-#### Usage: `/mmrrequirement add [role]`
+#### Usage: `/rolerequirement add [role]`
 #### Arguments
 `role`: The required role.
 #### Description
 Remove a required Discord role a player must have to enter this queue. 
-#### Usage: `/mmrrequirement remove [role]`
+#### Usage: `/rolerequirement remove [role]`
 #### Arguments
 `role`: The role to remove.
 

@@ -19,7 +19,6 @@ const Home = () => {
 
     return (
         <div>
-            <Particles/>
             <div className="h-100 row align-items-center justify-content-center main">
                 <div className="col-6">
                     <h1 className="text-center home-header"><strong>NeatQueue</strong></h1>

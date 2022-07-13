@@ -35,6 +35,7 @@ function App() {
         { session !== {} &&
             <>
 
+                <Particles/>
                 <Router>
                 <Navbar />
                 <Routes>
