@@ -419,8 +419,14 @@ Specify additional lobby details to show all players.
 ## Locks
 #### Description
 Lock the queue to prevent players from queueing, or unlock to allow queueing again.
-#### Usage: `/lock`
-#### Usage: `/unlock`
+#### Usage: `/lock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Usage: `/unlock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Arguments
+`all`: If you want to lock/unlock all queues.  \
+`auto_lock`: If you want to automatically lock/unlock the queue at the given time.  \
+`time`: The time in HH:MM format you want to lock/unlock the queue at. Ex: 14:30.  \
+`timezone`: The timezone that corresponds to your inputted time.  \
+`repeat`: If the lock/unlock timer should restart after completing.
 
 ---
 
