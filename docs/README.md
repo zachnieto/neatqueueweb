@@ -96,16 +96,6 @@ Set your IGN which is shown next your name if `/requireign` is enabled.
 
 
 
-## AFK Timer
-#### Description
-The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
-#### Usage: `/afktimer [toggle] (duration)`
-#### Arguments
-`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
-`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
-
----
-
 ## Add/Remove/Substitute Players
 #### Description
 Add/remove the given player to/from the queue
@@ -246,15 +236,6 @@ Enable/disable channel restrictions for created channels.
 #### Usage: `/channelrestrictions [toggle]`
 #### Arguments
 `toggle`: (Default: True) If channel restrictions are applied.
-
----
-
-## Cleanup Timer
-#### Description
-Automatically close a match after this timer has elapsed.
-#### Usage: `/cleanuptimer [duration]`
-#### Arguments
-`duration`: (Default: 5400) The maximum match length in seconds.
 
 ---
 
@@ -508,16 +489,6 @@ Sets the required MMR a player must have to enter this queue.
 
 ---
 
-
-## Menu Timer
-#### Description
-The amount of time each menu vote lasts.
-#### Usage: `/menutimer [duration]`
-#### Arguments
-`duration`: (Default: 60) The duration for votes in seconds.
-
----
-
 ## Modify Player Stats
 #### Description
 Manually set the given players stats
@@ -665,15 +636,6 @@ Reset stats for the given player for the given queue or the entire server
 #### Arguments
 `user`: The user to reset stats of. \
 `queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
-
----
-
-## Reset Timer
-#### Description
-Automatically reset a queue if this timer elapses without any queue activity.
-#### Usage: `/resettimer [duration]`
-#### Arguments
-`duration`: (Default: 3600) The length of time in seconds a queue can be inactive before resetting.
 
 ---
 
@@ -938,6 +900,37 @@ Toggle allowing ties.
 #### Usage: `/ties [toggle]`
 #### Arguments
 `toggle`: (Default: True) If ties are enabled.
+
+---
+
+## Timers
+#### Description
+The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
+#### Usage: `/timer afk [toggle] (duration)`
+#### Arguments
+`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
+`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
+#### Description
+Automatically close a match after this timer has elapsed.
+#### Usage: `/timer matchcleanup [duration]`
+#### Arguments
+`duration`: (Default: 5400) The maximum match length in seconds.
+#### Description
+The amount of time each menu vote lasts.
+#### Usage: `/timer votes [duration]`
+#### Arguments
+`duration`: (Default: 60) The duration for votes in seconds.
+#### Description
+Automatically reset a queue if this timer elapses without any queue activity.
+#### Usage: `/timer queuereset [duration]`
+#### Arguments
+`duration`: (Default: 3600) The length of time in seconds a queue can be inactive before resetting.
+#### Description
+Sets the delay for when a new queue message comes up.
+#### Usage: `/timer queuereset [seconds]`
+#### Arguments
+`seconds`: (Default: 3) The delay before resending a queue message
+
 
 ---
 
