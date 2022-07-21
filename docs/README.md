@@ -437,9 +437,9 @@ Specify Maps/Gamemodes for matches
 ## MMR Ceiling
 #### Description
 Sets the highest MMR a player can reach in this queue. 
-#### Usage: `/mmrceiling [mmr]`
+#### Usage: `/mmrceiling (mmr)`
 #### Arguments
-`mmr`: The highest assignable MMR.
+`mmr`: The highest assignable MMR. Omit to reset to default.
 
 ---
 
@@ -474,9 +474,9 @@ parking the top of the leaderboard.
 ## MMR Floor
 #### Description
 Sets the lowest MMR a player can reach in this queue. 
-#### Usage: `/mmrfloor [mmr]`
+#### Usage: `/mmrfloor (mmr)`
 #### Arguments
-`mmr`: The lowest assignable MMR.
+`mmr`: The lowest assignable MMR. Omit to reset to default.
 
 ---
 
@@ -991,7 +991,7 @@ Removes the Queue's webhook
 Generate an API token to be able to make requests to NeatQueue endpoints
 #### Usage: `/webhook generatetoken`
 ## Endpoints
-### `POST https://host.neatqueue.com:2000/outcome`
+### `POST https://host.neatqueue.com:2000/api/outcome`
 #### Headers:
 - `Authorization: API Token`
 
@@ -1001,7 +1001,7 @@ Generate an API token to be able to make requests to NeatQueue endpoints
 
 #### Usage: 
 ```
-POST /outcome HTTP/1.1
+POST /api/outcome HTTP/1.1
 Host: https://host.neatqueue.com:2000
 Authorization: YOURAPITOKENHERE
 Content-Type: text/plain
@@ -1012,5 +1012,110 @@ Content-Length: 61
     "winning_team_number": 1
 }
 ```
+
+### `POST https://host.neatqueue.com:2000/api/queue/clear`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `channel_id: #`
+
+#### Usage: 
+```
+POST /api/queue/clear HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 42
+
+{
+    "channel_id": 960292287437471804
+}
+```
+
+### `POST https://host.neatqueue.com:2000/api/queue/lock`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `channel_id: #`
+
+#### Usage: 
+```
+POST /api/queue/lock HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 42
+
+{
+    "channel_id": 960292287437471804
+}
+```
+
+### `POST https://host.neatqueue.com:2000/api/queue/unlock`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `channel_id: #`
+
+#### Usage: 
+```
+POST /api/queue/unlock HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 42
+
+{
+    "channel_id": 960292287437471804
+}
+```
+
+### `POST https://host.neatqueue.com:2000/api/queue/player/add`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `channel_id: #`
+- `player_id: #`
+
+#### Usage: 
+```
+POST /api/queue/player/add HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 80
+
+{
+    "channel_id": 960292213751943178,
+    "player_id": 145305657237700608
+}
+```
+
+### `POST https://host.neatqueue.com:2000/api/queue/player/remove`
+#### Headers:
+- `Authorization: API Token`
+
+#### Body:
+- `channel_id: #`
+- `player_id: #`
+
+#### Usage: 
+```
+POST /api/queue/player/remove HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 80
+
+{
+    "channel_id": 960292213751943178,
+    "player_id": 145305657237700608
+}
+```
+
 
 
