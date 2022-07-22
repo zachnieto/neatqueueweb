@@ -1073,6 +1073,17 @@ Content-Length: 42
 }
 ```
 
+### `GET https://host.neatqueue.com:2000/api/queue/{channel_id}/players`
+#### Headers:
+- `Authorization: API Token`
+
+#### Usage: 
+```
+GET /api/queue/{channel_id}/players HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+```
+
 ### `POST https://host.neatqueue.com:2000/api/queue/player/add`
 #### Headers:
 - `Authorization: API Token`
