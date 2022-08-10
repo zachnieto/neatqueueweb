@@ -1,1000 +1,1620 @@
+
 # Introduction
-[NeatQueue Website](https://www.neatqueue.com) \
+
+### [NeatQueue Website](https://www.neatqueue.com)
+
 All NeatQueue commands are slash commands, which means they are invoked using a `/` \
-Any command that is marked as Admin Only requires the user to have `Manage Channels` permissions, or have one of the
-configured NeatQueue staff roles.\
-In this documentation, anytime an argument is surrounded by `[square brackets]`, it is a required argument. If
-it is surrounded by `(parenthesis)`, it is optional.\
-Also, the term MMR stands for Match Making Rating, which corresponds to the hidden rating system used by most competitive games.
+Any Admin command requires the user to have Manage Channels permissions, or have one of the configured NeatQueue staff roles. \
+In this documentation, anytime an argument is surrounded by [square brackets], it is a required argument. If it is surrounded by (parenthesis), it is optional. \
+The term MMR stands for Match Making Rating, which corresponds to the hidden rating system used by most competitive games.  \
 All commands are queue specific unless otherwise stated.
-> All stats are tied to the queue name. This means if you create multiple queues with the same queue name, they
-> will share stats.
 
+**All stats are tied to the queue name. This means if you create multiple queues with the same queue name, they will share stats.**
 
-##### Want to Donate? Simply use `/donate` or visit https://donatebot.io/checkout/505102060119916545
+Want to Donate? Simply use /donate or visit https://donatebot.io/checkout/505102060119916545
+
 
 <hr style="border:3px solid gray">
 
-# Getting Started
+# Quick Start
+
 ## Starting a Queue
-Starting a queue is super simple with NeatQueue, just run one of the two following commands:\
-`/setup` if you want an interactive walk through
-or \
-`/startqueue` if you just want the default configuration
+Starting a queue is super simple with NeatQueue, just run one of the following commands:
+#### `/setup` for an interactive walk through
+#### `/startqueue` for a simple default configuration
+#### `/load [config_id]` for a specific queue configuration
+#### `/globalqueue join [global_queue]` for loading a global configuration and joining the shared leaderboard
 
 <hr style="border:3px solid gray">
 
 # User Commands
-## Stats
-#### Description
-View your player stats
-#### Usage: `/stats (hidden) (user)`
-#### Arguments
-`hidden`: If you want the stats to be only visible to you. \
-`user`: The user who you want to see stats of. Omit to see your own stats.
-> 30 second cooldown
-
-___
-
-## Leaderboard
-#### Description
-View the queue's leaderboard
-#### Usage: `/leaderboard (page) (type) (queue_name)`
-#### Arguments
-`page`: The specific page number you want to view. \
-`type`: The type of stats that the leaderboard sorts by. \
-`queue_name`: The specific queue name to view the leaderboard of. Omit to see the current queue's leaderboard.
-> 30 second cooldown per channel
-
-___
-
-## Compare Stats
-#### Description
-Compare the stats of two players
-#### Usage: `/compare [player1] (player2) (hidden)`
-#### Arguments
-`player1`: The player to compare against. \
-`player2`: The player to compare from. Omit to compare to yourself.  \
-`hidden`: If you want the comparison to be hidden
-> 30 second cooldown per player
-
-___
-
-## Forcestart
-#### Description
-Forcestart the queue if it is not full
-#### Usage: `/forcestart`
-> Requires /forcestartsize to be configured
-
-___
-
 ## Cancel
+### `/cancel`
 #### Description
-Call a vote to cancel the current match
+Start a vote to cancel the current match.
 #### Usage: `/cancel`
 
-___
+
+<hr style="border:3px solid gray">
+
+## Compare
+### `/compare`
+#### Description
+Compare your stats to the given player.
+#### Usage: `/compare [player2] (player1) (hidden)`
+#### Arguments:
+`player2`: *(Required)* Enter the second user you want to compare to.\
+`player1`: *(Optional)* Enter the first user you want to compare to, or omit for yourself.\
+`hidden`: *(Optional)* If you want the stats to be hidden.
+
+<hr style="border:3px solid gray">
+
+## Decay
+### `/mmrdecay`
+#### Description
+Enable/disable MMR decay and configure the values.
+#### Usage: `/mmrdecay [toggle] (amount) (duration)`
+#### Arguments:
+`toggle`: *(Required)* Enable/disable MMR decay.\
+`amount`: *(Optional)* Amount of MMR to decay.\
+`duration`: *(Optional)* After how long should a player decay.
+
+<hr style="border:3px solid gray">
+
+## Donate
+### `/donate`
+#### Description
+Donate to help NeatQueue development.
+#### Usage: `/donate`
+
+
+<hr style="border:3px solid gray">
+
+## Force Start
+### `/forcestart`
+#### Description
+Start a vote to forcestart the game.
+#### Usage: `/forcestart`
+
+
+<hr style="border:3px solid gray">
+
+## Help
+### `/help`
+#### Description
+View locations where to find help for setup.
+#### Usage: `/help`
+
+
+<hr style="border:3px solid gray">
 
 ## Info
+### `/info`
 #### Description
-View the queue's configuration
+View information about the queue configuration.
 #### Usage: `/info`
 
-___
 
-## IGN
+<hr style="border:3px solid gray">
+
+## Leaderboard
+### `/leaderboard`
 #### Description
-Set your IGN which is shown next your name if `/requireign` is enabled.
-#### Usage: `/info`
-#### Arguments
-`page`: The specific page number you want to view. \
+Shows the leaderboard for the current queue's game.
+#### Usage: `/leaderboard (page) (type) (queuename)`
+#### Arguments:
+`page`: *(Optional)* Enter the desired page number.\
+`type`: *(Optional)* The type of leaderboard to display.\
+`queuename`: *(Optional)* Queue name for the leaderboard.
+
+<hr style="border:3px solid gray">
+
+## Manage Players
+### `/substitute`
+#### Description
+Substitute yourself for the given player.
+#### Usage: `/substitute [player]`
+#### Arguments:
+`player`: *(Required)* Enter the player to replace you.
+
+<hr style="border:3px solid gray">
+
+## Parties
+### `/party cancelinvites`
+#### Description
+CAPTAIN ONLY: Cancel all pending invites.
+#### Usage: `/party cancelinvites [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party captain`
+#### Description
+CAPTAIN ONLY: Designate a new captain if you are the current one.
+#### Usage: `/party captain [player] [party_name]`
+#### Arguments:
+`player`: *(Required)* The new captain.\
+`party_name`: *(Required)* The team name.
+
+---
+
+### `/party create`
+#### Description
+Create a new party.
+#### Usage: `/party create [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party disband`
+#### Description
+CAPTAIN ONLY: Disband a party.
+#### Usage: `/party disband [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party invite`
+#### Description
+CAPTAIN ONLY: Invite a new player to the team.
+#### Usage: `/party invite [player] [party_name]`
+#### Arguments:
+`player`: *(Required)* Player to invite.\
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party join`
+#### Description
+Join a team.
+#### Usage: `/party join [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party kick`
+#### Description
+CAPTAIN ONLY: Kick a player from the party.
+#### Usage: `/party kick [player] [party_name]`
+#### Arguments:
+`player`: *(Required)* The player to kick.\
+`party_name`: *(Required)* The team name.
+
+---
+
+### `/party leave`
+#### Description
+Leave a team.
+#### Usage: `/party leave [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+---
+
+### `/party list`
+#### Description
+List your parties.
+#### Usage: `/party list`
+
+
+---
+
+### `/party selectrole`
+#### Description
+Specify your role in the team.
+#### Usage: `/party selectrole [party_name] [role]`
+#### Arguments:
+`party_name`: *(Required)* The party name.\
+`role`: *(Required)* Your role.
+
+---
+
+### `/party view`
+#### Description
+View the specified party.
+#### Usage: `/party view [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
+
+<hr style="border:3px solid gray">
+
+## Ping
+### `/ping`
+#### Description
+Pings all members in the queue.
+#### Usage: `/ping`
+
+
+<hr style="border:3px solid gray">
+
+## Register
+### `/register`
+#### Description
+Initialize your MMR using your account.
+#### Usage: `/register [account]`
+#### Arguments:
+`account`: *(Required)* Account details.
+
+<hr style="border:3px solid gray">
+
+## Report Bug
+### `/reportbug`
+#### Description
+Report a bug.
+#### Usage: `/reportbug [message]`
+#### Arguments:
+`message`: *(Required)* Enter the message you want reported.
+
+<hr style="border:3px solid gray">
+
+## Require IGN
+### `/ign`
+#### Description
+Sets your IGN for this queue to help with easy lobby setup.
+#### Usage: `/ign [ign]`
+#### Arguments:
+`ign`: *(Required)* Your IGN for this queue's platform.
+
+<hr style="border:3px solid gray">
+
+## Stats
+### `/stats`
+#### Description
+Shows your stats.
+#### Usage: `/stats (hidden) (user)`
+#### Arguments:
+`hidden`: *(Optional)* If you want the stats to be hidden.\
+`user`: *(Optional)* Enter the user you want to check stats of.
+
+<hr style="border:3px solid gray">
+
+## Webhooks
+### `/webhooks generatetoken`
+#### Description
+Generate an API token for your account.
+#### Usage: `/webhooks generatetoken`
 
 
 <hr style="border:3px solid gray">
 
 # Admin Commands
-
-
-
-## Add/Remove/Substitute Players
+## Anti Cheat
+### `/anticheat channel`
 #### Description
-Add/remove the given player to/from the queue
-#### Usage: `/player add|remove [user] (role) (team)`
-#### Arguments
-`user`: The user to add/remove.  \
-`role`: The role if roles are enabled.  \
-`team`: The team number if you want to specify. 
-#### Description
-Substitute the first player for the second player
-#### Usage: `/player sub [player1] [player2]`
-#### Arguments
-`player1`: The user to remove.  \
-`player2`: The user to add in place of player1. 
-> This is an Admin command, but players can create a substitution themselves after teams are created using `/substitute`  \
-> Teams must be created and the winner message must be visible to use this command.
-
----
-
-## Anonymous Queues
-#### Description
-Hide player names when entering/viewing a queue
-#### Usage: `/anonymousqueue [toggle]`
-#### Arguments
-`toggle`: Enable/disable anonymous queueing
-
----
-
-## AntiCheat
-#### Description
-Toggle all AntiCheat checks. This command is configured Server-Wide, and applies to all queues.
-#### Usage: `/anticheat enable [toggle]`
-#### Arguments
-`toggle`: If you want AntiCheat enabled.
-#### Description
-Specify an AntiCheat channel to post suspicious activity. Without this set, AntiCheat will not function.
+ Sets the anticheat channel to show flagged users.
 #### Usage: `/anticheat channel [channel]`
-#### Arguments
-`channel`: The channel to post suspicious activity to. 
+#### Arguments:
+`channel`: *(Required)* The desired anticheat channel.
+
+---
+
+### `/anticheat enable`
 #### Description
-Specify a role to give to flagged players.
-#### Usage: `/anticheat role [role]`
-#### Arguments
-`role`: Role to assign to flagged players. 
+ Enable/disable the anticheat system.
+#### Usage: `/anticheat enable [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle for anticheat.
+
+---
+
+### `/anticheat flagnewaccount`
 #### Description
-Flag players who have new Discord accounts.
+ Set an anticheat trigger for new accounts.
 #### Usage: `/anticheat flagnewaccount [age]`
-#### Arguments
-`age`: The account age in days. 
+#### Arguments:
+`age`: *(Required)* Account age in days.
+
+---
+
+### `/anticheat flagrejoins`
 #### Description
-Flag players who go on long winning/losing streaks.
-#### Usage: `/anticheat flagstreak [streak]`
-#### Arguments
-`streak`: The number of wins/losses in a row.
-#### Description
-Flag players who leave + rejoin the server in an attempt to bypass manual MMR initialization.
+ Set an anticheat trigger for if a player rejoins a server.
 #### Usage: `/anticheat flagrejoins [toggle]`
-#### Arguments
-`toggle`: If you want to flag rejoin.
+#### Arguments:
+`toggle`: *(Required)* Flag users who rejoin the server if they already have stats.
 
 ---
 
-## Automatically Assign/Remove Roles
+### `/anticheat flagstreak`
 #### Description
-Create conditions to automatically assign/remove Discord roles.
-#### Usage: `/autoroles set [role] [lower_threshold] [upper_threshold]`
-#### Arguments
-`role`: The role to assign.  \
-`lower_threshold`: (Inclusive) The minimum MMR a player must have to be assigned this role.  \
-`upper_threshold`: (Exclusive) The maximum MMR a player may have to be assigned this role.  \
-#### Description
-Remove conditions to automatically assign/remove Discord roles.
-#### Usage: `/autoroles remove [role]`
-#### Arguments
-`role`: The role to remove auto assignment for.
-#### Description
-Give the top n players the given role.
-#### Usage: `/autoroles topplayers [role] [number]`
-#### Arguments
-`role`: The role to assign. \
-`number`: The number of players to give the role.
-#### Description
-Copy the autoroles configuration from this queue to another queue since it can be tedious.
-#### Usage: `/autoroles copy [channel]`
-#### Arguments
-`channel`: The queue channel to copy to.
+ Set an anticheat trigger for a players streak.
+#### Usage: `/anticheat flagstreak [streak]`
+#### Arguments:
+`streak`: *(Required)* Streak to trigger a flag.
 
 ---
 
-## Ban/Block Players
+### `/anticheat role`
 #### Description
-Ban a player from entering any queues.
-#### Usage: `/player ban [player] (duration)`
-#### Arguments
-`player`: User to block from queueing  \
-`duration`: Length of time in seconds to ban for 
+ Set a role to assign to flagged players.
+#### Usage: `/anticheat role [role]`
+#### Arguments:
+`role`: *(Required)* Role to assign.
+
+<hr style="border:3px solid gray">
+
+## Auto Ping
+### `/autoping remove`
 #### Description
-Unban a player from entering any queues
-#### Usage: `/player unban [player]`
-#### Arguments
-`player`: User to unban from queueing
+ Remove the set auto ping rule.
+#### Usage: `/autoping remove`
+
 
 ---
 
-## Captain Selection
+### `/autoping set`
 #### Description
-Specify how captains are selected
-#### Usage: `/captainselection [type]`
-#### Arguments
-`type`: (Default: Selection Menu) Either via the default selection menu, random, two highest rated, two lowest rated, or a vote.
+ Automatically ping the given role when the queue hits the given size.
+#### Usage: `/autoping set [role] [size]`
+#### Arguments:
+`role`: *(Required)* Role to ping.\
+`size`: *(Required)* Ping when the queue hits this size.
+
+<hr style="border:3px solid gray">
+
+## Balance By
+### `/balanceby`
+#### Description
+ (default: mmr) Sets how teams are balanced.
+#### Usage: `/balanceby [mode]`
+#### Arguments:
+`mode`: *(Required)* How teams are balanced.
 
 ---
 
-## Channel Links
+### `/balancebyroles`
 #### Description
-Link a channel without a queue to a channel with a queue. This allows you to check stats/leaderboards for channels without queues.
-#### Usage: `/link [channel]`
-#### Arguments
-`channel`: The channel to link to that has a queue running.
-#### Usage: `/unlink`
+ The order of role to skill from lowest to highest rated.
+#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
+#### Arguments:
+`role1`: *(Optional)* The role to use in balancing.\
+`role2`: *(Optional)* The role to use in balancing.\
+`role3`: *(Optional)* The role to use in balancing.\
+`role4`: *(Optional)* The role to use in balancing.\
+`role5`: *(Optional)* The role to use in balancing.\
+`role6`: *(Optional)* The role to use in balancing.\
+`role7`: *(Optional)* The role to use in balancing.\
+`role8`: *(Optional)* The role to use in balancing.\
+`role9`: *(Optional)* The role to use in balancing.\
+`role10`: *(Optional)* The role to use in balancing.
+
+<hr style="border:3px solid gray">
+
+## Channel Name
+> Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
+Therefore, this command is not very helpful for servers with large amounts of queueing.
+### `/channelname queueempty`
+#### Description
+ Set the channel name when a queue is empty. Can only be updated twice per 10 minutes!.
+#### Usage: `/channelname queueempty [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
 
 ---
 
-## Channel Names
+### `/channelname queuelocked`
 #### Description
-Automatically rename the channel when a queue is empty/not empty.
-#### Usage: `/channelname queueempty|queuenotempty [name]`
-#### Arguments
-`name`: What to set the channel name as for the given condition.
-> Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period. Therefore, this command
-> is not very helpful for servers with large amounts of queueing.
+ Set the channel name when a queue is locked. Can only be updated twice per 10 minutes!.
+#### Usage: `/channelname queuelocked [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
 
 ---
 
-## Channel Restrictions
+### `/channelname queuenotempty`
 #### Description
-Enable/disable channel restrictions for created channels.
-#### Usage: `/channelrestrictions [toggle]`
-#### Arguments
-`toggle`: (Default: True) If channel restrictions are applied.
+ Set the channel name when a queue isn't empty. Can only be updated twice per 10 minutes!.
+#### Usage: `/channelname queuenotempty [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
 
----
+<hr style="border:3px solid gray">
 
 ## Clear Queue
+### `/clearqueue`
 #### Description
-Clears the queue of all players
+ Clears the running queue.
 #### Usage: `/clearqueue`
-
----
-
-## Configuration Saving/Loading
-#### Description
-Save the queue configuration to be able to load in other channels/servers
-#### Usage: `/save`
-#### Description
-Load the given configuration
-#### Usage: `/load [config]`
-#### Arguments
-`config`: The configuration ID to load from.
-
----
-
-## Delay Winner Vote
-#### Description
-The amount of time to delay the winner message showing up to prevent players from accidentally clicking.
-#### Usage: `/delaywinnervote [duration]`
-#### Arguments
-`duration`: (Default: 10) The length of time in seconds to wait before sending the winner message.
-
----
-
-## Draft Type
-#### Description
-The type of draft to use. See https://www.rookieroad.com/football/fantasy/draft-types/ for a more in-depth draft description.
-#### Usage: `/nametype [type]`
-#### Arguments
-`type`: (Default: Snake) The draft type, either Straight or Snake.
-
----
-
-## Emojis
-#### Description
-Toggle showing emojis or being lame.
-#### Usage: `/emojis [toggle]`
-#### Arguments
-`toggle`: (Default: Enabled) Enable/Disable emojis in bot messages.
-
----
-
-## End Queue
-#### Description
-End the current queue
-#### Usage: `/endqueue`
-
----
-
-## Forcestart Size
-#### Description
-The configuration for when a player can call a forcestart vote for a queue.
-#### Usage: `/forcestartsize [min_size] (max_size) (only_fair)`
-#### Arguments
-`min_size`: (Default: -1) The minimum required players to be able to forcestart. Set to -1 to disable \
-`max_size`: The maximum required players to be able to forcestart.  \
-`only_fair`: Only allow force starting if teams will have the same number of players. 
-
----
-
-## Game Integrations/Account Registering
-#### Description
-Require users to register their game's account. When a user registers their account, their 
-MMR will be grabbed from their account details for the respective game ONLY if they do not already have an MMR!
-#### Usage: `/requireregister [game]`
-#### Arguments
-`game`: The game to register the account with
-#### Description
-Register your account
-#### Usage: `/register [account]`
-#### Arguments
-`account`: Account details to register
-
-> Currently supported games:
-> 1. Overwatch (BattleNet) `Ex: /register NeatZ#11354`
-> 2. RocketLeague (Steam or Epic) `Ex: /register neat-z`
-> 3. Rainbow 6
-
----
-
-## Hide Stats
-#### Description
-Toggle always hiding stats to avoid channel spam.
-#### Usage: `/hidestats [toggle]`
-#### Arguments
-`toggle`: (Default: False) Toggle stats always being hidden.
-
----
-
-## Leaderboard Config
-#### Description
-Either use images for the leaderboards, or just a basic textual leaderboard.
-#### Usage: `/leaderboardtype [type]`
-#### Arguments
-`type`: (Default: Images) The leaderboard type, either Images or Text.
-> Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
-
----
-
-## Lobby Channel
-#### Description
-Automatically drag players to/from the lobby channel before/after matches.
-#### Usage: `/lobbychannel toggle [toggle]`
-#### Arguments
-`toggle`: Enable/disable the lobby channel
-#### Description
-Specify a lobby channel to pull players from when their queue starts. If the player is not in this voice channel, 
-they will not be automatically dragged. After a queue completes, the players
-will be dragged from their team channels back to this lobby channel.
-#### Usage: `/lobbychannel set [channel]`
-#### Arguments
-`channel`: The lobby channel
-#### Description
-Automatically pull the queue's players from all voice channels to the queue voice channel.
-#### Usage: `/lobbychannel pullall [toggle]`
-#### Arguments
-`toggle`: Enable/disable moving players from all channels
-#### Description
-Return users to the voice channel they were in before the match started after the winner is selected.
-#### Usage: `/lobbychannel return [toggle]`
-#### Arguments
-`toggle`: Enable/disable returning players to their voice channel
-
-
----
-
-## Lobby Details
-#### Description
-Specify additional lobby details to show all players.
-#### Usage: `/lobbydetails set [message]`
-#### Arguments
-`message`: The message to show. Can include substitutions to dynamically generate details.
-> Currently supports three substitutions:
-> 1. `HOST`: Randomly select a player name
-> 2. `QUEUENUM`: Substitute the queue number 
-> 3. `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, 
-> and T is the type of characters to be in the password. 
-> There are currently 5 supported password types:
-> 1. `L`: Lowercase Letters only
-> 2. `U`: Uppercase Letters only
-> 3. `N`: Numbers only
-> 4. `C`: Lowercase and Uppercase Letters
-> 5. `A`: Lowercase Letters, Uppercase Letters, and Numbers
->Example:  \
-> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A"`  \
-> could substitute to  \
-> `"Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x`  \
-> You can further enhance the visuals using Markdown formatting.
-#### Usage: `/lobbydetails location [location]`
- #### Arguments
- `location`: Where to show the lobby details, either in DMS or the Queue Channel.
- 
- ---
-
-## Locks
-#### Description
-Lock the queue to prevent players from queueing, or unlock to allow queueing again.
-#### Usage: `/lock (all) (auto_lock) (time) (timezone) (repeat)`
-#### Usage: `/unlock (all) (auto_lock) (time) (timezone) (repeat)`
-#### Arguments
-`all`: If you want to lock/unlock all queues.  \
-`auto_lock`: If you want to automatically lock/unlock the queue at the given time.  \
-`time`: The time in HH:MM format you want to lock/unlock the queue at. Ex: 14:30.  \
-`timezone`: The timezone that corresponds to your inputted time.  \
-`repeat`: If the lock/unlock timer should restart after completing.
-
----
-
-## Logs
-#### Description
-View the logs of previously used NeatQueue commands
-#### Usage: `/logs`
-
----
- 
-## Maps
-#### Description
-Specify Maps/Gamemodes for matches
-#### Usage: `/map add [map_name] (gamemode)`
-#### Arguments
-`map_name`: The name of the map.  \
-`gamemode`: The map's gamemode.
-#### Usage: `/map remove [map_name]`
-#### Arguments
-`map_name`: The name of the map to remove, or ALL to remove all maps. 
-#### Usage: `/map selection [type]`
-#### Arguments
-`type`: How the map is selected, either randomly or via a player vote. 
-
----
-
-## MMR Ceiling
-#### Description
-Sets the highest MMR a player can reach in this queue. 
-#### Usage: `/mmrceiling (mmr)`
-#### Arguments
-`mmr`: The highest assignable MMR. Omit to reset to default.
-
----
-
-## MMR Change
-#### Description
-Sets the average or specific MMR change per match. 
-#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance) (hidden)`
-#### Arguments
-`mmr`: (Default: 50) The average MMR change for winners and losers.  \
-`loser_mmr`: (Default: 50) Overwrite the loser MMR change so that it is different than the winner MMR change.  \
-`static`: (Default: False) If you want the MMR change to ALWAYS be this value.  \
-`variance`: (Default: 800) The MMR variance to use. Lower values correspond to higher variance, while higher values correspond to lower variance.  \
-`hidden`: (Default: False) If MMR and MMR changes should be hidden to everyone. 
-> Use this calculator https://www.desmos.com/calculator/ue5labtkpv to figure out the best MMR change values and variance for you!
----
-
-## MMR Decay
-#### Description
-Decays a player's MMR by the given amount after the elapsed period of time. Useful to prevent players from 
-parking the top of the leaderboard. 
-#### Usage: `/mmrdecay [toggle] (amount) (duration)`
-#### Arguments
-`toggle`: (Default: Disabled) Enable/disable MMR decay.  \
-`amount`: (Default: 10) The amount of MMR to decay by.  \
-`duration`: (Default: 604800) Timespan in seconds of how long before decaying  \
-> The decay timer is ONLY reset from completing a match.  \
-> Example: `/mmrdecay Enabled 10 604800`, means that players will lose 10 MMR if they have not played a match in 604800 seconds,
-> or 1 week. Upon losing that 10 MMR, the timer restarts.
-
----
-
-## MMR Floor
-#### Description
-Sets the lowest MMR a player can reach in this queue. 
-#### Usage: `/mmrfloor (mmr)`
-#### Arguments
-`mmr`: The lowest assignable MMR. Omit to reset to default.
-
----
-
-## MMR Requirement
-#### Description
-Sets the required MMR a player must have to enter this queue.
-#### Usage: `/mmrrequirement [mmr]`
-#### Arguments
-`mmr`: The required MMR.
-
----
-
-## Modify Player Stats
-#### Description
-Manually set the given players stats
-#### Usage: `/set wins|losses|games|mmr|account [user] [value]`
-#### Arguments
-`user`: The user to modify stats of.  \
-`value`: The value to set.
-#### Description
-Manually add/subtract from the given stats
-#### Usage: `/add wins|losses|games|mmr|decaygraceperiod [user] [value]`
-#### Arguments
-`user`: The user to modify stats of.  \
-`value`: The value to add.
-> The decay grace period corresponds to `/mmrdecay`, to disable a player from decaying for the given time span.
----
-
-## MultiQueue
-#### Description
-Toggle allowing players to be in multiple queues at once.
-#### Usage: `/multiqueue [toggle]`
-#### Arguments
-`toggle`: (Default: True) If players can join multiple queues at once.
-> If disabled, players will be prevented by queueing if: \
-> 1. They are in queue in another channel
-> 2. Have yet to vote for a winner in an active match
-
----
-
-## Name Type
-#### Description
-Specify using Discord Names or nicknames.
-#### Usage: `/nametype [type]`
-#### Arguments
-`type`: (Default: Nick) The name type, either Discord Names or Nicknames.
-
----
-
-## Number of Lobbies
-#### Description
-Specifies the number of lobbies for the queue
-#### Usage: `/numberofteams [number]`
-#### Arguments
-`number`: The number of lobbies.
-> Example: Teamsize set to 2, numberofteams set to 2, numberoflobbies set to 2. \
-> The queue size would be 8, but when the queue fills up, two lobbies of size 4 will be created. \
-> From each lobby a 2v2 would start.  \
-> Overall, we get one 2v2 and another 2v2, both independent of each other.
-
----
-
-## Number of Teams
-#### Description
-Specifies the number of teams for the queue
-#### Usage: `/numberofteams [number]`
-#### Arguments
-`number`: The number of teams.
-
----
-
-## Outcome
-#### Description
-Manually specify an outcome for a match. For ease of use, it is better to specify a `/staffchannel` to allow for match modification via button clicks.
-#### Usage: `/outcome selectwinner [queue_num] [team_num]`
-#### Arguments
-`queue_num`: The queue number for the match. \
-`team_num`: The winning team. 
-#### Description
-Manually revert/mark the given match as a tie.
-#### Usage: `/outcome tie|cancel [queue_num]`
-#### Arguments
-`queue_num`: The queue number for the match.
-
----
-
-## Queue Into Team
-#### Description
-Require players to select a team when they enter the queue. This skips any team selection since teams are already chosen. 
-Will show separate queue buttons for each team.
-#### Usage: `/queueintoteam [toggle]`
-#### Arguments
-`toggle`: (Default: False) If you want players to queue into teams.
-
----
-
-## Queue Name
-#### Description
-Change the name of the queue
-#### Usage: `/queuename [name]`
-> Since stats are tied to the queue name, changing the name will make it seem like all stats are lost.\
-> If you want to change a queue name but move all stats to the new name, use `/rename [name]`.
-#### Arguments
-`name`: The queue name.
-
----
-
-## Reaction Roles
-#### Description
-Add a new reaction role to the given message in the given channel.
-#### Usage: `/reactionroles add [channel] [message_id] [role] [emoji]`
-#### Arguments
-`channel`: Channel of the message.  \
-`message_id`: The reaction message id.  \
-`role`: The role to assign.  \
-`emoji`: To emoji that corresponds to this role. 
-
----
-
-## Rematches
-#### Description
-Toggle allowing rematches.
-#### Usage: `/rematches [toggle]`
-#### Arguments
-`toggle`: (Default: True) If rematches are enabled.
-
----
-
-## Require IGN (In Game Name)
-#### Description
-Require if players must set their IGN before they can join the queue. Their IGN will appear next to their name when teams are selected.
-#### Usage: `/requireign [toggle]`
-#### Arguments
-`toggle`: (Default: False) If IGNs are required.
-> Players will be prompted to specify their IGNs with `/ign`
-
----
-
-## Required Votes
-#### Description
-Specify the requirements for a vote to finish.
-#### Usage: `/requiredvotes [type]`
-#### Arguments
-`type`: (Default: Majority) The voting requirement, either one, half, or majority.
-
----
-
-## Reset Stats
-#### Description
-Reset stats for the given queue or the entire server
-#### Usage: `/resetstats all (queue_name)`
-#### Arguments
-`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
-#### Description
-Reset stats for the given player for the given queue or the entire server
-#### Usage: `/resetstats player [user] (queue_name)`
-#### Arguments
-`user`: The user to reset stats of. \
-`queue_name`: The queue name to reset stats of. Omit to reset all queue stats.
-
----
-
-## Results Channel
-#### Description
-Specify a channel to post the outcomes for matches. By default, this is the queue channel.
-#### Usage: `/resultschannel [channel]`
-#### Arguments
-`channel`: The channel to post match results to.
-
----
-
-## Role Requirement
-#### Description
-Add a required Discord role a player must have to enter this queue. The player can join the queue if they 
-have any of the required roles.
-#### Usage: `/rolerequirement add [role]`
-#### Arguments
-`role`: The required role.
-#### Description
-Remove a required Discord role a player must have to enter this queue. 
-#### Usage: `/rolerequirement remove [role]`
-#### Arguments
-`role`: The role to remove.
-
----
-
-## Roles
-#### Description
-Specify game roles per team if required for your game
-#### Usage: `/roles [roles]`
-#### Arguments
-`roles`: (Default: None) Comma separated list of your roles.
-> Example:  \
->Overwatch - `/roles Tank,Tank,DPS,DPS,Support,Support` \
->This will automatically resize your teams to match the number of roles, so 6 in this example.
-
----
-
-## Server Stats
-#### Description
-View specific stats to your server, including total/daily queues/players.
-#### Usage: `/serverstats`
-
----
-
-## Setup
-#### Description
-Start the interactive queue setup
-#### Usage: `/setup`
-
----
-
-## Show Rating In Name
-#### Description
-Show a players MMR in their nickname. This command is configured Server-Wide, and applies to all queues.
-#### Usage: `/ratinginname toggle [toggle]`
-#### Arguments
-`toggle`: Enable/disable showing rating in names.
-#### Description
-The format for how the rating appears.
-#### Usage: `/ratinginname format [format]`
-#### Arguments
-`format`: Rating format to use, where $ is the rating.
-> For example, if your name was `NeatZ` and you wanted your rating of `1337` 
->to appear in your name as `NeatZ [1337]`, the rating format would be 
-> `[$]` \
->The bot automatically inserts a space between your name and the rating format
-#### Description
-Remove all nicknames from all users.
-#### Usage: `/ratinginname removeall`
-#### Description
-Specify the queuenames to show in player nicknames. By default, the most recent queue shows in your nickname, but using this
-command allows you to explicitly specify what queues to show rating from.
-#### Usage: `/ratinginname queuenames [queues]`
-#### Arguments
-`queues`: Comma seperated list of queue names to pull rating from.
-> For example, if your name was `NeatZ` and you wanted both your RocketLeague and Overwatch ratings to appear \
->in your nickname as `NeatZ - [1337] [1234]`, you would specify `/ratinginname queuenames RocketLeague,Overwatch`  \
->Also, the rating format must reflect the correct number of `$`s to match the number of queue names specified. \
->`/ratinginname format "- [$] [$]"` \
-> Super simple, right?
-
----
-
-## Spectator Role
-#### Description
-Set a spectator role which can join any created team voice channels.
-#### Usage: `/spectatorrole set [role]`
-#### Arguments
-`role`: Role to set as spectators.
-
----
-
-## Staff Channel
-#### Description
-Specify the staff channel where admin match results are posted. These message have buttons that allow you to modify match results.
-#### Usage: `/staffchannel set [channel] (serverwide)`
-#### Arguments
-`channel`: The channel to post admin results to. \
-`serverwide`: If you want all queues to post their admin results to this channel. Defaults to True.
-
----
-
-## Staff Role
-#### Description
-Add/remove NeatQueue staff roles. Staff roles have all access to Admin commands as well as match outcome 
-modifications. This command is configured Server-Wide, and applies to all queues.
-#### Usage: `/staffrole add/remove [role]`
-#### Arguments
-`role`: Role to add/remove as staff.
-
----
-
-## Start From Voice Chat
-#### Description
-Start a match using players from the given voice chat. The created match will use the same config as the queue channel the command was typed from.
-#### Usage: `/startfromvc [channel]`
-#### Arguments
-`channel`: The voice channel to start a match from.
-
----
-
-## Start Queue
-#### Description
-Start a new queue
-#### Usage: `/startqueue [queuename] [team_size] (number_of_teams)`
-#### Arguments
-`queuename`: The queue name. \
-`team_size`: The team size. \
-`number_of_teams`: The number of teams.
-
----
-
-## Starting MMR
-#### Description
-Modify the starting MMR for the given role.
-#### Usage: `/startingmmr set [role] [mmr]`
-#### Arguments
-`role`: (Default: @everyone) The Discord role.  \
-`mmr`: (Default: 1000) The starting MMR for this role.
-#### Usage: `/startingmmr remove [role]`
-#### Arguments
-`role`: The Discord role.  
-
----
-
-## Team Balance
-#### Description
-Balanced teams using either MMR (default) or Discord role ordering.
-#### Usage: `/balanceby [type]`
-#### Arguments
-`type`: (Default: MMR) The type of balancing, either MMR or Role.
-#### Description
-For `/balanceby roles`, specify the ordering of roles to utilize from lowest to highest ranking. 
-Omit to use the default Discord role hierarchy.
-#### Usage: `/balancebyroles [role1] (role2) (role3) (role4) ...`
-#### Arguments
-`role1`: The discord role.
-> As of 05/02/2022, Discord does not support variable length Role inputs, so we get around this using a bunch of optional arguments!
-
----
-
-## Team Queue
-#### Description
-Require players to create/join a team before being able to queue. The team captain selects the team upon queueing, and all team members
-are automatically queued as well.
-#### Usage: `/teamqueue [toggle]`
-#### Arguments
-`toggle`: (Default: False) If you want players to create teams.
-> Team Queue is different than Queue Into Team, since it requires players to create/join teams with `/team`. These teams
-> last forever until disbanded.
-
----
-
-## Team Selection
-#### Description
-Specify how teams are selected
-#### Usage: `/teamselection [type]`
-#### Arguments
-`type`: (Default: Selection Menu) Either via the default selection menu, balanced, captains, random, players choose, or unfairly.
-
----
-
-## Team Size
-#### Description
-Specifies the number of players for each team
-#### Usage: `/teamsize [size]`
-#### Arguments
-`size`: The team size.
-
----
-
-## Parties/Clans/Teams
-#### Description
-Create a new party.
-#### Usage: `/party create [party_name]`
-#### Arguments
-`party_name`: The party name.
-#### Description
-Invite a new party member
-#### Usage: `/party invite [player] [party_name]`
-#### Arguments
-`player`: Player to invite. \
-`party_name`: The party name.
-#### Description
-Leave the given party.
-#### Usage: `/party leave [party_name]`
-#### Arguments
-`party_name`: The party name.
-#### Description
-Kick the given player from the party.
-#### Usage: `/party kick [player] [party_name]`
-#### Arguments
-`player`: Player to kick. \
-`party_name`: The party name.
-#### Description
-Join the given party.
-#### Usage: `/party join [party_name]`
-#### Arguments
-`party_name`: The party name.
-#### Description
-Specify the new party captain.
-#### Usage: `/party captain [player] [party_name]`
-#### Arguments
-`player`: Player to make the captain. \
-`party_name`: The party name.
-#### Description
-Cancel all pending party invites.
-#### Usage: `/party cancelinvites [party_name]`
-#### Arguments
-`party_name`: The party name.
-#### Description
-Select your role in the party for role queue.
-#### Usage: `/party selectrole [party_name] [role]`
-#### Arguments
-`party_name`: The party name.  \
-`role`: Your role
-
----
-
-## Temporary Setup Channels
-#### Description
-Toggle creating a new text channel for every queue that pops.
-#### Usage: `/tempchannels [toggle]`
-#### Arguments
-`toggle`: (Default: True) Whether to create new channels.
-
----
-
-## Test
-#### Description
-Toggle queue testing mode
-#### Usage: `/test`
-> Test mode behaves differently than normal to allow for testing of all features.
-
----
-
-## Ties
-#### Description
-Toggle allowing ties.
-#### Usage: `/ties [toggle]`
-#### Arguments
-`toggle`: (Default: True) If ties are enabled.
-
----
-
-## Timers
-#### Description
-The amount of time a player can sit AFK in a queue. This timer is reset basically any time the player interacts with the server.
-#### Usage: `/timer afk [toggle] (duration)`
-#### Arguments
-`toggle`: (Default: True) Enable autokicking of players who are detected as AFK.  \
-`duration`: (Default: 5400) The length of time in seconds to wait before kicking an AFK player. 
-#### Description
-Automatically close a match after this timer has elapsed.
-#### Usage: `/timer matchcleanup [duration]`
-#### Arguments
-`duration`: (Default: 5400) The maximum match length in seconds.
-#### Description
-The amount of time each menu vote lasts.
-#### Usage: `/timer votes [duration]`
-#### Arguments
-`duration`: (Default: 60) The duration for votes in seconds.
-#### Description
-Automatically reset a queue if this timer elapses without any queue activity.
-#### Usage: `/timer queuereset [duration]`
-#### Arguments
-`duration`: (Default: 3600) The length of time in seconds a queue can be inactive before resetting.
-#### Description
-Sets the delay for when a new queue message comes up.
-#### Usage: `/timer queuereset [seconds]`
-#### Arguments
-`seconds`: (Default: 3) The delay before resending a queue message
-
-
----
-
-## Voice Channels
-#### Description
-Specify whether voice channels are required to be joined, optional, or fully disabled.
-#### Usage: `/voicechannels [mode]`
-#### Arguments
-`mode`: (Default: Required) Either required, optional, or disabled.
-
----
-
-## Vote For Results
-#### Description
-Toggle voting for match results. If this is disabled, most stats will not be collected!
-#### Usage: `/voteforresult [toggle]`
-#### Arguments
-`toggle`: (Default: True) If you want players to vote for results.
-
----
-
-## Waiting Room
-#### Description
-Toggle a waiting room which allows for roles to be overqueued. When roles are overqueued, each extra player will show as 
-a +1 next to the role. When the match starts, players will automatically be queued from the waiting room.
-#### Usage: `/waitingroom [toggle]`
-#### Arguments
-`toggle`: (Default: False) Toggle the waiting room.
-> Only applies to when Roles are enabled, since otherwise queues instantly start.
 
 
 <hr style="border:3px solid gray">
 
-# Webhooks
-## Adding a Webhook
+## Config
+### `/load`
 #### Description
-Adds a webhook for the current queue.
-#### Usage: `/webhook add [url]`
-#### Arguments
-`url`: The URL to post requests to.
-> Currently there are 3 times when NeatQueue will send a webhook
-> 1. When a queue fills up (includes players and match number)
-> 2. When teams are created (includes teams, the match number, maps, best_of, and lobby details)
-> 3. When a winner is selected (includes teams, the match number, and the winner team number)
->
-> Feel free to request any more information!
-## Deleting a Webhook
+ Loads the queue configuration based on the given name.
+#### Usage: `/load [config]`
+#### Arguments:
+`config`: *(Required)* Config name.
+
+---
+
+### `/save`
 #### Description
-Removes the Queue's webhook
-#### Usage: `/webhook delete`
+ Save the current queue configuration to a name.
+#### Usage: `/save`
+
+
+<hr style="border:3px solid gray">
+
+## Draft Type
+### `/drafttype`
+#### Description
+ Sets the type of draft to either Snake or Straight.
+#### Usage: `/drafttype [type]`
+#### Arguments:
+`type`: *(Required)* The type of draft to use.
+
+<hr style="border:3px solid gray">
+
+## Emojis
+### `/emojis`
+#### Description
+ Sets whether to display emojis.
+#### Usage: `/emojis [mode]`
+#### Arguments:
+`mode`: *(Required)* If emojis are used.
+
+<hr style="border:3px solid gray">
+
+## End Queue
+### `/endqueue`
+#### Description
+ Ends the running queue.
+#### Usage: `/endqueue`
+
+
+<hr style="border:3px solid gray">
+
+## Force Start
+### `/forcestartsize`
+#### Description
+ Sets the requirements for forcestarting.
+#### Usage: `/forcestartsize [min_size] (max_size) (only_fair) (auto_start)`
+#### Arguments:
+`min_size`: *(Required)* Enter the minimum number of players required. Set to -1 to disable.\
+`max_size`: *(Optional)* Enter the maximum number of players required. Set to -1 to ignore.\
+`only_fair`: *(Optional)* Should the forcestart happen if teams are not the same size?.\
+`auto_start`: *(Optional)* Should the forcestart vote automatically happen when possible?.
+
+<hr style="border:3px solid gray">
+
+## Global Queue
+### `/globalqueue create`
+#### Description
+ Create a global queue. You will not be able to modify certain queue configs after.
+#### Usage: `/globalqueue create`
+
+
+---
+
+### `/globalqueue join`
+#### Description
+ Join a global queue. You will not be able to modify certain queue configs after.
+#### Usage: `/globalqueue join [name]`
+#### Arguments:
+`name`: *(Required)* The unique ID of the global queue.
+
+---
+
+### `/globalqueue leave`
+#### Description
+ Unlink from the global queue.
+#### Usage: `/globalqueue leave`
+
+
+<hr style="border:3px solid gray">
+
+## Leaderboard Config
+> Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
+Leaderboard titles are also hyperlinks to the website version of the leaderboard.
+### `/leaderboardtype`
+#### Description
+ Toggle using the new image leaderboard.
+#### Usage: `/leaderboardtype [type]`
+#### Arguments:
+`type`: *(Required)* Leaderboard format.
+
+<hr style="border:3px solid gray">
+
+## Link Queue
+### `/link`
+#### Description
+ Links the current channel to another channel's queue.
+#### Usage: `/link [channel]`
+#### Arguments:
+`channel`: *(Required)* Enter the channel to link to.
+
+---
+
+### `/unlink`
+#### Description
+ Unlinks the current channel.
+#### Usage: `/unlink`
+
+
+<hr style="border:3px solid gray">
+
+## Lobby Channel
+### `/lobbychannel pullall`
+#### Description
+ Specify pulling players from all channels when their match starts.
+#### Usage: `/lobbychannel pullall [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Pull players from all channels.
+
+---
+
+### `/lobbychannel returnall`
+#### Description
+ Specify returning players to their original voice channel from before the match.
+#### Usage: `/lobbychannel returnall [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Return players to their original voice channel.
+
+---
+
+### `/lobbychannel set`
+#### Description
+ Specify the channel to move players to/from before/after a game.
+#### Usage: `/lobbychannel set [channel]`
+#### Arguments:
+`channel`: *(Required)* Channel to drag/drop players from/to.
+
+---
+
+### `/lobbychannel timer`
+#### Description
+ Specify how long players have to join the voice channel before the match is cancelled.
+#### Usage: `/lobbychannel timer [timer]`
+#### Arguments:
+`timer`: *(Required)* (Default: 300) Timeout length in seconds.
+
+<hr style="border:3px solid gray">
+
+## Lobby Details
+### `/lobbydetails location`
+#### Description
+ Sets the lobby details message.
+#### Usage: `/lobbydetails location [location]`
+#### Arguments:
+`location`: *(Required)* The type of names to be used.
+
+---
+
+### `/lobbydetails remove`
+#### Description
+ Removed the lobby details message.
+#### Usage: `/lobbydetails remove`
+
+
+---
+
+### `/lobbydetails set`
+#### Description
+ Sets the lobby details message.
+#### Usage: `/lobbydetails set [message]`
+#### Arguments:
+`message`: *(Required)* Enter the message to send. See /help for keywords for generating messages.> Currently supports three substitutions:
+> 
+> `HOST`: Randomly select a player name
+> `QUEUENUM`: Substitute the queue number
+> `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
+> characters to be in the password. There are currently 5 supported password types:
+> 
+> 1. L: Lowercase Letters only
+> 2. U: Uppercase Letters only
+> 3. N: Numbers only
+> 4. C: Lowercase and Uppercase Letters
+> 5. A: Lowercase Letters, Uppercase Letters, and Numbers
+> 
+> Example:
+> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
+> could substitute to
+> 
+> "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x
+> 
+> You can further enhance the visuals using Markdown formatting.
+
+<hr style="border:3px solid gray">
+
+## Lock
+### `/lock`
+#### Description
+ Lock the queue channel to prevent players from joining.
+#### Usage: `/lock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Arguments:
+`all`: *(Optional)* Lock all queues?.\
+`auto_lock`: *(Optional)* Automatically lock at the specified time.\
+`time`: *(Optional)* Time to lock at in 24 hour format. Ex: 14:00.\
+`timezone`: *(Optional)* Timezone for the specified time. Defaults to UTC.\
+`repeat`: *(Optional)* Repeat daily or just once.
+
+---
+
+### `/unlock`
+#### Description
+ Unlock the queue channel to allow players to join.
+#### Usage: `/unlock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Arguments:
+`all`: *(Optional)* Unlock all queues?.\
+`auto_lock`: *(Optional)* Automatically unlock at the specified time.\
+`time`: *(Optional)* Time to unlock at in 24 hour format. Ex: 14:00.\
+`timezone`: *(Optional)* Timezone for the specified time. Defaults to UTC.\
+`repeat`: *(Optional)* Repeat daily or just once.
+
+<hr style="border:3px solid gray">
+
+## Logs
+### `/logs`
+#### Description
+ View a log of used NeatQueue commands.
+#### Usage: `/logs`
+
+
+<hr style="border:3px solid gray">
+
+## MMR Change
+### `/mmrchange`
+#### Description
+ Sets the MMR change per game.
+#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance) (hidden) (allow_disable)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the MMR change for winners and losers.\
+`loser_mmr`: *(Optional)* Override the lower MMR change to be different from the winners.\
+`static`: *(Optional)* Do you want the MMR change to ALWAYS be this value? (Default: False).\
+`variance`: *(Optional)* Sets the MMR variance. See the MMR equation in the documentation! (Default: 800).\
+`hidden`: *(Optional)* If you want all MMR and MMR changes to be hidden from players.\
+`allow_disable`: *(Optional)* If you want the enable/disable MMR vote to pop up.
+
+<hr style="border:3px solid gray">
+
+## Manage Players
+### `/player add`
+#### Description
+ Adds the given player to the queue.
+#### Usage: `/player add [user] (role) (team)`
+#### Arguments:
+`user`: *(Required)* -.\
+`role`: *(Optional)* Enter the role for the player.\
+`team`: *(Optional)* Enter the team for the player if desired.
+
+---
+
+### `/player ban`
+#### Description
+ Bans a player from queueing for the given duration of time.
+#### Usage: `/player ban [player] (duration)`
+#### Arguments:
+`player`: *(Required)* The player to ban.\
+`duration`: *(Optional)* Duration of time in seconds for the ban to last.
+
+---
+
+### `/player remove`
+#### Description
+ Removes the given player from the queue.
+#### Usage: `/player remove [user]`
+#### Arguments:
+`user`: *(Required)* The player.
+
+---
+
+### `/player sub`
+#### Description
+ Substitute the first player for the second player.
+#### Usage: `/player sub [player1] [player2] (gamenum)`
+#### Arguments:
+`player1`: *(Required)* Enter the player to replace.\
+`player2`: *(Required)* Enter the player that will be inserted.\
+`gamenum`: *(Optional)* Game to modify. Can be omitted to use this channels game.
+
+---
+
+### `/player unban`
+#### Description
+ Unban the given player from queueing.
+#### Usage: `/player unban [player]`
+#### Arguments:
+`player`: *(Required)* The player to unban.
+
+<hr style="border:3px solid gray">
+
+## Maps
+### `/bestof`
+#### Description
+ Sets whether the queue is a best of 3, 5, 7, etc.
+#### Usage: `/bestof [number] (vote) (voteselection)`
+#### Arguments:
+`number`: *(Required)* Best of #.\
+`vote`: *(Optional)* Whether players can vote on the number of matches to play.\
+`voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.
+
+---
+
+### `/map add`
+#### Description
+ Adds the given map.
+#### Usage: `/map add [map_name] (game_mode)`
+#### Arguments:
+`map_name`: *(Required)* Enter the map name.\
+`game_mode`: *(Optional)* Enter the corresponding game mode.
+
+---
+
+### `/map remove`
+#### Description
+ Removes the given map.
+#### Usage: `/map remove [map_name]`
+#### Arguments:
+`map_name`: *(Required)* The map to remove, or ALL to remove all.
+
+---
+
+### `/map selection`
+#### Description
+ Choose between map votes or always random.
+#### Usage: `/map selection [type]`
+#### Arguments:
+`type`: *(Required)* Voting or always random.
+
+<hr style="border:3px solid gray">
+
+## Mod Channel
+### `/staffchannel remove`
+#### Description
+ Remove the set results channel.
+#### Usage: `/staffchannel remove`
+
+
+---
+
+### `/staffchannel set`
+#### Description
+ Sets the results channel to send queue history.".
+#### Usage: `/staffchannel set [channel] (serverwide)`
+#### Arguments:
+`channel`: *(Required)* The text channel to send queue history to.\
+`serverwide`: *(Optional)* Should the channel be global for all queues or just this one?.
+
+<hr style="border:3px solid gray">
+
+## Modify Player Data
+### `/add decaygraceperiod`
+#### Description
+ Add a grace period for a user so they won't be affected by MMR decay.
+#### Usage: `/add decaygraceperiod [user] [time]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`time`: *(Required)* Enter the desired grace period time in seconds.
+
+---
+
+### `/add game`
+#### Description
+ Increment the players games.
+#### Usage: `/add game [user] (games)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`games`: *(Optional)* Enter the desired games to add.
+
+---
+
+### `/add loss`
+#### Description
+ Increment the players losses.
+#### Usage: `/add loss [user] (losses)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`losses`: *(Optional)* Enter the desired losses to add.
+
+---
+
+### `/add mmr`
+#### Description
+ Increment the players mmr.
+#### Usage: `/add mmr [user] (mmr)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`mmr`: *(Optional)* Enter the desired mmr to add.
+
+---
+
+### `/add streak`
+#### Description
+ Increment the players streak.
+#### Usage: `/add streak [user] [streak]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`streak`: *(Required)* Enter the desired streak to add.
+
+---
+
+### `/add win`
+#### Description
+ Increment the players wins.
+#### Usage: `/add win [user] (wins)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`wins`: *(Optional)* Enter the desired wins to add.
+
+---
+
+### `/set account`
+#### Description
+ Sets the players account (used in /register).
+#### Usage: `/set account [user] [account]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`account`: *(Required)* Enter the desired account, or 'none' to remove.
+
+---
+
+### `/set games`
+#### Description
+ Sets the players games.
+#### Usage: `/set games [user] [games]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`games`: *(Required)* Enter the desired games.
+
+---
+
+### `/set losses`
+#### Description
+ Sets the players losses.
+#### Usage: `/set losses [user] [losses]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`losses`: *(Required)* Enter the desired losses.
+
+---
+
+### `/set wins`
+#### Description
+ Sets the players wins.
+#### Usage: `/set wins [user] [wins]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`wins`: *(Required)* Enter the desired wins.
+
+<hr style="border:3px solid gray">
+
+## Multi Queue
+### `/multiqueue`
+#### Description
+ Sets whether players can be in multiple queues at once.
+#### Usage: `/multiqueue [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players can be in multiple queues at once.
+
+<hr style="border:3px solid gray">
+
+## Name Type
+### `/anonymousqueue`
+#### Description
+ Sets whether to hide the names of players in queue.
+#### Usage: `/anonymousqueue [mode]`
+#### Arguments:
+`mode`: *(Required)* Hide player names in queue.
+
+---
+
+### `/nametype`
+#### Description
+ Sets whether to use nicknames or discord names (default: nick).
+#### Usage: `/nametype [type]`
+#### Arguments:
+`type`: *(Required)* The type of names to be used.
+
+<hr style="border:3px solid gray">
+
+## Number Of Lobbies
+### `/numberoflobbies`
+#### Description
+ (default: 1) Sets the number of lobbies to create.
+#### Usage: `/numberoflobbies [lobbies]`
+#### Arguments:
+`lobbies`: *(Required)* The number of lobbies.
+
+<hr style="border:3px solid gray">
+
+## Number Of Teams
+### `/numberofteams`
+#### Description
+ (default: 2) Sets the number of teams.
+#### Usage: `/numberofteams [number]`
+#### Arguments:
+`number`: *(Required)* The number of teams.
+
+<hr style="border:3px solid gray">
+
+## Purge
+### `/purge`
+#### Description
+ Delete ALL messages in the channel except the queue message if it exists.
+#### Usage: `/purge`
+
+
+<hr style="border:3px solid gray">
+
+## Queue As Team
+### `/queueintoteam`
+#### Description
+ Sets whether players queue into teams or not.
+#### Usage: `/queueintoteam [value]`
+#### Arguments:
+`value`: *(Required)* Whether players queue into teams.
+
+<hr style="border:3px solid gray">
+
+## Queue Message
+### `/queuemessage delay`
+#### Description
+ (Default: 3) Sets the delay for when a new queue message comes up.
+#### Usage: `/queuemessage delay [seconds]`
+#### Arguments:
+`seconds`: *(Required)* New message delay.
+
+---
+
+### `/queuemessage deletions`
+#### Description
+ (Default: 3) Sets whether old queue updates should be deleted.
+#### Usage: `/queuemessage deletions [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.
+
+---
+
+### `/queuemessage edits`
+#### Description
+ (Default: Enabled) Set whether queue updates should edit the previous message.
+#### Usage: `/queuemessage edits [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.
+
+<hr style="border:3px solid gray">
+
+## Queue Name
+### `/queuename`
+#### Description
+ Sets the name for this queue.
+#### Usage: `/queuename [name]`
+#### Arguments:
+`name`: *(Required)* Enter the queue name.
+
+---
+
+### `/rename`
+#### Description
+ Renames the queue, but keeps all stats. This will merge all stats with desired name.
+#### Usage: `/rename [name]`
+#### Arguments:
+`name`: *(Required)* Enter the queue name.
+
+<hr style="border:3px solid gray">
+
+## Queue Size
+### `/queuesizeoverride`
+#### Description
+ Manually specify the queue size instead of letting the bot decide based on queue setup.
+#### Usage: `/queuesizeoverride [size]`
+#### Arguments:
+`size`: *(Required)* Enter the queue size, or 0 to reset to default behavior.
+
+<hr style="border:3px solid gray">
+
+## Rating In Name
+### `/ratinginname format`
+#### Description
+ (Default: '- ($)') Sets the format for ratings in nicknames.
+#### Usage: `/ratinginname format [format]`
+#### Arguments:
+`format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.
+
+---
+
+### `/ratinginname queuenames`
+#### Description
+ Sets the queue names to use in retrieving player stats, or omit to reset.
+#### Usage: `/ratinginname queuenames (names)`
+#### Arguments:
+`names`: *(Optional)* The queue names seperated by ',' to use for inserting ratings into '$' indicators in the format.
+
+---
+
+### `/ratinginname removeall`
+#### Description
+ Removes all nicknames from all members.
+#### Usage: `/ratinginname removeall`
+
+
+---
+
+### `/ratinginname toggle`
+#### Description
+ Enable or disable showing player MMR in their nickname.
+#### Usage: `/ratinginname toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If ratings should be shown in name.
+
+<hr style="border:3px solid gray">
+
+## Reaction Roles
+### `/reactionroles add`
+#### Description
+ Specify a spectator role which can join any voice channel.
+#### Usage: `/reactionroles add [channel] [message_id] [role] [reaction]`
+#### Arguments:
+`channel`: *(Required)* Channel where message is.\
+`message_id`: *(Required)* Message to add reaction to.\
+`role`: *(Required)* Role to assign/remove.\
+`reaction`: *(Required)* Reaction that corresponds to this role.
+
+<hr style="border:3px solid gray">
+
+## Register
+### `/requireregister`
+#### Description
+ Specify whether players must register their account before playing.
+#### Usage: `/requireregister [mode]`
+#### Arguments:
+`mode`: *(Required)* Game to register with, or None to disable.
+
+<hr style="border:3px solid gray">
+
+## Rematch
+### `/rematches`
+#### Description
+ (Default: true) Toggle the ability to rematch.
+#### Usage: `/rematches [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If you want rematches to be enabled or disabled.
+
+<hr style="border:3px solid gray">
+
+## Require IGN
+### `/requireign`
+#### Description
+ (Default: false) Require if players must set their IGN before they can queue.
+#### Usage: `/requireign [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If you want to require that users set their IGN.
+
+<hr style="border:3px solid gray">
+
+## Required Votes
+### `/requiredvotes`
+#### Description
+ Sets the required votes to pick a winner.
+#### Usage: `/requiredvotes [type]`
+#### Arguments:
+`type`: *(Required)* The type of voting requirement to be used.
+
+---
+
+### `/voteforresult`
+#### Description
+ Sets whether to vote for queue outcome.
+#### Usage: `/voteforresult [value]`
+#### Arguments:
+`value`: *(Required)* Whether voting for outcomes is enabled or not.
+
+<hr style="border:3px solid gray">
+
+## Requirements
+### `/mmrrequirement`
+#### Description
+ Sets the required mmr to enter this queue.
+#### Usage: `/mmrrequirement [mmr]`
+#### Arguments:
+`mmr`: *(Required)* Enter the required mmr, or 0 to disable.
+
+---
+
+### `/rolerequirement add`
+#### Description
+ Add a required role to enter this queue. Players can join if they have any of the roles.
+#### Usage: `/rolerequirement add [role]`
+#### Arguments:
+`role`: *(Required)* Enter the required role.
+
+---
+
+### `/rolerequirement remove`
+#### Description
+ Removed a required role to enter this queue.
+#### Usage: `/rolerequirement remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the required role.
+
+<hr style="border:3px solid gray">
+
+## Reset Data
+### `/resetstats all`
+#### Description
+ Resets all stats for all queues, or for the inputted queue name.
+#### Usage: `/resetstats all (queue_name)`
+#### Arguments:
+`queue_name`: *(Optional)* The queue name to reset stats for.
+
+---
+
+### `/resetstats player`
+#### Description
+ Reset the user's data for all queues or a certain queue.
+#### Usage: `/resetstats player [user] (queue_name)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`queue_name`: *(Optional)* Enter the queue data to remove from. Ignore to delete all data from all queues.
+
+<hr style="border:3px solid gray">
+
+## Results Channel
+### `/resultschannel`
+#### Description
+ Sets the channel to post match results.
+#### Usage: `/resultschannel [channel]`
+#### Arguments:
+`channel`: *(Required)* Enter the desired channel.
+
+<hr style="border:3px solid gray">
+
+## Roles
+### `/autoroles copy`
+#### Description
+ Copies the auto roles config to the desired channel.
+#### Usage: `/autoroles copy [channel]`
+#### Arguments:
+`channel`: *(Required)* Channel with queue to copy to.
+
+---
+
+### `/autoroles remove`
+#### Description
+ Removes a condition where player roles are changed.
+#### Usage: `/autoroles remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles set`
+#### Description
+ Adds a condition in which player roles are changed.
+#### Usage: `/autoroles set [role] [lower_rating] [upper_rating]`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_rating`: *(Required)* Enter the minimum rating threshold for this role.\
+`upper_rating`: *(Required)* Enter the maximum rating threshold for this role.
+
+---
+
+### `/autoroles topplayers`
+#### Description
+ (default: 'none') Adds a condition in which player roles are changed.
+#### Usage: `/autoroles topplayers [role] [number]`
+#### Arguments:
+`role`: *(Required)* Enter the role for the top players.\
+`number`: *(Required)* Enter the number of players who can have this role.
+
+---
+
+### `/roles`
+#### Description
+ (default: 'None') Sets the roles for this queue.
+#### Usage: `/roles (roles)`
+#### Arguments:
+`roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.
+
+<hr style="border:3px solid gray">
+
+## Select Winner
+### `/outcome cancel`
+#### Description
+ Cancel the given game.
+#### Usage: `/outcome cancel [queue_num]`
+#### Arguments:
+`queue_num`: *(Required)* The queue number.
+
+---
+
+### `/outcome selectwinner`
+#### Description
+ Sets the winner for the given game.
+#### Usage: `/outcome selectwinner [queue_num] [team_num]`
+#### Arguments:
+`queue_num`: *(Required)* The queue number.\
+`team_num`: *(Required)* The team that won.
+
+---
+
+### `/outcome tie`
+#### Description
+ Mark the given game as a tie.
+#### Usage: `/outcome tie [queue_num]`
+#### Arguments:
+`queue_num`: *(Required)* The queue number.
+
+<hr style="border:3px solid gray">
+
+## Server Stats
+### `/serverstats`
+#### Description
+ View all queue names in the server.
+#### Usage: `/serverstats (hidden)`
+#### Arguments:
+`hidden`: *(Optional)* If you want the stats to be hidden.
+
+<hr style="border:3px solid gray">
+
+## Setup
+### `/setup`
+#### Description
+ Starts the interactive setup.
+#### Usage: `/setup`
+
+
+<hr style="border:3px solid gray">
+
+## Setup Channel
+### `/tempchannels`
+#### Description
+ (default: disabled) Sets whether to create a temporary text channel for setup.
+#### Usage: `/tempchannels [mode]`
+#### Arguments:
+`mode`: *(Required)* If the setupchannel is enabled.
+
+<hr style="border:3px solid gray">
+
+## Staff
+### `/spectatorrole`
+#### Description
+ Specify a spectator role which can join any voice channel.
+#### Usage: `/spectatorrole [role]`
+#### Arguments:
+`role`: *(Required)* Spectator role.
+
+---
+
+### `/staffrole add`
+#### Description
+ Add a staff role that grants full access to all commands.
+#### Usage: `/staffrole add [role]`
+#### Arguments:
+`role`: *(Required)* Staff role.
+
+---
+
+### `/staffrole remove`
+#### Description
+ Remove a staff role that grants full access to all commands.
+#### Usage: `/staffrole remove [role]`
+#### Arguments:
+`role`: *(Required)* Staff role.
+
+<hr style="border:3px solid gray">
+
+## Start From Voice Channel
+### `/startfromvc`
+#### Description
+ Creates a queue using all players in the given channel.
+#### Usage: `/startfromvc [voice_channel]`
+#### Arguments:
+`voice_channel`: *(Required)* The voice channel to start a queue from.
+
+<hr style="border:3px solid gray">
+
+## Start Queue
+### `/startqueue`
+#### Description
+ Starts a queue for the current channel.
+#### Usage: `/startqueue [queuename] [teamsize] (numberofteams)`
+#### Arguments:
+`queuename`: *(Required)* Enter the queue name.\
+`teamsize`: *(Required)* Enter the team size.\
+`numberofteams`: *(Optional)* Enter the number of teams.
+
+<hr style="border:3px solid gray">
+
+## Starting MMR
+### `/mmrceiling`
+#### Description
+ Sets the highest mmr a player can reach in this queue.
+#### Usage: `/mmrceiling (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the peak rating, or omit to reset.
+
+---
+
+### `/mmrfloor`
+#### Description
+ Sets the lowest mmr a player can reach in this queue.
+#### Usage: `/mmrfloor (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
+
+---
+
+### `/startingmmr remove`
+#### Description
+ Removes the starting mmr for the given role.
+#### Usage: `/startingmmr remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/startingmmr set`
+#### Description
+ Sets the starting mmr for the given role.
+#### Usage: `/startingmmr set [role] [mmr]`
+#### Arguments:
+`role`: *(Required)* Enter the role.\
+`mmr`: *(Required)* Enter the mmr.
+
+<hr style="border:3px solid gray">
+
+## Stats
+### `/hidestats`
+#### Description
+ Sets whether stats are forced to be hidden (only shown to the user).
+#### Usage: `/hidestats [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If you want the stats to be always hidden.
+
+---
+
+### `/statsbutton`
+#### Description
+ Send a button that allows players to show their stats.
+#### Usage: `/statsbutton`
+
+
+<hr style="border:3px solid gray">
+
+## Team Creation
+### `/captainselection`
+#### Description
+ Choose how captains will be picked.
+#### Usage: `/captainselection [type]`
+#### Arguments:
+`type`: *(Required)* The default captain selection option to use.
+
+---
+
+### `/randomselection`
+#### Description
+ Specify whether players have the option to reshuffle teams in the random selection.
+#### Usage: `/randomselection [allow_reshuffle]`
+#### Arguments:
+`allow_reshuffle`: *(Required)* If players will be allowed to reshuffle teams.
+
+---
+
+### `/teamselection`
+#### Description
+ Choose how teams will be picked.
+#### Usage: `/teamselection [type]`
+#### Arguments:
+`type`: *(Required)* The default team selection option to use.
+
+<hr style="border:3px solid gray">
+
+## Team Names
+### `/teamnames`
+#### Description
+ Speicfy the names of each team, or omit for the default behavior..
+#### Usage: `/teamnames (team_names)`
+#### Arguments:
+`team_names`: *(Optional)* Comma seperated list of team names. Ex: Team 1,Team 2,...
+
+<hr style="border:3px solid gray">
+
+## Team Queue
+### `/partyqueue`
+#### Description
+ Enable party queue, allowing players to create parties with `/party` before joining.
+#### Usage: `/partyqueue [toggle] (max_size)`
+#### Arguments:
+`toggle`: *(Required)* Enable or disable party queue.\
+`max_size`: *(Optional)* The max party size.
+
+---
+
+### `/teamqueue`
+#### Description
+ Enable teamqueue, requiring players to create parties with `/party` before joining.
+#### Usage: `/teamqueue [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If team queue should be enabled.
+
+<hr style="border:3px solid gray">
+
+## Team Size
+### `/teamsize`
+#### Description
+ Sets the size for each team.
+#### Usage: `/teamsize [size]`
+#### Arguments:
+`size`: *(Required)* The team size.
+
+<hr style="border:3px solid gray">
+
+## Test
+### `/test`
+#### Description
+ Enables testing mode which allows for duplicate queue joining.
+#### Usage: `/test`
+
+
+<hr style="border:3px solid gray">
+
+## Ties
+### `/ties`
+#### Description
+ Sets whether tieing is an option for game outcomes.
+#### Usage: `/ties [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Whether to show the tie option.
+
+<hr style="border:3px solid gray">
+
+## Timers
+### `/timer afk`
+#### Description
+ Toggle kicking players for inactivity.
+#### Usage: `/timer afk [toggle] (timer)`
+#### Arguments:
+`toggle`: *(Required)* Toggle.\
+`timer`: *(Optional)* Enter the AFK timer in seconds (Default: 3600).
+
+---
+
+### `/timer matchcleanup`
+#### Description
+ (Default: 5400) Sets the timeout before a running game is finished.
+#### Usage: `/timer matchcleanup [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Enter the time in SECONDS.
+
+---
+
+### `/timer queuemessage`
+#### Description
+ (Default: 3) Sets the delay for when a new queue message comes up.
+#### Usage: `/timer queuemessage [seconds]`
+#### Arguments:
+`seconds`: *(Required)* New message delay.
+
+---
+
+### `/timer queuereset`
+#### Description
+ (Default: 3600) Sets the time before the queue is reset.
+#### Usage: `/timer queuereset [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Enter the time in SECONDS.
+
+---
+
+### `/timer votes`
+#### Description
+ (Default: 60) Sets the timeout for voting menus.
+#### Usage: `/timer votes [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Enter the time in SECONDS.
+
+---
+
+### `/timer winnervotemessage`
+#### Description
+ (Default: 0) Sets the delay before showing the winner voting message.
+#### Usage: `/timer winnervotemessage [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Enter the time in SECONDS, or 0 to disable.
+
+<hr style="border:3px solid gray">
+
+## Voice Channel Mode
+### `/channelrestrictions`
+#### Description
+ (default: enabled) Sets whether created channels have restrictions.
+#### Usage: `/channelrestrictions [mode]`
+#### Arguments:
+`mode`: *(Required)* If channels are restricted.
+
+---
+
+### `/voicechannels`
+#### Description
+ (default: required) Sets whether voice channels are required, optional, or disabled.
+#### Usage: `/voicechannels [mode]`
+#### Arguments:
+`mode`: *(Required)* The type of voice channel setting.
+
+<hr style="border:3px solid gray">
+
+## Voting Menu
+### `/votingmenu add`
+#### Description
+ Add a new voting menu.
+#### Usage: `/votingmenu add [title] [options] [key] (order) (button_colors) (show_numbers) (allow_random) (force_random)`
+#### Arguments:
+`title`: *(Required)* (Ex: Vote for the Region) The title for the vote.\
+`options`: *(Required)* (Ex: NA,EU) Comma separated list of options.\
+`key`: *(Required)* (Ex: Region Name) The key for this vote for displaying the result after.\
+`order`: *(Optional)* (Ex: 1) The order for this vote in regard to other votes. Votes will occur in ascending order.\
+`button_colors`: *(Optional)* (Ex: blurple,red) Comma separated list of button colors. Valid options: blurple, gray, green, red.\
+`show_numbers`: *(Optional)* If each option should have a number associated with it when displayed.\
+`allow_random`: *(Optional)* If a 'random' option is included in the vote.\
+`force_random`: *(Optional)* If you want to skip the vote altogether and just pick a random option.
+
+---
+
+### `/votingmenu remove`
+#### Description
+ Remove the given voting menu.
+#### Usage: `/votingmenu remove [title_and_order]`
+#### Arguments:
+`title_and_order`: *(Required)* Title and corresponding order of voting menu to delete.
+
+<hr style="border:3px solid gray">
+
+## Waiting Room
+### `/waitingroom`
+#### Description
+ Enable a waiting room allowing a queue to be overfilled (Only useful with /roles).
+#### Usage: `/waitingroom [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If waiting room should be enabled.
+
+<hr style="border:3px solid gray">
+
+## Webhooks
+### `/webhooks add`
+#### Description
+ Add a new webhook to receive queue information.
+#### Usage: `/webhooks add [url]`
+#### Arguments:
+`url`: *(Required)* Your webhook url.
+
+---
+
+### `/webhooks delete`
+#### Description
+ Delete this queue's webhook.
+#### Usage: `/webhooks delete`
+
+
+<hr style="border:3px solid gray">
+
+## Winner Message
+### `/winnermessage format`
+#### Description
+ (Default: 0) Sets the format for the winner message.
+#### Usage: `/winnermessage format [mode]`
+#### Arguments:
+`mode`: *(Required)* Formatting type.
 
 <hr style="border:3px solid gray">
 
 # API
 
-## Generating an API token
-#### Description
-Generate an API token to be able to make requests to NeatQueue endpoints
-#### Usage: `/webhook generatetoken`
+## [Generate an API token](/#webhooks-1)
+
+___
+
+
 ## Endpoints
 ### `POST https://host.neatqueue.com:2000/api/outcome`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `match_number: #` 
 - `winning_team_number: # `
@@ -1013,10 +1633,11 @@ Content-Length: 61
 }
 ```
 
+___
+
 ### `POST https://host.neatqueue.com:2000/api/queue/clear`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `channel_id: #`
 
@@ -1033,10 +1654,12 @@ Content-Length: 42
 }
 ```
 
+___
+
+
 ### `POST https://host.neatqueue.com:2000/api/queue/lock`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `channel_id: #`
 
@@ -1053,10 +1676,12 @@ Content-Length: 42
 }
 ```
 
+___
+
+
 ### `POST https://host.neatqueue.com:2000/api/queue/unlock`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `channel_id: #`
 
@@ -1073,6 +1698,9 @@ Content-Length: 42
 }
 ```
 
+___
+
+
 ### `GET https://host.neatqueue.com:2000/api/queue/{channel_id}/players`
 #### Headers:
 - `Authorization: API Token`
@@ -1084,10 +1712,12 @@ Host: https://host.neatqueue.com:2000
 Authorization: YOURAPITOKENHERE
 ```
 
+___
+
+
 ### `POST https://host.neatqueue.com:2000/api/queue/player/add`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `channel_id: #`
 - `player_id: #`
@@ -1106,10 +1736,12 @@ Content-Length: 80
 }
 ```
 
+___
+
+
 ### `POST https://host.neatqueue.com:2000/api/queue/player/remove`
 #### Headers:
 - `Authorization: API Token`
-
 #### Body:
 - `channel_id: #`
 - `player_id: #`
@@ -1127,6 +1759,3 @@ Content-Length: 80
     "player_id": 145305657237700608
 }
 ```
-
-
-
