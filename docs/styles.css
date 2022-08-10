@@ -5,11 +5,11 @@
     font-size: 2rem;
 }
 
-:root {
-    --mono-hue: 250;
-    --mono-saturation: 10%;
-    --base-background-color: var(--mono-shade2);
-}
+/*:root {*/
+/*    --mono-hue: 250;*/
+/*    --mono-saturation: 10%;*/
+/*    --base-background-color: var(--mono-shade2);*/
+/*}*/
 
 code {
     background-color: #303030;

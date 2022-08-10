@@ -79,6 +79,16 @@ Start a vote to forcestart the game.
 
 <hr style="border:3px solid gray">
 
+## Game Integrations
+### `/register`
+#### Description
+Initialize your MMR using your account.
+#### Usage: `/register [account]`
+#### Arguments:
+`account`: *(Required)* Account details.
+
+<hr style="border:3px solid gray">
+
 ## Help
 ### `/help`
 #### Description
@@ -119,7 +129,7 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Parties
+## Parties/ Teams/ Clans/ Groups
 ### `/party cancelinvites`
 #### Description
 CAPTAIN ONLY: Cancel all pending invites.
@@ -228,16 +238,6 @@ View the specified party.
 Pings all members in the queue.
 #### Usage: `/ping`
 
-
-<hr style="border:3px solid gray">
-
-## Register
-### `/register`
-#### Description
-Initialize your MMR using your account.
-#### Usage: `/register [account]`
-#### Arguments:
-`account`: *(Required)* Account details.
 
 <hr style="border:3px solid gray">
 
@@ -423,7 +423,7 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 
 <hr style="border:3px solid gray">
 
-## Config
+## Config Loading/Saving
 ### `/load`
 #### Description
  Loads the queue configuration based on the given name.
@@ -438,6 +438,25 @@ Therefore, this command is not very helpful for servers with large amounts of qu
  Save the current queue configuration to a name.
 #### Usage: `/save`
 
+
+<hr style="border:3px solid gray">
+
+## Display Names
+### `/anonymousqueue`
+#### Description
+ Sets whether to hide the names of players in queue.
+#### Usage: `/anonymousqueue [mode]`
+#### Arguments:
+`mode`: *(Required)* Hide player names in queue.
+
+---
+
+### `/nametype`
+#### Description
+ Sets whether to use nicknames or discord names (default: nick).
+#### Usage: `/nametype [type]`
+#### Arguments:
+`type`: *(Required)* The type of names to be used.
 
 <hr style="border:3px solid gray">
 
@@ -480,6 +499,16 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 `max_size`: *(Optional)* Enter the maximum number of players required. Set to -1 to ignore.\
 `only_fair`: *(Optional)* Should the forcestart happen if teams are not the same size?.\
 `auto_start`: *(Optional)* Should the forcestart vote automatically happen when possible?.
+
+<hr style="border:3px solid gray">
+
+## Game Integrations
+### `/requireregister`
+#### Description
+ Specify whether players must register their account before playing.
+#### Usage: `/requireregister [mode]`
+#### Arguments:
+`mode`: *(Required)* Game to register with, or None to disable.
 
 <hr style="border:3px solid gray">
 
@@ -894,25 +923,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 <hr style="border:3px solid gray">
 
-## Name Type
-### `/anonymousqueue`
-#### Description
- Sets whether to hide the names of players in queue.
-#### Usage: `/anonymousqueue [mode]`
-#### Arguments:
-`mode`: *(Required)* Hide player names in queue.
-
----
-
-### `/nametype`
-#### Description
- Sets whether to use nicknames or discord names (default: nick).
-#### Usage: `/nametype [type]`
-#### Arguments:
-`type`: *(Required)* The type of names to be used.
-
-<hr style="border:3px solid gray">
-
 ## Number Of Lobbies
 ### `/numberoflobbies`
 #### Description
@@ -1009,39 +1019,43 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 <hr style="border:3px solid gray">
 
-## Rating In Name
-### `/ratinginname format`
+## Ranks/Automatically Assign Discord Roles
+### `/autoroles copy`
 #### Description
- (Default: '- ($)') Sets the format for ratings in nicknames.
-#### Usage: `/ratinginname format [format]`
+ Copies the auto roles config to the desired channel.
+#### Usage: `/autoroles copy [channel]`
 #### Arguments:
-`format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.
+`channel`: *(Required)* Channel with queue to copy to.
 
 ---
 
-### `/ratinginname queuenames`
+### `/autoroles remove`
 #### Description
- Sets the queue names to use in retrieving player stats, or omit to reset.
-#### Usage: `/ratinginname queuenames (names)`
+ Removes a condition where player roles are changed.
+#### Usage: `/autoroles remove [role]`
 #### Arguments:
-`names`: *(Optional)* The queue names seperated by ',' to use for inserting ratings into '$' indicators in the format.
+`role`: *(Required)* Enter the role.
 
 ---
 
-### `/ratinginname removeall`
+### `/autoroles set`
 #### Description
- Removes all nicknames from all members.
-#### Usage: `/ratinginname removeall`
-
+ Adds a condition in which player roles are changed.
+#### Usage: `/autoroles set [role] [lower_rating] [upper_rating]`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_rating`: *(Required)* Enter the minimum rating threshold for this role.\
+`upper_rating`: *(Required)* Enter the maximum rating threshold for this role.
 
 ---
 
-### `/ratinginname toggle`
+### `/autoroles topplayers`
 #### Description
- Enable or disable showing player MMR in their nickname.
-#### Usage: `/ratinginname toggle [toggle]`
+ (default: 'none') Adds a condition in which player roles are changed.
+#### Usage: `/autoroles topplayers [role] [number]`
 #### Arguments:
-`toggle`: *(Required)* If ratings should be shown in name.
+`role`: *(Required)* Enter the role for the top players.\
+`number`: *(Required)* Enter the number of players who can have this role.
 
 <hr style="border:3px solid gray">
 
@@ -1055,16 +1069,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 `message_id`: *(Required)* Message to add reaction to.\
 `role`: *(Required)* Role to assign/remove.\
 `reaction`: *(Required)* Reaction that corresponds to this role.
-
-<hr style="border:3px solid gray">
-
-## Register
-### `/requireregister`
-#### Description
- Specify whether players must register their account before playing.
-#### Usage: `/requireregister [mode]`
-#### Arguments:
-`mode`: *(Required)* Game to register with, or None to disable.
 
 <hr style="border:3px solid gray">
 
@@ -1166,45 +1170,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Roles
-### `/autoroles copy`
-#### Description
- Copies the auto roles config to the desired channel.
-#### Usage: `/autoroles copy [channel]`
-#### Arguments:
-`channel`: *(Required)* Channel with queue to copy to.
-
----
-
-### `/autoroles remove`
-#### Description
- Removes a condition where player roles are changed.
-#### Usage: `/autoroles remove [role]`
-#### Arguments:
-`role`: *(Required)* Enter the role.
-
----
-
-### `/autoroles set`
-#### Description
- Adds a condition in which player roles are changed.
-#### Usage: `/autoroles set [role] [lower_rating] [upper_rating]`
-#### Arguments:
-`role`: *(Required)* Enter the role to give/remove.\
-`lower_rating`: *(Required)* Enter the minimum rating threshold for this role.\
-`upper_rating`: *(Required)* Enter the maximum rating threshold for this role.
-
----
-
-### `/autoroles topplayers`
-#### Description
- (default: 'none') Adds a condition in which player roles are changed.
-#### Usage: `/autoroles topplayers [role] [number]`
-#### Arguments:
-`role`: *(Required)* Enter the role for the top players.\
-`number`: *(Required)* Enter the number of players who can have this role.
-
----
-
 ### `/roles`
 #### Description
  (default: 'None') Sets the roles for this queue.
@@ -1262,13 +1227,39 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 <hr style="border:3px solid gray">
 
-## Setup Channel
-### `/tempchannels`
+## Show MMR in Name
+### `/ratinginname format`
 #### Description
- (default: disabled) Sets whether to create a temporary text channel for setup.
-#### Usage: `/tempchannels [mode]`
+ (Default: '- ($)') Sets the format for ratings in nicknames.
+#### Usage: `/ratinginname format [format]`
 #### Arguments:
-`mode`: *(Required)* If the setupchannel is enabled.
+`format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.
+
+---
+
+### `/ratinginname queuenames`
+#### Description
+ Sets the queue names to use in retrieving player stats, or omit to reset.
+#### Usage: `/ratinginname queuenames (names)`
+#### Arguments:
+`names`: *(Optional)* The queue names seperated by ',' to use for inserting ratings into '$' indicators in the format.
+
+---
+
+### `/ratinginname removeall`
+#### Description
+ Removes all nicknames from all members.
+#### Usage: `/ratinginname removeall`
+
+
+---
+
+### `/ratinginname toggle`
+#### Description
+ Enable or disable showing player MMR in their nickname.
+#### Usage: `/ratinginname toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If ratings should be shown in name.
 
 <hr style="border:3px solid gray">
 
@@ -1443,6 +1434,16 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Usage: `/teamsize [size]`
 #### Arguments:
 `size`: *(Required)* The team size.
+
+<hr style="border:3px solid gray">
+
+## Temporary Setup Channels
+### `/tempchannels`
+#### Description
+ (default: disabled) Sets whether to create a temporary text channel for setup.
+#### Usage: `/tempchannels [mode]`
+#### Arguments:
+`mode`: *(Required)* If the setupchannel is enabled.
 
 <hr style="border:3px solid gray">
 
