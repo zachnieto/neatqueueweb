@@ -28,6 +28,25 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 <hr style="border:3px solid gray">
 
 # User Commands
+## Balance By
+### `/balancebyroles`
+#### Description
+"ADMIN ONLY: The order of role to skill from lowest to highest rated.
+#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
+#### Arguments:
+`role1`: *(Optional)* The role to use in balancing.\
+`role2`: *(Optional)* The role to use in balancing.\
+`role3`: *(Optional)* The role to use in balancing.\
+`role4`: *(Optional)* The role to use in balancing.\
+`role5`: *(Optional)* The role to use in balancing.\
+`role6`: *(Optional)* The role to use in balancing.\
+`role7`: *(Optional)* The role to use in balancing.\
+`role8`: *(Optional)* The role to use in balancing.\
+`role9`: *(Optional)* The role to use in balancing.\
+`role10`: *(Optional)* The role to use in balancing.
+
+<hr style="border:3px solid gray">
+
 ## Cancel
 ### `/cancel`
 #### Description
@@ -241,13 +260,25 @@ Pings all members in the queue.
 
 <hr style="border:3px solid gray">
 
+## Predictions
+### `/predict`
+#### Description
+Place a bet on the given team for the specified match number.
+#### Usage: `/predict [gamenumber] [team] [amount]`
+#### Arguments:
+`gamenumber`: *(Required)* Game number of bet on.\
+`team`: *(Required)* Team to place the bet on.\
+`amount`: *(Required)* Amount of points you want to bet.
+
+<hr style="border:3px solid gray">
+
 ## Report Bug
 ### `/reportbug`
 #### Description
 Report a bug.
 #### Usage: `/reportbug [message]`
 #### Arguments:
-`message`: *(Required)* Enter the message you want reported.
+`message`: *(Required)* The message to send in the report.
 
 <hr style="border:3px solid gray">
 
@@ -363,24 +394,6 @@ Generate an API token for your account.
 #### Usage: `/balanceby [mode]`
 #### Arguments:
 `mode`: *(Required)* How teams are balanced.
-
----
-
-### `/balancebyroles`
-#### Description
- The order of role to skill from lowest to highest rated.
-#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
-#### Arguments:
-`role1`: *(Optional)* The role to use in balancing.\
-`role2`: *(Optional)* The role to use in balancing.\
-`role3`: *(Optional)* The role to use in balancing.\
-`role4`: *(Optional)* The role to use in balancing.\
-`role5`: *(Optional)* The role to use in balancing.\
-`role6`: *(Optional)* The role to use in balancing.\
-`role7`: *(Optional)* The role to use in balancing.\
-`role8`: *(Optional)* The role to use in balancing.\
-`role9`: *(Optional)* The role to use in balancing.\
-`role10`: *(Optional)* The role to use in balancing.
 
 <hr style="border:3px solid gray">
 
@@ -853,6 +866,16 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 ---
 
+### `/add points`
+#### Description
+ Increment the players points (not MMR).
+#### Usage: `/add points [user] [points]`
+#### Arguments:
+`user`: *(Required)* The desired user.\
+`points`: *(Required)* The new points amount.
+
+---
+
 ### `/add streak`
 #### Description
  Increment the players streak.
@@ -943,6 +966,25 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 <hr style="border:3px solid gray">
 
+## Predictions
+### `/predictions channel`
+#### Description
+ Specify the channel to show predictions.
+#### Usage: `/predictions channel [channel]`
+#### Arguments:
+`channel`: *(Required)* The predictions channel.
+
+---
+
+### `/predictions toggle`
+#### Description
+ Specify the channel to show predictions.
+#### Usage: `/predictions toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If predictions are enabled or disabled.
+
+<hr style="border:3px solid gray">
+
 ## Purge
 ### `/purge`
 #### Description
@@ -1025,7 +1067,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Copies the auto roles config to the desired channel.
 #### Usage: `/autoroles copy [channel]`
 #### Arguments:
-`channel`: *(Required)* Channel with queue to copy to.
+`channel`: *(Required)* Channel with queue to copy autoroles config to.
 
 ---
 
@@ -1051,7 +1093,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 ### `/autoroles topplayers`
 #### Description
- (default: 'none') Adds a condition in which player roles are changed.
+ Adds a condition in which player roles are changed.
 #### Usage: `/autoroles topplayers [role] [number]`
 #### Arguments:
 `role`: *(Required)* Enter the role for the top players.\
@@ -1183,9 +1225,9 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ### `/outcome cancel`
 #### Description
  Cancel the given game.
-#### Usage: `/outcome cancel [queue_num]`
+#### Usage: `/outcome cancel (queue_num)`
 #### Arguments:
-`queue_num`: *(Required)* The queue number.
+`queue_num`: *(Optional)* The queue number.
 
 ---
 
@@ -1337,7 +1379,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Removes the starting mmr for the given role.
 #### Usage: `/startingmmr remove [role]`
 #### Arguments:
-`role`: *(Required)* Enter the role.
+`role`: *(Required)* The role to remove starting MMR from.
 
 ---
 
@@ -1346,8 +1388,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the starting mmr for the given role.
 #### Usage: `/startingmmr set [role] [mmr]`
 #### Arguments:
-`role`: *(Required)* Enter the role.\
-`mmr`: *(Required)* Enter the mmr.
+`role`: *(Required)* The role.\
+`mmr`: *(Required)* The starting mmr value.
 
 <hr style="border:3px solid gray">
 
@@ -1411,9 +1453,9 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ### `/partyqueue`
 #### Description
  Enable party queue, allowing players to create parties with `/party` before joining.
-#### Usage: `/partyqueue [toggle] (max_size)`
+#### Usage: `/partyqueue (toggle) (max_size)`
 #### Arguments:
-`toggle`: *(Required)* Enable or disable party queue.\
+`toggle`: *(Optional)* Enable or disable party queue.\
 `max_size`: *(Optional)* The max party size.
 
 ---
