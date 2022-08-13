@@ -130,11 +130,11 @@ View information about the queue configuration.
 ### `/leaderboard`
 #### Description
 Shows the leaderboard for the current queue's game.
-#### Usage: `/leaderboard (page) (type) (queuename)`
+#### Usage: `/leaderboard (page) (type) (queue_name)`
 #### Arguments:
-`page`: *(Optional)* Enter the desired page number.\
+`page`: *(Optional)* The desired page number.\
 `type`: *(Optional)* The type of leaderboard to display.\
-`queuename`: *(Optional)* Queue name for the leaderboard.
+`queue_name`: *(Optional)* The queue name to view.
 
 <hr style="border:3px solid gray">
 
@@ -460,7 +460,7 @@ Therefore, this command is not very helpful for servers with large amounts of qu
  Sets whether to hide the names of players in queue.
 #### Usage: `/anonymousqueue [mode]`
 #### Arguments:
-`mode`: *(Required)* Hide player names in queue.
+`mode`: *(Required)* Hide players names in queue.
 
 ---
 
@@ -556,7 +556,7 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 Leaderboard titles are also hyperlinks to the website version of the leaderboard.
 ### `/leaderboardtype`
 #### Description
- Toggle using the new image leaderboard.
+ Toggle using the image or text leaderboard.
 #### Usage: `/leaderboardtype [type]`
 #### Arguments:
 `type`: *(Required)* Leaderboard format.
@@ -624,7 +624,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the lobby details message.
 #### Usage: `/lobbydetails location [location]`
 #### Arguments:
-`location`: *(Required)* The type of names to be used.
+`location`: *(Required)* Where to show lobby details.
 
 ---
 
@@ -641,26 +641,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the lobby details message.
 #### Usage: `/lobbydetails set [message]`
 #### Arguments:
-`message`: *(Required)* Enter the message to send. See /help for keywords for generating messages.> Currently supports three substitutions:
-> 
-> `HOST`: Randomly select a player name
-> `QUEUENUM`: Substitute the queue number
-> `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
-> characters to be in the password. There are currently 5 supported password types:
-> 
-> 1. L: Lowercase Letters only
-> 2. U: Uppercase Letters only
-> 3. N: Numbers only
-> 4. C: Lowercase and Uppercase Letters
-> 5. A: Lowercase Letters, Uppercase Letters, and Numbers
-> 
-> Example:
-> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
-> could substitute to
-> 
-> "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x
-> 
-> You can further enhance the visuals using Markdown formatting.
+`message`: *(Required)* Enter the message to send.
 
 <hr style="border:3px solid gray">
 
@@ -772,7 +753,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets whether the queue is a best of 3, 5, 7, etc.
 #### Usage: `/bestof [number] (vote) (voteselection)`
 #### Arguments:
-`number`: *(Required)* Best of #.\
+`number`: *(Required)* Best of number.\
 `vote`: *(Optional)* Whether players can vote on the number of matches to play.\
 `voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.
 
@@ -783,8 +764,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Adds the given map.
 #### Usage: `/map add [map_name] (game_mode)`
 #### Arguments:
-`map_name`: *(Required)* Enter the map name.\
-`game_mode`: *(Optional)* Enter the corresponding game mode.
+`map_name`: *(Required)* New map name.\
+`game_mode`: *(Optional)* Game mode for map if applicable.
 
 ---
 
@@ -1051,7 +1032,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 <hr style="border:3px solid gray">
 
-## Queue Size
+## Queue Size Override
+> To normally change the queue size, use `/teamsize` and `/numberofteams`
 ### `/queuesizeoverride`
 #### Description
  Manually specify the queue size instead of letting the bot decide based on queue setup.
@@ -1421,15 +1403,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 ---
 
-### `/randomselection`
-#### Description
- Specify whether players have the option to reshuffle teams in the random selection.
-#### Usage: `/randomselection [allow_reshuffle]`
-#### Arguments:
-`allow_reshuffle`: *(Required)* If players will be allowed to reshuffle teams.
-
----
-
 ### `/teamselection`
 #### Description
  Choose how teams will be picked.
@@ -1482,10 +1455,10 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ## Temporary Setup Channels
 ### `/tempchannels`
 #### Description
- (default: disabled) Sets whether to create a temporary text channel for setup.
+ (default: Enabled) Sets whether to create a temporary text channel for setup.
 #### Usage: `/tempchannels [mode]`
 #### Arguments:
-`mode`: *(Required)* If the setupchannel is enabled.
+`mode`: *(Required)* If the temporary setup channels are enabled.
 
 <hr style="border:3px solid gray">
 
@@ -1640,7 +1613,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ## Winner Message
 ### `/winnermessage format`
 #### Description
- (Default: 0) Sets the format for the winner message.
+ Sets the format for the winner message.
 #### Usage: `/winnermessage format [mode]`
 #### Arguments:
 `mode`: *(Required)* Formatting type.
