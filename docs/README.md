@@ -28,25 +28,6 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 <hr style="border:3px solid gray">
 
 # User Commands
-## Balance By
-### `/balancebyroles`
-#### Description
-"ADMIN ONLY: The order of role to skill from lowest to highest rated.
-#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
-#### Arguments:
-`role1`: *(Optional)* The role to use in balancing.\
-`role2`: *(Optional)* The role to use in balancing.\
-`role3`: *(Optional)* The role to use in balancing.\
-`role4`: *(Optional)* The role to use in balancing.\
-`role5`: *(Optional)* The role to use in balancing.\
-`role6`: *(Optional)* The role to use in balancing.\
-`role7`: *(Optional)* The role to use in balancing.\
-`role8`: *(Optional)* The role to use in balancing.\
-`role9`: *(Optional)* The role to use in balancing.\
-`role10`: *(Optional)* The role to use in balancing.
-
-<hr style="border:3px solid gray">
-
 ## Cancel
 ### `/cancel`
 #### Description
@@ -65,18 +46,6 @@ Compare your stats to the given player.
 `player2`: *(Required)* Enter the second user you want to compare to.\
 `player1`: *(Optional)* Enter the first user you want to compare to, or omit for yourself.\
 `hidden`: *(Optional)* If you want the stats to be hidden.
-
-<hr style="border:3px solid gray">
-
-## Decay
-### `/mmrdecay`
-#### Description
-Enable/disable MMR decay and configure the values.
-#### Usage: `/mmrdecay [toggle] (amount) (duration)`
-#### Arguments:
-`toggle`: *(Required)* Enable/disable MMR decay.\
-`amount`: *(Optional)* Amount of MMR to decay.\
-`duration`: *(Optional)* After how long should a player decay.
 
 <hr style="border:3px solid gray">
 
@@ -395,6 +364,52 @@ Generate an API token for your account.
 #### Arguments:
 `mode`: *(Required)* How teams are balanced.
 
+---
+
+### `/balancebyroles`
+#### Description
+ The order of role to skill from lowest to highest rated.
+#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
+#### Arguments:
+`role1`: *(Optional)* The role to use in balancing.\
+`role2`: *(Optional)* The role to use in balancing.\
+`role3`: *(Optional)* The role to use in balancing.\
+`role4`: *(Optional)* The role to use in balancing.\
+`role5`: *(Optional)* The role to use in balancing.\
+`role6`: *(Optional)* The role to use in balancing.\
+`role7`: *(Optional)* The role to use in balancing.\
+`role8`: *(Optional)* The role to use in balancing.\
+`role9`: *(Optional)* The role to use in balancing.\
+`role10`: *(Optional)* The role to use in balancing.
+
+<hr style="border:3px solid gray">
+
+## Captain Selection
+### `/captains automute`
+#### Description
+ Automatically mute all non-captains during selection to remove bias.
+#### Usage: `/captains automute [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players are muted.
+
+---
+
+### `/captains drafttype`
+#### Description
+ Sets the type of draft to either Snake or Straight.
+#### Usage: `/captains drafttype [type]`
+#### Arguments:
+`type`: *(Required)* The type of draft to use.
+
+---
+
+### `/captains selection`
+#### Description
+ Choose how captains will be picked.
+#### Usage: `/captains selection [type]`
+#### Arguments:
+`type`: *(Required)* The default captain selection option to use.
+
 <hr style="border:3px solid gray">
 
 ## Channel Name
@@ -454,6 +469,18 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 
 <hr style="border:3px solid gray">
 
+## Decay
+### `/mmrdecay`
+#### Description
+ Enable/disable MMR decay and configure the values.
+#### Usage: `/mmrdecay [toggle] (amount) (duration)`
+#### Arguments:
+`toggle`: *(Required)* Enable/disable MMR decay.\
+`amount`: *(Optional)* Amount of MMR to decay.\
+`duration`: *(Optional)* After how long should a player decay.
+
+<hr style="border:3px solid gray">
+
 ## Display Names
 ### `/anonymousqueue`
 #### Description
@@ -470,16 +497,6 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 #### Usage: `/nametype [type]`
 #### Arguments:
 `type`: *(Required)* The type of names to be used.
-
-<hr style="border:3px solid gray">
-
-## Draft Type
-### `/drafttype`
-#### Description
- Sets the type of draft to either Snake or Straight.
-#### Usage: `/drafttype [type]`
-#### Arguments:
-`type`: *(Required)* The type of draft to use.
 
 <hr style="border:3px solid gray">
 
@@ -781,9 +798,10 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ### `/map selection`
 #### Description
  Choose between map votes or always random.
-#### Usage: `/map selection [type]`
+#### Usage: `/map selection [map_choice] (gamemode_choice)`
 #### Arguments:
-`type`: *(Required)* Voting or always random.
+`map_choice`: *(Required)* Voting or always random.\
+`gamemode_choice`: *(Optional)* -.
 
 <hr style="border:3px solid gray">
 
@@ -1394,15 +1412,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Team Creation
-### `/captainselection`
-#### Description
- Choose how captains will be picked.
-#### Usage: `/captainselection [type]`
-#### Arguments:
-`type`: *(Required)* The default captain selection option to use.
-
----
-
 ### `/teamselection`
 #### Description
  Choose how teams will be picked.
