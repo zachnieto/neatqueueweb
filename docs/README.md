@@ -414,7 +414,6 @@ Generate an API token for your account.
 
 ## Channel Config
 > Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
-Therefore, this command is not very helpful for servers with large amounts of queueing.
 ### `/channel category`
 #### Description
  (Default: Parent) Sets whether created channels go in a separate or the parent category.
