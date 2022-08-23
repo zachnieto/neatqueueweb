@@ -424,6 +424,42 @@ Therefore, this command is not very helpful for servers with large amounts of qu
 
 ---
 
+### `/channel name queueempty`
+#### Description
+ Set the channel name when a queue is empty. Can only be updated twice per 10 minutes!.
+#### Usage: `/channel name queueempty [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
+
+---
+
+### `/channel name queuelocked`
+#### Description
+ Set the channel name when a queue is locked. Can only be updated twice per 10 minutes!.
+#### Usage: `/channel name queuelocked [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
+
+---
+
+### `/channel name queuenotempty`
+#### Description
+ Set the channel name when a queue isn't empty. Can only be updated twice per 10 minutes!.
+#### Usage: `/channel name queuenotempty [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
+
+---
+
+### `/channel name team`
+#### Description
+ Set the name for created team channels.
+#### Usage: `/channel name team [channel_name]`
+#### Arguments:
+`channel_name`: *(Required)* The channel name.
+
+---
+
 ### `/channel restrictions`
 #### Description
  (default: enabled) Sets whether created channels have restrictions.
