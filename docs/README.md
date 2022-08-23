@@ -412,33 +412,24 @@ Generate an API token for your account.
 
 <hr style="border:3px solid gray">
 
-## Channel Name
+## Channel Config
 > Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
 Therefore, this command is not very helpful for servers with large amounts of queueing.
-### `/channelname queueempty`
+### `/channel category`
 #### Description
- Set the channel name when a queue is empty. Can only be updated twice per 10 minutes!.
-#### Usage: `/channelname queueempty [channel_name]`
+ (Default: Parent) Sets whether created channels go in a separate or the parent category.
+#### Usage: `/channel category [category]`
 #### Arguments:
-`channel_name`: *(Required)* The channel name.
+`category`: *(Required)* The category setting.
 
 ---
 
-### `/channelname queuelocked`
+### `/channel restrictions`
 #### Description
- Set the channel name when a queue is locked. Can only be updated twice per 10 minutes!.
-#### Usage: `/channelname queuelocked [channel_name]`
+ (default: enabled) Sets whether created channels have restrictions.
+#### Usage: `/channel restrictions [mode]`
 #### Arguments:
-`channel_name`: *(Required)* The channel name.
-
----
-
-### `/channelname queuenotempty`
-#### Description
- Set the channel name when a queue isn't empty. Can only be updated twice per 10 minutes!.
-#### Usage: `/channelname queuenotempty [channel_name]`
-#### Arguments:
-`channel_name`: *(Required)* The channel name.
+`mode`: *(Required)* If channels are restricted.
 
 <hr style="border:3px solid gray">
 
@@ -659,6 +650,29 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Usage: `/lobbydetails set [message]`
 #### Arguments:
 `message`: *(Required)* Enter the message to send.
+> Currently supports five substitutions:
+> 
+> `HOST`: Randomly select a player name \
+> `QUEUENUM`: Substitute the queue number \
+> `RANDOMTEAM`: Substitute a random team name \
+> `RANDOM[Option1,Option2,...]`: Randomly select one of the given options and substitute. Ex: `RANDOM[Heads,Tails]` \
+> `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
+> characters to be in the password. There are currently 5 supported password types:
+> 
+> 1. L: Lowercase Letters only
+> 2. U: Uppercase Letters only
+> 3. N: Numbers only
+> 4. C: Lowercase and Uppercase Letters
+> 5. A: Lowercase Letters, Uppercase Letters, and Numbers
+> 
+> Example:
+> `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
+> could substitute to
+> 
+> "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
+> 
+> You can further enhance the visuals using Markdown formatting.
+> 
 
 <hr style="border:3px solid gray">
 
@@ -1547,15 +1561,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Voice Channel Mode
-### `/channelrestrictions`
-#### Description
- (default: enabled) Sets whether created channels have restrictions.
-#### Usage: `/channelrestrictions [mode]`
-#### Arguments:
-`mode`: *(Required)* If channels are restricted.
-
----
-
 ### `/voicechannels`
 #### Description
  (default: required) Sets whether voice channels are required, optional, or disabled.
