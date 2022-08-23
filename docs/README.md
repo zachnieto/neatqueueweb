@@ -103,6 +103,7 @@ Shows the leaderboard for the current queue's game.
 #### Arguments:
 `page`: *(Optional)* The desired page number.\
 `type`: *(Optional)* The type of leaderboard to display.\
+&emsp;&emsp;&emsp; Options: `MMR, Points, Games, Wins, Losses, Winrate, Streak`\
 `queue_name`: *(Optional)* The queue name to view.
 
 <hr style="border:3px solid gray">
@@ -362,7 +363,8 @@ Generate an API token for your account.
  (default: mmr) Sets how teams are balanced.
 #### Usage: `/balanceby [mode]`
 #### Arguments:
-`mode`: *(Required)* How teams are balanced.
+`mode`: *(Required)* How teams are balanced.\
+&emsp;&emsp;&emsp; Options: `Roles, MMR`
 
 ---
 
@@ -390,7 +392,8 @@ Generate an API token for your account.
  Automatically mute all non-captains during selection to remove bias.
 #### Usage: `/captains automute [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If players are muted.
+`toggle`: *(Required)* If players are muted.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -399,7 +402,8 @@ Generate an API token for your account.
  Sets the type of draft to either Snake or Straight.
 #### Usage: `/captains drafttype [type]`
 #### Arguments:
-`type`: *(Required)* The type of draft to use.
+`type`: *(Required)* The type of draft to use.\
+&emsp;&emsp;&emsp; Options: `Snake (1-2-2-2), Straight (1-1-1-1), Hybrid (1-1/2-1-1), Hybrid 2 (1-2-1-1)`
 
 ---
 
@@ -408,7 +412,8 @@ Generate an API token for your account.
  Choose how captains will be picked.
 #### Usage: `/captains selection [type]`
 #### Arguments:
-`type`: *(Required)* The default captain selection option to use.
+`type`: *(Required)* The default captain selection option to use.\
+&emsp;&emsp;&emsp; Options: `Default Selection Menu, Random, Highest Rated, Lowest Rated, Vote For Captains`
 
 <hr style="border:3px solid gray">
 
@@ -419,7 +424,8 @@ Generate an API token for your account.
  (Default: Parent) Sets whether created channels go in a separate or the parent category.
 #### Usage: `/channel category [category]`
 #### Arguments:
-`category`: *(Required)* The category setting.
+`category`: *(Required)* The category setting.\
+&emsp;&emsp;&emsp; Options: `Parent, New`
 
 ---
 
@@ -455,7 +461,8 @@ Generate an API token for your account.
  Set the name for created team channels.
 #### Usage: `/channel name team [channel_name]`
 #### Arguments:
-`channel_name`: *(Required)* The channel name.
+`channel_name`: *(Required)* The channel name.\
+&emsp;&emsp;&emsp; Options: `Default, Captain`
 
 ---
 
@@ -464,7 +471,8 @@ Generate an API token for your account.
  (default: enabled) Sets whether created channels have restrictions.
 #### Usage: `/channel restrictions [mode]`
 #### Arguments:
-`mode`: *(Required)* If channels are restricted.
+`mode`: *(Required)* If channels are restricted.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -502,6 +510,7 @@ Generate an API token for your account.
 #### Usage: `/mmrdecay [toggle] (amount) (duration)`
 #### Arguments:
 `toggle`: *(Required)* Enable/disable MMR decay.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
 `amount`: *(Optional)* Amount of MMR to decay.\
 `duration`: *(Optional)* After how long should a player decay.
 
@@ -513,7 +522,8 @@ Generate an API token for your account.
  Sets whether to hide the names of players in queue.
 #### Usage: `/anonymousqueue [mode]`
 #### Arguments:
-`mode`: *(Required)* Hide players names in queue.
+`mode`: *(Required)* Hide players names in queue.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -522,7 +532,8 @@ Generate an API token for your account.
  Sets whether to use nicknames or discord names (default: nick).
 #### Usage: `/nametype [type]`
 #### Arguments:
-`type`: *(Required)* The type of names to be used.
+`type`: *(Required)* The type of names to be used.\
+&emsp;&emsp;&emsp; Options: `Discord, Nicknames`
 
 <hr style="border:3px solid gray">
 
@@ -532,7 +543,8 @@ Generate an API token for your account.
  Sets whether to display emojis.
 #### Usage: `/emojis [mode]`
 #### Arguments:
-`mode`: *(Required)* If emojis are used.
+`mode`: *(Required)* If emojis are used.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -564,7 +576,8 @@ Generate an API token for your account.
  Specify whether players must register their account before playing.
 #### Usage: `/requireregister [mode]`
 #### Arguments:
-`mode`: *(Required)* Game to register with, or None to disable.
+`mode`: *(Required)* Game to register with, or None to disable.\
+&emsp;&emsp;&emsp; Options: `None, Valorant, Rainbow 6, Overwatch, RocketLeague`
 
 <hr style="border:3px solid gray">
 
@@ -602,7 +615,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Toggle using the image or text leaderboard.
 #### Usage: `/leaderboardtype [type]`
 #### Arguments:
-`type`: *(Required)* Leaderboard format.
+`type`: *(Required)* Leaderboard format.\
+&emsp;&emsp;&emsp; Options: `Images, Text`
 
 <hr style="border:3px solid gray">
 
@@ -630,7 +644,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Specify pulling players from all channels when their match starts.
 #### Usage: `/lobbychannel pullall [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Pull players from all channels.
+`toggle`: *(Required)* Pull players from all channels.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -639,7 +654,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Specify returning players to their original voice channel from before the match.
 #### Usage: `/lobbychannel returnall [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Return players to their original voice channel.
+`toggle`: *(Required)* Return players to their original voice channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -667,7 +683,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the lobby details message.
 #### Usage: `/lobbydetails location [location]`
 #### Arguments:
-`location`: *(Required)* Where to show lobby details.
+`location`: *(Required)* Where to show lobby details.\
+&emsp;&emsp;&emsp; Options: `DMs, Teams Message`
 
 ---
 
@@ -821,7 +838,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Arguments:
 `number`: *(Required)* Best of number.\
 `vote`: *(Optional)* Whether players can vote on the number of matches to play.\
-`voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.
+`voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.\
+&emsp;&emsp;&emsp; Options: `Majority, Lowest`
 
 ---
 
@@ -850,7 +868,9 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Usage: `/map selection [map_choice] (gamemode_choice)`
 #### Arguments:
 `map_choice`: *(Required)* Voting or always random.\
-`gamemode_choice`: *(Optional)* -.
+&emsp;&emsp;&emsp; Options: `Vote, Random`\
+`gamemode_choice`: *(Optional)* -.\
+&emsp;&emsp;&emsp; Options: `Vote, Random`
 
 <hr style="border:3px solid gray">
 
@@ -990,7 +1010,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets whether players can be in multiple queues at once.
 #### Usage: `/multiqueue [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If players can be in multiple queues at once.
+`toggle`: *(Required)* If players can be in multiple queues at once.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1029,7 +1050,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Specify the channel to show predictions.
 #### Usage: `/predictions toggle [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If predictions are enabled or disabled.
+`toggle`: *(Required)* If predictions are enabled or disabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1067,7 +1089,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  (Default: 3) Sets whether old queue updates should be deleted.
 #### Usage: `/queuemessage deletions [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -1076,7 +1099,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  (Default: Enabled) Set whether queue updates should edit the previous message.
 #### Usage: `/queuemessage edits [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1189,7 +1213,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the required votes to pick a winner.
 #### Usage: `/requiredvotes [type]`
 #### Arguments:
-`type`: *(Required)* The type of voting requirement to be used.
+`type`: *(Required)* The type of voting requirement to be used.\
+&emsp;&emsp;&emsp; Options: `Half, Majority, One`
 
 ---
 
@@ -1350,7 +1375,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Enable or disable showing player MMR in their nickname.
 #### Usage: `/ratinginname toggle [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If ratings should be shown in name.
+`toggle`: *(Required)* If ratings should be shown in name.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1466,7 +1492,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Choose how teams will be picked.
 #### Usage: `/teamselection [type]`
 #### Arguments:
-`type`: *(Required)* The default team selection option to use.
+`type`: *(Required)* The default team selection option to use.\
+&emsp;&emsp;&emsp; Options: `Default Selection Menu, Balanced, Captains, Random, Players Choose, Unfair`
 
 <hr style="border:3px solid gray">
 
@@ -1496,7 +1523,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Enable teamqueue, requiring players to create parties with `/party` before joining.
 #### Usage: `/teamqueue [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If team queue should be enabled.
+`toggle`: *(Required)* If team queue should be enabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1516,7 +1544,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  (default: Enabled) Sets whether to create a temporary text channel for setup.
 #### Usage: `/tempchannels [mode]`
 #### Arguments:
-`mode`: *(Required)* If the temporary setup channels are enabled.
+`mode`: *(Required)* If the temporary setup channels are enabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1601,7 +1630,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  (default: required) Sets whether voice channels are required, optional, or disabled.
 #### Usage: `/voicechannels [mode]`
 #### Arguments:
-`mode`: *(Required)* The type of voice channel setting.
+`mode`: *(Required)* The type of voice channel setting.\
+&emsp;&emsp;&emsp; Options: `Required, Optional, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1637,7 +1667,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Enable a waiting room allowing a queue to be overfilled (Only useful with /roles).
 #### Usage: `/waitingroom [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If waiting room should be enabled.
+`toggle`: *(Required)* If waiting room should be enabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1665,7 +1696,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the format for the winner message.
 #### Usage: `/winnermessage format [mode]`
 #### Arguments:
-`mode`: *(Required)* Formatting type.
+`mode`: *(Required)* Formatting type.\
+&emsp;&emsp;&emsp; Options: `Detailed, Simple`
 
 <hr style="border:3px solid gray">
 
