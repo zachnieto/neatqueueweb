@@ -1639,7 +1639,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ### `/votingmenu add`
 #### Description
  Add a new voting menu.
-#### Usage: `/votingmenu add [title] [options] [key] (order) (button_colors) (show_numbers) (allow_random) (force_random)`
+#### Usage: `/votingmenu add [title] [options] [key] (order) (button_colors) (show_numbers) (allow_random) (force_random) (number_of_votes) (per_team)`
 #### Arguments:
 `title`: *(Required)* (Ex: Vote for the Region) The title for the vote.\
 `options`: *(Required)* (Ex: NA,EU) Comma separated list of options.\
@@ -1648,7 +1648,9 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 `button_colors`: *(Optional)* (Ex: blurple,red) Comma separated list of button colors. Valid options: blurple, gray, green, red.\
 `show_numbers`: *(Optional)* If each option should have a number associated with it when displayed.\
 `allow_random`: *(Optional)* If a 'random' option is included in the vote.\
-`force_random`: *(Optional)* If you want to skip the vote altogether and just pick a random option.
+`force_random`: *(Optional)* If you want to skip the vote altogether and just pick a random option.\
+`number_of_votes`: *(Optional)* Number of votes per player.\
+`per_team`: *(Optional)* If the vote should occur once per team.
 
 ---
 
@@ -1698,6 +1700,16 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Arguments:
 `mode`: *(Required)* Formatting type.\
 &emsp;&emsp;&emsp; Options: `Detailed, Simple`
+
+---
+
+### `/winnermessage sticky`
+#### Description
+ Sets whether the message sticks to the bottom of chat.
+#### Usage: `/winnermessage sticky [mode]`
+#### Arguments:
+`mode`: *(Required)* Sticky mode.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
