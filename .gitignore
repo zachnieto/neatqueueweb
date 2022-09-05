@@ -6,3 +6,4 @@
 .netlify
 web/build/*
 web/.env.*
+*.env

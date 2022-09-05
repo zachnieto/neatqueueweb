@@ -403,7 +403,7 @@ Generate an API token for your account.
 #### Usage: `/captains drafttype [type]`
 #### Arguments:
 `type`: *(Required)* The type of draft to use.\
-&emsp;&emsp;&emsp; Options: `Snake (1-2-2-2), Straight (1-1-1-1), Hybrid (1-1/2-1-1), Hybrid 2 (1-2-1-1)`
+&emsp;&emsp;&emsp; Options: `Snake (1-2-2-2), Straight (1-1-1-1), Hybrid (1-1/2-1-1), Hybrid 2 (1-2-1-1), Vote`
 
 ---
 
@@ -500,19 +500,6 @@ Generate an API token for your account.
  Save the current queue configuration to a name.
 #### Usage: `/save`
 
-
-<hr style="border:3px solid gray">
-
-## Decay
-### `/mmrdecay`
-#### Description
- Enable/disable MMR decay and configure the values.
-#### Usage: `/mmrdecay [toggle] (amount) (duration)`
-#### Arguments:
-`toggle`: *(Required)* Enable/disable MMR decay.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`amount`: *(Optional)* Amount of MMR to decay.\
-`duration`: *(Optional)* After how long should a player decay.
 
 <hr style="border:3px solid gray">
 
@@ -765,17 +752,83 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## MMR Change
-### `/mmrchange`
+### `/mmr ceiling`
+#### Description
+ Sets the highest mmr a player can reach in this queue.
+#### Usage: `/mmr ceiling (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the peak rating, or omit to reset.
+
+---
+
+### `/mmr change allow_disable`
+#### Description
+ Sets if the vote to disable MMR appears.
+#### Usage: `/mmr change allow_disable [allow_disable]`
+#### Arguments:
+`allow_disable`: *(Required)* If MMR changes should be toggleable.
+
+---
+
+### `/mmr change hidden`
+#### Description
+ Sets if MMR changes are hidden from players.
+#### Usage: `/mmr change hidden [hidden]`
+#### Arguments:
+`hidden`: *(Required)* If MMR changes are hidden.
+
+---
+
+### `/mmr change multipliers`
+#### Description
+ Sets the variance value. Lower value = higher ranges of MMR changes.
+#### Usage: `/mmr change multipliers [streaks] [placements]`
+#### Arguments:
+`streaks`: *(Required)* If there exists a multiplier for win/loss streaks.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`placements`: *(Required)* If there exists a multiplier for the first 10 matches for placements.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/mmr change set`
 #### Description
  Sets the MMR change per game.
-#### Usage: `/mmrchange (mmr) (loser_mmr) (static) (variance) (hidden) (allow_disable)`
+#### Usage: `/mmr change set [amount] (loser_mmr) (static)`
 #### Arguments:
-`mmr`: *(Optional)* Enter the MMR change for winners and losers.\
-`loser_mmr`: *(Optional)* Override the lower MMR change to be different from the winners.\
-`static`: *(Optional)* Do you want the MMR change to ALWAYS be this value? (Default: False).\
-`variance`: *(Optional)* Sets the MMR variance. See the MMR equation in the documentation! (Default: 800).\
-`hidden`: *(Optional)* If you want all MMR and MMR changes to be hidden from players.\
-`allow_disable`: *(Optional)* If you want the enable/disable MMR vote to pop up.
+`amount`: *(Required)* The average MMR change for wins and losses.\
+`loser_mmr`: *(Optional)* Override the MMR change for losses.\
+`static`: *(Optional)* If the MMR change should ALWAYS be this value.
+
+---
+
+### `/mmr change variance`
+#### Description
+ Sets the variance value. Lower value = higher ranges of MMR changes.
+#### Usage: `/mmr change variance [amount]`
+#### Arguments:
+`amount`: *(Required)* (Default: 1600) Variance value. See docs for a calculator.
+
+---
+
+### `/mmr decay`
+#### Description
+ Enable/disable MMR decay and configure the values.
+#### Usage: `/mmr decay [toggle] (amount) (duration)`
+#### Arguments:
+`toggle`: *(Required)* Enable/disable MMR decay.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`amount`: *(Optional)* Amount of MMR to decay.\
+`duration`: *(Optional)* After how long should a player decay.
+
+---
+
+### `/mmr floor`
+#### Description
+ Sets the lowest mmr a player can reach in this queue.
+#### Usage: `/mmr floor (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
 
 <hr style="border:3px solid gray">
 
@@ -850,6 +903,15 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Arguments:
 `map_name`: *(Required)* New map name.\
 `game_mode`: *(Optional)* Game mode for map if applicable.
+
+---
+
+### `/map bans`
+#### Description
+ Specify the number of map bans per team, or 0 to disable.
+#### Usage: `/map bans [bans]`
+#### Arguments:
+`bans`: *(Required)* Number of bans per team.
 
 ---
 
@@ -1431,24 +1493,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Starting MMR
-### `/mmrceiling`
-#### Description
- Sets the highest mmr a player can reach in this queue.
-#### Usage: `/mmrceiling (mmr)`
-#### Arguments:
-`mmr`: *(Optional)* Enter the peak rating, or omit to reset.
-
----
-
-### `/mmrfloor`
-#### Description
- Sets the lowest mmr a player can reach in this queue.
-#### Usage: `/mmrfloor (mmr)`
-#### Arguments:
-`mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
-
----
-
 ### `/startingmmr remove`
 #### Description
  Removes the starting mmr for the given role.
