@@ -409,7 +409,7 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Channel Config
-> Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
+>Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
 ### `/channel category`
 #### Description
  (Default: Parent) Sets whether created channels go in a separate or the parent category.
@@ -555,7 +555,9 @@ Substitute yourself for the given player.
 #### Usage: `/requireregister [mode]`
 #### Arguments:
 `mode`: *(Required)* Game to register with, or None to disable.\
-&emsp;&emsp;&emsp; Options: `None, Valorant, Rainbow 6, Overwatch, RocketLeague`
+&emsp;&emsp;&emsp; Options: `None, Valorant, Rainbow 6, Overwatch, RocketLeague, Custom API, Manually`
+>With register mode being Custom API, please check out `https://docs.neatqueue.com/#/?id=webhooks`         With register mode Manually, players must have their MMR manually set, either through an admin command
+> or via an API request `https://docs.neatqueue.com/#/?id=endpoints`.
 
 <hr style="border:3px solid gray">
 
@@ -586,8 +588,8 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Leaderboard Config
-> Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
-Leaderboard titles are also hyperlinks to the website version of the leaderboard.
+>Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
+> Leaderboard titles are also hyperlinks to the website version of the leaderboard.
 ### `/leaderboardtype`
 #### Description
  Toggle using the image or text leaderboard.
@@ -679,7 +681,8 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the lobby details message.
 #### Usage: `/lobbydetails set [message]`
 #### Arguments:
-`message`: *(Required)* Enter the message to send.Currently supports five substitutions:
+`message`: *(Required)* Enter the message to send.
+>Currently supports five substitutions:
 > 
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
@@ -1193,7 +1196,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Queue Size Override
-> To normally change the queue size, use `/teamsize` and `/numberofteams`
+>To normally change the queue size, use `/teamsize` and `/numberofteams`
 ### `/queuesizeoverride`
 #### Description
  Manually specify the queue size instead of letting the bot decide based on queue setup.
@@ -1736,6 +1739,18 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Webhooks
+>Webhooks receive information about a match as it is being setup.
+> Currently supported actions are:
+> - MATCH_STARTED
+> - TEAMS_CREATED
+> - MATCH_COMPLETED
+> 
+> Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
+> - REGISTER_PLAYER
+> 
+> containing various information about the user, as well as the account they are attempting to register.
+> You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
+> rating that the player should be registered with, or any non 200 status response to display to the user.
 ### `/webhooks add`
 #### Description
  Add a new webhook to receive queue information.
@@ -1935,5 +1950,32 @@ Content-Length: 80
 {
     "channel_id": 960292213751943178,
     "player_id": 145305657237700608
+}
+```
+
+___
+
+
+### `POST https://host.neatqueue.com:2000/api/player/rating`
+#### Headers:
+- `Authorization: API Token`
+#### Body:
+- `channel_id: #`
+- `player_id: #`
+- `mmr: #`
+
+#### Usage: 
+```
+POST /api/queue/player/rating HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
+Content-Type: text/plain
+Content-Length: 100
+
+{
+
+    "channel_id": 960292213751943178,
+    "player_id": 145305657237700608,
+    "mmr": 1234
 }
 ```
