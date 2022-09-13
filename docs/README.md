@@ -67,16 +67,6 @@ Start a vote to forcestart the game.
 
 <hr style="border:3px solid gray">
 
-## Game Integrations
-### `/register`
-#### Description
-Initialize your MMR using your account.
-#### Usage: `/register [account]`
-#### Arguments:
-`account`: *(Required)* Account details.
-
-<hr style="border:3px solid gray">
-
 ## Help
 ### `/help`
 #### Description
@@ -108,17 +98,7 @@ Shows the leaderboard for the current queue's game.
 
 <hr style="border:3px solid gray">
 
-## Manage Players
-### `/substitute`
-#### Description
-Substitute yourself for the given player.
-#### Usage: `/substitute [player]`
-#### Arguments:
-`player`: *(Required)* Enter the player to replace you.
-
-<hr style="border:3px solid gray">
-
-## Parties/ Teams/ Clans/ Groups
+## Parties/Teams/Clans/Groups
 ### `/party cancelinvites`
 #### Description
 CAPTAIN ONLY: Cancel all pending invites.
@@ -242,6 +222,16 @@ Place a bet on the given team for the specified match number.
 
 <hr style="border:3px solid gray">
 
+## Register
+### `/register`
+#### Description
+Initialize your MMR using your account.
+#### Usage: `/register [account]`
+#### Arguments:
+`account`: *(Required)* Account details.
+
+<hr style="border:3px solid gray">
+
 ## Report Bug
 ### `/reportbug`
 #### Description
@@ -273,12 +263,13 @@ Shows your stats.
 
 <hr style="border:3px solid gray">
 
-## Webhooks
-### `/webhooks generatetoken`
+## Substitute
+### `/substitute`
 #### Description
-Generate an API token for your account.
-#### Usage: `/webhooks generatetoken`
-
+Substitute yourself for the given player.
+#### Usage: `/substitute [player]`
+#### Arguments:
+`player`: *(Required)* Enter the player to replace you.
 
 <hr style="border:3px solid gray">
 
@@ -688,8 +679,7 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
  Sets the lobby details message.
 #### Usage: `/lobbydetails set [message]`
 #### Arguments:
-`message`: *(Required)* Enter the message to send.
-> Currently supports five substitutions:
+`message`: *(Required)* Enter the message to send.Currently supports five substitutions:
 > 
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
@@ -711,7 +701,6 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 > "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
 > 
 > You can further enhance the visuals using Markdown formatting.
-> 
 
 <hr style="border:3px solid gray">
 
@@ -1107,6 +1096,24 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 
 ---
 
+### `/predictions role`
+#### Description
+ Role to ping when a prediction opens.
+#### Usage: `/predictions role [role]`
+#### Arguments:
+`role`: *(Required)* Role to ping.
+
+---
+
+### `/predictions timer`
+#### Description
+ Specify the duration the prediction lasts before closing.
+#### Usage: `/predictions timer [timer]`
+#### Arguments:
+`timer`: *(Required)* (Default: 180) Prediction length in seconds.
+
+---
+
 ### `/predictions toggle`
 #### Description
  Specify the channel to show predictions.
@@ -1290,30 +1297,30 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 <hr style="border:3px solid gray">
 
 ## Requirements
+### `/bannedroles add`
+#### Description
+ Add a banned role which can't join the queue.
+#### Usage: `/bannedroles add [role]`
+#### Arguments:
+`role`: *(Required)* Enter the banned role.
+
+---
+
+### `/bannedroles remove`
+#### Description
+ Removed a banned role.
+#### Usage: `/bannedroles remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the banned role.
+
+---
+
 ### `/mmrrequirement`
 #### Description
  Sets the required mmr to enter this queue.
 #### Usage: `/mmrrequirement [mmr]`
 #### Arguments:
 `mmr`: *(Required)* Enter the required mmr, or 0 to disable.
-
----
-
-### `/rolerequirement add`
-#### Description
- Add a required role to enter this queue. Players can join if they have any of the roles.
-#### Usage: `/rolerequirement add [role]`
-#### Arguments:
-`role`: *(Required)* Enter the required role.
-
----
-
-### `/rolerequirement remove`
-#### Description
- Removed a required role to enter this queue.
-#### Usage: `/rolerequirement remove [role]`
-#### Arguments:
-`role`: *(Required)* Enter the required role.
 
 <hr style="border:3px solid gray">
 
@@ -1322,6 +1329,15 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Description
  Resets all stats for all queues, or for the inputted queue name.
 #### Usage: `/resetstats all (queue_name)`
+#### Arguments:
+`queue_name`: *(Optional)* The queue name to reset stats for.
+
+---
+
+### `/resetstats mmr`
+#### Description
+ Resets all MMR for all queues, or for the inputted queue name.
+#### Usage: `/resetstats mmr (queue_name)`
 #### Arguments:
 `queue_name`: *(Optional)* The queue name to reset stats for.
 
@@ -1555,9 +1571,10 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 ### `/partyqueue`
 #### Description
  Enable party queue, allowing players to create parties with `/party` before joining.
-#### Usage: `/partyqueue (toggle) (max_size)`
+#### Usage: `/partyqueue [toggle] (max_size)`
 #### Arguments:
-`toggle`: *(Optional)* Enable or disable party queue.\
+`toggle`: *(Required)* Enable or disable party queue.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
 `max_size`: *(Optional)* The max party size.
 
 ---
@@ -1732,6 +1749,14 @@ Leaderboard titles are also hyperlinks to the website version of the leaderboard
 #### Description
  Delete this queue's webhook.
 #### Usage: `/webhooks delete`
+
+
+---
+
+### `/webhooks generatetoken`
+#### Description
+ Generate an API token for your account.
+#### Usage: `/webhooks generatetoken`
 
 
 <hr style="border:3px solid gray">
