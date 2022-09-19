@@ -16,6 +16,15 @@ const Leaderboard = () => {
         }
 
         getChannelStats()
+
+        const interval = setInterval(() => {
+            console.log("Trigger!")
+            getChannelStats()
+        }, 10000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, [])
 
     console.log(stats.channelStats)

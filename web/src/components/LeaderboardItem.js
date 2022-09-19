@@ -20,8 +20,7 @@ const LeaderboardItem = ({player}) => {
         <div className="nq-leaderboard-item row">
             <div className="col-8 col-md-7">
 
-                <h1><div className={`${arrowClass} d-lg-inline-block`}>{arrow}</div>{player.num}. {player.name} {player.num === 1 && "🏆"}</h1>
-
+                <h1 className="d-inline-flex"><div className={`${arrowClass} d-lg-inline-block`}>{arrow}</div>{player.num}. {player.name} {player.num === 1 && "🏆"}</h1>
 
 
             </div>
