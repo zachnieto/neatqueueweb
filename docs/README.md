@@ -273,6 +273,15 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Tournaments
+### `/tournament list`
+#### Description
+List all active tournaments.
+#### Usage: `/tournament list`
+
+
+<hr style="border:3px solid gray">
+
 # Admin Commands
 ## Anti Cheat
 ### `/anticheat channel`
@@ -590,10 +599,20 @@ Substitute yourself for the given player.
 ## Leaderboard Config
 >Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
 > Leaderboard titles are also hyperlinks to the website version of the leaderboard.
-### `/leaderboardtype`
+### `/leaderboardconfig edits`
+#### Description
+ Specify who can edit a leaderboard.
+#### Usage: `/leaderboardconfig edits [edits]`
+#### Arguments:
+`edits`: *(Required)* Leaderboard edit requirement.\
+&emsp;&emsp;&emsp; Options: `Staff, Anyone`
+
+---
+
+### `/leaderboardconfig type`
 #### Description
  Toggle using the image or text leaderboard.
-#### Usage: `/leaderboardtype [type]`
+#### Usage: `/leaderboardconfig type [type]`
 #### Arguments:
 `type`: *(Required)* Leaderboard format.\
 &emsp;&emsp;&emsp; Options: `Images, Text`
@@ -724,10 +743,10 @@ Substitute yourself for the given player.
 ### `/unlock`
 #### Description
  Unlock the queue channel to allow players to join.
-#### Usage: `/unlock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Usage: `/unlock (all) (auto_unlock) (time) (timezone) (repeat)`
 #### Arguments:
 `all`: *(Optional)* Unlock all queues?.\
-`auto_lock`: *(Optional)* Automatically unlock at the specified time.\
+`auto_unlock`: *(Optional)* Automatically unlock at the specified time.\
 `time`: *(Optional)* Time to unlock at in 24 hour format. Ex: 14:00.\
 `timezone`: *(Optional)* Timezone for the specified time. Defaults to UTC.\
 `repeat`: *(Optional)* Repeat daily or just once.
@@ -773,7 +792,7 @@ Substitute yourself for the given player.
 
 ### `/mmr change multipliers`
 #### Description
- Sets the variance value. Lower value = higher ranges of MMR changes.
+ Toggle multipliers.
 #### Usage: `/mmr change multipliers [streaks] [placements]`
 #### Arguments:
 `streaks`: *(Required)* If there exists a multiplier for win/loss streaks.\
@@ -1158,7 +1177,7 @@ Substitute yourself for the given player.
 
 ### `/queuemessage deletions`
 #### Description
- (Default: 3) Sets whether old queue updates should be deleted.
+ (Default: Enabled) Sets whether old queue updates should be deleted.
 #### Usage: `/queuemessage deletions [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
@@ -1174,12 +1193,22 @@ Substitute yourself for the given player.
 `toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
+---
+
+### `/queuemessage history`
+#### Description
+ (Default: Disable) Sets whether to send a new message for every queue interaction.
+#### Usage: `/queuemessage history [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
 <hr style="border:3px solid gray">
 
 ## Queue Name
 ### `/queuename`
 #### Description
- Sets the name for this queue.
+ Sets the name for this queue. All stats are tied to the queue name.
 #### Usage: `/queuename [name]`
 #### Arguments:
 `name`: *(Required)* Enter the queue name.
@@ -1213,6 +1242,15 @@ Substitute yourself for the given player.
 #### Usage: `/autoroles copy [channel]`
 #### Arguments:
 `channel`: *(Required)* Channel with queue to copy autoroles config to.
+
+---
+
+### `/autoroles ingame`
+#### Description
+ Assign a role to players who are in a matched that is removed after.
+#### Usage: `/autoroles ingame (role)`
+#### Arguments:
+`role`: *(Optional)* Enter the role, or omit to remove.
 
 ---
 
@@ -1286,7 +1324,7 @@ Substitute yourself for the given player.
 #### Usage: `/requiredvotes [type]`
 #### Arguments:
 `type`: *(Required)* The type of voting requirement to be used.\
-&emsp;&emsp;&emsp; Options: `Half, Majority, One`
+&emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
 
 ---
 
@@ -1550,6 +1588,16 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Team Creation
+### `/reshuffle`
+#### Description
+ Sets whether players can reshuffle teams in random selection.
+#### Usage: `/reshuffle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/teamselection`
 #### Description
  Choose how teams will be picked.
@@ -1688,6 +1736,36 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Tournaments
+### `/tournament create`
+#### Description
+ Create a new tournament and shows signup buttons.
+#### Usage: `/tournament create [name] [team_size] [number_of_teams]`
+#### Arguments:
+`name`: *(Required)* The tournament name, also the name of the queue/stats storage for determining seeding.\
+`team_size`: *(Required)* Number of players of each team.\
+`number_of_teams`: *(Required)* Maximum number of teams that can register.
+
+---
+
+### `/tournament delete`
+#### Description
+ Deletes a tournament.
+#### Usage: `/tournament delete [name]`
+#### Arguments:
+`name`: *(Required)* The tournament name.
+
+---
+
+### `/tournament start`
+#### Description
+ Start the tournament.
+#### Usage: `/tournament start [name]`
+#### Arguments:
+`name`: *(Required)* The tournament to start.
+
+<hr style="border:3px solid gray">
+
 ## Voice Channel Mode
 ### `/voicechannels`
 #### Description
@@ -1787,6 +1865,16 @@ Substitute yourself for the given player.
 
 ---
 
+### `/winnermessage pin`
+#### Description
+ Sets whether the message gets pinned.
+#### Usage: `/winnermessage pin [mode]`
+#### Arguments:
+`mode`: *(Required)* Pin mode.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/winnermessage sticky`
 #### Description
  Sets whether the message sticks to the bottom of chat.
@@ -1805,6 +1893,7 @@ ___
 
 
 ## Endpoints
+Specify the outcome for the given match
 ### `POST https://host.neatqueue.com:2000/api/outcome`
 #### Headers:
 - `Authorization: API Token`
@@ -1829,6 +1918,7 @@ Content-Length: 61
 ___
 
 ### `POST https://host.neatqueue.com:2000/api/queue/clear`
+Clear the queue
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1851,6 +1941,7 @@ ___
 
 
 ### `POST https://host.neatqueue.com:2000/api/queue/lock`
+Locks the queue
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1873,6 +1964,7 @@ ___
 
 
 ### `POST https://host.neatqueue.com:2000/api/queue/unlock`
+Unlocks the queue
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1895,6 +1987,7 @@ ___
 
 
 ### `GET https://host.neatqueue.com:2000/api/queue/{channel_id}/players`
+Get all players in the queue
 #### Headers:
 - `Authorization: API Token`
 
@@ -1909,6 +2002,7 @@ ___
 
 
 ### `POST https://host.neatqueue.com:2000/api/queue/player/add`
+Add a player to the queue
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1933,6 +2027,7 @@ ___
 
 
 ### `POST https://host.neatqueue.com:2000/api/queue/player/remove`
+Remove a player from the queue
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1957,6 +2052,7 @@ ___
 
 
 ### `POST https://host.neatqueue.com:2000/api/player/rating`
+Set the player's rating
 #### Headers:
 - `Authorization: API Token`
 #### Body:
@@ -1978,4 +2074,16 @@ Content-Length: 100
     "player_id": 145305657237700608,
     "mmr": 1234
 }
+```
+
+### `GET https://host.neatqueue.com:2000/api/serverstats/{server_id}`
+Gets all player stats for the server
+#### Headers:
+- `Authorization: API Token`
+
+#### Usage: 
+```
+GET /api/serverstats/{server_id} HTTP/1.1
+Host: https://host.neatqueue.com:2000
+Authorization: YOURAPITOKENHERE
 ```
