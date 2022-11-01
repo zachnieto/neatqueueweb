@@ -98,6 +98,15 @@ Shows the leaderboard for the current queue's game.
 
 <hr style="border:3px solid gray">
 
+## Need
+### `/need`
+#### Description
+Shows how many players are needed for the queue.
+#### Usage: `/need`
+
+
+<hr style="border:3px solid gray">
+
 ## Parties/Teams/Clans/Groups
 ### `/party cancelinvites`
 #### Description
@@ -256,10 +265,11 @@ Sets your IGN for this queue to help with easy lobby setup.
 ### `/stats`
 #### Description
 Shows your stats.
-#### Usage: `/stats (hidden) (user)`
+#### Usage: `/stats (hidden) (user) (all_time)`
 #### Arguments:
 `hidden`: *(Optional)* If you want the stats to be hidden.\
-`user`: *(Optional)* Enter the user you want to check stats of.
+`user`: *(Optional)* The user you want to check stats of.\
+`all_time`: *(Optional)* If you want to view all time stats, only applies to monthly queues.
 
 <hr style="border:3px solid gray">
 
@@ -609,6 +619,18 @@ List all active tournaments.
 
 ---
 
+### `/leaderboardconfig monthly`
+#### Description
+ Toggle monthly leaderboards.
+
+Parameters.
+#### Usage: `/leaderboardconfig monthly [toggle]`
+#### Arguments:
+`toggle`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/leaderboardconfig type`
 #### Description
  Toggle using the image or text leaderboard.
@@ -862,6 +884,14 @@ List all active tournaments.
 #### Arguments:
 `player`: *(Required)* The player to ban.\
 `duration`: *(Optional)* Duration of time in seconds for the ban to last.
+
+---
+
+### `/player banlist`
+#### Description
+ View the player ban list.
+#### Usage: `/player banlist`
+
 
 ---
 
@@ -1418,18 +1448,18 @@ List all active tournaments.
 ### `/outcome cancel`
 #### Description
  Cancel the given game.
-#### Usage: `/outcome cancel (queue_num)`
+#### Usage: `/outcome cancel (match_number)`
 #### Arguments:
-`queue_num`: *(Optional)* The queue number.
+`match_number`: *(Optional)* The match number.
 
 ---
 
 ### `/outcome selectwinner`
 #### Description
  Sets the winner for the given game.
-#### Usage: `/outcome selectwinner [queue_num] [team_num]`
+#### Usage: `/outcome selectwinner [match_number] [team_num]`
 #### Arguments:
-`queue_num`: *(Required)* The queue number.\
+`match_number`: *(Required)* The match number.\
 `team_num`: *(Required)* The team that won.
 
 ---
@@ -1437,9 +1467,9 @@ List all active tournaments.
 ### `/outcome tie`
 #### Description
  Mark the given game as a tie.
-#### Usage: `/outcome tie [queue_num]`
+#### Usage: `/outcome tie [match_number]`
 #### Arguments:
-`queue_num`: *(Required)* The queue number.
+`match_number`: *(Required)* The match number.
 
 <hr style="border:3px solid gray">
 
