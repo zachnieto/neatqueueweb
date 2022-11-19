@@ -606,6 +606,15 @@ List all active tournaments.
 
 <hr style="border:3px solid gray">
 
+## Helpers
+### `/purge`
+#### Description
+ Delete ALL messages in the channel except the queue message if it exists.
+#### Usage: `/purge`
+
+
+<hr style="border:3px solid gray">
+
 ## Leaderboard Config
 >Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
 > Leaderboard titles are also hyperlinks to the website version of the leaderboard.
@@ -614,8 +623,8 @@ List all active tournaments.
  Specify who can edit a leaderboard.
 #### Usage: `/leaderboardconfig edits [edits]`
 #### Arguments:
-`edits`: *(Required)* Leaderboard edit requirement.\
-&emsp;&emsp;&emsp; Options: `Staff, Anyone`
+`edits`: *(Required)* Who can edit the leaderboard buttons.\
+&emsp;&emsp;&emsp; Options: `Staff, Anyone, Creator`
 
 ---
 
@@ -1097,6 +1106,36 @@ Parameters.
 
 ---
 
+### `/set mmr`
+#### Description
+ Sets the players mmr.
+#### Usage: `/set mmr [user] [mmr]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`mmr`: *(Required)* Enter the desired mmr.
+
+---
+
+### `/set points`
+#### Description
+ Sets the players points (not MMR).
+#### Usage: `/set points [user] [points]`
+#### Arguments:
+`user`: *(Required)* The desired user.\
+`points`: *(Required)* The new points amount.
+
+---
+
+### `/set streak`
+#### Description
+ Sets the players streak.
+#### Usage: `/set streak [user] [streak]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`streak`: *(Required)* Enter the desired streak.
+
+---
+
 ### `/set wins`
 #### Description
  Sets the players wins.
@@ -1173,15 +1212,6 @@ Parameters.
 #### Arguments:
 `toggle`: *(Required)* If predictions are enabled or disabled.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
-<hr style="border:3px solid gray">
-
-## Purge
-### `/purge`
-#### Description
- Delete ALL messages in the channel except the queue message if it exists.
-#### Usage: `/purge`
-
 
 <hr style="border:3px solid gray">
 
@@ -1392,6 +1422,24 @@ Parameters.
 #### Usage: `/mmrrequirement [mmr]`
 #### Arguments:
 `mmr`: *(Required)* Enter the required mmr, or 0 to disable.
+
+---
+
+### `/rolerequirement add`
+#### Description
+ Add a required role to enter this queue. Players can join if they have any of the roles.
+#### Usage: `/rolerequirement add [role]`
+#### Arguments:
+`role`: *(Required)* Enter the required role.
+
+---
+
+### `/rolerequirement remove`
+#### Description
+ Removed a required role to enter this queue.
+#### Usage: `/rolerequirement remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the required role.
 
 <hr style="border:3px solid gray">
 
@@ -1759,7 +1807,7 @@ Parameters.
 
 ### `/timer winnervotemessage`
 #### Description
- (Default: 0) Sets the delay before showing the winner voting message.
+ (Default: 0) Sets the delay before enabling the winner voting message.
 #### Usage: `/timer winnervotemessage [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Enter the time in SECONDS, or 0 to disable.
