@@ -192,3 +192,47 @@ h1 {
 
   border-bottom: 15px solid black;
 }
+
+.brackets-viewer {
+  /* Colors */
+  --primary-background: rgba(38, 38, 38, .0);
+  --secondary-background: #a24dd386;
+  --match-background: var(--primary-background);
+  --font-color: #d9d9d9;
+  --win-color: #50b649;
+  --loss-color: #e61a1a;
+  --label-color: grey;
+  --hint-color: #a7a7a7;
+  --connector-color: #9e9e9e;
+  --border-color: #d9d9d9;
+  --border-hover-color: #b6b5b5;
+
+  /* Sizes */
+  --text-size: 15px;
+  --round-margin: 40px;
+  --match-width: 150px;
+  --match-horizontal-padding: 8px;
+  --match-vertical-padding: 6px;
+  --connector-border-width: 2px;
+  --match-border-width: 1px;
+  --match-border-radius: 0.3em;
+
+  height: 100%;
+}
+
+/*body {*/
+/*  margin: 0*/
+/*}*/
+
+.bracket h2 {
+  text-shadow: none !important;
+  display: none;
+}
+
+.bracket h3 {
+  background: none !important;
+}
+
+.elimination {
+  margin: auto;
+}

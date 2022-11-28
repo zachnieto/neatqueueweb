@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Manage from "./components/Manage";
 import Leaderboard from "./components/Leaderboard";
 import LeaderboardMenu from "./components/LeaderboardMenu";
+import Bracket from "./components/Bracket";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/manage/:guildID" element={<Manage/>}/>
                 <Route path="/leaderboard/:guildID/:channelID" element={<Leaderboard/>}/>
                 <Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>
+                <Route path="/bracket/:guildID/:tournyName" element={<Bracket/>}/>
                 </Routes>
                 </Router>
             </>

@@ -39,3 +39,7 @@ export const getPremium = async (guildID) => {
 export const purchasePremium = async (guildID, oauth, plan) => {
     return await service.purchasePremium(guildID, oauth, plan);
 };
+
+export const getBracket = async (guildID, tournyName) => {
+    return await service.getBracket(guildID, tournyName)
+}

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const API_BASE = process.env.REACT_APP_NEATQUEUE_API;
 
 export const getStats = async () => {
@@ -45,3 +46,8 @@ export const purchasePremium = async (guildID, oauth, plan) => {
     return resp.data;
 }
 
+
+export async function getBracket(guildID, tournyName) {
+    const resp = await axios.get(`${API_BASE}/tournament/${guildID}/${tournyName}`);
+    return resp.data
+}
