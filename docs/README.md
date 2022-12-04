@@ -1288,7 +1288,7 @@ Parameters.
 >To normally change the queue size, use `/teamsize` and `/numberofteams`
 ### `/queuesizeoverride`
 #### Description
- Manually specify the queue size instead of letting the bot decide based on queue setup.
+ (Not Recommended) Override the bot's determined queue size.
 #### Usage: `/queuesizeoverride [size]`
 #### Arguments:
 `size`: *(Required)* Enter the queue size, or 0 to reset to default behavior.
@@ -1305,28 +1305,36 @@ Parameters.
 
 ---
 
-### `/autoroles ingame`
+### `/autoroles ingame remove`
+#### Description
+ Removes an in-game role.
+#### Usage: `/autoroles ingame remove`
+
+
+---
+
+### `/autoroles ingame set`
 #### Description
  Assign a role to players who are in a matched that is removed after.
-#### Usage: `/autoroles ingame (role)`
+#### Usage: `/autoroles ingame set (role)`
 #### Arguments:
 `role`: *(Optional)* Enter the role, or omit to remove.
 
 ---
 
-### `/autoroles remove`
+### `/autoroles mmr remove`
 #### Description
- Removes a condition where player roles are changed.
-#### Usage: `/autoroles remove [role]`
+ Removes a condition where player roles are changed based on MMR.
+#### Usage: `/autoroles mmr remove [role]`
 #### Arguments:
 `role`: *(Required)* Enter the role.
 
 ---
 
-### `/autoroles set`
+### `/autoroles mmr set`
 #### Description
- Adds a condition in which player roles are changed.
-#### Usage: `/autoroles set [role] [lower_rating] [upper_rating]`
+ Adds a condition in which player roles are changed based on MMR.
+#### Usage: `/autoroles mmr set [role] [lower_rating] [upper_rating]`
 #### Arguments:
 `role`: *(Required)* Enter the role to give/remove.\
 `lower_rating`: *(Required)* Enter the minimum rating threshold for this role.\
@@ -1334,10 +1342,19 @@ Parameters.
 
 ---
 
-### `/autoroles topplayers`
+### `/autoroles topplayers remove`
 #### Description
- Adds a condition in which player roles are changed.
-#### Usage: `/autoroles topplayers [role] [number]`
+ Removes a top player role.
+#### Usage: `/autoroles topplayers remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles topplayers set`
+#### Description
+ Conditionally add/remove a role based on leaderboard position.
+#### Usage: `/autoroles topplayers set [role] [number]`
 #### Arguments:
 `role`: *(Required)* Enter the role for the top players.\
 `number`: *(Required)* Enter the number of players who can have this role.
@@ -1485,7 +1502,7 @@ Parameters.
 ## Roles
 ### `/roles`
 #### Description
- (default: 'None') Sets the roles for this queue.
+ (default: None) Sets the roles for this queue, or omit to remove all.
 #### Usage: `/roles (roles)`
 #### Arguments:
 `roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.
@@ -1817,7 +1834,7 @@ Parameters.
 ## Tournaments
 ### `/tournament create`
 #### Description
- Create a new tournament and shows signup buttons.
+ (BETA) Create a new tournament and shows signup buttons.
 #### Usage: `/tournament create [name] [team_size] [number_of_teams]`
 #### Arguments:
 `name`: *(Required)* The tournament name, also the name of the queue/stats storage for determining seeding.\
@@ -1828,19 +1845,29 @@ Parameters.
 
 ### `/tournament delete`
 #### Description
- Deletes a tournament.
-#### Usage: `/tournament delete [name]`
+ (BETA) Deletes the tournament.
+#### Usage: `/tournament delete`
+
+
+---
+
+### `/tournament setwinner`
+#### Description
+ (BETA) Sets the winner for a match.
+#### Usage: `/tournament setwinner [round_number] [match_number] [team_number]`
 #### Arguments:
-`name`: *(Required)* The tournament name.
+`round_number`: *(Required)* -.\
+`match_number`: *(Required)* -.\
+`team_number`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `1, 2`
 
 ---
 
 ### `/tournament start`
 #### Description
- Start the tournament.
-#### Usage: `/tournament start [name]`
-#### Arguments:
-`name`: *(Required)* The tournament to start.
+ (BETA) Start the tournament.
+#### Usage: `/tournament start`
+
 
 <hr style="border:3px solid gray">
 

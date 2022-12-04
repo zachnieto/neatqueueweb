@@ -154,6 +154,7 @@ const Premium = ({serverData, setServerData}) => {
                                 <div>
                                     <div className="card-body">
                                         <h4 className="card-title">{product.name}</h4>
+                                        <h4 className="card-title">${product.price}</h4>
                                         <button onClick={() => handlePurchaseCredits(product.default_price)} className="btn btn-secondary btn-lg">Purchase</button>
                                     </div>
                                 </div>

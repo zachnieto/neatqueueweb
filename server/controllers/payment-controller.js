@@ -5,8 +5,17 @@ const paymentController = (app) => {
     const stripe_obj = new Stripe(process.env.STRIPE_API_KEY)
 
     app.get('/products', async (req, res) => {
-        let products = await stripe_obj.products.list()
-        res.json(products.data)
+        let products = (await stripe_obj.products.list()).data
+
+        let price_objs = (await stripe_obj.prices.list()).data
+        let prices = new Map(price_objs.map(obj => [obj.id, obj.unit_amount / 100]));
+
+        products.forEach(product => product.price = prices.get(product.default_price))
+
+        console.log(prices)
+        console.log(products)
+
+        res.json(products)
     });
 
     app.post('/checkout', async (req, res) => {
