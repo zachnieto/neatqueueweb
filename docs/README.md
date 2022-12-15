@@ -283,15 +283,6 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Tournaments
-### `/tournament list`
-#### Description
-List all active tournaments.
-#### Usage: `/tournament list`
-
-
-<hr style="border:3px solid gray">
-
 # Admin Commands
 ## Anti Cheat
 ### `/anticheat channel`
@@ -986,6 +977,16 @@ Parameters.
 
 <hr style="border:3px solid gray">
 
+## Matchmaking
+### `/matchmaking range`
+#### Description
+ The range of MMRs for matches. Tighter range = more waiting and players required.
+#### Usage: `/matchmaking range [range]`
+#### Arguments:
+`range`: *(Required)* Range of player MMRs.
+
+<hr style="border:3px solid gray">
+
 ## Mod Channel
 ### `/staffchannel remove`
 #### Description
@@ -1177,6 +1178,18 @@ Parameters.
 
 <hr style="border:3px solid gray">
 
+## Party Queue
+### `/partyqueue`
+#### Description
+ Enable party queue, allowing players to create parties with `/party` before joining.
+#### Usage: `/partyqueue [toggle] (max_size)`
+#### Arguments:
+`toggle`: *(Required)* Enable or disable party queue.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`max_size`: *(Optional)* The max party size.
+
+<hr style="border:3px solid gray">
+
 ## Predictions
 ### `/predictions channel`
 #### Description
@@ -1212,16 +1225,6 @@ Parameters.
 #### Arguments:
 `toggle`: *(Required)* If predictions are enabled or disabled.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
-<hr style="border:3px solid gray">
-
-## Queue As Team
-### `/queueintoteam`
-#### Description
- Sets whether players queue into teams or not.
-#### Usage: `/queueintoteam [value]`
-#### Arguments:
-`value`: *(Required)* Whether players queue into teams.
 
 <hr style="border:3px solid gray">
 
@@ -1292,6 +1295,17 @@ Parameters.
 #### Usage: `/queuesizeoverride [size]`
 #### Arguments:
 `size`: *(Required)* Enter the queue size, or 0 to reset to default behavior.
+
+<hr style="border:3px solid gray">
+
+## Queue Type
+### `/queuetype`
+#### Description
+ Select the type of queue to run. See docs for detailed explanations.
+#### Usage: `/queuetype [type]`
+#### Arguments:
+`type`: *(Required)* The type of queue.\
+&emsp;&emsp;&emsp; Options: `PUGs/Normal Individual Queue, (BETA) Matchmaking, Full Team vs Full Team, Select Team On Join`
 
 <hr style="border:3px solid gray">
 
@@ -1713,28 +1727,6 @@ Parameters.
 
 <hr style="border:3px solid gray">
 
-## Team Queue
-### `/partyqueue`
-#### Description
- Enable party queue, allowing players to create parties with `/party` before joining.
-#### Usage: `/partyqueue [toggle] (max_size)`
-#### Arguments:
-`toggle`: *(Required)* Enable or disable party queue.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`max_size`: *(Optional)* The max party size.
-
----
-
-### `/teamqueue`
-#### Description
- Enable teamqueue, requiring players to create parties with `/party` before joining.
-#### Usage: `/teamqueue [toggle]`
-#### Arguments:
-`toggle`: *(Required)* If team queue should be enabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
-<hr style="border:3px solid gray">
-
 ## Team Size
 ### `/teamsize`
 #### Description
@@ -1847,6 +1839,14 @@ Parameters.
 #### Description
  (BETA) Deletes the tournament.
 #### Usage: `/tournament delete`
+
+
+---
+
+### `/tournament list`
+#### Description
+ (BETA) List all active tournament.
+#### Usage: `/tournament list`
 
 
 ---
