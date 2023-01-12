@@ -25,6 +25,7 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 #### `/load [config_id]` for a specific queue configuration
 #### `/globalqueue join [global_queue]` for loading a global configuration and joining the shared leaderboard
 
+
 <hr style="border:3px solid gray">
 
 # User Commands
@@ -261,6 +262,26 @@ Sets your IGN for this queue to help with easy lobby setup.
 
 <hr style="border:3px solid gray">
 
+## Spectator Role
+### `/spectatorrole add`
+#### Description
+"ADMIN ONLY: Specify a spectator role which can join any voice channel.".
+#### Usage: `/spectatorrole add [role] (can_speak)`
+#### Arguments:
+`role`: *(Required)* Spectator role.\
+`can_speak`: *(Optional)* Can this role speak in the channel?.
+
+---
+
+### `/spectatorrole remove`
+#### Description
+"ADMIN ONLY: Remove's a spectator role.
+#### Usage: `/spectatorrole remove [role]`
+#### Arguments:
+`role`: *(Required)* Spectator role.
+
+<hr style="border:3px solid gray">
+
 ## Stats
 ### `/stats`
 #### Description
@@ -423,10 +444,11 @@ Substitute yourself for the given player.
 ### `/channel category`
 #### Description
  (Default: Parent) Sets whether created channels go in a separate or the parent category.
-#### Usage: `/channel category [category]`
+#### Usage: `/channel category [category_mode] (category)`
 #### Arguments:
-`category`: *(Required)* The category setting.\
-&emsp;&emsp;&emsp; Options: `Parent, New`
+`category_mode`: *(Required)* The category setting. If mode is Specified, you must provide the category.\
+&emsp;&emsp;&emsp; Options: `Parent, New, Specified`\
+`category`: *(Optional)* The specific category if category_mode is Specified.
 
 ---
 
@@ -841,6 +863,8 @@ Parameters.
 #### Usage: `/mmr change variance [amount]`
 #### Arguments:
 `amount`: *(Required)* (Default: 1600) Variance value. See docs for a calculator.
+>Calculator: https://www.desmos.com/calculator/3qtwvlrw8q
+> Using the calculator, you can see that as the variance value goes up, the actually outputted MMR change has lower variance.
 
 ---
 
@@ -852,7 +876,7 @@ Parameters.
 `toggle`: *(Required)* Enable/disable MMR decay.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
 `amount`: *(Optional)* Amount of MMR to decay.\
-`duration`: *(Optional)* After how long should a player decay.
+`duration`: *(Optional)* After how long should a player decay in seconds.
 
 ---
 
@@ -928,31 +952,35 @@ Parameters.
 ### `/bestof`
 #### Description
  Sets whether the queue is a best of 3, 5, 7, etc.
-#### Usage: `/bestof [number] (vote) (voteselection)`
+#### Usage: `/bestof [number] (vote) (voteselection) (eligible_voters)`
 #### Arguments:
 `number`: *(Required)* Best of number.\
 `vote`: *(Optional)* Whether players can vote on the number of matches to play.\
 `voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.\
-&emsp;&emsp;&emsp; Options: `Majority, Lowest`
+&emsp;&emsp;&emsp; Options: `Majority, Lowest`\
+`eligible_voters`: *(Optional)* -.\
+&emsp;&emsp;&emsp; Options: `All, Captains`
 
 ---
 
 ### `/map add`
 #### Description
  Adds the given map.
-#### Usage: `/map add [map_name] (game_mode)`
+#### Usage: `/map add [map_name] (game_mode) (image_url)`
 #### Arguments:
 `map_name`: *(Required)* New map name.\
-`game_mode`: *(Optional)* Game mode for map if applicable.
+`game_mode`: *(Optional)* Game mode for map if applicable.\
+`image_url`: *(Optional)* Image to show when map selected.
 
 ---
 
 ### `/map bans`
 #### Description
  Specify the number of map bans per team, or 0 to disable.
-#### Usage: `/map bans [bans]`
+#### Usage: `/map bans [bans] (per_team)`
 #### Arguments:
-`bans`: *(Required)* Number of bans per team.
+`bans`: *(Required)* Number of bans per team.\
+`per_team`: *(Optional)* If the map bans are team by team.
 
 ---
 
@@ -974,6 +1002,17 @@ Parameters.
 &emsp;&emsp;&emsp; Options: `Vote, Random`\
 `gamemode_choice`: *(Optional)* -.\
 &emsp;&emsp;&emsp; Options: `Vote, Random`
+
+---
+
+### `/map voting`
+#### Description
+ Specify who can vote for map picks and map bans. Defaults to All if no captains.
+#### Usage: `/map voting [per_team] [mode]`
+#### Arguments:
+`per_team`: *(Required)* If the map vote is team by team.\
+`mode`: *(Required)* Who can vote.\
+&emsp;&emsp;&emsp; Options: `All, Captains`
 
 <hr style="border:3px solid gray">
 
@@ -1306,6 +1345,10 @@ Parameters.
 #### Arguments:
 `type`: *(Required)* The type of queue.\
 &emsp;&emsp;&emsp; Options: `PUGs/Normal Individual Queue, (BETA) Matchmaking, Full Team vs Full Team, Select Team On Join`
+>PUGs/Normal Individual Queue: The default queue setup, players join individually to get put into a match when the queue is filled.
+> (BETA) Matchmaking: Players join the queue, and once there are enough players within their MMR range, a match is created.
+> Full Team vs Full Team: Captains join the queue and pull in the entire team. No team setup is required.
+> Select Team On Join: The queue has join buttons for each team, no team setup is required.
 
 <hr style="border:3px solid gray">
 
@@ -1347,12 +1390,14 @@ Parameters.
 
 ### `/autoroles mmr set`
 #### Description
- Adds a condition in which player roles are changed based on MMR.
-#### Usage: `/autoroles mmr set [role] [lower_rating] [upper_rating]`
+ (Ranks) Adds a condition in which player roles are changed based on MMR.
+#### Usage: `/autoroles mmr set [role] [lower_rating] [upper_rating] (lower_lose_rating) (only_one_allowed)`
 #### Arguments:
 `role`: *(Required)* Enter the role to give/remove.\
-`lower_rating`: *(Required)* Enter the minimum rating threshold for this role.\
-`upper_rating`: *(Required)* Enter the maximum rating threshold for this role.
+`lower_rating`: *(Required)* The lowest MMR required to gain the role.\
+`upper_rating`: *(Required)* The upper MMR rating to lose the role.\
+`lower_lose_rating`: *(Optional)* (Default: lower_rating) The MMR the player must fall below to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other MMR autoroles will be allowed.
 
 ---
 
@@ -1590,10 +1635,10 @@ Parameters.
 
 ---
 
-### `/ratinginname removeall`
+### `/ratinginname removeallnicknames`
 #### Description
  Removes all nicknames from all members.
-#### Usage: `/ratinginname removeall`
+#### Usage: `/ratinginname removeallnicknames`
 
 
 ---
@@ -1609,15 +1654,6 @@ Parameters.
 <hr style="border:3px solid gray">
 
 ## Staff
-### `/spectatorrole`
-#### Description
- Specify a spectator role which can join any voice channel.
-#### Usage: `/spectatorrole [role]`
-#### Arguments:
-`role`: *(Required)* Spectator role.
-
----
-
 ### `/staffrole add`
 #### Description
  Add a staff role that grants full access to all commands.
@@ -1710,10 +1746,8 @@ Parameters.
 ### `/teamselection`
 #### Description
  Choose how teams will be picked.
-#### Usage: `/teamselection [type]`
-#### Arguments:
-`type`: *(Required)* The default team selection option to use.\
-&emsp;&emsp;&emsp; Options: `Default Selection Menu, Balanced, Captains, Random, Players Choose, Unfair`
+#### Usage: `/teamselection`
+
 
 <hr style="border:3px solid gray">
 
@@ -2003,10 +2037,10 @@ Specify the outcome for the given match
 #### Headers:
 - `Authorization: API Token`
 #### Body:
-- `match_number: #` 
+- `match_number: #`
 - `winning_team_number: # `
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/outcome HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2029,7 +2063,7 @@ Clear the queue
 #### Body:
 - `channel_id: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/clear HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2052,7 +2086,7 @@ Locks the queue
 #### Body:
 - `channel_id: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/lock HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2075,7 +2109,7 @@ Unlocks the queue
 #### Body:
 - `channel_id: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/unlock HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2096,7 +2130,7 @@ Get all players in the queue
 #### Headers:
 - `Authorization: API Token`
 
-#### Usage: 
+#### Usage:
 ```
 GET /api/queue/{channel_id}/players HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2114,7 +2148,7 @@ Add a player to the queue
 - `channel_id: #`
 - `player_id: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/player/add HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2139,7 +2173,7 @@ Remove a player from the queue
 - `channel_id: #`
 - `player_id: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/player/remove HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2165,7 +2199,7 @@ Set the player's rating
 - `player_id: #`
 - `mmr: #`
 
-#### Usage: 
+#### Usage:
 ```
 POST /api/queue/player/rating HTTP/1.1
 Host: https://host.neatqueue.com:2000
@@ -2186,7 +2220,7 @@ Gets all player stats for the server
 #### Headers:
 - `Authorization: API Token`
 
-#### Usage: 
+#### Usage:
 ```
 GET /api/serverstats/{server_id} HTTP/1.1
 Host: https://host.neatqueue.com:2000
