@@ -628,6 +628,17 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Language
+### `/language`
+#### Description
+ Set the language for the server.
+#### Usage: `/language [language]`
+#### Arguments:
+`language`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `English, Español, Portugais, Français, Japanese`
+
+<hr style="border:3px solid gray">
+
 ## Leaderboard Config
 >Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
 > Leaderboard titles are also hyperlinks to the website version of the leaderboard.
@@ -801,8 +812,9 @@ Parameters.
 ### `/logs`
 #### Description
  View a log of used NeatQueue commands.
-#### Usage: `/logs`
-
+#### Usage: `/logs (filter)`
+#### Arguments:
+`filter`: *(Optional)* Filter for logs containing this word.
 
 <hr style="border:3px solid gray">
 
@@ -958,7 +970,7 @@ Parameters.
 `vote`: *(Optional)* Whether players can vote on the number of matches to play.\
 `voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.\
 &emsp;&emsp;&emsp; Options: `Majority, Lowest`\
-`eligible_voters`: *(Optional)* -.\
+`eligible_voters`: *(Optional)* Who on the team can vote. Defaults to All if no captain selected.\
 &emsp;&emsp;&emsp; Options: `All, Captains`
 
 ---
@@ -1010,7 +1022,7 @@ Parameters.
  Specify who can vote for map picks and map bans. Defaults to All if no captains.
 #### Usage: `/map voting [per_team] [mode]`
 #### Arguments:
-`per_team`: *(Required)* If the map vote is team by team.\
+`per_team`: *(Required)* If the map vote goes team by team. Team 1 picks first map, Team 2 picks next, ...\
 `mode`: *(Required)* Who can vote.\
 &emsp;&emsp;&emsp; Options: `All, Captains`
 
@@ -1082,7 +1094,7 @@ Parameters.
 #### Usage: `/add mmr [user] (mmr)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
-`mmr`: *(Optional)* Enter the desired mmr to add.
+`mmr`: *(Optional)* -.
 
 ---
 
@@ -1099,10 +1111,10 @@ Parameters.
 ### `/add streak`
 #### Description
  Increment the players streak.
-#### Usage: `/add streak [user] [streak]`
+#### Usage: `/add streak [user] (streak)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
-`streak`: *(Required)* Enter the desired streak to add.
+`streak`: *(Optional)* Enter the desired streak to add.
 
 ---
 
@@ -1326,17 +1338,6 @@ Parameters.
 
 <hr style="border:3px solid gray">
 
-## Queue Size Override
->To normally change the queue size, use `/teamsize` and `/numberofteams`
-### `/queuesizeoverride`
-#### Description
- (Not Recommended) Override the bot's determined queue size.
-#### Usage: `/queuesizeoverride [size]`
-#### Arguments:
-`size`: *(Required)* Enter the queue size, or 0 to reset to default behavior.
-
-<hr style="border:3px solid gray">
-
 ## Queue Type
 ### `/queuetype`
 #### Description
@@ -1449,7 +1450,8 @@ Parameters.
  (Default: false) Require if players must set their IGN before they can queue.
 #### Usage: `/requireign [toggle]`
 #### Arguments:
-`toggle`: *(Required)* If you want to require that users set their IGN.
+`toggle`: *(Required)* If you want to require that users set their IGN.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 

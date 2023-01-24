@@ -54,5 +54,5 @@ pingController(app)
 sessionController(app)
 paymentController(app)
 
-console.log(`Starting ${process.env.APP_ENV} at port 4000`)
-server.listen(4000);
+console.log(`Starting ${process.env.APP_ENV} at port 8443`)
+server.listen(8443);
