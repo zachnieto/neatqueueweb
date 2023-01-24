@@ -12,9 +12,6 @@ const paymentController = (app) => {
 
         products.forEach(product => product.price = prices.get(product.default_price))
 
-        console.log(prices)
-        console.log(products)
-
         res.json(products)
     });
 
