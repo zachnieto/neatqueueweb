@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {RiDiscordLine} from "react-icons/ri";
-import {FaDiscord, FaList} from "react-icons/fa";
-import {MdOutlineDashboardCustomize, MdOutlineFeaturedPlayList, MdOutlineApi} from "react-icons/md";
+import {FaDiscord} from "react-icons/fa";
+import {MdOutlineDashboardCustomize} from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 import {useNavigate, useLocation} from 'react-router-dom';
 import {discordAuth, discordGetUser} from "../actions/discord-actions";
 import {useDispatch, useSelector} from "react-redux";
 import {resetSession} from "../actions/server-actions";
-import {FaCog, FaBars} from "react-icons/fa";
+import {FaCog} from "react-icons/fa";
 
 function getWindowSize() {
     const {innerWidth, innerHeight} = window;
@@ -16,7 +16,6 @@ function getWindowSize() {
 
 const Navbar = () => {
 
-    const [windowSize, setWindowSize] = useState(getWindowSize());
     const session = useSelector(state => state.sessionReducer)
     const [collapsed, setCollapsed] = useState(false)
     const location = useLocation()
@@ -33,18 +32,6 @@ const Navbar = () => {
     const logIn = () => {
         window.open(process.env.REACT_APP_DISCORD_AUTH, "_self")
     }
-
-    useEffect(() => {
-        function handleWindowResize() {
-            setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
 
     useEffect(() => {
         if (session.auth !== undefined && !('user' in session)) {
@@ -98,7 +85,7 @@ const Navbar = () => {
 
             {!("user" in session) ?
                 <li className="nav-item p-4 pe-sm-0 pe-md-4">
-                    <a className="nav-link nq-button" onClick={logIn}><FaDiscord style={{fontSize: "1.2em", marginBottom: "6px"}} />
+                    <a className="nav-link nq-button nq-hover-action" onClick={logIn}><FaDiscord style={{fontSize: "1.2em", marginBottom: "6px"}} />
                         <div className="d-sm-inline d-none"> Login</div></a>
                 </li>
                 :
@@ -108,7 +95,7 @@ const Navbar = () => {
                         <div className="d-lg-inline d-none">Dashboard</div></a>
                 </li>
                 <li className="nav-item p-4 pe-sm-0 pe-md-4">
-                    <a className="nav-link nq-button" onClick={logOut}><FaDiscord style={{fontSize: "1.2em", marginBottom: "6px"}} />
+                    <a className="nav-link nq-button nq-hover-action" onClick={logOut}><FaDiscord style={{fontSize: "1.2em", marginBottom: "6px"}} />
                         <div className="d-sm-inline d-none">Logout</div>
                     </a>
                 </li>

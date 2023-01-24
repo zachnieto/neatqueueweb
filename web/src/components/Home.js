@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {getStats} from "../actions/neatqueue-actions";
 import {useDispatch, useSelector} from "react-redux";
-import Particles from "./Particles";
 
 const Home = () => {
 

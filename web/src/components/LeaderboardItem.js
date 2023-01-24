@@ -1,35 +1,55 @@
 import {useEffect, useState} from "react";
 
-const LeaderboardItem = ({player}) => {
+const LeaderboardItem = ({player, rank, sortKey}) => {
 
-    const [arrow, setArrow] = useState("🔻")
-    const [arrowClass, setArrowClass] = useState("nq-red-arrow")
+    const [arrow, setArrow] = useState("")
+    const [arrowClass, setArrowClass] = useState("")
 
     useEffect(() => {
-        console.log(player)
-        if (player.data.rank > player.num) {
+        console.log(rank, ' ', player.name, ' ', player.data[sortKey], ' ', sortKey)
+        if (sortKey !== "mmr") {
+            setArrow("🔻")
+            setArrowClass("")
+            return
+        }
+
+        if (player.data.rank > rank) {
+            setArrow("🔻")
             setArrowClass("nq-green-arrow")
         }
-        else if (!('rank' in player.data) || player.data.rank === player.num) {
+        else if (!player.data?.rank || player.data.rank === rank) {
             setArrow("")
             setArrowClass("nq-no-symbol")
+        } else {
+            setArrow("🔻")
+            setArrowClass("nq-red-arrow")
         }
-    }, [])
+    }, [rank, player, sortKey])
 
     return (
         <div className="nq-leaderboard-item row">
             <div className="col-8 col-md-7">
-
-                <h1 className="d-inline-flex"><div className={`${arrowClass} d-lg-inline-block`}>{arrow}</div>{player.num}. {player.name} {player.num === 1 && "🏆"}</h1>
-
-
+                <h1 className="d-inline-flex"><div className={`${arrowClass} d-lg-inline-block`}>{arrow}</div>{rank}. {player.name} {rank === 1 && "🏆"}</h1>
             </div>
-            <div className="col-2 text-end">
-                <h1>{parseInt(player.data.mmr)}</h1>
-            </div>
-            <div className="col-2 col-md-3 text-end d-none d-lg-block">
+
+            {sortKey === "mmr" ?
+                <>
+                <div className="col-2 text-end">
+                    <h1>{parseInt(player.data[sortKey])}</h1>
+                </div>
+                <div className="col-2 col-md-3 text-end d-none d-lg-block">
                 <h1>({player.data.wins} - {player.data.losses})</h1>
-            </div>
+                </div>
+                </>
+                :
+                <>
+                <div className="col-2" />
+                <div className="col-2 col-md-3 text-end d-none d-lg-block">
+                    <h1>{player.data[sortKey]}</h1>
+                </div>
+                </>
+            }
+
         </div>
     );
 }

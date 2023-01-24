@@ -13,12 +13,12 @@
   transition: all .3s ease-out 0s;
 }
 
-.nq-button:hover {
-  cursor: pointer;
-  transform: translateY(-2px) !important;
-  background-color: #a24dd386 !important;
-  border-color: #a24dd386 !important;
-}
+/*.nq-button:hover {*/
+/*  cursor: pointer;*/
+/*  transform: translateY(-2px) !important;*/
+/*  background-color: #a24dd386 !important;*/
+/*  border-color: #a24dd386 !important;*/
+/*}*/
 
 .nq-button {
   box-shadow: none !important;
@@ -60,7 +60,7 @@ h1 {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #ae0000;
+  background-color: #ffffff;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -96,6 +96,18 @@ h1 {
   transform: translateY(-5px) scale(1.02) !important;
   transition: all 0.25s ease-out;
   z-index: 1
+}
+
+.nq-leaderboard-selected {
+  transform: translateY(-5px) scale(1.02) !important;
+  background-color: rgba(175, 0, 255, 0.25) !important;
+  z-index: 1
+}
+
+.nq-leaderboard-not-selected {
+  transform: translateY(-5px) scale(.9) !important;
+  transition: all 0.25s ease-out;
+  opacity: 50%;
 }
 
 .nq-leaderboard-item {

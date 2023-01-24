@@ -9,7 +9,7 @@ export const getStats = async () => {
 }
 
 export const getGuildChannelStats = async (guildID, channelID) => {
-    const resp = await axios.get(`${API_BASE}/api/channelstats/${guildID}/${channelID}`)
+    const resp = await axios.get(`${API_BASE}/api2/channelstats/${guildID}/${channelID}`)
     return resp.data;
 }
 
