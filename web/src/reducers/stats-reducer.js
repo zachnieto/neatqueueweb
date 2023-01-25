@@ -1,4 +1,4 @@
-const statsReducer = (state = {servers: 573, players: 18688, games: 31586}, action) => {
+const statsReducer = (state = {servers: 0, players: 0, games: 0}, action) => {
     switch (action.type) {
         case 'GET_STATS':
             return action.stats;

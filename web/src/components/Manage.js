@@ -21,7 +21,7 @@ const Manage = () => {
         getPremiumData()
     }, [])
 
-
+    console.log(session)
     if (!session.auth || loading)
         return
 

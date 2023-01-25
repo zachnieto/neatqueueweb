@@ -6,7 +6,6 @@ import Particles from "./components/Particles";
 import Navbar from "./components/Navbar";
 import {useDispatch, useSelector} from "react-redux";
 import {getSession} from "./actions/server-actions";
-import {discordRefresh} from "./actions/discord-actions";
 import Dashboard from "./components/Dashboard";
 import Manage from "./components/Manage";
 import Leaderboard from "./components/Leaderboard";
@@ -21,10 +20,7 @@ function App() {
 
     useEffect(() => {
         const updateSession = async () => {
-            let sess = await getSession(dispatch)
-            if ("auth" in sess) {
-                await discordRefresh(dispatch, sess.auth.refresh_token)
-            }
+            await getSession(dispatch)
         }
 
         updateSession()

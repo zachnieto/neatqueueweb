@@ -6,13 +6,13 @@ const LeaderboardItem = ({player, rank, sortKey}) => {
     const [arrowClass, setArrowClass] = useState("")
 
     useEffect(() => {
-        console.log(rank, ' ', player.name, ' ', player.data[sortKey], ' ', sortKey)
         if (sortKey !== "mmr") {
-            setArrow("🔻")
+            setArrow("")
             setArrowClass("")
             return
         }
-
+        console.log(player)
+        console.log(rank, ' ', player.data.rank, ' ', player.name, ' ', player.data[sortKey], ' ', sortKey)
         if (player.data.rank > rank) {
             setArrow("🔻")
             setArrowClass("nq-green-arrow")

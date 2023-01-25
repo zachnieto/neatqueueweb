@@ -68,3 +68,12 @@ export const getProducts = async () => {
     const resp = await api.get(`${API_BASE}products`)
     return resp.data;
 }
+
+export const discordAuth = async (code) => {
+    const resp = await api.post(`${API_BASE}api/session/auth/`, {
+        params: {
+            code: code
+        }
+    })
+    return resp.data;
+}

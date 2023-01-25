@@ -4,15 +4,9 @@ import {FaDiscord} from "react-icons/fa";
 import {MdOutlineDashboardCustomize} from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 import {useNavigate, useLocation} from 'react-router-dom';
-import {discordAuth, discordGetUser} from "../actions/discord-actions";
 import {useDispatch, useSelector} from "react-redux";
-import {resetSession} from "../actions/server-actions";
+import {discordAuth, resetSession} from "../actions/server-actions";
 import {FaCog} from "react-icons/fa";
-
-function getWindowSize() {
-    const {innerWidth, innerHeight} = window;
-    return {innerWidth, innerHeight};
-}
 
 const Navbar = () => {
 
@@ -32,15 +26,6 @@ const Navbar = () => {
     const logIn = () => {
         window.open(process.env.REACT_APP_DISCORD_AUTH, "_self")
     }
-
-    useEffect(() => {
-        if (session.auth !== undefined && !('user' in session)) {
-            const getUser = async () => {
-                await discordGetUser(dispatch, session.auth)
-            }
-            getUser()
-        }
-    }, [session.auth])
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search)
