@@ -19,13 +19,12 @@ const sessionController = (app) => {
 
     app.get('/api/session/get/', async (req, res) => {
 
-        const session = req.session;
-        if (session?.auth?.refresh_token) {
+        if (req.session?.auth?.refresh_token) {
             const params = new URLSearchParams({
                 client_id: process.env.CLIENT_ID,
                 client_secret: process.env.CLIENT_SECRET,
                 grant_type: 'refresh_token',
-                refresh_token: session.auth.refresh_token,
+                refresh_token: req.session.auth.refresh_token,
             })
 
             const config = {
@@ -34,12 +33,14 @@ const sessionController = (app) => {
                 }
             }
 
-            const resp = await axios.post(`https://discord.com/api/oauth2/token`, params, config)
-            session.auth = resp.data
+            await axios.post(`https://discord.com/api/oauth2/token`, params, config).catch(() => {
+                req.session.auth = undefined;
+            }).then((resp) => {
+                req.session.auth = resp.data
+            })
         }
 
         res.send(req.session);
-        console.log(req.session)
     });
 
     app.get('/api/session/reset', (req, res) => {
@@ -65,9 +66,11 @@ const sessionController = (app) => {
             }
         }
 
-        const resp = await axios.post(`https://discord.com/api/oauth2/token`, params, config)
-        req.session.auth = resp.data
-
+        await axios.post(`https://discord.com/api/oauth2/token`, params, config).catch(error => {
+            req.session.auth = undefined;
+        }).then((resp) => {
+            req.session.auth = resp.data
+        })
         res.send(req.session.auth);
     });
 
