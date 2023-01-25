@@ -36,7 +36,7 @@ const sessionController = (app) => {
             await axios.post(`https://discord.com/api/oauth2/token`, params, config).catch(() => {
                 req.session.auth = undefined;
             }).then((resp) => {
-                req.session.auth = resp.data
+                req.session.auth = resp?.data
             })
         }
 
@@ -69,7 +69,7 @@ const sessionController = (app) => {
         await axios.post(`https://discord.com/api/oauth2/token`, params, config).catch(error => {
             req.session.auth = undefined;
         }).then((resp) => {
-            req.session.auth = resp.data
+            req.session.auth = resp?.data
         })
         res.send(req.session.auth);
     });
