@@ -62,7 +62,7 @@ Donate to help NeatQueue development.
 ## Force Start
 ### `/forcestart`
 #### Description
-Start a vote to forcestart the game.
+Start a vote to forcestart the game, skips vote if used by staff.
 #### Usage: `/forcestart`
 
 
@@ -262,6 +262,16 @@ Sets your IGN for this queue to help with easy lobby setup.
 
 <hr style="border:3px solid gray">
 
+## Roles
+### `/role`
+#### Description
+-.
+#### Usage: `/role [role]`
+#### Arguments:
+`role`: *(Required)* -.
+
+<hr style="border:3px solid gray">
+
 ## Spectator Role
 ### `/spectatorrole add`
 #### Description
@@ -382,7 +392,7 @@ Substitute yourself for the given player.
 ## Balance By
 ### `/balanceby`
 #### Description
- (default: mmr) Sets how teams are balanced.
+ (Default: mmr) Sets how teams are balanced.
 #### Usage: `/balanceby [mode]`
 #### Arguments:
 `mode`: *(Required)* How teams are balanced.\
@@ -479,19 +489,9 @@ Substitute yourself for the given player.
 
 ---
 
-### `/channel name team`
-#### Description
- Set the name for created team channels.
-#### Usage: `/channel name team [channel_name]`
-#### Arguments:
-`channel_name`: *(Required)* The channel name.\
-&emsp;&emsp;&emsp; Options: `Default, Captain`
-
----
-
 ### `/channel restrictions`
 #### Description
- (default: enabled) Sets whether created channels have restrictions.
+ (Default: enabled) Sets whether created channels have restrictions.
 #### Usage: `/channel restrictions [mode]`
 #### Arguments:
 `mode`: *(Required)* If channels are restricted.\
@@ -539,22 +539,11 @@ Substitute yourself for the given player.
 
 ### `/nametype`
 #### Description
- Sets whether to use nicknames or discord names (default: nick).
+ Sets whether to use nicknames or discord names (Default: nick).
 #### Usage: `/nametype [type]`
 #### Arguments:
 `type`: *(Required)* The type of names to be used.\
 &emsp;&emsp;&emsp; Options: `Discord, Nicknames`
-
-<hr style="border:3px solid gray">
-
-## Emojis
-### `/emojis`
-#### Description
- Sets whether to display emojis.
-#### Usage: `/emojis [mode]`
-#### Arguments:
-`mode`: *(Required)* If emojis are used.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1212,7 +1201,7 @@ Parameters.
 ## Number Of Lobbies
 ### `/numberoflobbies`
 #### Description
- (default: 1) Sets the number of lobbies to create.
+ (Default: 1) Sets the number of lobbies to create.
 #### Usage: `/numberoflobbies [lobbies]`
 #### Arguments:
 `lobbies`: *(Required)* The number of lobbies.
@@ -1222,7 +1211,7 @@ Parameters.
 ## Number Of Teams
 ### `/numberofteams`
 #### Description
- (default: 2) Sets the number of teams.
+ (Default: 2) Sets the number of teams.
 #### Usage: `/numberofteams [number]`
 #### Arguments:
 `number`: *(Required)* The number of teams.
@@ -1563,10 +1552,11 @@ Parameters.
 ## Roles
 ### `/roles`
 #### Description
- (default: None) Sets the roles for this queue, or omit to remove all.
-#### Usage: `/roles (roles)`
+ (Default: None) Sets the roles for this queue, or omit to remove all.
+#### Usage: `/roles (roles) (required)`
 #### Arguments:
-`roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.
+`roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.\
+`required`: *(Optional)* If roles are required to be chosen and enforced.
 
 <hr style="border:3px solid gray">
 
@@ -1754,10 +1744,20 @@ Parameters.
 <hr style="border:3px solid gray">
 
 ## Team Names
-### `/teamnames`
+### `/teamnames captains`
+#### Description
+ If team names should be the captains names, if applicable.
+#### Usage: `/teamnames captains [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle team names being the captain's names.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/teamnames set`
 #### Description
  Speicfy the names of each team, or omit for the default behavior..
-#### Usage: `/teamnames (team_names)`
+#### Usage: `/teamnames set (team_names)`
 #### Arguments:
 `team_names`: *(Optional)* Comma seperated list of team names. Ex: Team 1,Team 2,...
 
@@ -1776,7 +1776,7 @@ Parameters.
 ## Temporary Setup Channels
 ### `/tempchannels`
 #### Description
- (default: Enabled) Sets whether to create a temporary text channel for setup.
+ (Default: Enabled) Sets whether to create a temporary text channel for setup.
 #### Usage: `/tempchannels [mode]`
 #### Arguments:
 `mode`: *(Required)* If the temporary setup channels are enabled.\
@@ -1910,7 +1910,7 @@ Parameters.
 ## Voice Channel Mode
 ### `/voicechannels`
 #### Description
- (default: required) Sets whether voice channels are required, optional, or disabled.
+ (Default: required) Sets whether voice channels are required, optional, or disabled.
 #### Usage: `/voicechannels [mode]`
 #### Arguments:
 `mode`: *(Required)* The type of voice channel setting.\
