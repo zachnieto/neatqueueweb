@@ -11,6 +11,7 @@ import Manage from "./components/Manage";
 import Leaderboard from "./components/Leaderboard";
 import LeaderboardMenu from "./components/LeaderboardMenu";
 import Bracket from "./components/Bracket";
+import ShortUrl from "./components/ShortUrl";
 
 
 function App() {
@@ -28,11 +29,12 @@ function App() {
 
     return (
     <div className="container-fluid">
+
+        <Particles/>
         {console.log(session)}
         { session !== {} &&
             <>
 
-                <Particles/>
                 <Router>
                 <Navbar />
                 <Routes>
@@ -42,6 +44,7 @@ function App() {
                 <Route path="/leaderboard/:guildID/:channelID" element={<Leaderboard/>}/>
                 <Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>
                 <Route path="/bracket/:guildID/:tournyName" element={<Bracket/>}/>
+                <Route path="/lb/:shortUrl" element={<ShortUrl/>}/>
                 </Routes>
                 </Router>
             </>

@@ -43,3 +43,7 @@ export const purchasePremium = async (guildID, oauth, plan) => {
 export const getBracket = async (guildID, tournyName) => {
     return await service.getBracket(guildID, tournyName)
 }
+
+export const getLongUrl = async (shortUrl) => {
+    return await service.getLongUrl(shortUrl);
+}

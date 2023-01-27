@@ -51,3 +51,8 @@ export async function getBracket(guildID, tournyName) {
     const resp = await axios.get(`${API_BASE}/tournament/${guildID}/${tournyName}`);
     return resp.data
 }
+
+export async function getLongUrl(shortUrl) {
+    const resp = await axios.get(`${API_BASE}/api/longurl/${shortUrl}`);
+    return resp.data
+}

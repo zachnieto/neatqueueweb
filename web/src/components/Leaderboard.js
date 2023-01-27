@@ -44,7 +44,7 @@ const Leaderboard = () => {
             <div className="col-lg-2 col-md-1">
             <ul className={`nav nav-pills`}>
                 {stats.channelStats && Object.keys(stats.channelStats).length > 2 && Object.keys(stats.channelStats).map(m =>
-                    <li onClick={() => setMonth(m)} className={`${month === m ? "nq-leaderboard-selected" : "nq-leaderboard-not-selected"}  nq-button nq-hover-action col ms-5 me-5 mb-1 text-center`}>
+                    <li key={m} onClick={() => setMonth(m)} className={`${month === m ? "nq-leaderboard-selected" : "nq-leaderboard-not-selected"}  nq-button nq-hover-action col ms-5 me-5 mb-1 text-center`}>
                         <h1>{m === "alltime" ? "All Time" : new Date(m + "-15").toLocaleDateString("en-US", dateOptions)}</h1>
                     </li>
 
@@ -56,7 +56,7 @@ const Leaderboard = () => {
             <div className="col-lg-8 col-md-12">
                 <div className="row m-2">
                     {Object.keys(sortKeys).map(key =>
-                        <div onClick={() => setSortKey(key)} className={`${key === sortKey ? "nq-leaderboard-selected" : "nq-leaderboard-not-selected"} nq-button nq-hover-action col ms-5 me-5 mb-1 text-center`}>
+                        <div key={key} onClick={() => setSortKey(key)} className={`${key === sortKey ? "nq-leaderboard-selected" : "nq-leaderboard-not-selected"} nq-button nq-hover-action col ms-5 me-5 mb-1 text-center`}>
                             <h1>{key}</h1>
                         </div>
                     )}
