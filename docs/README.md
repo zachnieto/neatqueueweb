@@ -103,8 +103,9 @@ Shows the leaderboard for the current queue's game.
 ### `/need`
 #### Description
 Shows how many players are needed for the queue.
-#### Usage: `/need`
-
+#### Usage: `/need (channel)`
+#### Arguments:
+`channel`: *(Optional)* Channel of queue to show need for.
 
 <hr style="border:3px solid gray">
 
@@ -265,10 +266,10 @@ Sets your IGN for this queue to help with easy lobby setup.
 ## Roles
 ### `/role`
 #### Description
--.
-#### Usage: `/role [role]`
+Set your role.
+#### Usage: `/role (role)`
 #### Arguments:
-`role`: *(Required)* -.
+`role`: *(Optional)* Preferred role to use, or omit to remove.
 
 <hr style="border:3px solid gray">
 
@@ -445,7 +446,7 @@ Substitute yourself for the given player.
 #### Usage: `/captains selection [type]`
 #### Arguments:
 `type`: *(Required)* The default captain selection option to use.\
-&emsp;&emsp;&emsp; Options: `Default Selection Menu, Random, Highest Rated, Lowest Rated, Vote For Captains`
+&emsp;&emsp;&emsp; Options: `Default Selection Menu, Random, Highest Rated, Lowest Rated, Vote For Captains, Balanced`
 
 <hr style="border:3px solid gray">
 
@@ -624,7 +625,7 @@ Substitute yourself for the given player.
 #### Usage: `/language [language]`
 #### Arguments:
 `language`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `English, Español, Portugais, Français, Japanese`
+&emsp;&emsp;&emsp; Options: `English, Spanish, Portuguese, French, Japanese, Italian, Russian, German`
 
 <hr style="border:3px solid gray">
 
@@ -643,13 +644,13 @@ Substitute yourself for the given player.
 
 ### `/leaderboardconfig monthly`
 #### Description
- Toggle monthly leaderboards.
-
-Parameters.
-#### Usage: `/leaderboardconfig monthly [toggle]`
+ Toggle monthly leaderboards, either resets monthly or rolls over.
+#### Usage: `/leaderboardconfig monthly [toggle] (mode)`
 #### Arguments:
-`toggle`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+`toggle`: *(Required)* If monthly leaderboards are enabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`mode`: *(Optional)* If stats reset for the month, or keep rolling.\
+&emsp;&emsp;&emsp; Options: `Reset, Rolling`
 
 ---
 
@@ -899,6 +900,15 @@ Parameters.
 `user`: *(Required)* -.\
 `role`: *(Optional)* Enter the role for the player.\
 `team`: *(Optional)* Enter the team for the player if desired.
+
+---
+
+### `/player autoban`
+#### Description
+ Auto ban players who cause a match to cancel by not joining the voice channel.
+#### Usage: `/player autoban (duration)`
+#### Arguments:
+`duration`: *(Optional)* Duration of time in seconds for the ban to last, or 0 to reset.
 
 ---
 
@@ -1414,12 +1424,14 @@ Parameters.
 ### `/reactionroles add`
 #### Description
  Specify a spectator role which can join any voice channel.
-#### Usage: `/reactionroles add [channel] [message_id] [role] [reaction]`
+#### Usage: `/reactionroles add [channel] [message_id] [role] [reaction] (remove_others) (queue_role)`
 #### Arguments:
 `channel`: *(Required)* Channel where message is.\
 `message_id`: *(Required)* Message to add reaction to.\
 `role`: *(Required)* Role to assign/remove.\
-`reaction`: *(Required)* Reaction that corresponds to this role.
+`reaction`: *(Required)* Reaction that corresponds to this role.\
+`remove_others`: *(Optional)* If the user has this role, remove all other reactionroles in the message they have.\
+`queue_role`: *(Optional)* Option role for `/roles` that the user will default to.
 
 <hr style="border:3px solid gray">
 
@@ -1922,18 +1934,18 @@ Parameters.
 ### `/votingmenu add`
 #### Description
  Add a new voting menu.
-#### Usage: `/votingmenu add [title] [options] [key] (order) (button_colors) (show_numbers) (allow_random) (force_random) (number_of_votes) (per_team)`
+#### Usage: `/votingmenu add [title] [options] [key] [team_voting] (order) (button_colors) (show_numbers) (allow_random) (force_random) (number_of_votes)`
 #### Arguments:
 `title`: *(Required)* (Ex: Vote for the Region) The title for the vote.\
 `options`: *(Required)* (Ex: NA,EU) Comma separated list of options.\
 `key`: *(Required)* (Ex: Region Name) The key for this vote for displaying the result after.\
+`team_voting`: *(Required)* Is the vote once per team, once for all teams, or for a specific team?.\
 `order`: *(Optional)* (Ex: 1) The order for this vote in regard to other votes. Votes will occur in ascending order.\
 `button_colors`: *(Optional)* (Ex: blurple,red) Comma separated list of button colors. Valid options: blurple, gray, green, red.\
 `show_numbers`: *(Optional)* If each option should have a number associated with it when displayed.\
 `allow_random`: *(Optional)* If a 'random' option is included in the vote.\
 `force_random`: *(Optional)* If you want to skip the vote altogether and just pick a random option.\
-`number_of_votes`: *(Optional)* Number of votes per player.\
-`per_team`: *(Optional)* If the vote should occur once per team.
+`number_of_votes`: *(Optional)* Number of votes per player.
 
 ---
 
@@ -1943,17 +1955,6 @@ Parameters.
 #### Usage: `/votingmenu remove [title_and_order]`
 #### Arguments:
 `title_and_order`: *(Required)* Title and corresponding order of voting menu to delete.
-
-<hr style="border:3px solid gray">
-
-## Waiting Room
-### `/waitingroom`
-#### Description
- Enable a waiting room allowing a queue to be overfilled (Only useful with /roles).
-#### Usage: `/waitingroom [toggle]`
-#### Arguments:
-`toggle`: *(Required)* If waiting room should be enabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 

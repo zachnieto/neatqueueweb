@@ -17,7 +17,7 @@ const Leaderboard = () => {
     const dispatch = useDispatch()
     const stats = useSelector(state => state.statsReducer)
 
-    const [month, setMonth] = useState("alltime");
+    const [month, setMonth] = useState("");
     const [sortKey, setSortKey] = useState("MMR")
 
     useEffect(() => {
@@ -36,14 +36,24 @@ const Leaderboard = () => {
         // };
     }, [])
 
+    useEffect(() => {
+
+        if (stats.channelStats)
+            setMonth(Object.keys(stats.channelStats)[0])
+
+    }, [stats])
+
 
     const dateOptions = { year: 'numeric', month: 'short' };
+
+    if (!month)
+        return
 
     return (
         <div className="row">
             <div className="col-lg-2 col-md-1">
             <ul className={`nav nav-pills`}>
-                {stats.channelStats && Object.keys(stats.channelStats).length > 2 && Object.keys(stats.channelStats).map(m =>
+                {stats.channelStats && Object.keys(stats.channelStats).length > 1 && Object.keys(stats.channelStats).map(m =>
                     <li key={m} onClick={() => setMonth(m)} className={`${month === m ? "nq-leaderboard-selected" : "nq-leaderboard-not-selected"}  nq-button nq-hover-action col ms-5 me-5 mb-1 text-center`}>
                         <h1>{m === "alltime" ? "All Time" : new Date(m + "-15").toLocaleDateString("en-US", dateOptions)}</h1>
                     </li>
