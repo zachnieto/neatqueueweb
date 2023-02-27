@@ -94,7 +94,7 @@ Shows the leaderboard for the current queue's game.
 #### Arguments:
 `page`: *(Optional)* The desired page number.\
 `type`: *(Optional)* The type of leaderboard to display.\
-&emsp;&emsp;&emsp; Options: `MMR, Points, Games, Wins, Losses, Winrate, Streak`\
+&emsp;&emsp;&emsp; Options: `MMR, Points, MVPs, Games, Wins, Losses, Winrate, Streak`\
 `queue_name`: *(Optional)* The queue name to view.
 
 <hr style="border:3px solid gray">
@@ -625,7 +625,7 @@ Substitute yourself for the given player.
 #### Usage: `/language [language]`
 #### Arguments:
 `language`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, Portuguese, French, Japanese, Italian, Russian, German`
+&emsp;&emsp;&emsp; Options: `English, Spanish, Portuguese, French, Japanese, Italian, Russian, German, Ukranian`
 
 <hr style="border:3px solid gray">
 
@@ -642,6 +642,24 @@ Substitute yourself for the given player.
 
 ---
 
+### `/leaderboardconfig ignoreroles add`
+#### Description
+ Will not show players on leaderboard with this role.
+#### Usage: `/leaderboardconfig ignoreroles add [role]`
+#### Arguments:
+`role`: *(Required)* Required role to show on leaderboard.
+
+---
+
+### `/leaderboardconfig ignoreroles remove`
+#### Description
+ Remove an ignored leaderboard role.
+#### Usage: `/leaderboardconfig ignoreroles remove [role]`
+#### Arguments:
+`role`: *(Required)* Role to no longer ignore.
+
+---
+
 ### `/leaderboardconfig monthly`
 #### Description
  Toggle monthly leaderboards, either resets monthly or rolls over.
@@ -651,6 +669,15 @@ Substitute yourself for the given player.
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
 `mode`: *(Optional)* If stats reset for the month, or keep rolling.\
 &emsp;&emsp;&emsp; Options: `Reset, Rolling`
+
+---
+
+### `/leaderboardconfig shorturl`
+#### Description
+ Create a short url for leaderboards. Ex: 'MyGame' -> https://www.neatqueue.com/lb/MyGame.
+#### Usage: `/leaderboardconfig shorturl [url]`
+#### Arguments:
+`url`: *(Required)* Short url for this channel's leaderboard.
 
 ---
 
@@ -808,6 +835,26 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## M V P
+### `/mvp reward`
+#### Description
+ (Default: 5) MMR reward for MVPs.
+#### Usage: `/mvp reward [amount]`
+#### Arguments:
+`amount`: *(Required)* Amount of MMR to give as a reward.
+
+---
+
+### `/mvp toggle`
+#### Description
+ Enable/disable MVP votes for matches.
+#### Usage: `/mvp toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Enable/disable MVPs.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+<hr style="border:3px solid gray">
+
 ## MMR Change
 ### `/mmr ceiling`
 #### Description
@@ -850,7 +897,7 @@ Substitute yourself for the given player.
 
 ### `/mmr change set`
 #### Description
- Sets the MMR change per game.
+ (Default: 50) Sets the MMR change per game.
 #### Usage: `/mmr change set [amount] (loser_mmr) (static)`
 #### Arguments:
 `amount`: *(Required)* The average MMR change for wins and losses.\
@@ -1028,12 +1075,32 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Matchmaking
+### `/matchmaking leniency`
+#### Description
+ Every 15 seconds, how much the range will increase for a better chance at a match.
+#### Usage: `/matchmaking leniency [value]`
+#### Arguments:
+`value`: *(Required)* How much to increase the range by.
+
+---
+
 ### `/matchmaking range`
 #### Description
  The range of MMRs for matches. Tighter range = more waiting and players required.
 #### Usage: `/matchmaking range [range]`
 #### Arguments:
 `range`: *(Required)* Range of player MMRs.
+
+<hr style="border:3px solid gray">
+
+## Migrate Stats
+### `/migratestats`
+#### Description
+ Copies the player stats from the old queue name to the new one.
+#### Usage: `/migratestats [old_name] [new_name]`
+#### Arguments:
+`old_name`: *(Required)* Old queue name with stats.\
+`new_name`: *(Required)* New name to copy the stats to. Will overwrite any stats stored there.
 
 <hr style="border:3px solid gray">
 
@@ -1069,7 +1136,7 @@ Substitute yourself for the given player.
 
 ### `/add game`
 #### Description
- Increment the players games.
+ Increment the players games, use a negative number to decrement.
 #### Usage: `/add game [user] (games)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
@@ -1079,7 +1146,7 @@ Substitute yourself for the given player.
 
 ### `/add loss`
 #### Description
- Increment the players losses.
+ Increment the players losses, use a negative number to decrement.
 #### Usage: `/add loss [user] (losses)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
@@ -1089,7 +1156,7 @@ Substitute yourself for the given player.
 
 ### `/add mmr`
 #### Description
- Increment the players mmr.
+ Increment the players mmr, use a negative number to decrement.
 #### Usage: `/add mmr [user] (mmr)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
@@ -1099,7 +1166,7 @@ Substitute yourself for the given player.
 
 ### `/add points`
 #### Description
- Increment the players points (not MMR).
+ Increment the players points (not MMR), use a negative number to decrement.
 #### Usage: `/add points [user] [points]`
 #### Arguments:
 `user`: *(Required)* The desired user.\
@@ -1109,7 +1176,7 @@ Substitute yourself for the given player.
 
 ### `/add streak`
 #### Description
- Increment the players streak.
+ Increment the players streak, use a negative number to decrement.
 #### Usage: `/add streak [user] (streak)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
@@ -1119,21 +1186,11 @@ Substitute yourself for the given player.
 
 ### `/add win`
 #### Description
- Increment the players wins.
+ Increment the players wins, use a negative number to decrement.
 #### Usage: `/add win [user] (wins)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
 `wins`: *(Optional)* Enter the desired wins to add.
-
----
-
-### `/set account`
-#### Description
- Sets the players account (used in /register).
-#### Usage: `/set account [user] [account]`
-#### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`account`: *(Required)* Enter the desired account, or 'none' to remove.
 
 ---
 
@@ -1144,6 +1201,16 @@ Substitute yourself for the given player.
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
 `games`: *(Required)* Enter the desired games.
+
+---
+
+### `/set ign`
+#### Description
+ Sets the players IGN (used in `/register` or `/ign`).
+#### Usage: `/set ign [user] [account]`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`account`: *(Required)* Enter the desired IGN, or 'none' to remove.
 
 ---
 
@@ -1194,17 +1261,6 @@ Substitute yourself for the given player.
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
 `wins`: *(Required)* Enter the desired wins.
-
-<hr style="border:3px solid gray">
-
-## Multi Queue
-### `/multiqueue`
-#### Description
- Sets whether players can be in multiple queues at once.
-#### Usage: `/multiqueue [toggle]`
-#### Arguments:
-`toggle`: *(Required)* If players can be in multiple queues at once.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1326,15 +1382,6 @@ Substitute yourself for the given player.
 #### Arguments:
 `name`: *(Required)* Enter the queue name.
 
----
-
-### `/rename`
-#### Description
- Renames the queue, but keeps all stats. This will merge all stats with desired name.
-#### Usage: `/rename [name]`
-#### Arguments:
-`name`: *(Required)* Enter the queue name.
-
 <hr style="border:3px solid gray">
 
 ## Queue Type
@@ -1344,9 +1391,9 @@ Substitute yourself for the given player.
 #### Usage: `/queuetype [type]`
 #### Arguments:
 `type`: *(Required)* The type of queue.\
-&emsp;&emsp;&emsp; Options: `PUGs/Normal Individual Queue, (BETA) Matchmaking, Full Team vs Full Team, Select Team On Join`
+&emsp;&emsp;&emsp; Options: `PUGs/Normal Individual Queue, Matchmaking, Full Team vs Full Team, Select Team On Join`
 >PUGs/Normal Individual Queue: The default queue setup, players join individually to get put into a match when the queue is filled.
-> (BETA) Matchmaking: Players join the queue, and once there are enough players within their MMR range, a match is created.
+> Matchmaking: Players join the queue, and once there are enough players within their MMR range, a match is created.
 > Full Team vs Full Team: Captains join the queue and pull in the entire team. No team setup is required.
 > Select Team On Join: The queue has join buttons for each team, no team setup is required.
 
@@ -1401,6 +1448,14 @@ Substitute yourself for the given player.
 
 ---
 
+### `/autoroles refresh`
+#### Description
+ Recalculates all autoroles for players.
+#### Usage: `/autoroles refresh`
+
+
+---
+
 ### `/autoroles topplayers remove`
 #### Description
  Removes a top player role.
@@ -1445,6 +1500,35 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Requeue
+### `/requeue condition`
+#### Description
+ Sets the condition for letting a player requeue.
+#### Usage: `/requeue condition [condition]`
+#### Arguments:
+`condition`: *(Required)* Condition that must be met to requeue.\
+&emsp;&emsp;&emsp; Options: `Must Vote, Winner Selected, None`
+
+---
+
+### `/requeue delay`
+#### Description
+ Delay people from queuing for the given duration after the condition is met.
+#### Usage: `/requeue delay [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Seconds to delay from queuing.
+
+---
+
+### `/requeue priorityrole`
+#### Description
+ Allow players with the given role to skip the requeue delay.
+#### Usage: `/requeue priorityrole (role)`
+#### Arguments:
+`role`: *(Optional)* Priority role.
+
+<hr style="border:3px solid gray">
+
 ## Require IGN
 ### `/requireign`
 #### Description
@@ -1469,10 +1553,10 @@ Substitute yourself for the given player.
 
 ### `/voteforresult`
 #### Description
- Sets whether to vote for queue outcome.
+ Sets whether to vote for queue outcome. Disabling means you don't care about outcomes.
 #### Usage: `/voteforresult [value]`
 #### Arguments:
-`value`: *(Required)* Whether voting for outcomes is enabled or not.
+`value`: *(Required)* Whether match outcomes are enabled or not.
 
 <hr style="border:3px solid gray">
 
@@ -1602,10 +1686,50 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Server Stats
-### `/serverstats`
+### `/serverstats channelnames games`
+#### Description
+ Show how many gamaes have been played by renaming the specified channel.
+#### Usage: `/serverstats channelnames games (channel) (format)`
+#### Arguments:
+`channel`: *(Optional)* Channel to rename, or omit to remove.\
+`format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "Games: $".
+
+---
+
+### `/serverstats channelnames ingame`
+#### Description
+ Show how many players are in game by renaming the specified channel.
+#### Usage: `/serverstats channelnames ingame (channel) (format)`
+#### Arguments:
+`channel`: *(Optional)* Channel to rename, or omit to remove.\
+`format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "In Game: $".
+
+---
+
+### `/serverstats channelnames inqueue`
+#### Description
+ Show how many players are in queue by renaming the specified channel.
+#### Usage: `/serverstats channelnames inqueue (channel) (format)`
+#### Arguments:
+`channel`: *(Optional)* Channel to rename, or omit to remove.\
+`format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "In Queue: $".
+
+---
+
+### `/serverstats channelnames players`
+#### Description
+ Show the total number of players by renaming the specified channel.
+#### Usage: `/serverstats channelnames players (channel) (format)`
+#### Arguments:
+`channel`: *(Optional)* Channel to rename, or omit to remove.\
+`format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "Players: $".
+
+---
+
+### `/serverstats info`
 #### Description
  View all queue names in the server.
-#### Usage: `/serverstats (hidden)`
+#### Usage: `/serverstats info (hidden)`
 #### Arguments:
 `hidden`: *(Optional)* If you want the stats to be hidden.
 
@@ -1624,9 +1748,11 @@ Substitute yourself for the given player.
 ### `/ratinginname format`
 #### Description
  (Default: '- ($)') Sets the format for ratings in nicknames.
-#### Usage: `/ratinginname format [format]`
+#### Usage: `/ratinginname format [format] [location]`
 #### Arguments:
-`format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.
+`format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.\
+`location`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `Prefix, Suffix`
 
 ---
 
@@ -1654,6 +1780,17 @@ Substitute yourself for the given player.
 #### Arguments:
 `toggle`: *(Required)* If ratings should be shown in name.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+<hr style="border:3px solid gray">
+
+## Simulate
+### `/simulate`
+#### Description
+ Simulate the MMR distribution for the current configuration.
+#### Usage: `/simulate (players) (matches)`
+#### Arguments:
+`players`: *(Optional)* The number of players to simulate.\
+`matches`: *(Optional)* The number of matches to simulate.
 
 <hr style="border:3px solid gray">
 
@@ -1711,10 +1848,10 @@ Substitute yourself for the given player.
 ### `/startingmmr set`
 #### Description
  Sets the starting mmr for the given role.
-#### Usage: `/startingmmr set [role] [mmr]`
+#### Usage: `/startingmmr set [mmr] (role)`
 #### Arguments:
-`role`: *(Required)* The role.\
-`mmr`: *(Required)* The starting mmr value.
+`mmr`: *(Required)* The starting mmr value.\
+`role`: *(Optional)* The role.
 
 <hr style="border:3px solid gray">
 
@@ -1920,13 +2057,23 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Voice Channel Mode
-### `/voicechannels`
+### `/voicechannels mode`
 #### Description
  (Default: required) Sets whether voice channels are required, optional, or disabled.
-#### Usage: `/voicechannels [mode]`
+#### Usage: `/voicechannels mode [mode]`
 #### Arguments:
 `mode`: *(Required)* The type of voice channel setting.\
 &emsp;&emsp;&emsp; Options: `Required, Optional, Disabled`
+
+---
+
+### `/voicechannels moveteam`
+#### Description
+ (Default: required) Sets whether voice channels are required, optional, or disabled.
+#### Usage: `/voicechannels moveteam [when]`
+#### Arguments:
+`when`: *(Required)* The type of voice channel setting.\
+&emsp;&emsp;&emsp; Options: `After All Setup, After Teams Created`
 
 <hr style="border:3px solid gray">
 

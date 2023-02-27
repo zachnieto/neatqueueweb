@@ -8,21 +8,19 @@ const ShortUrl = () => {
     const {shortUrl} = useParams()
     let navigate = useNavigate();
 
-
-    const tempMaps = {
+    const commonMaps = {
         ProCity: "/leaderboard/1061301529597976700/1061303977460908173"
     }
 
     useEffect(() => {
-        console.log("Getting long url");
-        // getLongUrl(shortUrl).then(res => {
-        //     if (res !== null) {
-        //         navigate(res);
-        //     }
-        // });
-
-        if (shortUrl in tempMaps) {
-            navigate(tempMaps[shortUrl])
+        if (shortUrl in commonMaps) {
+            navigate(commonMaps[shortUrl])
+        } else {
+            getLongUrl(shortUrl).then(res => {
+                if (res !== null) {
+                    navigate(res);
+                }
+            });
         }
 
     })
