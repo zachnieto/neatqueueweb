@@ -38,6 +38,16 @@ Start a vote to cancel the current match.
 
 <hr style="border:3px solid gray">
 
+## Captain Selection
+### `/captains role`
+#### Description
+-.
+#### Usage: `/captains role (role)`
+#### Arguments:
+`role`: *(Optional)* -.
+
+<hr style="border:3px solid gray">
+
 ## Compare
 ### `/compare`
 #### Description
@@ -47,6 +57,24 @@ Compare your stats to the given player.
 `player2`: *(Required)* Enter the second user you want to compare to.\
 `player1`: *(Optional)* Enter the first user you want to compare to, or omit for yourself.\
 `hidden`: *(Optional)* If you want the stats to be hidden.
+
+<hr style="border:3px solid gray">
+
+## Cross Chat
+### `/crosschat join`
+#### Description
+-.
+#### Usage: `/crosschat join (room_name)`
+#### Arguments:
+`room_name`: *(Optional)* -.
+
+---
+
+### `/crosschat leave`
+#### Description
+-.
+#### Usage: `/crosschat leave`
+
 
 <hr style="border:3px solid gray">
 
@@ -94,7 +122,7 @@ Shows the leaderboard for the current queue's game.
 #### Arguments:
 `page`: *(Optional)* The desired page number.\
 `type`: *(Optional)* The type of leaderboard to display.\
-&emsp;&emsp;&emsp; Options: `MMR, Points, MVPs, Games, Wins, Losses, Winrate, Streak`\
+&emsp;&emsp;&emsp; Options: `MMR, Peak MMR, Points, MVPs, Games, Wins, Losses, Winrate, Streak, Peak Streak`\
 `queue_name`: *(Optional)* The queue name to view.
 
 <hr style="border:3px solid gray">
@@ -240,16 +268,6 @@ Initialize your MMR using your account.
 #### Usage: `/register [account]`
 #### Arguments:
 `account`: *(Required)* Account details.
-
-<hr style="border:3px solid gray">
-
-## Report Bug
-### `/reportbug`
-#### Description
-Report a bug.
-#### Usage: `/reportbug [message]`
-#### Arguments:
-`message`: *(Required)* The message to send in the report.
 
 <hr style="border:3px solid gray">
 
@@ -443,10 +461,8 @@ Substitute yourself for the given player.
 ### `/captains selection`
 #### Description
  Choose how captains will be picked.
-#### Usage: `/captains selection [type]`
-#### Arguments:
-`type`: *(Required)* The default captain selection option to use.\
-&emsp;&emsp;&emsp; Options: `Default Selection Menu, Random, Highest Rated, Lowest Rated, Vote For Captains, Balanced`
+#### Usage: `/captains selection`
+
 
 <hr style="border:3px solid gray">
 
@@ -835,26 +851,6 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## M V P
-### `/mvp reward`
-#### Description
- (Default: 5) MMR reward for MVPs.
-#### Usage: `/mvp reward [amount]`
-#### Arguments:
-`amount`: *(Required)* Amount of MMR to give as a reward.
-
----
-
-### `/mvp toggle`
-#### Description
- Enable/disable MVP votes for matches.
-#### Usage: `/mvp toggle [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Enable/disable MVPs.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
-<hr style="border:3px solid gray">
-
 ## MMR Change
 ### `/mmr ceiling`
 #### Description
@@ -935,6 +931,36 @@ Substitute yourself for the given player.
 #### Usage: `/mmr floor (mmr)`
 #### Arguments:
 `mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
+
+<hr style="border:3px solid gray">
+
+## MVPs 
+### `/mvp reward`
+#### Description
+ (Default: 5) MMR reward for MVPs.
+#### Usage: `/mvp reward [amount]`
+#### Arguments:
+`amount`: *(Required)* Amount of MMR to give as a reward.
+
+---
+
+### `/mvp toggle`
+#### Description
+ Enable/disable MVP votes for matches.
+#### Usage: `/mvp toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Enable/disable MVPs.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/mvp voterequired`
+#### Description
+ (Default: Disabled) Require players to vote for MVP before voting for winner.
+#### Usage: `/mvp voterequired [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If voting for MVP is required.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
@@ -1127,140 +1153,176 @@ Substitute yourself for the given player.
 ### `/add decaygraceperiod`
 #### Description
  Add a grace period for a user so they won't be affected by MMR decay.
-#### Usage: `/add decaygraceperiod [user] [time]`
+#### Usage: `/add decaygraceperiod [time] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`time`: *(Required)* Enter the desired grace period time in seconds.
+`time`: *(Required)* Enter the desired grace period time in seconds.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add game`
 #### Description
  Increment the players games, use a negative number to decrement.
-#### Usage: `/add game [user] (games)`
+#### Usage: `/add game (games) (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`games`: *(Optional)* Enter the desired games to add.
+`games`: *(Optional)* Enter the desired games to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add loss`
 #### Description
  Increment the players losses, use a negative number to decrement.
-#### Usage: `/add loss [user] (losses)`
+#### Usage: `/add loss (losses) (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`losses`: *(Optional)* Enter the desired losses to add.
+`losses`: *(Optional)* Enter the desired losses to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add mmr`
 #### Description
  Increment the players mmr, use a negative number to decrement.
-#### Usage: `/add mmr [user] (mmr)`
+#### Usage: `/add mmr (mmr) (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`mmr`: *(Optional)* -.
+`mmr`: *(Optional)* Enter the desired mmr to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
+### `/add mvps`
+#### Description
+ Increment the players MVPs, use a negative number to decrement.
+#### Usage: `/add mvps [mvps] (user) (role)`
+#### Arguments:
+`mvps`: *(Required)* Enter the desired MVPs to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add points`
 #### Description
  Increment the players points (not MMR), use a negative number to decrement.
-#### Usage: `/add points [user] [points]`
+#### Usage: `/add points [points] (user) (role)`
 #### Arguments:
-`user`: *(Required)* The desired user.\
-`points`: *(Required)* The new points amount.
+`points`: *(Required)* Enter the desired points to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add streak`
 #### Description
  Increment the players streak, use a negative number to decrement.
-#### Usage: `/add streak [user] (streak)`
+#### Usage: `/add streak (streak) (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`streak`: *(Optional)* Enter the desired streak to add.
+`streak`: *(Optional)* Enter the desired streak to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/add win`
 #### Description
  Increment the players wins, use a negative number to decrement.
-#### Usage: `/add win [user] (wins)`
+#### Usage: `/add win (wins) (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`wins`: *(Optional)* Enter the desired wins to add.
+`wins`: *(Optional)* Enter the desired wins to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set games`
 #### Description
  Sets the players games.
-#### Usage: `/set games [user] [games]`
+#### Usage: `/set games [games] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`games`: *(Required)* Enter the desired games.
+`games`: *(Required)* Enter the desired games.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set ign`
 #### Description
  Sets the players IGN (used in `/register` or `/ign`).
-#### Usage: `/set ign [user] [account]`
+#### Usage: `/set ign [account] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`account`: *(Required)* Enter the desired IGN, or 'none' to remove.
+`account`: *(Required)* Enter the desired IGN, or 'none' to remove.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set losses`
 #### Description
  Sets the players losses.
-#### Usage: `/set losses [user] [losses]`
+#### Usage: `/set losses [losses] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`losses`: *(Required)* Enter the desired losses.
+`losses`: *(Required)* Enter the desired losses.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set mmr`
 #### Description
  Sets the players mmr.
-#### Usage: `/set mmr [user] [mmr]`
+#### Usage: `/set mmr [mmr] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`mmr`: *(Required)* Enter the desired mmr.
+`mmr`: *(Required)* Enter the desired mmr.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
+### `/set mvps`
+#### Description
+ Sets the players MVPs.
+#### Usage: `/set mvps [mvps] (user) (role)`
+#### Arguments:
+`mvps`: *(Required)* The new MVPs amount.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set points`
 #### Description
  Sets the players points (not MMR).
-#### Usage: `/set points [user] [points]`
+#### Usage: `/set points [points] (user) (role)`
 #### Arguments:
-`user`: *(Required)* The desired user.\
-`points`: *(Required)* The new points amount.
+`points`: *(Required)* The new points amount.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set streak`
 #### Description
  Sets the players streak.
-#### Usage: `/set streak [user] [streak]`
+#### Usage: `/set streak [streak] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`streak`: *(Required)* Enter the desired streak.
+`streak`: *(Required)* Enter the desired streak.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 ---
 
 ### `/set wins`
 #### Description
  Sets the players wins.
-#### Usage: `/set wins [user] [wins]`
+#### Usage: `/set wins [wins] (user) (role)`
 #### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`wins`: *(Required)* Enter the desired wins.
+`wins`: *(Required)* Enter the desired wins.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
 
 <hr style="border:3px solid gray">
 
@@ -1660,9 +1722,9 @@ Substitute yourself for the given player.
 ### `/outcome cancel`
 #### Description
  Cancel the given game.
-#### Usage: `/outcome cancel (match_number)`
+#### Usage: `/outcome cancel [match_number]`
 #### Arguments:
-`match_number`: *(Optional)* The match number.
+`match_number`: *(Required)* The match number.
 
 ---
 
@@ -2118,6 +2180,9 @@ Substitute yourself for the given player.
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
+> 
+> Examples:
+> https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
 #### Description
  Add a new webhook to receive queue information.
