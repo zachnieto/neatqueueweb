@@ -21,11 +21,8 @@ const Leaderboard = () => {
     const [sortKey, setSortKey] = useState("MMR")
 
     useEffect(() => {
-        const getChannelStats = async () => {
-            await getGuildChannelStats(dispatch, guildID, channelID)
-        }
+        getGuildChannelStats(dispatch, guildID, channelID).catch(() => console.log("Error fetching leaderboard data"))
 
-        getChannelStats()
 
         // const interval = setInterval(() => {
         //     getChannelStats()

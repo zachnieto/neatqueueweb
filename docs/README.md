@@ -38,16 +38,6 @@ Start a vote to cancel the current match.
 
 <hr style="border:3px solid gray">
 
-## Captain Selection
-### `/captains role`
-#### Description
--.
-#### Usage: `/captains role (role)`
-#### Arguments:
-`role`: *(Optional)* -.
-
-<hr style="border:3px solid gray">
-
 ## Compare
 ### `/compare`
 #### Description
@@ -57,24 +47,6 @@ Compare your stats to the given player.
 `player2`: *(Required)* Enter the second user you want to compare to.\
 `player1`: *(Optional)* Enter the first user you want to compare to, or omit for yourself.\
 `hidden`: *(Optional)* If you want the stats to be hidden.
-
-<hr style="border:3px solid gray">
-
-## Cross Chat
-### `/crosschat join`
-#### Description
--.
-#### Usage: `/crosschat join (room_name)`
-#### Arguments:
-`room_name`: *(Optional)* -.
-
----
-
-### `/crosschat leave`
-#### Description
--.
-#### Usage: `/crosschat leave`
-
 
 <hr style="border:3px solid gray">
 
@@ -291,26 +263,6 @@ Set your role.
 
 <hr style="border:3px solid gray">
 
-## Spectator Role
-### `/spectatorrole add`
-#### Description
-"ADMIN ONLY: Specify a spectator role which can join any voice channel.".
-#### Usage: `/spectatorrole add [role] (can_speak)`
-#### Arguments:
-`role`: *(Required)* Spectator role.\
-`can_speak`: *(Optional)* Can this role speak in the channel?.
-
----
-
-### `/spectatorrole remove`
-#### Description
-"ADMIN ONLY: Remove's a spectator role.
-#### Usage: `/spectatorrole remove [role]`
-#### Arguments:
-`role`: *(Required)* Spectator role.
-
-<hr style="border:3px solid gray">
-
 ## Stats
 ### `/stats`
 #### Description
@@ -409,20 +361,10 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Balance By
-### `/balanceby`
+### `/balanceby roles`
 #### Description
- (Default: mmr) Sets how teams are balanced.
-#### Usage: `/balanceby [mode]`
-#### Arguments:
-`mode`: *(Required)* How teams are balanced.\
-&emsp;&emsp;&emsp; Options: `Roles, MMR`
-
----
-
-### `/balancebyroles`
-#### Description
- The order of role to skill from lowest to highest rated.
-#### Usage: `/balancebyroles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
+ Order of role to skill from lowest to highest rated, used if balance by ROLES, not MMR.
+#### Usage: `/balanceby roles (role1) (role2) (role3) (role4) (role5) (role6) (role7) (role8) (role9) (role10)`
 #### Arguments:
 `role1`: *(Optional)* The role to use in balancing.\
 `role2`: *(Optional)* The role to use in balancing.\
@@ -434,6 +376,16 @@ Substitute yourself for the given player.
 `role8`: *(Optional)* The role to use in balancing.\
 `role9`: *(Optional)* The role to use in balancing.\
 `role10`: *(Optional)* The role to use in balancing.
+
+---
+
+### `/balanceby type`
+#### Description
+ (Default: mmr) Sets how teams are balanced.
+#### Usage: `/balanceby type [mode]`
+#### Arguments:
+`mode`: *(Required)* How teams are balanced.\
+&emsp;&emsp;&emsp; Options: `Roles, MMR`
 
 <hr style="border:3px solid gray">
 
@@ -455,6 +407,15 @@ Substitute yourself for the given player.
 #### Arguments:
 `type`: *(Required)* The type of draft to use.\
 &emsp;&emsp;&emsp; Options: `Snake (1-2-2-2), Straight (1-1-1-1), Hybrid (1-1/2-1-1), Hybrid 2 (1-2-1-1), Vote`
+
+---
+
+### `/captains role`
+#### Description
+ Sets a role which gets priority for being captain.
+#### Usage: `/captains role (role)`
+#### Arguments:
+`role`: *(Optional)* The captain role.
 
 ---
 
@@ -543,6 +504,25 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Cross Chat
+### `/crosschat join`
+#### Description
+ Join/create a crosschat room, to share a text channel between servers.
+#### Usage: `/crosschat join (room_name) (censored)`
+#### Arguments:
+`room_name`: *(Optional)* Name of the room.\
+`censored`: *(Optional)* If crosschat text should be censored.
+
+---
+
+### `/crosschat leave`
+#### Description
+ Leave the crosschat.
+#### Usage: `/crosschat leave`
+
+
+<hr style="border:3px solid gray">
+
 ## Display Names
 ### `/anonymousqueue`
 #### Description
@@ -561,6 +541,34 @@ Substitute yourself for the given player.
 #### Arguments:
 `type`: *(Required)* The type of names to be used.\
 &emsp;&emsp;&emsp; Options: `Discord, Nicknames`
+
+<hr style="border:3px solid gray">
+
+## Dodge
+### `/dodge autoban`
+#### Description
+ Auto ban players who cause a match to cancel by not joining the voice channel.
+#### Usage: `/dodge autoban (duration)`
+#### Arguments:
+`duration`: *(Optional)* Duration of time in seconds for the ban to last, or 0 to reset.
+
+---
+
+### `/dodge mmrpenalty`
+#### Description
+ Deduct MMR from players who dodge the match.
+#### Usage: `/dodge mmrpenalty [amount]`
+#### Arguments:
+`amount`: *(Required)* Amount of MMR to deduct.
+
+---
+
+### `/dodge pointspenalty`
+#### Description
+ Deduct points from players who dodge the match.
+#### Usage: `/dodge pointspenalty [amount]`
+#### Arguments:
+`amount`: *(Required)* Amount of points to deduct.
 
 <hr style="border:3px solid gray">
 
@@ -1141,7 +1149,7 @@ Substitute yourself for the given player.
 
 ### `/staffchannel set`
 #### Description
- Sets the results channel to send queue history.".
+ Sets the results channel to send queue history.
 #### Usage: `/staffchannel set [channel] (serverwide)`
 #### Arguments:
 `channel`: *(Required)* The text channel to send queue history to.\
@@ -1359,6 +1367,33 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Predictions
+### `/points change loss`
+#### Description
+ (Default: 100) Set how many points players gain for a loss (not MMR).
+#### Usage: `/points change loss [value]`
+#### Arguments:
+`value`: *(Required)* Points for a loss.
+
+---
+
+### `/points change win`
+#### Description
+ (Default: 100) Set how many points players gain for a win (not MMR).
+#### Usage: `/points change win [value]`
+#### Arguments:
+`value`: *(Required)* Points for a win.
+
+---
+
+### `/points startingvalue`
+#### Description
+ (Default: 0) Set how many points players start with (not MMR).
+#### Usage: `/points startingvalue [value]`
+#### Arguments:
+`value`: *(Required)* Starting points value.
+
+---
+
 ### `/predictions channel`
 #### Description
  Specify the channel to show predictions.
@@ -1853,6 +1888,26 @@ Substitute yourself for the given player.
 #### Arguments:
 `players`: *(Optional)* The number of players to simulate.\
 `matches`: *(Optional)* The number of matches to simulate.
+
+<hr style="border:3px solid gray">
+
+## Spectator Role
+### `/spectatorrole add`
+#### Description
+ Specify a spectator role which can join any voice channel.
+#### Usage: `/spectatorrole add [role] (can_speak)`
+#### Arguments:
+`role`: *(Required)* Spectator role.\
+`can_speak`: *(Optional)* Can this role speak in the channel?.
+
+---
+
+### `/spectatorrole remove`
+#### Description
+ Remove's a spectator role.
+#### Usage: `/spectatorrole remove [role]`
+#### Arguments:
+`role`: *(Required)* Spectator role.
 
 <hr style="border:3px solid gray">
 
