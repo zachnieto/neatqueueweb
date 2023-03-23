@@ -286,6 +286,17 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 # Admin Commands
+## AnonymousQueue / Hiding Names
+### `/anonymousqueue`
+#### Description
+ Sets whether to hide the names of players in queue.
+#### Usage: `/anonymousqueue [mode]`
+#### Arguments:
+`mode`: *(Required)* Hide players names in queue.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+<hr style="border:3px solid gray">
+
 ## Anti Cheat
 ### `/anticheat channel`
 #### Description
@@ -523,27 +534,6 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Display Names
-### `/anonymousqueue`
-#### Description
- Sets whether to hide the names of players in queue.
-#### Usage: `/anonymousqueue [mode]`
-#### Arguments:
-`mode`: *(Required)* Hide players names in queue.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
----
-
-### `/nametype`
-#### Description
- Sets whether to use nicknames or discord names (Default: nick).
-#### Usage: `/nametype [type]`
-#### Arguments:
-`type`: *(Required)* The type of names to be used.\
-&emsp;&emsp;&emsp; Options: `Discord, Nicknames`
-
-<hr style="border:3px solid gray">
-
 ## Dodge
 ### `/dodge autoban`
 #### Description
@@ -633,12 +623,43 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Helpers
-### `/purge`
+## Heroes
+### `/hero add`
 #### Description
- Delete ALL messages in the channel except the queue message if it exists.
-#### Usage: `/purge`
+ Adds the given hero.
+#### Usage: `/hero add [hero_name]`
+#### Arguments:
+`hero_name`: *(Required)* -.
 
+---
+
+### `/hero bans`
+#### Description
+ Specify the number of hero bans or 0 to disable.
+#### Usage: `/hero bans [bans] (per_team)`
+#### Arguments:
+`bans`: *(Required)* Number of bans (per team if applicable).\
+`per_team`: *(Optional)* If the hero bans are team by team.
+
+---
+
+### `/hero remove`
+#### Description
+ Removes the given hero.
+#### Usage: `/hero remove [hero_name]`
+#### Arguments:
+`hero_name`: *(Required)* The hero to remove, or ALL to remove all.
+
+---
+
+### `/hero voting`
+#### Description
+ Specify who can vote for hero bans. Defaults to All if no captains.
+#### Usage: `/hero voting [per_team] [mode]`
+#### Arguments:
+`per_team`: *(Required)* If the map vote goes team by team. Team 1 picks first ban, Team 2 picks next, ...\
+`mode`: *(Required)* Who can vote.\
+&emsp;&emsp;&emsp; Options: `All, Captains`
 
 <hr style="border:3px solid gray">
 
@@ -734,6 +755,14 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Lobby Channel
+### `/lobbychannel pause`
+#### Description
+ Pause the current lobby channel countdown timer.
+#### Usage: `/lobbychannel pause`
+
+
+---
+
 ### `/lobbychannel pullall`
 #### Description
  Specify pulling players from all channels when their match starts.
@@ -769,6 +798,14 @@ Substitute yourself for the given player.
 #### Usage: `/lobbychannel timer [timer]`
 #### Arguments:
 `timer`: *(Required)* (Default: 300) Timeout length in seconds.
+
+---
+
+### `/lobbychannel unpause`
+#### Description
+ Unpause the current lobby channel countdown timer.
+#### Usage: `/lobbychannel unpause`
+
 
 <hr style="border:3px solid gray">
 
@@ -940,6 +977,15 @@ Substitute yourself for the given player.
 #### Arguments:
 `mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
 
+---
+
+### `/mmr requirement`
+#### Description
+ Sets the required mmr to enter this queue.
+#### Usage: `/mmr requirement (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the required mmr, or omit to disable.
+
 <hr style="border:3px solid gray">
 
 ## MVPs 
@@ -996,10 +1042,11 @@ Substitute yourself for the given player.
 ### `/player ban`
 #### Description
  Bans a player from queueing for the given duration of time.
-#### Usage: `/player ban [player] (duration)`
+#### Usage: `/player ban [player] (duration) (reason)`
 #### Arguments:
 `player`: *(Required)* The player to ban.\
-`duration`: *(Optional)* Duration of time in seconds for the ban to last.
+`duration`: *(Optional)* Duration of time in seconds for the ban to last.\
+`reason`: *(Optional)* -.
 
 ---
 
@@ -1135,6 +1182,25 @@ Substitute yourself for the given player.
 #### Arguments:
 `old_name`: *(Required)* Old queue name with stats.\
 `new_name`: *(Required)* New name to copy the stats to. Will overwrite any stats stored there.
+
+<hr style="border:3px solid gray">
+
+## Miscellaneous/Utility
+### `/misc nametype`
+#### Description
+ Sets whether to use nicknames or discord names (Default: nick).
+#### Usage: `/misc nametype [type]`
+#### Arguments:
+`type`: *(Required)* The type of names to be used.\
+&emsp;&emsp;&emsp; Options: `Discord, Nicknames`
+
+---
+
+### `/misc purge`
+#### Description
+ Delete ALL messages in the channel except the queue message if it exists.
+#### Usage: `/misc purge`
+
 
 <hr style="border:3px solid gray">
 
@@ -1506,18 +1572,19 @@ Substitute yourself for the given player.
 
 ---
 
-### `/autoroles ingame remove`
+### `/autoroles ingame`
 #### Description
- Removes an in-game role.
-#### Usage: `/autoroles ingame remove`
-
+ Assign a role to players who are in a match that is removed after.
+#### Usage: `/autoroles ingame (role)`
+#### Arguments:
+`role`: *(Optional)* Enter the role, or omit to remove.
 
 ---
 
-### `/autoroles ingame set`
+### `/autoroles inqueue`
 #### Description
- Assign a role to players who are in a matched that is removed after.
-#### Usage: `/autoroles ingame set (role)`
+ Assign a role to players who are in the queue.
+#### Usage: `/autoroles inqueue (role)`
 #### Arguments:
 `role`: *(Optional)* Enter the role, or omit to remove.
 
@@ -1676,15 +1743,6 @@ Substitute yourself for the given player.
 
 ---
 
-### `/mmrrequirement`
-#### Description
- Sets the required mmr to enter this queue.
-#### Usage: `/mmrrequirement [mmr]`
-#### Arguments:
-`mmr`: *(Required)* Enter the required mmr, or 0 to disable.
-
----
-
 ### `/rolerequirement add`
 #### Description
  Add a required role to enter this queue. Players can join if they have any of the roles.
@@ -1785,7 +1843,7 @@ Substitute yourself for the given player.
 ## Server Stats
 ### `/serverstats channelnames games`
 #### Description
- Show how many gamaes have been played by renaming the specified channel.
+ Show how many games have been played by renaming the specified channel.
 #### Usage: `/serverstats channelnames games (channel) (format)`
 #### Arguments:
 `channel`: *(Optional)* Channel to rename, or omit to remove.\
@@ -1820,6 +1878,16 @@ Substitute yourself for the given player.
 #### Arguments:
 `channel`: *(Optional)* Channel to rename, or omit to remove.\
 `format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "Players: $".
+
+---
+
+### `/serverstats channelnames users`
+#### Description
+ Show how many users are in the server by renaming the specified channel.
+#### Usage: `/serverstats channelnames users (channel) (format)`
+#### Arguments:
+`channel`: *(Optional)* Channel to rename, or omit to remove.\
+`format`: *(Optional)* Format for channel name. Indicate a $ for the replacement. Ex: "Users: $".
 
 ---
 
@@ -2043,10 +2111,12 @@ Substitute yourself for the given player.
 ### `/tempchannels`
 #### Description
  (Default: Enabled) Sets whether to create a temporary text channel for setup.
-#### Usage: `/tempchannels [mode]`
+#### Usage: `/tempchannels [mode] (channeltype)`
 #### Arguments:
 `mode`: *(Required)* If the temporary setup channels are enabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`channeltype`: *(Optional)* If the new channels should be text channels, or threads of this channel.\
+&emsp;&emsp;&emsp; Options: `Text Channels, Threads`
 
 <hr style="border:3px solid gray">
 
@@ -2201,7 +2271,7 @@ Substitute yourself for the given player.
 #### Usage: `/votingmenu add [title] [options] [key] [team_voting] (order) (button_colors) (show_numbers) (allow_random) (force_random) (number_of_votes)`
 #### Arguments:
 `title`: *(Required)* (Ex: Vote for the Region) The title for the vote.\
-`options`: *(Required)* (Ex: NA,EU) Comma separated list of options.\
+`options`: *(Required)* (Ex: NA,EU) Comma separated list of options. Ignored if options_variable exists with values.\
 `key`: *(Required)* (Ex: Region Name) The key for this vote for displaying the result after.\
 `team_voting`: *(Required)* Is the vote once per team, once for all teams, or for a specific team?.\
 `order`: *(Optional)* (Ex: 1) The order for this vote in regard to other votes. Votes will occur in ascending order.\

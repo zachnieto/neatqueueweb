@@ -2,19 +2,15 @@ import axios from "axios";
 
 const sessionController = (app) => {
 
-    app.post('/api/session/set/:name/', (req, res) => {
-        const name = req.params['name'];
-        const body = req.body.params[name]
-
-        req.session[name] = body;
-        res.send(req.session);
+    app.post('/api/session/set/', (req, res) => {
+        const data = req.body.params.data
+        
+        for (const prop in data) {
+            req.session[prop] = data[prop]
+        }
 
         console.log(req.session)
-    });
-
-    app.get('/api/session/get/:name/', (req, res) => {
-        const value = req.session[req.params['name']];
-        res.send(value);
+        res.send(req.session);
     });
 
     app.get('/api/session/get/', async (req, res) => {
@@ -65,11 +61,13 @@ const sessionController = (app) => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-
+        
         await axios.post(`https://discord.com/api/oauth2/token`, params, config).catch(error => {
             req.session.auth = undefined;
+            console.log(error)
         }).then((resp) => {
             req.session.auth = resp?.data
+            console.log(resp?.data)
         })
         res.send(req.session.auth);
     });
