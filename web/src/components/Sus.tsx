@@ -20,7 +20,8 @@ const Sus = () => {
   };
 
   useEffect(() => {
-    delay((Math.random() * 10 + 5) * 1000 * 60).then(() => loop());
+    // delay((Math.random() * 10 + 5) * 1000 * 60).then(() => loop());
+    loop()
   }, []);
 
   return (
