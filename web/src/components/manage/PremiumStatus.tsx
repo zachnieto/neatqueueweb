@@ -1,0 +1,155 @@
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import globalState, { PremiumData } from "../../State";
+import ChangePlans from "./ChangePlans";
+import Extend from "./Extend";
+import Modal from "../Modal";
+import { purchasePremium } from "../../services/neatqueue-service";
+import { useHookstate } from "@hookstate/core";
+
+const PremiumStatus = ({
+  premiumData,
+  guildID,
+  setError,
+  setSuccess,
+}: {
+  premiumData: PremiumData;
+  guildID: string;
+  setError: Dispatch<SetStateAction<string>>;
+  setSuccess: Dispatch<SetStateAction<string>>;
+}) => {
+  const state = useHookstate(globalState);
+  const { auth } = state.get();
+  const [planModalOpen, setPlanModalOpen] = useState(false);
+  const [extendModalOpen, setExtendModalOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }>();
+
+  useEffect(() => {
+    const interval = setInterval(() => setTimeLeft(calculateTimeLeft()), 60);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [premiumData]);
+
+  const calculateTimeLeft = () => {
+    let difference;
+    if (premiumData.premium)
+      difference =
+        new Date(premiumData.premium.until * 1000).getTime() - Date.now();
+    else difference = 0;
+
+    let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return timeLeft;
+  };
+
+  const handleChangePlans = async (plan: any) => {
+    if (!guildID) return;
+
+    try {
+      const prem = await purchasePremium(guildID, auth, plan);
+      console.log(prem);
+      setSuccess(
+        `30 days have been added to your server's premium timer at the cost of ${
+          prem.plans[prem.premium.plan].price
+        } credits`
+      );
+    } catch (e: any) {
+      setError(e.response.data.detail);
+      setSuccess("");
+      return;
+    }
+
+    setTimeLeft(calculateTimeLeft());
+  };
+
+  const handleExtend = async () => {
+    await handleChangePlans(premiumData.premium.plan);
+  };
+
+  return (
+    <>
+      <div className="col-span-4 bg-stone-900 rounded shadow-md p-5">
+        {premiumData.premium && timeLeft ? (
+          <div className="grid place-items-center">
+            <h1 className="text-3xl">Premium</h1>
+            <h1 className="text-2xl text-green-500">
+              {premiumData.premium.plan}
+            </h1>
+            <h3>
+              For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{" "}
+              {timeLeft.minutes} Minutes
+            </h3>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setPlanModalOpen(true)}
+                className="btn-primary"
+              >
+                Change Plan
+              </button>
+              <button
+                onClick={() => setExtendModalOpen(true)}
+                className="btn-primary"
+              >
+                Extend
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="grid place-items-center">
+            <h1 className="text-3xl">Premium</h1>
+            <h1 className="text-2xl">❌</h1>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setPlanModalOpen(true)}
+                className="btn-primary"
+              >
+                Change Plan
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <Modal
+        onSubmit={handleChangePlans}
+        visible={planModalOpen}
+        setVisibility={setPlanModalOpen}
+        title="Change Plans"
+        submitText="Confirm"
+        component={
+          <ChangePlans
+            plans={[
+              { name: "Basic", price: "5", description: "Blah Blah" },
+              { name: "Professional", price: "20", description: "Blah Blah" },
+              { name: "Enterprise", price: "30", description: "Blah Blah" },
+            ]}
+          />
+        }
+      />
+      <Modal
+        onSubmit={handleExtend}
+        visible={extendModalOpen}
+        setVisibility={setExtendModalOpen}
+        title="Extend Plan?"
+        submitText="Confirm"
+        component={<Extend />}
+      />
+    </>
+  );
+};
+
+export default PremiumStatus;

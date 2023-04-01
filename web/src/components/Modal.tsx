@@ -15,7 +15,6 @@ export default function Modal({
   component?: ReactElement;
   visible: boolean;
 }) {
-
   if (!visible) return <></>;
 
   return (
@@ -38,18 +37,18 @@ export default function Modal({
                 Close
               </button>
 
-              {onSubmit && 
-              <button
-                className="bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium hover:translate-y-1 transition-all"
-                type="button"
-                onClick={() => {
-                  setVisibility(false);
-                  onSubmit();
-                }}
-              >
-                {submitText}
-              </button> 
-              }
+              {onSubmit && (
+                <button
+                  className="bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium hover:translate-y-1 transition-all"
+                  type="button"
+                  onClick={() => {
+                    setVisibility(false);
+                    onSubmit();
+                  }}
+                >
+                  {submitText}
+                </button>
+              )}
             </div>
           </div>
         </div>

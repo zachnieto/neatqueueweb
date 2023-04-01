@@ -1,25 +1,31 @@
 import { useNavigate } from "react-router-dom";
 import { Guild } from "../State";
 
-
-const GuildCard = ({guild} : {
-    guild: Guild
-}) => {
-
-    
+const GuildCard = ({ guild }: { guild: Guild }) => {
   const navigate = useNavigate();
 
-
-return (
+  return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-black/25 text-white text-center">
-    <img className="w-1/2 mx-auto pt-5" src={guild.icon !== null ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : 'https://i.imgur.com/2X6ZRmm.png'} alt="Server icon" />
-    <div className="px-6 py-4">
+      <img
+        className="w-1/2 mx-auto pt-5"
+        src={
+          guild.icon !== null
+            ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
+            : "https://i.imgur.com/2X6ZRmm.png"
+        }
+        alt="Server icon"
+      />
+      <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{guild.name}</div>
-        <button className="bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium" onClick={() => navigate(`/manage/${guild.id}`)}>Manage</button>
+        <button
+          className="btn-primary"
+          onClick={() => navigate(`/manage/${guild.id}`)}
+        >
+          Manage
+        </button>
+      </div>
     </div>
-
-    </div>
-)
-}
+  );
+};
 
 export default GuildCard;

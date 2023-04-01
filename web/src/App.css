@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap");
 body {
   margin: 0;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(29, 29, 29);
@@ -15,14 +15,13 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-
 #tsparticles {
   position: absolute !important;
   z-index: -1 !important;
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -53,4 +52,25 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 15px;
   border-top: 5px solid #000;
   border-left: 5px solid #000;
+}
+
+.btn-primary {
+  @apply bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium hover:translate-y-1 transition-all;
+}
+
+.off-screen-left {
+  left: -25vw;
+}
+
+.off-screen-right {
+  left: 125vw;
+}
+
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.slow-spin {
+  animation: spin 5s linear infinite;
 }
