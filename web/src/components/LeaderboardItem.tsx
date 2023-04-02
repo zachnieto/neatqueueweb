@@ -26,12 +26,15 @@ const LeaderboardItem = ({
       );
     }
 
+    console.log(rank)
     if (rank === 1) {
       setColor("border-amber-500 border-8");
     } else if (rank === 2) {
       setColor("border-gray-500 border-8");
     } else if (rank === 3) {
       setColor("border-orange-800 border-8");
+    } else {
+      setColor("")
     }
   }, [rank, player, sortKey]);
 
