@@ -14,17 +14,21 @@ const ShortURL = () => {
     ProCity: "/leaderboard/1061301529597976700/1061303977460908173",
   };
 
+  const updateFromString = (str: string) => {
+    const args = str.split("/");
+    setGuildId(args[2]);
+    setChannelId(args[3]);
+  }
+
   useEffect(() => {
     if (!shortUrl) return;
 
     if (shortUrl in commonMaps) {
-      navigate(commonMaps[shortUrl as keyof typeof commonMaps]);
+      updateFromString(commonMaps[shortUrl as keyof typeof commonMaps]);
     } else {
       getLongUrl(shortUrl).then((res) => {
         if (res !== null) {
-          const args = res.split("/");
-          setGuildId(args[2]);
-          setChannelId(args[3]);
+          updateFromString(res)
         }
       });
     }
