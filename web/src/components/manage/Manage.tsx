@@ -6,6 +6,7 @@ import globalState, { Guild, PremiumData } from "../../State";
 import Credits from "./Credits";
 import Instance from "./Instance";
 import PremiumStatus from "./PremiumStatus";
+import Alert from "../Alert";
 
 const Manage = () => {
   const { guildID } = useParams();
@@ -26,30 +27,24 @@ const Manage = () => {
     console.log(premiumData);
   }, [state.guilds]);
 
-  // if (!guild) {
-  //     return <></>
-  // }
+  if (!guild) {
+    return <></>;
+  }
 
   return (
     <>
       <div className="text-center mb-5">
-        {/* <h1 className="text-5xl">{guild.name}</h1>   */}
-        <h1 className="text-5xl">NeatQueue Hub</h1>
-        {error && (
-          <h1 className="text-3xl bg-red-600 rounded p-1 mx-4">{error}</h1>
-        )}
-        {success && (
-          <h1 className="text-3xl bg-green-500 rounded p-1 mx-4">{success}</h1>
-        )}
+        <h1 className="text-5xl">{guild.name}</h1>
+        <Alert value={success} setValue={setSuccess} color="bg-green-600" />
+        <Alert value={error} setValue={setError} color="bg-red-600" />
       </div>
 
       <div className="grid grid-cols-12 mx-32 gap-8">
-        {/* {premiumData && <Premium premiumData={premiumData} />} */}
-
         {premiumData && guildID && (
           <>
             <PremiumStatus
               premiumData={premiumData}
+              setPremiumData={setPremiumData}
               guildID={guildID}
               setError={setError}
               setSuccess={setSuccess}

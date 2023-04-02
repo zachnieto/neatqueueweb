@@ -10,7 +10,7 @@ const PurchaseCredits = ({
 }) => {
   const [purchaseAmountCredits, setPurchaseAmountCredits] = useState<number>(5);
 
-  const CREDIT_MULTIPLIER = 1.07;
+  const CREDIT_MULTIPLIER = 1.08;
 
   const roundTo2Decimals = (num: number) => {
     return Math.round((num + Number.EPSILON) * 100) / 100;
@@ -34,10 +34,10 @@ const PurchaseCredits = ({
         <CurrencyInput
           className="text-center rounded w-20 text-black px-2 mb-5"
           name="input-name"
-          placeholder="Please enter a number"
           value={purchaseAmountDollars}
           decimalsLimit={2}
           prefix="$"
+          // @ts-ignore
           onValueChange={(val: number, name: string) => {
             setPurchaseAmountDollars(val);
             setPurchaseAmountCredits(

@@ -10,22 +10,41 @@ import { classNames } from "../util/tailwind";
 const navigation = [
   { name: "Home", href: "/", current: true },
   {
-    name: "Documentation",
-    href: "https://docs.neatqueue.com",
-    current: false,
-    requiresLogin: false,
-  },
-  {
     name: "Invite",
     href: import.meta.env.VITE_DISCORD_INVITE,
     current: false,
     requiresLogin: false,
   },
   {
+    name: "Documentation",
+    href: "https://docs.neatqueue.com",
+    current: false,
+    requiresLogin: false,
+  },
+  {
+    name: "API",
+    href: "https://api.neatqueue.com/docs",
+    current: false,
+    requiresLogin: false,
+  },
+
+  {
     name: "Dashboard",
     href: "/dashboard",
     current: false,
     requiresLogin: true,
+  },
+  {
+    name: "Status",
+    href: "/status",
+    current: false,
+    requiresLogin: false,
+  },
+  {
+    name: "Support Server",
+    href: "https://discord.com/invite/2Y4YnV54b5",
+    current: false,
+    requiresLogin: false,
   },
 ];
 

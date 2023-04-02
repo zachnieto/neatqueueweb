@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { classNames } from "../../util/tailwind";
+import { Plans, PremiumData } from "../../State";
 
-const ChangePlans = ({ plans }: { plans: any[] }) => {
-  const [selectedPlan, setSelectedPlan] = useState<any>();
-
+const ChangePlans = ({
+  plans,
+  selectedPlan,
+  setSelectedPlan,
+}: {
+  plans: Plans;
+  selectedPlan: string;
+  setSelectedPlan: Dispatch<SetStateAction<string>>;
+}) => {
   return (
     <div className="flex">
-      {plans.map((plan: any) => (
-        <div className="m-1 max-w-sm rounded overflow-hidden shadow-lg bg-black/25 text-white text-center">
+      {Object.keys(plans).map((plan: string, i: number) => (
+        <div
+          key={i}
+          className="m-1 max-w-sm rounded overflow-hidden shadow-lg bg-black/25 text-white text-center"
+        >
           <div className="px-6 py-4">
-            <div className="font-bold text-2xl mb-2">{plan.name}</div>
-            <div className="font-bold text-xl mb-2">${plan.price}</div>
-            <div className="font-bold text-xl mb-2">{plan.description}</div>
+            <div className="font-bold text-2xl mb-2">{plan}</div>
+            <div className="font-bold text-xl mb-2">${plans[plan].price}</div>
+            <div className="font-bold text-xl mb-2">{plans[plan].details}</div>
             <button
               onClick={() => setSelectedPlan(plan)}
               className={classNames(
                 "btn-primary",
-                selectedPlan !== undefined && selectedPlan.name !== plan.name
+                selectedPlan !== undefined && selectedPlan !== plan
                   ? "opacity-50 hover:opacity-100"
                   : ""
               )}

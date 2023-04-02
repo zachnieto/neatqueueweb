@@ -8,14 +8,16 @@ import { useHookstate } from "@hookstate/core";
 
 const PremiumStatus = ({
   premiumData,
+  setPremiumData,
   guildID,
   setError,
   setSuccess,
 }: {
   premiumData: PremiumData;
+  setPremiumData: Dispatch<SetStateAction<PremiumData | undefined>>;
   guildID: string;
-  setError: Dispatch<SetStateAction<string>>;
-  setSuccess: Dispatch<SetStateAction<string>>;
+  setError: (s: string) => void;
+  setSuccess: (s: string) => void;
 }) => {
   const state = useHookstate(globalState);
   const { auth } = state.get();
@@ -27,6 +29,9 @@ const PremiumStatus = ({
     minutes: number;
     seconds: number;
   }>();
+  const [selectedPlan, setSelectedPlan] = useState<string>(
+    premiumData.premium?.plan || ""
+  );
 
   useEffect(() => {
     const interval = setInterval(() => setTimeLeft(calculateTimeLeft()), 60);
@@ -56,17 +61,18 @@ const PremiumStatus = ({
     return timeLeft;
   };
 
-  const handleChangePlans = async (plan: any) => {
+  const handlePurchase = async () => {
     if (!guildID) return;
 
     try {
-      const prem = await purchasePremium(guildID, auth, plan);
+      const prem = await purchasePremium(guildID, auth, selectedPlan);
       console.log(prem);
       setSuccess(
         `30 days have been added to your server's premium timer at the cost of ${
           prem.plans[prem.premium.plan].price
         } credits`
       );
+      setPremiumData(prem);
     } catch (e: any) {
       setError(e.response.data.detail);
       setSuccess("");
@@ -76,8 +82,9 @@ const PremiumStatus = ({
     setTimeLeft(calculateTimeLeft());
   };
 
-  const handleExtend = async () => {
-    await handleChangePlans(premiumData.premium.plan);
+  const handleChangePlans = async () => {
+    if (selectedPlan === premiumData.premium?.plan) return;
+    await handlePurchase();
   };
 
   return (
@@ -132,22 +139,24 @@ const PremiumStatus = ({
         submitText="Confirm"
         component={
           <ChangePlans
-            plans={[
-              { name: "Basic", price: "5", description: "Blah Blah" },
-              { name: "Professional", price: "20", description: "Blah Blah" },
-              { name: "Enterprise", price: "30", description: "Blah Blah" },
-            ]}
+            selectedPlan={selectedPlan}
+            setSelectedPlan={setSelectedPlan}
+            plans={premiumData.plans}
           />
         }
       />
-      <Modal
-        onSubmit={handleExtend}
-        visible={extendModalOpen}
-        setVisibility={setExtendModalOpen}
-        title="Extend Plan?"
-        submitText="Confirm"
-        component={<Extend />}
-      />
+      {premiumData.premium && (
+        <Modal
+          onSubmit={handlePurchase}
+          visible={extendModalOpen}
+          setVisibility={setExtendModalOpen}
+          title="Extend Plan?"
+          submitText="Confirm"
+          component={
+            <Extend plan={premiumData.plans[premiumData.premium.plan]} />
+          }
+        />
+      )}
     </>
   );
 };

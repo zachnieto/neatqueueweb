@@ -31,19 +31,30 @@ export type Guild = {
 
 export type Auth = { token_type: string; access_token: string } | undefined;
 
-export type PremiumData = {
-  premium: {
-    until: number;
-    plan: string;
-  };
-  credits: number;
-  plans: any;
+export type Plan = {
+  price: number;
+  details: string;
+  max_players: number;
+  max_queues: number;
+  daily_games: number;
 };
 
-export type Product = {
-  name: string;
-  price: number;
-  default_price: number;
+export type Plans = { [key: string]: Plan };
+
+export type PremiumData = {
+  premium:
+    | {
+        until: number;
+        plan: string;
+      }
+    | undefined;
+  credits: number;
+  plans: Plans;
+};
+
+export type BotStatus = {
+  online: boolean;
+  shards: number;
 };
 
 export const defaultState: session = {

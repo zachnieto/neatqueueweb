@@ -23,12 +23,21 @@ type LooseObject =
     }
   | undefined;
 
-const Leaderboard = () => {
-  const { guildID, channelID } = useParams();
+const Leaderboard = ({
+  passedGuildId = "",
+  passedChannelId = "",
+}: {
+  passedGuildId?: string;
+  passedChannelId?: string;
+}) => {
+  let { guildID, channelID } = useParams();
 
   const [month, setMonth] = useState("alltime");
   const [sortKey, setSortKey] = useState("MMR");
   const [stats, setStats] = useState<LooseObject>(undefined);
+
+  if (guildID === undefined) guildID = passedGuildId;
+  if (channelID === undefined) channelID = passedChannelId;
 
   useEffect(() => {
     if (guildID && channelID)
@@ -54,7 +63,7 @@ const Leaderboard = () => {
   return (
     <div className="grid grid-cols-10 mx-auto max-w-7xl">
       <div className="col-span-1">
-        <ul className="grid grid-cols-1 text-center">
+        <ul className="grid-cols-1 text-center md:grid hidden">
           {stats &&
             Object.keys(stats).length > 1 &&
             Object.keys(stats).map((m) => (
@@ -66,12 +75,12 @@ const Leaderboard = () => {
                   "px-2 py-1 shadow-xl text-lg mb-1 mr-3 cursor-pointer"
                 )}
               >
-                {/* @ts-ignore */}
                 <h1>
                   {m === "alltime"
                     ? "All Time"
                     : new Date(m + "-15").toLocaleDateString(
                         "en-US",
+                        /* @ts-ignore */
                         dateOptions
                       )}
                 </h1>
@@ -112,7 +121,7 @@ const Leaderboard = () => {
           stats[month]
             .sort(
               (a: LooseObject, b: LooseObject) =>
-                b.data[sortKeys[sortKey]] - a.data[sortKeys[sortKey]]
+                b?.data[sortKeys[sortKey]] - a?.data[sortKeys[sortKey]]
             )
             .map((player: any, idx: number) => (
               <LeaderboardItem

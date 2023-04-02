@@ -35,7 +35,7 @@ const paymentController = (app) => {
           {
             currency: "usd",
             amount: body.price * 100,
-            name: `${Math.pow(body.price, 1.07).toFixed(2)} NeatQueue Credits`,
+            name: `${Math.pow(body.price, 1.08).toFixed(2)} NeatQueue Credits`,
             quantity: 1,
           },
         ],

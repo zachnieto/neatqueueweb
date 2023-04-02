@@ -15,7 +15,7 @@ env.env();
 app.use(
   cors({
     credentials: true,
-    origin: process.env.REACT_APP,
+    origin: process.env.VITE,
   })
 );
 app.use(express.json());

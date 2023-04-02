@@ -8,9 +8,11 @@ import Leaderboard from "./components/Leaderboard";
 import Manage from "./components/manage/Manage";
 import Nav from "./components/Nav";
 import CustomParticles from "./components/Particles";
-import Sus from "./components/Sus";
 import { getSession } from "./services/server-service";
 import globalState, { loadingState } from "./State";
+import ShortURL from "./components/ShortURL";
+import Bracket from "./components/Bracket";
+import Status from "./components/Status";
 
 function App() {
   const state = useHookstate(globalState);
@@ -36,9 +38,10 @@ function App() {
             path="/leaderboard/:guildID/:channelID"
             element={<Leaderboard />}
           />
-          {/* <Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>
-        <Route path="/bracket/:guildID/:tournyName" element={<Bracket/>}/>
-        <Route path="/lb/:shortUrl" element={<ShortUrl/>}/> */}
+          {/*<Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>*/}
+          <Route path="/bracket/:guildID/:tournyName" element={<Bracket />} />
+          <Route path="/lb/:shortUrl" element={<ShortURL />} />
+          <Route path="/status" element={<Status />} />
         </Routes>
       </>
     </div>

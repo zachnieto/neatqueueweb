@@ -1,10 +1,10 @@
 import axios from "axios";
-import globalState, { Auth } from "../State";
+import globalState, { Auth, BotStatus } from "../State";
 
 const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 
 export const getStats = async () => {
-  const resp = await axios.get(`${API_BASE}/api/stats`);
+  const resp = await axios.get(`${API_BASE}/api/stats`, {timeout: 2000});
   console.log(resp.data);
   globalState.stats.set(resp.data);
 };
@@ -14,7 +14,7 @@ export const getGuildChannelStats = async (
   channelID: string
 ) => {
   const resp = await axios.get(
-    `${API_BASE}/api2/channelstats/${guildID}/${channelID}`
+    `${API_BASE}/api/leaderboard/${guildID}/${channelID}`
   );
   return resp.data;
 };
@@ -59,12 +59,20 @@ export const purchasePremium = async (
   return resp.data;
 };
 
-// export async function getBracket(guildID, tournyName) {
-//     const resp = await axios.get(`${API_BASE}/tournament/${guildID}/${tournyName}`);
-//     return resp.data
-// }
+export async function getBracket(guildID: string, tournyName: string) {
+  const resp = await axios.get(
+    `${API_BASE}/api/tournament/${guildID}/${tournyName}`
+  );
+  return resp.data;
+}
 
-// export async function getLongUrl(shortUrl) {
-//     const resp = await axios.get(`${API_BASE}/api/longurl/${shortUrl}`);
-//     return resp.data
-// }
+export async function getLongUrl(shortUrl: string) {
+  const resp = await axios.get(`${API_BASE}/api/longurl/${shortUrl}`);
+  return resp.data;
+}
+
+export async function getStatus() {
+  const resp = await axios.get(`${API_BASE}/api/status`, {timeout: 2000});
+  const data: BotStatus = resp.data;
+  return data;
+}
