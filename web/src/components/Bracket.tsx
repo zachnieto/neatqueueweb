@@ -31,15 +31,20 @@ const Bracket = () => {
   // @ts-ignore
   if (!bracketData || !window.bracketsViewer) return <></>;
 
-  // @ts-ignore
-  window.bracketsViewer.render({
-    stages: bracketData.stage,
-    matches: bracketData.match,
-    matchGames: bracketData.match_game,
-    participants: bracketData.participant,
-  });
 
-  return <div className="brackets-viewer"></div>;
+  return <div className="brackets-viewer">
+
+    {
+      // @ts-ignore
+      window.bracketsViewer.render({
+        stages: bracketData.stage,
+        matches: bracketData.match,
+        matchGames: bracketData.match_game,
+        participants: bracketData.participant,
+      })
+    }
+
+  </div>;
 };
 
 export default Bracket;
