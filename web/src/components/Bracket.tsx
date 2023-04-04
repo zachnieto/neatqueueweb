@@ -5,6 +5,8 @@ import { getBracket } from "../services/neatqueue-service";
 const Bracket = () => {
   const { guildID, tournyName } = useParams();
   const [bracketData, setBracketData] = useState<any>();
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const [rendered, setRendered] = useState<boolean>(false);
 
   useEffect(() => {
     if (!guildID || !tournyName) return;
@@ -14,6 +16,9 @@ const Bracket = () => {
     script.src =
       "https://cdn.jsdelivr.net/npm/brackets-viewer/dist/brackets-viewer.min.js";
     script.async = true;
+    script.onload = () => {
+      setLoaded(true);
+    };
     document.body.appendChild(script);
 
     const link = document.createElement("link");
@@ -28,13 +33,15 @@ const Bracket = () => {
     };
   }, []);
 
-  // @ts-ignore
-  if (!bracketData || !window.bracketsViewer) return <></>;
 
+  useEffect(() => {
+    if (!bracketData || !loaded || rendered) return;
 
-  return <div className="brackets-viewer">
+    console.log("Loaded bracket")
 
-    {
+    // @ts-ignore
+    if (window.bracketsViewer) {
+      setRendered(true);
       // @ts-ignore
       window.bracketsViewer.render({
         stages: bracketData.stage,
@@ -43,8 +50,10 @@ const Bracket = () => {
         participants: bracketData.participant,
       })
     }
+  }, [bracketData, loaded, rendered])
 
-  </div>;
+
+  return <div className="brackets-viewer"></div>;
 };
 
 export default Bracket;
