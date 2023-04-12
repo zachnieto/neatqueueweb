@@ -24,7 +24,7 @@ const Privacy = () => {
         <li>Command usage</li>
         <li>
           Message Content (Only in NeatQueue match channels if enabled by
-          server)
+          server, deleted after 30 days)
         </li>
       </ul>
 
