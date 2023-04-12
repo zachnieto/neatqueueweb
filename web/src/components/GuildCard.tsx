@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Guild } from "../State";
+import { Guild } from "../types";
 
 const GuildCard = ({ guild }: { guild: Guild }) => {
   const navigate = useNavigate();

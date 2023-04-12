@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { classNames } from "../../util/tailwind";
-import { Plans, PremiumData } from "../../State";
+import { Plans, PremiumData } from "../../types";
 
 const ChangePlans = ({
   plans,

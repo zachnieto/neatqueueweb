@@ -18,7 +18,7 @@ const ShortURL = () => {
     const args = str.split("/");
     setGuildId(args[2]);
     setChannelId(args[3]);
-  }
+  };
 
   useEffect(() => {
     if (!shortUrl) return;
@@ -28,7 +28,7 @@ const ShortURL = () => {
     } else {
       getLongUrl(shortUrl).then((res) => {
         if (res !== null) {
-          updateFromString(res)
+          updateFromString(res);
         }
       });
     }

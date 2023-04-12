@@ -1,8 +1,8 @@
 .markdown-section h1 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 .markdown-section h2 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 /*:root {*/
@@ -12,9 +12,9 @@
 /*}*/
 
 code {
-    background-color: #303030;
+  background-color: #303030;
 }
 
 .content h2 {
-    border: none;
+  border: none;
 }

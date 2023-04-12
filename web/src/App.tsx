@@ -13,6 +13,8 @@ import globalState, { loadingState } from "./State";
 import ShortURL from "./components/ShortURL";
 import Bracket from "./components/Bracket";
 import Status from "./components/Status";
+import Privacy from "./components/Privacy";
+import Footer from "./components/Footer";
 
 function App() {
   const state = useHookstate(globalState);
@@ -42,7 +44,10 @@ function App() {
           <Route path="/bracket/:guildID/:tournyName" element={<Bracket />} />
           <Route path="/lb/:shortUrl" element={<ShortURL />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
+
+        <Footer />
       </>
     </div>
   );

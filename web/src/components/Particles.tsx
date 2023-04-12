@@ -1,4 +1,5 @@
 import Particles from "react-tsparticles";
+import React from "react";
 
 const CustomParticles = ({
   color = "#1c0037",

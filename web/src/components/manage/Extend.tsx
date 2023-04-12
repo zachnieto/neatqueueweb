@@ -1,4 +1,4 @@
-import { Plan } from "../../State";
+import { Plan } from "../../types";
 
 const Extend = ({ plan }: { plan: Plan }) => {
   return (

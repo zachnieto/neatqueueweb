@@ -33,11 +33,10 @@ const Bracket = () => {
     };
   }, []);
 
-
   useEffect(() => {
     if (!bracketData || !loaded || rendered) return;
 
-    console.log("Loaded bracket")
+    console.log("Loaded bracket");
 
     // @ts-ignore
     if (window.bracketsViewer) {
@@ -48,12 +47,11 @@ const Bracket = () => {
         matches: bracketData.match,
         matchGames: bracketData.match_game,
         participants: bracketData.participant,
-      })
+      });
     }
-  }, [bracketData, loaded, rendered])
+  }, [bracketData, loaded, rendered]);
 
-
-  return <div className="brackets-viewer"></div>;
+  return <div className="brackets-viewer h-screen"></div>;
 };
 
 export default Bracket;

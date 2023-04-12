@@ -1,11 +1,11 @@
 import { useHookstate } from "@hookstate/core";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { getStats } from "../services/neatqueue-service";
 import globalState from "../State";
 import { LoadingBar } from "./Loading";
 import CustomParticles from "./Particles";
 import Sus from "./Sus";
-import {classNames} from "../util/tailwind";
+import { classNames } from "../util/tailwind";
 
 const Home = () => {
   const global = useHookstate(globalState);
@@ -20,7 +20,7 @@ const Home = () => {
     <div>
       <CustomParticles />
       <Sus />
-      <div className="h-[90vh] flex justify-center items-center text-gray-200">
+      <div className="h-screen flex justify-center items-center text-gray-200">
         <div className="">
           <h1 className="md:text-9xl sm:text-8xl text-7xl">NeatQueue</h1>
           <div className="grid grid-cols-4">
@@ -53,10 +53,21 @@ const Home = () => {
                   global.stats.games.get()
                 )}
               </h1>
-          </div>
+            </div>
             <div className="col-span-1" />
             <div className="col-span-1 text-center">
-              {!loading && <h1 className={classNames("text-xl my-auto bg-black/50 mx-8 rounded-xl", global.stats.servers.get() === -1 ? "text-red-600" : "text-green-600")}>{global.stats.servers.get() === -1 ? "Offline" : "Online"}</h1>}
+              {!loading && (
+                <h1
+                  className={classNames(
+                    "text-xl my-auto bg-black/50 mx-8 rounded-xl",
+                    global.stats.servers.get() === -1
+                      ? "text-red-600"
+                      : "text-green-600"
+                  )}
+                >
+                  {global.stats.servers.get() === -1 ? "Offline" : "Online"}
+                </h1>
+              )}
             </div>
           </div>
         </div>

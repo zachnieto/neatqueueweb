@@ -1,6 +1,7 @@
 import axios from "axios";
-import globalState, { Auth, Guild } from "../State";
+import globalState from "../State";
 import { setSession } from "./server-service";
+import { Auth, Guild } from "../types";
 
 const API_BASE = "https://discord.com/api";
 

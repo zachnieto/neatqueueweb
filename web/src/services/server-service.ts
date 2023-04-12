@@ -1,6 +1,7 @@
 import axios from "axios";
-import globalState, { defaultState, session } from "../State";
+import globalState, { defaultState } from "../State";
 import { discordGetUser } from "./discord-service";
+import { Session } from "../types";
 
 const API_BASE = import.meta.env.VITE_SERVER;
 const api = axios.create({
@@ -8,7 +9,7 @@ const api = axios.create({
 });
 
 export const setSession = async (data: object) => {
-  const resp: session = await api.post(`${API_BASE}api/session/set/`, {
+  const resp: Session = await api.post(`${API_BASE}api/session/set/`, {
     params: {
       data,
     },
@@ -17,7 +18,7 @@ export const setSession = async (data: object) => {
 
 export const getSession = async () => {
   const resp = await api.get(`${API_BASE}api/session/get`);
-  const data: session = resp.data;
+  const data: Session = resp.data;
   globalState.auth.set(data.auth);
   globalState.user.set(data.user);
   globalState.guilds.set(data.guilds);

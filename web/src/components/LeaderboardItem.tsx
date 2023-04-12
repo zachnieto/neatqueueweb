@@ -26,7 +26,7 @@ const LeaderboardItem = ({
       );
     }
 
-    console.log(rank)
+    console.log(rank);
     if (rank === 1) {
       setColor("border-amber-500 border-8");
     } else if (rank === 2) {
@@ -34,7 +34,7 @@ const LeaderboardItem = ({
     } else if (rank === 3) {
       setColor("border-orange-800 border-8");
     } else {
-      setColor("")
+      setColor("");
     }
   }, [rank, player, sortKey]);
 

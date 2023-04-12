@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import globalState, { PremiumData } from "../../State";
+import globalState from "../../State";
 import ChangePlans from "./ChangePlans";
 import Extend from "./Extend";
 import Modal from "../Modal";
 import { purchasePremium } from "../../services/neatqueue-service";
 import { useHookstate } from "@hookstate/core";
+import { PremiumData, TimeLeft } from "../../types";
+import { calculateTimeLeft } from "../../util/utility";
 
 const PremiumStatus = ({
   premiumData,
@@ -23,42 +25,26 @@ const PremiumStatus = ({
   const { auth } = state.get();
   const [planModalOpen, setPlanModalOpen] = useState(false);
   const [extendModalOpen, setExtendModalOpen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>();
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>();
   const [selectedPlan, setSelectedPlan] = useState<string>(
     premiumData.premium?.plan || ""
   );
 
   useEffect(() => {
-    const interval = setInterval(() => setTimeLeft(calculateTimeLeft()), 60);
+    setTimeLeft(recalculateTimeLeft());
+    const interval = setInterval(
+      () => setTimeLeft(recalculateTimeLeft()),
+      60000
+    );
 
     return () => {
       clearInterval(interval);
     };
   }, [premiumData]);
 
-  const calculateTimeLeft = () => {
-    let difference;
-    if (premiumData.premium)
-      difference =
-        new Date(premiumData.premium.until * 1000).getTime() - Date.now();
-    else difference = 0;
-
-    let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-    return timeLeft;
+  const recalculateTimeLeft = () => {
+    if (!premiumData.premium?.until) return;
+    return calculateTimeLeft(premiumData.premium?.until);
   };
 
   const handlePurchase = async () => {
@@ -75,11 +61,10 @@ const PremiumStatus = ({
       setPremiumData(prem);
     } catch (e: any) {
       setError(e.response.data.detail);
-      setSuccess("");
       return;
     }
 
-    setTimeLeft(calculateTimeLeft());
+    setTimeLeft(recalculateTimeLeft());
   };
 
   const handleChangePlans = async () => {
@@ -89,11 +74,11 @@ const PremiumStatus = ({
 
   return (
     <>
-      <div className="col-span-4 bg-stone-900 rounded shadow-md p-5">
+      <div className="col-span-6 bg-stone-900 rounded shadow-md p-5">
         {premiumData.premium && timeLeft ? (
           <div className="grid place-items-center">
             <h1 className="text-3xl">Premium</h1>
-            <h1 className="text-2xl text-green-500">
+            <h1 className="text-2xl text-green-500 mt-5">
               {premiumData.premium.plan}
             </h1>
             <h3>

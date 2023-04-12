@@ -15,13 +15,13 @@ const Dashboard = () => {
   }, [auth]);
 
   return (
-    <>
+    <div className="h-screen">
       {/* {JSON.stringify(guilds)} */}
       <div className="grid grid-cols-5 gap-3 ">
         {guilds &&
           guilds.map((guild) => <GuildCard key={guild.id} guild={guild} />)}
       </div>
-    </>
+    </div>
   );
 };
 

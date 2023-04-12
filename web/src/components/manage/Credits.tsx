@@ -1,9 +1,10 @@
 import { useHookstate } from "@hookstate/core";
 import { useState } from "react";
 import { requestCheckout } from "../../services/server-service";
-import globalState, { PremiumData } from "../../State";
+import globalState from "../../State";
 import Modal from "../Modal";
 import PurchaseCredits from "./PurchaseCredits";
+import { PremiumData } from "../../types";
 
 const Credits = ({
   premiumData,
@@ -34,7 +35,7 @@ const Credits = ({
 
   return (
     <>
-      <div className="col-span-4 bg-stone-900 rounded shadow-md p-5 grid place-items-center">
+      <div className="col-span-6 bg-stone-900 rounded shadow-md p-5 grid place-items-center">
         <h1 className="text-3xl">Credits: {premiumData.credits.toFixed(1)}</h1>
         <button
           onClick={() => setCreditModalOpen(true)}

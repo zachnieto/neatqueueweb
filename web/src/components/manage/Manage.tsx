@@ -2,11 +2,12 @@ import { useHookstate } from "@hookstate/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPremium } from "../../services/neatqueue-service";
-import globalState, { Guild, PremiumData } from "../../State";
+import globalState from "../../State";
 import Credits from "./Credits";
-import Instance from "./Instance";
+import Instance from "./instance/Instance";
 import PremiumStatus from "./PremiumStatus";
 import Alert from "../Alert";
+import { Guild, PremiumData } from "../../types";
 
 const Manage = () => {
   const { guildID } = useParams();
@@ -19,20 +20,21 @@ const Manage = () => {
 
   useEffect(() => {
     if (guildID) {
-      getPremium(guildID).then(setPremiumData);
       setGuild(state.guilds.get()?.find((g) => g.id == guildID));
+      refreshPremiumData();
     }
+  }, [state.guilds, guildID]);
 
-    console.log(guild);
-    console.log(premiumData);
-  }, [state.guilds]);
+  const refreshPremiumData = async () => {
+    if (guildID) getPremium(guildID).then(setPremiumData);
+  };
 
   if (!guild) {
     return <></>;
   }
 
   return (
-    <>
+    <div className="h-screen">
       <div className="text-center mb-5">
         <h1 className="text-5xl">{guild.name}</h1>
         <Alert value={success} setValue={setSuccess} color="bg-green-600" />
@@ -50,11 +52,16 @@ const Manage = () => {
               setSuccess={setSuccess}
             />
             <Credits premiumData={premiumData} guildID={guildID} />
-            <Instance />
+            {/*<Instance*/}
+            {/*  guildID={guildID}*/}
+            {/*  setError={setError}*/}
+            {/*  setSuccess={setSuccess}*/}
+            {/*  refreshPremiumData={refreshPremiumData}*/}
+            {/*/>*/}
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
