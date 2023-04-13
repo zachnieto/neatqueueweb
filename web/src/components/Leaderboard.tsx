@@ -61,7 +61,7 @@ const Leaderboard = ({
   const dateOptions = { year: "numeric", month: "short" };
 
   return (
-    <div className="grid grid-cols-10 mx-auto max-w-7xl h-screen">
+    <div className="grid grid-cols-10 mx-auto max-w-7xl min-h-screen">
       <div className="col-span-1">
         <ul className="grid-cols-1 text-center md:grid hidden">
           {stats &&
