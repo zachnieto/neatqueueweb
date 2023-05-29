@@ -312,32 +312,44 @@ Substitute yourself for the given player.
  Enable/disable the anticheat system.
 #### Usage: `/anticheat enable [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Toggle for anticheat.
+`toggle`: *(Required)* Toggle for anticheat.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
-### `/anticheat flagnewaccount`
+### `/anticheat flag incorrectvoting`
+#### Description
+ Set an anticheat trigger for players who vote for the wrong team.
+#### Usage: `/anticheat flag incorrectvoting [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Flag users who vote wrong.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/anticheat flag newaccount`
 #### Description
  Set an anticheat trigger for new accounts.
-#### Usage: `/anticheat flagnewaccount [age]`
+#### Usage: `/anticheat flag newaccount [age]`
 #### Arguments:
 `age`: *(Required)* Account age in days.
 
 ---
 
-### `/anticheat flagrejoins`
+### `/anticheat flag rejoins`
 #### Description
  Set an anticheat trigger for if a player rejoins a server.
-#### Usage: `/anticheat flagrejoins [toggle]`
+#### Usage: `/anticheat flag rejoins [toggle]`
 #### Arguments:
-`toggle`: *(Required)* Flag users who rejoin the server if they already have stats.
+`toggle`: *(Required)* Flag users who rejoin the server if they already have stats.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
-### `/anticheat flagstreak`
+### `/anticheat flag streak`
 #### Description
  Set an anticheat trigger for a players streak.
-#### Usage: `/anticheat flagstreak [streak]`
+#### Usage: `/anticheat flag streak [streak]`
 #### Arguments:
 `streak`: *(Required)* Streak to trigger a flag.
 
@@ -670,7 +682,7 @@ Substitute yourself for the given player.
 #### Usage: `/language [language]`
 #### Arguments:
 `language`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, Portuguese, French, Japanese, Italian, Russian, German, Ukranian, Polish`
+&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew`
 
 <hr style="border:3px solid gray">
 
@@ -717,6 +729,15 @@ Substitute yourself for the given player.
 
 ---
 
+### `/leaderboardconfig requiredgames`
+#### Description
+ (Default: 1) The required number of games played to be displayed on the leaderboard.
+#### Usage: `/leaderboardconfig requiredgames [games]`
+#### Arguments:
+`games`: *(Required)* Required number of games.
+
+---
+
 ### `/leaderboardconfig shorturl`
 #### Description
  Create a short url for leaderboards. Ex: 'MyGame' -> https://www.neatqueue.com/lb/MyGame.
@@ -755,6 +776,16 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Lobby Channel
+### `/lobbychannel automute`
+#### Description
+ If the lobby channel should mute all players.
+#### Usage: `/lobbychannel automute [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players are muted in the lobby channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/lobbychannel pause`
 #### Description
  Pause the current lobby channel countdown timer.
@@ -1137,10 +1168,10 @@ Substitute yourself for the given player.
  Choose between map votes or always random.
 #### Usage: `/map selection [map_choice] (gamemode_choice)`
 #### Arguments:
-`map_choice`: *(Required)* Voting or always random.\
-&emsp;&emsp;&emsp; Options: `Vote, Random`\
-`gamemode_choice`: *(Optional)* -.\
-&emsp;&emsp;&emsp; Options: `Vote, Random`
+`map_choice`: *(Required)* Voting, always random, or least common.\
+&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`\
+`gamemode_choice`: *(Optional)* Voting, always random, or least common.\
+&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`
 
 ---
 
@@ -1156,6 +1187,10 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Matchmaking
+>The matchmaker works by checking the current queue if there are
+> enough players to create a match. A match will only be created if the total range of player MMRs
+> is less than the specified matchmaking range. Every 15 seconds, the range will be increased by the
+> matchmaking leniency, and the match conditions will be rechecked with this new extended matchmaking range.
 ### `/matchmaking leniency`
 #### Description
  Every 15 seconds, how much the range will increase for a better chance at a match.
@@ -1186,6 +1221,16 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Miscellaneous/Utility
+### `/misc mention teamscreated`
+#### Description
+ (Default: Disabled) Mention the players after teams are created.
+#### Usage: `/misc mention teamscreated [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If the players are mentioned after teams are created.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/misc nametype`
 #### Description
  Sets whether to use nicknames or discord names (Default: nick).
@@ -1201,6 +1246,16 @@ Substitute yourself for the given player.
  Delete ALL messages in the channel except the queue message if it exists.
 #### Usage: `/misc purge`
 
+
+---
+
+### `/misc startwhen`
+#### Description
+ (Default: Either) Start the match when the queue fills, or only when forcestarted.
+#### Usage: `/misc startwhen [mode]`
+#### Arguments:
+`mode`: *(Required)* Condition for starting the match.\
+&emsp;&emsp;&emsp; Options: `Queue Filled, Forcestart, Either`
 
 <hr style="border:3px solid gray">
 
@@ -1665,6 +1720,17 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Requeue
+>For queue types that always start when reaching the queue size,
+> requeue priority won't appear to make any changes.
+> However, there are two specific queue starting modes where it will matter:
+> 
+> 1) `/queuetype Matchmaking`: When the matchmaker is running, it will use the overall sum of all player priorities,
+> and use this value to increase the matchmaking range. For example, if the matchmaking range is 300 MMR, but there are
+> two players with 100 priority each, the matchmaking range for that attempted match creation will be 500 MMR,
+> making it more likely for that match to be created. If you want players with priority to ALWAYS be in the match, you
+> can give them a very large priority (like 100,000), which ensures the matchmaker always considers their match as valid.
+> 2) `/misc startwhen Forcestarted`: When matches can only be forcestarted, the number of players can exceed the maximum
+> queue size. Players who join the queue with priority will take precedence in the queue over lower priority players.
 ### `/requeue condition`
 #### Description
  Sets the condition for letting a player requeue.
@@ -1684,12 +1750,31 @@ Substitute yourself for the given player.
 
 ---
 
-### `/requeue priorityrole`
+### `/requeue priority`
 #### Description
- Allow players with the given role to skip the requeue delay.
-#### Usage: `/requeue priorityrole (role)`
+ Give priority to players who requeue after a match.
+#### Usage: `/requeue priority (value)`
 #### Arguments:
-`role`: *(Optional)* Priority role.
+`value`: *(Optional)* (Default: 0) How much priority value to give.
+
+---
+
+### `/requeue priorityrole add`
+#### Description
+ Allow players with the given role to gain priority for requeue.
+#### Usage: `/requeue priorityrole add [role] (value)`
+#### Arguments:
+`role`: *(Required)* Priority role.\
+`value`: *(Optional)* (Default: 100) Priority value to assign.
+
+---
+
+### `/requeue priorityrole remove`
+#### Description
+ Allow players with the given role to gain priority for requeue.
+#### Usage: `/requeue priorityrole remove [role]`
+#### Arguments:
+`role`: *(Required)* Priority role.
 
 <hr style="border:3px solid gray">
 
@@ -1712,15 +1797,6 @@ Substitute yourself for the given player.
 #### Arguments:
 `type`: *(Required)* The type of voting requirement to be used.\
 &emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
-
----
-
-### `/voteforresult`
-#### Description
- Sets whether to vote for queue outcome. Disabling means you don't care about outcomes.
-#### Usage: `/voteforresult [value]`
-#### Arguments:
-`value`: *(Required)* Whether match outcomes are enabled or not.
 
 <hr style="border:3px solid gray">
 
@@ -2182,7 +2258,7 @@ Substitute yourself for the given player.
  (Default: 60) Sets the timeout for voting menus.
 #### Usage: `/timer votes [seconds]`
 #### Arguments:
-`seconds`: *(Required)* Enter the time in SECONDS.
+`seconds`: *(Required)* -.
 
 ---
 
@@ -2191,7 +2267,7 @@ Substitute yourself for the given player.
  (Default: 0) Sets the delay before enabling the winner voting message.
 #### Usage: `/timer winnervotemessage [seconds]`
 #### Arguments:
-`seconds`: *(Required)* Enter the time in SECONDS, or 0 to disable.
+`seconds`: *(Required)* Enter the time in SECONDS.
 
 <hr style="border:3px solid gray">
 
@@ -2250,7 +2326,7 @@ Substitute yourself for the given player.
 #### Usage: `/voicechannels mode [mode]`
 #### Arguments:
 `mode`: *(Required)* The type of voice channel setting.\
-&emsp;&emsp;&emsp; Options: `Required, Optional, Disabled`
+&emsp;&emsp;&emsp; Options: `Optional, Required, Disabled`
 
 ---
 
@@ -2351,6 +2427,16 @@ Substitute yourself for the given player.
 #### Arguments:
 `mode`: *(Required)* Pin mode.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/winnermessage results`
+#### Description
+ Set who can vote for the result, or if results are fully disabled.
+#### Usage: `/winnermessage results [value]`
+#### Arguments:
+`value`: *(Required)* Who can vote, or if the match has no outcome.\
+&emsp;&emsp;&emsp; Options: `Default, Staff Only, Disabled`
 
 ---
 
