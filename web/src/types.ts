@@ -36,9 +36,11 @@ export type PremiumData = {
   credits: number;
   plans: Plans;
 };
-export type BotStatus = {
-  online: boolean;
+export type NodeStatus = {
+  status: string;
   shards: number;
+  guilds: number;
+  node: number;
 };
 export type InstancePricing = {
   price: number;

@@ -1,6 +1,6 @@
 import axios from "axios";
 import globalState from "../State";
-import { Auth, BotStatus, InstancePricing, PrivateInstance } from "../types";
+import { Auth, NodeStatus, InstancePricing, PrivateInstance } from "../types";
 
 const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 
@@ -73,8 +73,8 @@ export async function getLongUrl(shortUrl: string) {
 }
 
 export async function getStatus() {
-  const resp = await axios.get(`${API_BASE}/api/status`, { timeout: 2000 });
-  const data: BotStatus = resp.data;
+  const resp = await axios.get(`${API_BASE}/status`, { timeout: 2000 });
+  const data: NodeStatus[] = resp.data;
   return data;
 }
 
