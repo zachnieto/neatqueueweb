@@ -584,15 +584,24 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Force Start
-### `/forcestartsize`
+### `/forcestartconfig conditions`
 #### Description
  Sets the requirements for forcestarting.
-#### Usage: `/forcestartsize [min_size] (max_size) (only_fair) (auto_start)`
+#### Usage: `/forcestartconfig conditions [min_size] (max_size) (only_fair) (auto_start)`
 #### Arguments:
 `min_size`: *(Required)* Enter the minimum number of players required. Set to -1 to disable.\
 `max_size`: *(Optional)* Enter the maximum number of players required. Set to -1 to ignore.\
 `only_fair`: *(Optional)* Should the forcestart happen if teams are not the same size?.\
 `auto_start`: *(Optional)* Should the forcestart vote automatically happen when possible?.
+
+---
+
+### `/forcestartconfig cooldown`
+#### Description
+ (Default: 300) Sets the forcestart cooldown.
+#### Usage: `/forcestartconfig cooldown [seconds]`
+#### Arguments:
+`seconds`: *(Required)* Cooldown duration in seconds.
 
 <hr style="border:3px solid gray">
 
@@ -955,18 +964,6 @@ Substitute yourself for the given player.
 
 ---
 
-### `/mmr change multipliers`
-#### Description
- Toggle multipliers.
-#### Usage: `/mmr change multipliers [streaks] [placements]`
-#### Arguments:
-`streaks`: *(Required)* If there exists a multiplier for win/loss streaks.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`placements`: *(Required)* If there exists a multiplier for the first 10 matches for placements.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
----
-
 ### `/mmr change set`
 #### Description
  (Default: 50) Sets the MMR change per game.
@@ -1007,6 +1004,45 @@ Substitute yourself for the given player.
 #### Usage: `/mmr floor (mmr)`
 #### Arguments:
 `mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
+
+---
+
+### `/mmr multipliers placements`
+#### Description
+ Toggle the placement matches multiplier.
+#### Usage: `/mmr multipliers placements [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If there exists a multiplier for the first 10 matches.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/mmr multipliers remove`
+#### Description
+ Sets the MMR multiplier for the given role.
+#### Usage: `/mmr multipliers remove [role]`
+#### Arguments:
+`role`: *(Required)* -.
+
+---
+
+### `/mmr multipliers set`
+#### Description
+ Sets the MMR multiplier for the given role for wins.
+#### Usage: `/mmr multipliers set [role] [multiplier]`
+#### Arguments:
+`role`: *(Required)* -.\
+`multiplier`: *(Required)* Multiplier value. (Ex: 1.2 for a 20% boost).
+
+---
+
+### `/mmr multipliers streaks`
+#### Description
+ Toggle the streak multiplier.
+#### Usage: `/mmr multipliers streaks [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If there exists a multiplier for win/loss streaks.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -1246,6 +1282,16 @@ Substitute yourself for the given player.
  Delete ALL messages in the channel except the queue message if it exists.
 #### Usage: `/misc purge`
 
+
+---
+
+### `/misc shuffleonstart`
+#### Description
+ (Default: Disabled) Shuffle the player pool on start.
+#### Usage: `/misc shuffleonstart [mode]`
+#### Arguments:
+`mode`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `Disabled, Lottery, Priority`
 
 ---
 
@@ -1582,6 +1628,16 @@ Substitute yourself for the given player.
 
 ---
 
+### `/queuemessage footer`
+#### Description
+ (Default: None) Set a footer for the queue message.
+#### Usage: `/queuemessage footer (text) (icon_url)`
+#### Arguments:
+`text`: *(Optional)* Footer contents, or omit to remove.\
+`icon_url`: *(Optional)* -.
+
+---
+
 ### `/queuemessage history`
 #### Description
  (Default: Disable) Sets whether to send a new message for every queue interaction.
@@ -1589,6 +1645,24 @@ Substitute yourself for the given player.
 #### Arguments:
 `toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/queuemessage image`
+#### Description
+ (Default: None) Set an image for the queue message.
+#### Usage: `/queuemessage image (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
+
+---
+
+### `/queuemessage thumbnail`
+#### Description
+ (Default: None) Set a thumbnail for the queue message.
+#### Usage: `/queuemessage thumbnail (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
 
 <hr style="border:3px solid gray">
 
@@ -1753,9 +1827,10 @@ Substitute yourself for the given player.
 ### `/requeue priority`
 #### Description
  Give priority to players who requeue after a match.
-#### Usage: `/requeue priority (value)`
+#### Usage: `/requeue priority (value) (seconds)`
 #### Arguments:
-`value`: *(Optional)* (Default: 0) How much priority value to give.
+`value`: *(Optional)* (Default: 0) How much priority value to give.\
+`seconds`: *(Optional)* (Default: 300) How many seconds to give this temporary priority value for.
 
 ---
 
