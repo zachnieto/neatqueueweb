@@ -42,8 +42,8 @@ if (process.env.APP_ENV === "dev") {
   console.log("HTTP dev only server");
 } else {
   const options = {
-    key: fs.readFileSync("./privkey.pem"),
-    cert: fs.readFileSync("./fullchain.pem"),
+    key: fs.readFileSync("/etc/letsencrypt/live/host.neatqueue.com/privkey.pem"),
+    cert: fs.readFileSync("/etc/letsencrypt/live/host.neatqueue.com/fullchain.pem"),
   };
   console.log("HTTPS only server");
   server = https.createServer(options, app);
