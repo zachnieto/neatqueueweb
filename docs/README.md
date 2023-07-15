@@ -875,26 +875,26 @@ Substitute yourself for the given player.
 #### Arguments:
 `message`: *(Required)* Enter the message to send.
 >Currently supports five substitutions:
-> 
+>
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
 > `RANDOMTEAM`: Substitute a random team name \
 > `RANDOM[Option1,Option2,...]`: Randomly select one of the given options and substitute. Ex: `RANDOM[Heads,Tails]` \
 > `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
 > characters to be in the password. There are currently 5 supported password types:
-> 
+>
 > 1. L: Lowercase Letters only
 > 2. U: Uppercase Letters only
 > 3. N: Numbers only
 > 4. C: Lowercase and Uppercase Letters
 > 5. A: Lowercase Letters, Uppercase Letters, and Numbers
-> 
+>
 > Example:
 > `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
 > could substitute to
-> 
+>
 > "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
-> 
+>
 > You can further enhance the visuals using Markdown formatting.
 
 <hr style="border:3px solid gray">
@@ -1055,7 +1055,7 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## MVPs 
+## MVPs
 ### `/mvp reward`
 #### Description
  (Default: 5) MMR reward for MVPs.
@@ -1657,6 +1657,16 @@ Substitute yourself for the given player.
 
 ---
 
+### `/queuemessage sticky`
+#### Description
+ (Default: Enabled) Sets whether the queue message sticks to the bottom of the channel.
+#### Usage: `/queuemessage sticky [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle the message being sticky.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
 ### `/queuemessage thumbnail`
 #### Description
  (Default: None) Set a thumbnail for the queue message.
@@ -1797,7 +1807,7 @@ Substitute yourself for the given player.
 >For queue types that always start when reaching the queue size,
 > requeue priority won't appear to make any changes.
 > However, there are two specific queue starting modes where it will matter:
-> 
+>
 > 1) `/queuetype Matchmaking`: When the matchmaker is running, it will use the overall sum of all player priorities,
 > and use this value to increase the matchmaking range. For example, if the matchmaking range is 300 MMR, but there are
 > two players with 100 priority each, the matchmaking range for that attempted match creation will be 500 MMR,
@@ -1821,6 +1831,16 @@ Substitute yourself for the given player.
 #### Usage: `/requeue delay [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Seconds to delay from queuing.
+
+---
+
+### `/requeue matchcancelled`
+#### Description
+ Specify if players get automatically requeued if a match is cancelled.
+#### Usage: `/requeue matchcancelled [mode]`
+#### Arguments:
+`mode`: *(Required)* If requeue is automatic.\
+&emsp;&emsp;&emsp; Options: `Disabled, Automatic`
 
 ---
 
@@ -2259,14 +2279,31 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Temporary Setup Channels
-### `/tempchannels`
+### `/tempchannels name`
+#### Description
+ (Default: queue-$) Naming format for temporary setup channels.
+#### Usage: `/tempchannels name [name_format]`
+#### Arguments:
+`name_format`: *(Required)* Channel format, where $ will be replaced with the match number.
+
+---
+
+### `/tempchannels toggle`
 #### Description
  (Default: Enabled) Sets whether to create a temporary text channel for setup.
-#### Usage: `/tempchannels [mode] (channeltype)`
+#### Usage: `/tempchannels toggle [mode]`
 #### Arguments:
 `mode`: *(Required)* If the temporary setup channels are enabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`channeltype`: *(Optional)* If the new channels should be text channels, or threads of this channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/tempchannels type`
+#### Description
+ (Default: Text Channels) Specify if the temp channels are threads or normal channels.
+#### Usage: `/tempchannels type [type]`
+#### Arguments:
+`type`: *(Required)* If the new channels should be text channels, or threads of this channel.\
 &emsp;&emsp;&emsp; Options: `Text Channels, Threads`
 
 <hr style="border:3px solid gray">
@@ -2413,6 +2450,16 @@ Substitute yourself for the given player.
 `when`: *(Required)* The type of voice channel setting.\
 &emsp;&emsp;&emsp; Options: `After All Setup, After Teams Created`
 
+---
+
+### `/voicechannels teamchannels`
+#### Description
+ (Default: Enabled) Toggle creating separate voice channels for each team.
+#### Usage: `/voicechannels teamchannels [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If channels are created per team.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
 <hr style="border:3px solid gray">
 
 ## Voting Menu
@@ -2449,14 +2496,14 @@ Substitute yourself for the given player.
 > - MATCH_STARTED
 > - TEAMS_CREATED
 > - MATCH_COMPLETED
-> 
+>
 > Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
 > - REGISTER_PLAYER
-> 
+>
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
-> 
+>
 > Examples:
 > https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
