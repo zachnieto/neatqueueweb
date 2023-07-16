@@ -59,7 +59,7 @@ const Home = () => {
               {!loading && (
                 <h1
                   className={classNames(
-                    "text-xl my-auto bg-black/50 mx-8 rounded-xl",
+                    "text-xl my-auto bg-black/50 md:mx-8 rounded-xl",
                     global.stats.servers.get() === -1
                       ? "text-red-600"
                       : "text-green-600"

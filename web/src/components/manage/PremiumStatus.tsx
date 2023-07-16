@@ -74,7 +74,7 @@ const PremiumStatus = ({
 
   return (
     <>
-      <div className="col-span-6 bg-stone-900 rounded shadow-md p-5">
+      <div className="col-span-1 bg-stone-900 rounded shadow-md p-5">
         {premiumData.premium && timeLeft ? (
           <div className="grid place-items-center">
             <h1 className="text-3xl">Premium</h1>
@@ -85,10 +85,10 @@ const PremiumStatus = ({
               For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{" "}
               {timeLeft.minutes} Minutes
             </h3>
-            <div className="flex gap-3">
+            <div className="flex place-content-center gap-3">
               <button
                 onClick={() => setPlanModalOpen(true)}
-                className="btn-primary"
+                className="btn-primary max-w-1/2"
               >
                 Change Plan
               </button>

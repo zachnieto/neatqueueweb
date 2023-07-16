@@ -41,7 +41,7 @@ const Manage = () => {
         <Alert value={error} setValue={setError} color="bg-red-600" />
       </div>
 
-      <div className="grid grid-cols-12 mx-32 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:mx-32 gap-8">
         {premiumData && guildID && (
           <>
             <PremiumStatus
