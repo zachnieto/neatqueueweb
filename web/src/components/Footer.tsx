@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer className="rounded-lg shadow">
-      <div className="w-full mx-auto p-4 md:flex md:items-center md:justify-end">
+      <div className="w-full mx-auto p-4 flex items-center justify-end">
         <ul className="flex flex-wrap items-center mt-3 text-gray-300 text-lg font-medium nav-link relative">
           <li>
             <a

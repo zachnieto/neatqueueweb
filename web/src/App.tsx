@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <div className="container-fluid px-5 overflow-hidden relative">
+    <div className="container-fluid px-5 relative">
       <>
         <CustomParticles color={""} clickable={false} />
 
