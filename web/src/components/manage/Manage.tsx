@@ -34,7 +34,7 @@ const Manage = () => {
   }
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <div className="text-center mb-5">
         <h1 className="text-5xl">{guild.name}</h1>
         <Alert value={success} setValue={setSuccess} color="bg-green-600" />

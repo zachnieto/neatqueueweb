@@ -15,8 +15,7 @@ const Dashboard = () => {
   }, [auth]);
 
   return (
-    <div className="h-screen">
-      {/* {JSON.stringify(guilds)} */}
+    <div className="min-h-screen">
       <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 gap-3">
         {guilds &&
           guilds.map((guild) => <GuildCard key={guild.id} guild={guild} />)}
