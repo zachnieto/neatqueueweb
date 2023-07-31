@@ -70,7 +70,7 @@ const LeaderboardItem = ({
       ) : (
         <>
           <div className="">
-            <h1>{sortKey !== "winrate" ? player.data[sortKey] : displayPercent(player.data[sortKey])}</h1>
+            <h1>{sortKey !== "winrate" ? parseInt(player.data[sortKey]) : displayPercent(player.data[sortKey])}</h1>
           </div>
         </>
       )}
