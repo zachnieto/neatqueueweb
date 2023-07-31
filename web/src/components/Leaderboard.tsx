@@ -35,9 +35,10 @@ const Leaderboard = ({
 }) => {
   let { guildID, channelID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const urlParamSort = searchParams.get("sort");
 
   const [month, setMonth] = useState("alltime");
-  const [sortKey, setSortKey] = useState(Object.keys(sortKeys).includes(searchParams.get("sort") || "") ? searchParams.get("sort") : "MMR");
+  const [sortKey, setSortKey] = useState(urlParamSort && Object.keys(sortKeys).includes(urlParamSort) ? urlParamSort : "MMR");
   const [stats, setStats] = useState<LooseObject>();
 
   if (guildID === undefined) guildID = passedGuildId;
