@@ -15,3 +15,6 @@ export const calculateTimeLeft = (timestamp: number) => {
   }
   return timeLeft;
 };
+
+
+export const displayPercent = (percent: number) => `${(percent * 100).toFixed(1)}%`;

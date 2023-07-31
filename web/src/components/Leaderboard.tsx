@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import { getGuildChannelStats } from "../services/neatqueue-service";
 import { classNames } from "../util/tailwind";
 import LeaderboardItem from "./LeaderboardItem";
@@ -15,13 +15,16 @@ const sortKeys: any = {
   Wins: "wins",
   Losses: "losses",
   Games: "totalgames",
+  Streak: "streak",
+  Peak_MMR: "peak_mmr",
+  Peak_Streak: "peak_streak",
+  Win_Rate: "winrate"
 };
 
-type LooseObject =
-  | {
-      [key: string]: any;
-    }
-  | undefined;
+// TODO
+type LooseObject = {
+  [key: string]: any;
+};
 
 const Leaderboard = ({
   passedGuildId = "",
@@ -31,10 +34,11 @@ const Leaderboard = ({
   passedChannelId?: string;
 }) => {
   let { guildID, channelID } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [month, setMonth] = useState("alltime");
-  const [sortKey, setSortKey] = useState("MMR");
-  const [stats, setStats] = useState<LooseObject>(undefined);
+  const [sortKey, setSortKey] = useState(Object.keys(sortKeys).includes(searchParams.get("sort") || "") ? searchParams.get("sort") : "MMR");
+  const [stats, setStats] = useState<LooseObject>();
 
   if (guildID === undefined) guildID = passedGuildId;
   if (channelID === undefined) channelID = passedChannelId;
@@ -44,19 +48,25 @@ const Leaderboard = ({
       getGuildChannelStats(guildID, channelID)
         .catch(() => console.log("Error fetching leaderboard data"))
         .then(setStats);
-
-    // const interval = setInterval(() => {
-    //     getChannelStats()
-    // }, 60000);
-    //
-    // return () => {
-    //     clearInterval(interval);
-    // };
   }, []);
 
   useEffect(() => {
     if (stats) setMonth(Object.keys(stats)[0]);
   }, [stats]);
+
+  const changeSort = (sortKey: string) => {
+    setSortKey(sortKey);
+    let updatedSearchParams = new URLSearchParams(searchParams.toString());
+    updatedSearchParams.set('sort', sortKey);
+    setSearchParams(updatedSearchParams.toString());
+  }
+
+  const scrollChangeSort = (scrollRight: boolean) => {
+    const sortKeyArray = Object.keys(sortKeys);
+    const idx = sortKeyArray.indexOf(sortKey);
+    const nextIdx = scrollRight ? (idx + 1) % sortKeyArray.length : (idx - 1 + sortKeyArray.length) % sortKeyArray.length;
+    changeSort(sortKeyArray[nextIdx]);
+  }
 
   const dateOptions = { year: "numeric", month: "short" };
 
@@ -90,20 +100,33 @@ const Leaderboard = ({
       </div>
 
       <div className="col-span-8">
-        <div className="font-medium flex flex-row text-lg mb-3 justify-center gap-1">
+        <div className="md:visible invisible flex flex-row mb-3 justify-center gap-1">
           {Object.keys(sortKeys).map((key) => (
             <button
               key={key}
-              onClick={() => setSortKey(key)}
+              onClick={() => changeSort(key)}
               className={classNames(
                 "btn-primary",
                 sortKey === key ? "translate-y-1" : ""
               )}
             >
-              <h1>{key}</h1>
+              <h1>{key.replace("_", " ")}</h1>
             </button>
           ))}
         </div>
+
+        <div className="md:invisible visible flex flex-row mb-3 justify-center gap-1">
+          <button className="btn-primary" onClick={() => scrollChangeSort(false)}>
+            {'<'}
+          </button>
+          <div className="btn-style">
+            {sortKey.replace("_", " ")}
+          </div>
+          <button className="btn-primary" onClick={() => scrollChangeSort(true)}>
+            {'>'}
+          </button>
+        </div>
+
 
         <div className="bg-violet-900/80 px-3 py-3 font-medium flex flex-row text-lg mb-3 shadow-xl rounded">
           <div className="my-auto mx-3 basis-5">
@@ -114,7 +137,7 @@ const Leaderboard = ({
           </h1>
           {sortKey === "MMR" && <h1 className="basis-1/4">MMR</h1>}
           <h3 className="basis-1/4">
-            {sortKey === "MMR" ? "Win - Loss" : sortKey}
+            {sortKey === "MMR" ? "Win - Loss" : sortKey.replace("_", " ")}
           </h3>
         </div>
         {stats &&
