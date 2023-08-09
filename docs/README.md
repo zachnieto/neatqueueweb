@@ -695,23 +695,53 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Language
-### `/language`
+### `/language overrides set`
 #### Description
- Set the language for the server.
-#### Usage: `/language [language] (custom_overrides)`
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides set [original_phrase] (overriden_phrase)`
 #### Arguments:
-`language`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Uwu, Owo`\
-`custom_overrides`: *(Optional)* -.
->Language overrides are only available to premium servers. If there is an issue with a normal language translation,
-> please fix here: https://crowdin.com/project/neatqueue
->
-> The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
+`original_phrase`: *(Required)* Existing phrase to override.\
+`overriden_phrase`: *(Optional)* Replacement phrase, omit to go back to default.
+
+---
+
+### `/language overrides toggle`
+#### Description
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle custom overrides.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/language overrides upload`
+#### Description
+ Upload a custom overrides file.
+#### Usage: `/language overrides upload [custom_overrides]`
+#### Arguments:
+`custom_overrides`: *(Required)* Custom translation overrides, omit to remove.
+>The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
 > The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
 > value that replaces the key.
->
+> 
 > Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
 > entry must remain constant. If an override does not match the count of signifiers, it will not be used.
+
+---
+
+### `/language set`
+#### Description
+ Set the language for the server
+
+Parameters
+---------
+language: Server language.
+#### Usage: `/language set [language]`
+#### Arguments:
+`language`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Uwu, Owo`
+>If there is an issue with a normal language translation, please fix here: https://crowdin.com/project/neatqueue
 
 <hr style="border:3px solid gray">
 
@@ -895,26 +925,26 @@ Substitute yourself for the given player.
 #### Arguments:
 `message`: *(Required)* Enter the message to send.
 >Currently supports five substitutions:
->
+> 
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
 > `RANDOMTEAM`: Substitute a random team name \
 > `RANDOM[Option1,Option2,...]`: Randomly select one of the given options and substitute. Ex: `RANDOM[Heads,Tails]` \
 > `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
 > characters to be in the password. There are currently 5 supported password types:
->
+> 
 > 1. L: Lowercase Letters only
 > 2. U: Uppercase Letters only
 > 3. N: Numbers only
 > 4. C: Lowercase and Uppercase Letters
 > 5. A: Lowercase Letters, Uppercase Letters, and Numbers
->
+> 
 > Example:
 > `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
 > could substitute to
->
+> 
 > "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
->
+> 
 > You can further enhance the visuals using Markdown formatting.
 
 <hr style="border:3px solid gray">
@@ -1075,7 +1105,7 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## MVPs
+## MVPs 
 ### `/mvp reward`
 #### Description
  (Default: 5) MMR reward for MVPs.
@@ -1881,7 +1911,7 @@ Substitute yourself for the given player.
 >For queue types that always start when reaching the queue size,
 > requeue priority won't appear to make any changes.
 > However, there are two specific queue starting modes where it will matter:
->
+> 
 > 1) `/queuetype Matchmaking`: When the matchmaker is running, it will use the overall sum of all player priorities,
 > and use this value to increase the matchmaking range. For example, if the matchmaking range is 300 MMR, but there are
 > two players with 100 priority each, the matchmaking range for that attempted match creation will be 500 MMR,
@@ -2570,14 +2600,14 @@ Substitute yourself for the given player.
 > - MATCH_STARTED
 > - TEAMS_CREATED
 > - MATCH_COMPLETED
->
+> 
 > Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
 > - REGISTER_PLAYER
->
+> 
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
->
+> 
 > Examples:
 > https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
