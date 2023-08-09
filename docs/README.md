@@ -433,6 +433,16 @@ Substitute yourself for the given player.
 
 ---
 
+### `/captains firstpick`
+#### Description
+ Specify who gets the first pick in captain selection.
+#### Usage: `/captains firstpick [mode]`
+#### Arguments:
+`mode`: *(Required)* Who gets the first pick.\
+&emsp;&emsp;&emsp; Options: `Highest Rated, Lowest Rated, Random`
+
+---
+
 ### `/captains role`
 #### Description
  Sets a role which gets priority for being captain.
@@ -688,10 +698,20 @@ Substitute yourself for the given player.
 ### `/language`
 #### Description
  Set the language for the server.
-#### Usage: `/language [language]`
+#### Usage: `/language [language] (custom_overrides)`
 #### Arguments:
 `language`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew`
+&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Uwu, Owo`\
+`custom_overrides`: *(Optional)* -.
+>Language overrides are only available to premium servers. If there is an issue with a normal language translation,
+> please fix here: https://crowdin.com/project/neatqueue
+>
+> The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
+> The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
+> value that replaces the key.
+>
+> Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
+> entry must remain constant. If an override does not match the count of signifiers, it will not be used.
 
 <hr style="border:3px solid gray">
 
@@ -1172,10 +1192,10 @@ Substitute yourself for the given player.
 ### `/map add`
 #### Description
  Adds the given map.
-#### Usage: `/map add [map_name] (game_mode) (image_url)`
+#### Usage: `/map add [map_name] (game_modes) (image_url)`
 #### Arguments:
 `map_name`: *(Required)* New map name.\
-`game_mode`: *(Optional)* Game mode for map if applicable.\
+`game_modes`: *(Optional)* Comma separated list of game modes for map, if applicable.\
 `image_url`: *(Optional)* Image to show when map selected.
 
 ---
@@ -1380,6 +1400,28 @@ Substitute yourself for the given player.
 
 ---
 
+### `/add peakmmr`
+#### Description
+ Increment the players peak mmr, use a negative number to decrement.
+#### Usage: `/add peakmmr [mmr] (user) (role)`
+#### Arguments:
+`mmr`: *(Required)* Enter the desired mmr to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
+### `/add peakstreak`
+#### Description
+ Increment the players peak streak, use a negative number to decrement.
+#### Usage: `/add peakstreak [streak] (user) (role)`
+#### Arguments:
+`streak`: *(Required)* Enter the desired streak to add.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
 ### `/add points`
 #### Description
  Increment the players points (not MMR), use a negative number to decrement.
@@ -1463,6 +1505,28 @@ Substitute yourself for the given player.
 #### Usage: `/set mvps [mvps] (user) (role)`
 #### Arguments:
 `mvps`: *(Required)* The new MVPs amount.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
+### `/set peakmmr`
+#### Description
+ Sets the players peak mmr.
+#### Usage: `/set peakmmr [mmr] (user) (role)`
+#### Arguments:
+`mmr`: *(Required)* Enter the desired mmr.\
+`user`: *(Optional)* The user to modify.\
+`role`: *(Optional)* The role to modify.
+
+---
+
+### `/set peakstreak`
+#### Description
+ Sets the players peak streak.
+#### Usage: `/set peakstreak [streak] (user) (role)`
+#### Arguments:
+`streak`: *(Required)* Enter the desired streak.\
 `user`: *(Optional)* The user to modify.\
 `role`: *(Optional)* The role to modify.
 
@@ -1748,6 +1812,16 @@ Substitute yourself for the given player.
 `upper_rating`: *(Required)* The upper MMR rating to lose the role.\
 `lower_lose_rating`: *(Optional)* (Default: lower_rating) The MMR the player must fall below to lose the role.\
 `only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other MMR autoroles will be allowed.
+
+---
+
+### `/autoroles notify`
+#### Description
+ Toggle sending a DM to players when their rank autorole changes.
+#### Usage: `/autoroles notify [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players get a DM for role/rank changes.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 ---
 
@@ -2444,10 +2518,10 @@ Substitute yourself for the given player.
 
 ### `/voicechannels moveteam`
 #### Description
- (Default: required) Sets whether voice channels are required, optional, or disabled.
+ (Default: After All Setup) Sets when to move players to team voice channels.
 #### Usage: `/voicechannels moveteam [when]`
 #### Arguments:
-`when`: *(Required)* The type of voice channel setting.\
+`when`: *(Required)* When to move players to team channels.\
 &emsp;&emsp;&emsp; Options: `After All Setup, After Teams Created`
 
 ---
