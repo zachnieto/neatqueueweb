@@ -20,7 +20,7 @@ const ChangePlans = ({
         >
           <div className="px-6 py-4">
             <div className="font-bold text-2xl mb-2">{plan}</div>
-            <div className="font-bold text-xl mb-2">${plans[plan].price}</div>
+            <div className="font-bold text-xl mb-2">{plans[plan].price} Credits/Month</div>
             <div className="font-bold text-xl mb-2">{plans[plan].details}</div>
             <button
               onClick={() => setSelectedPlan(plan)}
