@@ -12,20 +12,20 @@ const ChangePlans = ({
   setSelectedPlan: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row ">
       {Object.keys(plans).map((plan: string, i: number) => (
         <div
           key={i}
-          className="m-1 max-w-sm rounded overflow-hidden shadow-lg bg-black/25 text-white text-center"
+          className="m-1 max-w-sm rounded shadow-lg bg-black/25 text-white text-center basis-full"
         >
-          <div className="px-6 py-4">
-            <div className="font-bold text-2xl mb-2">{plan}</div>
-            <div className="font-bold text-xl mb-2">{plans[plan].price} Credits/Month</div>
-            <div className="font-bold text-xl mb-2">{plans[plan].details}</div>
+          <div className="px-6 py-4 h-full">
+            <div className="font-bold text-lg md:text-2xl mb-2">{plan}</div>
+            <div className="font-bold text-lg md:text-xl mb-2">{plans[plan].price} Credits/Month</div>
+            <div className="text-md mb-2">{plans[plan].details}</div>
             <button
               onClick={() => setSelectedPlan(plan)}
               className={classNames(
-                "btn-primary",
+                "btn-primary mt-auto",
                 selectedPlan !== undefined && selectedPlan !== plan
                   ? "opacity-50 hover:opacity-100"
                   : ""

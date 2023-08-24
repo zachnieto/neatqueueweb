@@ -26,7 +26,7 @@ const Credits = ({
       user.id,
       `${user.username}#${user.discriminator}`,
       guildID,
-      purchaseAmountDollars,
+      Number(purchaseAmountDollars.toFixed(2)),
       window.location.href
     );
     console.log(checkout_session);
