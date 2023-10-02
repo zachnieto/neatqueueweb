@@ -520,20 +520,29 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Config Loading/Saving
-### `/load`
+### `/config list`
+#### Description
+ List the 10 most recently created configs.
+#### Usage: `/config list`
+
+
+---
+
+### `/config load`
 #### Description
  Loads the queue configuration based on the given name.
-#### Usage: `/load [config]`
+#### Usage: `/config load [config]`
 #### Arguments:
 `config`: *(Required)* Config name.
 
 ---
 
-### `/save`
+### `/config save`
 #### Description
  Save the current queue configuration to a name.
-#### Usage: `/save`
-
+#### Usage: `/config save (name)`
+#### Arguments:
+`name`: *(Optional)* Name of new config code, or omit for a random code.
 
 <hr style="border:3px solid gray">
 
@@ -660,7 +669,7 @@ Substitute yourself for the given player.
  Adds the given hero.
 #### Usage: `/hero add [hero_name]`
 #### Arguments:
-`hero_name`: *(Required)* -.
+`hero_name`: *(Required)* New hero name.
 
 ---
 
@@ -724,7 +733,7 @@ Substitute yourself for the given player.
 >The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
 > The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
 > value that replaces the key.
-> 
+>
 > Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
 > entry must remain constant. If an override does not match the count of signifiers, it will not be used.
 
@@ -732,14 +741,10 @@ Substitute yourself for the given player.
 
 ### `/language set`
 #### Description
- Set the language for the server
-
-Parameters
----------
-language: Server language.
+ Set the language for the server.
 #### Usage: `/language set [language]`
 #### Arguments:
-`language`: *(Required)* -.\
+`language`: *(Required)* Server language.\
 &emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Uwu, Owo`
 >If there is an issue with a normal language translation, please fix here: https://crowdin.com/project/neatqueue
 
@@ -794,6 +799,15 @@ language: Server language.
 #### Usage: `/leaderboardconfig requiredgames [games]`
 #### Arguments:
 `games`: *(Required)* Required number of games.
+
+---
+
+### `/leaderboardconfig sharedstats`
+#### Description
+ Sets the name to use for stats storaged. Queues with the same name share stats.
+#### Usage: `/leaderboardconfig sharedstats [name]`
+#### Arguments:
+`name`: *(Required)* Shared stats configuration name.
 
 ---
 
@@ -925,26 +939,26 @@ language: Server language.
 #### Arguments:
 `message`: *(Required)* Enter the message to send.
 >Currently supports five substitutions:
-> 
+>
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
 > `RANDOMTEAM`: Substitute a random team name \
 > `RANDOM[Option1,Option2,...]`: Randomly select one of the given options and substitute. Ex: `RANDOM[Heads,Tails]` \
 > `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
 > characters to be in the password. There are currently 5 supported password types:
-> 
+>
 > 1. L: Lowercase Letters only
 > 2. U: Uppercase Letters only
 > 3. N: Numbers only
 > 4. C: Lowercase and Uppercase Letters
 > 5. A: Lowercase Letters, Uppercase Letters, and Numbers
-> 
+>
 > Example:
 > `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
 > could substitute to
-> 
+>
 > "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
-> 
+>
 > You can further enhance the visuals using Markdown formatting.
 
 <hr style="border:3px solid gray">
@@ -953,26 +967,18 @@ language: Server language.
 ### `/lock`
 #### Description
  Lock the queue channel to prevent players from joining.
-#### Usage: `/lock (all) (auto_lock) (time) (timezone) (repeat)`
+#### Usage: `/lock (all)`
 #### Arguments:
-`all`: *(Optional)* Lock all queues?.\
-`auto_lock`: *(Optional)* Automatically lock at the specified time.\
-`time`: *(Optional)* Time to lock at in 24 hour format. Ex: 14:00.\
-`timezone`: *(Optional)* Timezone for the specified time. Defaults to UTC.\
-`repeat`: *(Optional)* Repeat daily or just once.
+`all`: *(Optional)* Lock all queues?.
 
 ---
 
 ### `/unlock`
 #### Description
  Unlock the queue channel to allow players to join.
-#### Usage: `/unlock (all) (auto_unlock) (time) (timezone) (repeat)`
+#### Usage: `/unlock (all)`
 #### Arguments:
-`all`: *(Optional)* Unlock all queues?.\
-`auto_unlock`: *(Optional)* Automatically unlock at the specified time.\
-`time`: *(Optional)* Time to unlock at in 24 hour format. Ex: 14:00.\
-`timezone`: *(Optional)* Timezone for the specified time. Defaults to UTC.\
-`repeat`: *(Optional)* Repeat daily or just once.
+`all`: *(Optional)* Unlock all queues?.
 
 <hr style="border:3px solid gray">
 
@@ -1069,10 +1075,10 @@ language: Server language.
 
 ### `/mmr multipliers remove`
 #### Description
- Sets the MMR multiplier for the given role.
+ Remove the MMR multiplier for the given role.
 #### Usage: `/mmr multipliers remove [role]`
 #### Arguments:
-`role`: *(Required)* -.
+`role`: *(Required)* Role to remove multiplier for.
 
 ---
 
@@ -1105,7 +1111,7 @@ language: Server language.
 
 <hr style="border:3px solid gray">
 
-## MVPs 
+## MVPs
 ### `/mvp reward`
 #### Description
  (Default: 5) MMR reward for MVPs.
@@ -1159,10 +1165,13 @@ language: Server language.
 ### `/player ban`
 #### Description
  Bans a player from queueing for the given duration of time.
-#### Usage: `/player ban [player] (duration) (reason)`
+#### Usage: `/player ban [player] (days) (hours) (minutes) (seconds) (reason)`
 #### Arguments:
 `player`: *(Required)* The player to ban.\
-`duration`: *(Optional)* Duration of time in seconds for the ban to last.\
+`days`: *(Optional)* Days to ban for.\
+`hours`: *(Optional)* Hours to ban for.\
+`minutes`: *(Optional)* Minutes to ban for.\
+`seconds`: *(Optional)* Seconds to ban for.\
 `reason`: *(Optional)* -.
 
 ---
@@ -1201,6 +1210,57 @@ language: Server language.
 #### Usage: `/player unban [player]`
 #### Arguments:
 `player`: *(Required)* The player to unban.
+
+<hr style="border:3px solid gray">
+
+## Manage Stats
+### `/managestats copy`
+#### Description
+ Copies the player stats from the old queue name to the new one.
+#### Usage: `/managestats copy [old_name] [new_name]`
+#### Arguments:
+`old_name`: *(Required)* Old queue name with stats.\
+`new_name`: *(Required)* New name to copy the stats to. Will overwrite any stats stored there.
+
+---
+
+### `/managestats merge`
+#### Description
+ Merges stats from the first queue name into the second queue name.
+#### Usage: `/managestats merge [from_queue_name] [to_queue_name] (mmr_merge_strategy)`
+#### Arguments:
+`from_queue_name`: *(Required)* Queue to merge stats from.\
+`to_queue_name`: *(Required)* Queue to merge stats into.\
+`mmr_merge_strategy`: *(Optional)* How individual MMRs should be merged together.\
+&emsp;&emsp;&emsp; Options: `Maximum, Add Together, Ignore`
+
+---
+
+### `/managestats resetstats all`
+#### Description
+ Resets all stats for all queues, or for the inputted queue name.
+#### Usage: `/managestats resetstats all (queue_name)`
+#### Arguments:
+`queue_name`: *(Optional)* The queue name to reset stats for.
+
+---
+
+### `/managestats resetstats mmr`
+#### Description
+ Resets all MMR for all queues, or for the inputted queue name.
+#### Usage: `/managestats resetstats mmr [queue_name]`
+#### Arguments:
+`queue_name`: *(Required)* The queue name to reset stats for.
+
+---
+
+### `/managestats resetstats player`
+#### Description
+ Reset the user's data for all queues or a certain queue.
+#### Usage: `/managestats resetstats player [user] (queue_name)`
+#### Arguments:
+`user`: *(Required)* Enter the desired user.\
+`queue_name`: *(Optional)* Enter the queue data to remove from. Ignore to delete all data from all queues.
 
 <hr style="border:3px solid gray">
 
@@ -1257,7 +1317,7 @@ language: Server language.
 `map_choice`: *(Required)* Voting, always random, or least common.\
 &emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`\
 `gamemode_choice`: *(Optional)* Voting, always random, or least common.\
-&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`
+&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent, Ordered`
 
 ---
 
@@ -1292,17 +1352,6 @@ language: Server language.
 #### Usage: `/matchmaking range [range]`
 #### Arguments:
 `range`: *(Required)* Range of player MMRs.
-
-<hr style="border:3px solid gray">
-
-## Migrate Stats
-### `/migratestats`
-#### Description
- Copies the player stats from the old queue name to the new one.
-#### Usage: `/migratestats [old_name] [new_name]`
-#### Arguments:
-`old_name`: *(Required)* Old queue name with stats.\
-`new_name`: *(Required)* New name to copy the stats to. Will overwrite any stats stored there.
 
 <hr style="border:3px solid gray">
 
@@ -1616,18 +1665,45 @@ language: Server language.
 <hr style="border:3px solid gray">
 
 ## Party Queue
-### `/partyqueue`
+### `/partyqueue maxsize`
+#### Description
+ Set the max party size that can enter the queue.
+#### Usage: `/partyqueue maxsize (max_size)`
+#### Arguments:
+`max_size`: *(Optional)* The max party size, or omit to remove.
+
+---
+
+### `/partyqueue preventoverfill`
+#### Description
+ (Default: Enabled) Prevent a party from joining queue if it over-fills the queue.
+#### Usage: `/partyqueue preventoverfill [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If parties can overfill a queue.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/partyqueue toggle`
 #### Description
  Enable party queue, allowing players to create parties with `/party` before joining.
-#### Usage: `/partyqueue [toggle] (max_size)`
+#### Usage: `/partyqueue toggle [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Enable or disable party queue.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`max_size`: *(Optional)* The max party size.
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 
 <hr style="border:3px solid gray">
 
 ## Predictions
+### `/points ceiling`
+#### Description
+ Sets the highest number of points a player can reach.
+#### Usage: `/points ceiling (points)`
+#### Arguments:
+`points`: *(Optional)* Enter the peak points, or omit to reset.
+
+---
+
 ### `/points change loss`
 #### Description
  (Default: 100) Set how many points players gain for a loss (not MMR).
@@ -1643,6 +1719,34 @@ language: Server language.
 #### Usage: `/points change win [value]`
 #### Arguments:
 `value`: *(Required)* Points for a win.
+
+---
+
+### `/points floor`
+#### Description
+ Sets the lowest number of points a player can reach.
+#### Usage: `/points floor (points)`
+#### Arguments:
+`points`: *(Optional)* Enter the lowest points value, or omit to reset.
+
+---
+
+### `/points multipliers remove`
+#### Description
+ Remove the points multiplier for the given role.
+#### Usage: `/points multipliers remove [role]`
+#### Arguments:
+`role`: *(Required)* Role to remove multiplier for.
+
+---
+
+### `/points multipliers set`
+#### Description
+ Sets the points multiplier for the given role.
+#### Usage: `/points multipliers set [role] [multiplier]`
+#### Arguments:
+`role`: *(Required)* -.\
+`multiplier`: *(Required)* Multiplier value. (Ex: 1.2 for a 20% boost).
 
 ---
 
@@ -1776,7 +1880,7 @@ language: Server language.
  Sets the name for this queue. All stats are tied to the queue name.
 #### Usage: `/queuename [name]`
 #### Arguments:
-`name`: *(Required)* Enter the queue name.
+`name`: *(Required)* New queue name.
 
 <hr style="border:3px solid gray">
 
@@ -1805,6 +1909,27 @@ language: Server language.
 
 ---
 
+### `/autoroles games remove`
+#### Description
+ Removes a condition where player roles are changed based on losses.
+#### Usage: `/autoroles games remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles games set`
+#### Description
+ (Ranks) Adds a condition in which player roles are changed based on games.
+#### Usage: `/autoroles games set [role] [lower_value] [upper_value] (only_one_allowed)`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_value`: *(Required)* The lowest number of games required to gain the role.\
+`upper_value`: *(Required)* The upper number of games to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other games autoroles will be allowed.
+
+---
+
 ### `/autoroles ingame`
 #### Description
  Assign a role to players who are in a match that is removed after.
@@ -1820,6 +1945,27 @@ language: Server language.
 #### Usage: `/autoroles inqueue (role)`
 #### Arguments:
 `role`: *(Optional)* Enter the role, or omit to remove.
+
+---
+
+### `/autoroles losses remove`
+#### Description
+ Removes a condition where player roles are changed based on losses.
+#### Usage: `/autoroles losses remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles losses set`
+#### Description
+ (Ranks) Adds a condition in which player roles are changed based on losses.
+#### Usage: `/autoroles losses set [role] [lower_value] [upper_value] (only_one_allowed)`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_value`: *(Required)* The lowest number of losses required to gain the role.\
+`upper_value`: *(Required)* The upper number of losses to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other loss autoroles will be allowed.
 
 ---
 
@@ -1855,10 +2001,39 @@ language: Server language.
 
 ---
 
+### `/autoroles points remove`
+#### Description
+ Removes a condition where player roles are changed based on Points.
+#### Usage: `/autoroles points remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles points set`
+#### Description
+ (Ranks) Adds a condition in which player roles are changed based on points.
+#### Usage: `/autoroles points set [role] [lower_value] [upper_value] (only_one_allowed)`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_value`: *(Required)* The lowest number of points required to gain the role.\
+`upper_value`: *(Required)* The upper number of points to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other Point autoroles will be allowed.
+
+---
+
 ### `/autoroles refresh`
 #### Description
  Recalculates all autoroles for players.
 #### Usage: `/autoroles refresh`
+
+
+---
+
+### `/autoroles reset`
+#### Description
+ Delete all auto role settings.
+#### Usage: `/autoroles reset`
 
 
 ---
@@ -1879,6 +2054,27 @@ language: Server language.
 #### Arguments:
 `role`: *(Required)* Enter the role for the top players.\
 `number`: *(Required)* Enter the number of players who can have this role.
+
+---
+
+### `/autoroles wins remove`
+#### Description
+ Removes a condition where player roles are changed based on wins.
+#### Usage: `/autoroles wins remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+
+---
+
+### `/autoroles wins set`
+#### Description
+ (Ranks) Adds a condition in which player roles are changed based on wins.
+#### Usage: `/autoroles wins set [role] [lower_value] [upper_value] (only_one_allowed)`
+#### Arguments:
+`role`: *(Required)* Enter the role to give/remove.\
+`lower_value`: *(Required)* The lowest number of wins required to gain the role.\
+`upper_value`: *(Required)* The upper number of wins to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other wins autoroles will be allowed.
 
 <hr style="border:3px solid gray">
 
@@ -1911,7 +2107,7 @@ language: Server language.
 >For queue types that always start when reaching the queue size,
 > requeue priority won't appear to make any changes.
 > However, there are two specific queue starting modes where it will matter:
-> 
+>
 > 1) `/queuetype Matchmaking`: When the matchmaker is running, it will use the overall sum of all player priorities,
 > and use this value to increase the matchmaking range. For example, if the matchmaking range is 300 MMR, but there are
 > two players with 100 priority each, the matchmaking range for that attempted match creation will be 500 MMR,
@@ -2036,35 +2232,6 @@ language: Server language.
 
 <hr style="border:3px solid gray">
 
-## Reset Data
-### `/resetstats all`
-#### Description
- Resets all stats for all queues, or for the inputted queue name.
-#### Usage: `/resetstats all (queue_name)`
-#### Arguments:
-`queue_name`: *(Optional)* The queue name to reset stats for.
-
----
-
-### `/resetstats mmr`
-#### Description
- Resets all MMR for all queues, or for the inputted queue name.
-#### Usage: `/resetstats mmr (queue_name)`
-#### Arguments:
-`queue_name`: *(Optional)* The queue name to reset stats for.
-
----
-
-### `/resetstats player`
-#### Description
- Reset the user's data for all queues or a certain queue.
-#### Usage: `/resetstats player [user] (queue_name)`
-#### Arguments:
-`user`: *(Required)* Enter the desired user.\
-`queue_name`: *(Optional)* Enter the queue data to remove from. Ignore to delete all data from all queues.
-
-<hr style="border:3px solid gray">
-
 ## Results Channel
 ### `/resultschannel`
 #### Description
@@ -2083,6 +2250,73 @@ language: Server language.
 #### Arguments:
 `roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.\
 `required`: *(Optional)* If roles are required to be chosen and enforced.
+
+<hr style="border:3px solid gray">
+
+## Schedule
+### `/schedule cancelsetup`
+#### Description
+ (BETA) Cancels your currently active schedule setup.
+#### Usage: `/schedule cancelsetup`
+
+
+---
+
+### `/schedule delete`
+#### Description
+ (BETA) Delete a previously scheduled command.
+#### Usage: `/schedule delete [scheduled_command]`
+#### Arguments:
+`scheduled_command`: *(Required)* The scheduled command to remove.
+
+---
+
+### `/schedule repeat`
+#### Description
+ (BETA) Toggle if the scheduled command should repeat each time daily.
+#### Usage: `/schedule repeat [scheduled_command] (repeat)`
+#### Arguments:
+`scheduled_command`: *(Required)* -.\
+`repeat`: *(Optional)* If times should repeat after execution.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/schedule setup`
+#### Description
+ (BETA) Start scheduling the execution of any NeatQueue command.
+#### Usage: `/schedule setup`
+
+
+---
+
+### `/schedule time add`
+#### Description
+ (BETA) Specify an execution time for the scheduled command.
+#### Usage: `/schedule time add [scheduled_command] [time] [timezone]`
+#### Arguments:
+`scheduled_command`: *(Required)* The scheduled command to add an execution time for.\
+`time`: *(Required)* Time for the command to be executed.\
+`timezone`: *(Required)* Respective timezone for the inputted time.
+
+---
+
+### `/schedule time list`
+#### Description
+ (BETA) List the scheduled times for the command.
+#### Usage: `/schedule time list [scheduled_command]`
+#### Arguments:
+`scheduled_command`: *(Required)* The scheduled command to list execution times.
+
+---
+
+### `/schedule time remove`
+#### Description
+ (BETA) Remove an execution time for the scheduled command.
+#### Usage: `/schedule time remove [scheduled_command] [time]`
+#### Arguments:
+`scheduled_command`: *(Required)* The scheduled command to remove an execution time for.\
+`time`: *(Required)* Time for the command to be executed.
 
 <hr style="border:3px solid gray">
 
@@ -2600,14 +2834,14 @@ language: Server language.
 > - MATCH_STARTED
 > - TEAMS_CREATED
 > - MATCH_COMPLETED
-> 
+>
 > Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
 > - REGISTER_PLAYER
-> 
+>
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
-> 
+>
 > Examples:
 > https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
