@@ -51,7 +51,7 @@ const Manage = () => {
               setError={setError}
               setSuccess={setSuccess}
             />
-            <Credits premiumData={premiumData} guildID={guildID} />
+            <Credits premiumData={premiumData} refreshPremiumData={refreshPremiumData} guildID={guildID} setError={setError} setSuccess={setSuccess}/>
             {/*<Instance*/}
             {/*  guildID={guildID}*/}
             {/*  setError={setError}*/}

@@ -27,9 +27,9 @@ export const getPremium = async (guildID: string) => {
 };
 
 export const purchasePremium = async (
-  guildID: string,
-  oauth: Auth,
-  plan: string
+    guildID: string,
+    oauth: Auth,
+    plan: string
 ) => {
   const config = {
     headers: {
@@ -38,11 +38,35 @@ export const purchasePremium = async (
   };
 
   const resp = await axios.post(
-    `${API_BASE}/premium/${guildID}/${plan}`,
-    {},
-    config
+      `${API_BASE}/premium/${guildID}/${plan}`,
+      {},
+      config
   );
   return resp.data;
+};
+
+
+export const transferCredits = async (
+    fromGuildID: string,
+    toGuildID: string,
+    amount: number,
+    oauth: Auth,
+) => {
+  const config = {
+    headers: {
+      authorization: `${oauth?.token_type} ${oauth?.access_token}`,
+    },
+  };
+
+  const resp = await axios.post(
+      `${API_BASE}/transfercredits`,
+      {
+        "from_guild_id": fromGuildID,
+        "to_guild_id": toGuildID,
+        "amount": amount
+      },
+      config
+  )
 };
 
 export async function getBracket(guildID: string, tournyName: string) {
