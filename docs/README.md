@@ -27,6 +27,78 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 
 <hr style="border:3px solid gray">
 
+# Premium Commands
+## Language
+### `/language overrides set`
+#### Description
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides set [original_phrase] (overriden_phrase)`
+#### Arguments:
+`original_phrase`: *(Required)* Existing phrase to override.\
+`overriden_phrase`: *(Optional)* Replacement phrase, omit to go back to default.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/language overrides toggle`
+#### Description
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle custom overrides.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/language overrides upload`
+#### Description
+ Upload a custom overrides file.
+#### Usage: `/language overrides upload [custom_overrides]`
+#### Arguments:
+`custom_overrides`: *(Required)* Custom translation overrides, omit to remove.
+>The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
+> The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
+> value that replaces the key.
+> 
+> Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
+> entry must remain constant. If an override does not match the count of signifiers, it will not be used.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
+## Queue Message
+### `/queuemessage footer`
+#### Description
+ (Default: None) Set a footer for the queue message.
+#### Usage: `/queuemessage footer (text) (icon_url)`
+#### Arguments:
+`text`: *(Optional)* Footer contents, or omit to remove.\
+`icon_url`: *(Optional)* -.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/queuemessage image`
+#### Description
+ (Default: None) Set an image for the queue message.
+#### Usage: `/queuemessage image (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/queuemessage thumbnail`
+#### Description
+ (Default: None) Set a thumbnail for the queue message.
+#### Usage: `/queuemessage thumbnail (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 # User Commands
 ## Cancel
 ### `/cancel`
@@ -229,78 +301,6 @@ Place a bet on the given team for the specified match number.
 `gamenumber`: *(Required)* Game number of bet on.\
 `team`: *(Required)* Team to place the bet on.\
 `amount`: *(Required)* Amount of points you want to bet.
-
-<hr style="border:3px solid gray">
-
-# Premium Commands
-## Language
-### `/language overrides set`
-#### Description
- Toggle on/off using the custom overrides.
-#### Usage: `/language overrides set [original_phrase] (overriden_phrase)`
-#### Arguments:
-`original_phrase`: *(Required)* Existing phrase to override.\
-`overriden_phrase`: *(Optional)* Replacement phrase, omit to go back to default.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/language overrides toggle`
-#### Description
- Toggle on/off using the custom overrides.
-#### Usage: `/language overrides toggle [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle custom overrides.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/language overrides upload`
-#### Description
- Upload a custom overrides file.
-#### Usage: `/language overrides upload [custom_overrides]`
-#### Arguments:
-`custom_overrides`: *(Required)* Custom translation overrides, omit to remove.
->The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
-> The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
-> value that replaces the key.
-> 
-> Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
-> entry must remain constant. If an override does not match the count of signifiers, it will not be used.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
-<hr style="border:3px solid gray">
-
-## Queue Message
-### `/queuemessage footer`
-#### Description
- (Default: None) Set a footer for the queue message.
-#### Usage: `/queuemessage footer (text) (icon_url)`
-#### Arguments:
-`text`: *(Optional)* Footer contents, or omit to remove.\
-`icon_url`: *(Optional)* -.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage image`
-#### Description
- (Default: None) Set an image for the queue message.
-#### Usage: `/queuemessage image (image_url)`
-#### Arguments:
-`image_url`: *(Optional)* Direct URL of image, or omit to remove.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage thumbnail`
-#### Description
- (Default: None) Set a thumbnail for the queue message.
-#### Usage: `/queuemessage thumbnail (image_url)`
-#### Arguments:
-`image_url`: *(Optional)* Direct URL of image, or omit to remove.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
 
