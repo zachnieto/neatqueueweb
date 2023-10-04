@@ -32,7 +32,7 @@ const Privacy = () => {
       <ul className="list-disc text-xl">
         <li>
           Server-specific player stats are able to be deleted via{" "}
-          <code className="bg-black rounded p-1">/resetstats</code>
+          <code>/resetstats</code>
         </li>
         <li>
           Reach out via the support server to request deletion of other data

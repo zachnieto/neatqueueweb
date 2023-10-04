@@ -4,9 +4,11 @@ import React from "react";
 const CustomParticles = ({
   color = "#1c0037",
   clickable = true,
+  opacity = 0.05
 }: {
   color?: string;
   clickable?: boolean;
+  opacity?: number;
 }) => {
   return (
     <Particles
@@ -33,7 +35,7 @@ const CustomParticles = ({
             bubble: {
               distance: 400,
               duration: 2,
-              opacity: 0.8,
+              opacity: opacity,
               size: 40,
             },
             push: {
@@ -53,7 +55,7 @@ const CustomParticles = ({
             color: "#ffffff",
             distance: 150,
             enable: true,
-            opacity: 0.1,
+            opacity: opacity,
             width: 1,
           },
           collisions: {
@@ -75,7 +77,7 @@ const CustomParticles = ({
             value: 80,
           },
           opacity: {
-            value: 0.3,
+            value: opacity,
           },
           shape: {
             type: "circle",

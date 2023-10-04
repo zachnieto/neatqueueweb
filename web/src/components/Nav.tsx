@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useHookstate } from "@hookstate/core";
 import globalState, { loadingState } from "../State";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import { discordAuth, endSession } from "../services/server-service";
 import { classNames } from "../util/tailwind";
 
@@ -18,6 +18,12 @@ const navigation = [
   {
     name: "Documentation",
     href: "https://docs.neatqueue.com",
+    current: false,
+    requiresLogin: false,
+  },
+  {
+    name: "Guide",
+    href: "/guide",
     current: false,
     requiresLogin: false,
   },
@@ -90,6 +96,7 @@ export default function Nav() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+
                 <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4 ">
                     {navigation
