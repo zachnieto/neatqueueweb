@@ -1,7 +1,6 @@
+### [NeatQueue Website](https://www.neatqueue.com)
 
 # Introduction
-
-### [NeatQueue Website](https://www.neatqueue.com)
 
 All NeatQueue commands are slash commands, which means they are invoked using a `/` \
 Any Admin command requires the user to have Manage Channels permissions, or have one of the configured NeatQueue staff roles. \
@@ -233,6 +232,72 @@ Place a bet on the given team for the specified match number.
 
 <hr style="border:3px solid gray">
 
+# Premium Commands
+## Language
+### `/language overrides set`
+#### Description
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides set [original_phrase] (overriden_phrase)`
+#### Arguments:
+`original_phrase`: *(Required)* Existing phrase to override.\
+`overriden_phrase`: *(Optional)* Replacement phrase, omit to go back to default.
+
+---
+
+### `/language overrides toggle`
+#### Description
+ Toggle on/off using the custom overrides.
+#### Usage: `/language overrides toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle custom overrides.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+
+---
+
+### `/language overrides upload`
+#### Description
+ Upload a custom overrides file.
+#### Usage: `/language overrides upload [custom_overrides]`
+#### Arguments:
+`custom_overrides`: *(Required)* Custom translation overrides, omit to remove.
+>The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
+> The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
+> value that replaces the key.
+> 
+> Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
+> entry must remain constant. If an override does not match the count of signifiers, it will not be used.
+
+<hr style="border:3px solid gray">
+
+## Queue Message
+### `/queuemessage footer`
+#### Description
+ (Default.
+#### Usage: `/queuemessage footer (text) (icon_url)`
+#### Arguments:
+`text`: *(Optional)* Footer contents, or omit to remove.\
+`icon_url`: *(Optional)* -.
+
+---
+
+### `/queuemessage image`
+#### Description
+ (Default.
+#### Usage: `/queuemessage image (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
+
+---
+
+### `/queuemessage thumbnail`
+#### Description
+ (Default.
+#### Usage: `/queuemessage thumbnail (image_url)`
+#### Arguments:
+`image_url`: *(Optional)* Direct URL of image, or omit to remove.
+
+<hr style="border:3px solid gray">
+
 ## Register
 ### `/register`
 #### Description
@@ -404,7 +469,7 @@ Substitute yourself for the given player.
 
 ### `/balanceby type`
 #### Description
- (Default: mmr) Sets how teams are balanced.
+ (Default.
 #### Usage: `/balanceby type [mode]`
 #### Arguments:
 `mode`: *(Required)* How teams are balanced.\
@@ -464,7 +529,7 @@ Substitute yourself for the given player.
 >Due to Discord API limitations, NeatQueue can only update the channel name twice per a 10 minute period.
 ### `/channel category`
 #### Description
- (Default: Parent) Sets whether created channels go in a separate or the parent category.
+ (Default.
 #### Usage: `/channel category [category_mode] (category)`
 #### Arguments:
 `category_mode`: *(Required)* The category setting. If mode is Specified, you must provide the category.\
@@ -502,7 +567,7 @@ Substitute yourself for the given player.
 
 ### `/channel restrictions`
 #### Description
- (Default: enabled) Sets whether created channels have restrictions.
+ (Default.
 #### Usage: `/channel restrictions [mode]`
 #### Arguments:
 `mode`: *(Required)* If channels are restricted.\
@@ -617,7 +682,7 @@ Substitute yourself for the given player.
 
 ### `/forcestartconfig cooldown`
 #### Description
- (Default: 300) Sets the forcestart cooldown.
+ (Default.
 #### Usage: `/forcestartconfig cooldown [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Cooldown duration in seconds.
@@ -704,41 +769,6 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Language
-### `/language overrides set`
-#### Description
- Toggle on/off using the custom overrides.
-#### Usage: `/language overrides set [original_phrase] (overriden_phrase)`
-#### Arguments:
-`original_phrase`: *(Required)* Existing phrase to override.\
-`overriden_phrase`: *(Optional)* Replacement phrase, omit to go back to default.
-
----
-
-### `/language overrides toggle`
-#### Description
- Toggle on/off using the custom overrides.
-#### Usage: `/language overrides toggle [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle custom overrides.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
----
-
-### `/language overrides upload`
-#### Description
- Upload a custom overrides file.
-#### Usage: `/language overrides upload [custom_overrides]`
-#### Arguments:
-`custom_overrides`: *(Required)* Custom translation overrides, omit to remove.
->The overrides file is JSON format, and can be found here: https://www.neatqueue.com/default_overrides.json
-> The keys (left side) signify the already existing English phrase the bot uses. The value (right side) is the
-> value that replaces the key.
->
-> Sometimes an entry will include special charcters similar to {}. The total number of these signifiers in each
-> entry must remain constant. If an override does not match the count of signifiers, it will not be used.
-
----
-
 ### `/language set`
 #### Description
  Set the language for the server.
@@ -795,7 +825,7 @@ Substitute yourself for the given player.
 
 ### `/leaderboardconfig requiredgames`
 #### Description
- (Default: 1) The required number of games played to be displayed on the leaderboard.
+ (Default.
 #### Usage: `/leaderboardconfig requiredgames [games]`
 #### Arguments:
 `games`: *(Required)* Required number of games.
@@ -813,7 +843,7 @@ Substitute yourself for the given player.
 
 ### `/leaderboardconfig shorturl`
 #### Description
- Create a short url for leaderboards. Ex: 'MyGame' -> https://www.neatqueue.com/lb/MyGame.
+ Create a short url for leaderboards. Ex.
 #### Usage: `/leaderboardconfig shorturl [url]`
 #### Arguments:
 `url`: *(Required)* Short url for this channel's leaderboard.
@@ -939,26 +969,26 @@ Substitute yourself for the given player.
 #### Arguments:
 `message`: *(Required)* Enter the message to send.
 >Currently supports five substitutions:
->
+> 
 > `HOST`: Randomly select a player name \
 > `QUEUENUM`: Substitute the queue number \
 > `RANDOMTEAM`: Substitute a random team name \
 > `RANDOM[Option1,Option2,...]`: Randomly select one of the given options and substitute. Ex: `RANDOM[Heads,Tails]` \
 > `PASSWORD#T`: Generate a random string of characters, where # is the length of the password, and T is the type of
 > characters to be in the password. There are currently 5 supported password types:
->
+> 
 > 1. L: Lowercase Letters only
 > 2. U: Uppercase Letters only
 > 3. N: Numbers only
 > 4. C: Lowercase and Uppercase Letters
 > 5. A: Lowercase Letters, Uppercase Letters, and Numbers
->
+> 
 > Example:
 > `/lobbydetails set "Host: HOST, Lobby Name: QUEUENUM, Lobby Password: PASSWORD8A`
 > could substitute to
->
+> 
 > "Host: @NeatZ, Lobby Name: 12345, Lobby Password: D83mA76x"
->
+> 
 > You can further enhance the visuals using Markdown formatting.
 
 <hr style="border:3px solid gray">
@@ -1022,7 +1052,7 @@ Substitute yourself for the given player.
 
 ### `/mmr change set`
 #### Description
- (Default: 50) Sets the MMR change per game.
+ (Default.
 #### Usage: `/mmr change set [amount] (loser_mmr) (static)`
 #### Arguments:
 `amount`: *(Required)* The average MMR change for wins and losses.\
@@ -1111,10 +1141,10 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## MVPs
+## MVPs 
 ### `/mvp reward`
 #### Description
- (Default: 5) MMR reward for MVPs.
+ (Default.
 #### Usage: `/mvp reward [amount]`
 #### Arguments:
 `amount`: *(Required)* Amount of MMR to give as a reward.
@@ -1133,7 +1163,7 @@ Substitute yourself for the given player.
 
 ### `/mvp voterequired`
 #### Description
- (Default: Disabled) Require players to vote for MVP before voting for winner.
+ (Default.
 #### Usage: `/mvp voterequired [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If voting for MVP is required.\
@@ -1358,7 +1388,7 @@ Substitute yourself for the given player.
 ## Miscellaneous/Utility
 ### `/misc mention teamscreated`
 #### Description
- (Default: Disabled) Mention the players after teams are created.
+ (Default.
 #### Usage: `/misc mention teamscreated [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If the players are mentioned after teams are created.\
@@ -1368,7 +1398,7 @@ Substitute yourself for the given player.
 
 ### `/misc nametype`
 #### Description
- Sets whether to use nicknames or discord names (Default: nick).
+ Sets whether to use nicknames or discord names (Default.
 #### Usage: `/misc nametype [type]`
 #### Arguments:
 `type`: *(Required)* The type of names to be used.\
@@ -1386,7 +1416,7 @@ Substitute yourself for the given player.
 
 ### `/misc shuffleonstart`
 #### Description
- (Default: Disabled) Shuffle the player pool on start.
+ (Default.
 #### Usage: `/misc shuffleonstart [mode]`
 #### Arguments:
 `mode`: *(Required)* -.\
@@ -1396,7 +1426,7 @@ Substitute yourself for the given player.
 
 ### `/misc startwhen`
 #### Description
- (Default: Either) Start the match when the queue fills, or only when forcestarted.
+ (Default.
 #### Usage: `/misc startwhen [mode]`
 #### Arguments:
 `mode`: *(Required)* Condition for starting the match.\
@@ -1647,7 +1677,7 @@ Substitute yourself for the given player.
 ## Number Of Lobbies
 ### `/numberoflobbies`
 #### Description
- (Default: 1) Sets the number of lobbies to create.
+ (Default.
 #### Usage: `/numberoflobbies [lobbies]`
 #### Arguments:
 `lobbies`: *(Required)* The number of lobbies.
@@ -1657,7 +1687,7 @@ Substitute yourself for the given player.
 ## Number Of Teams
 ### `/numberofteams`
 #### Description
- (Default: 2) Sets the number of teams.
+ (Default.
 #### Usage: `/numberofteams [number]`
 #### Arguments:
 `number`: *(Required)* The number of teams.
@@ -1676,7 +1706,7 @@ Substitute yourself for the given player.
 
 ### `/partyqueue preventoverfill`
 #### Description
- (Default: Enabled) Prevent a party from joining queue if it over-fills the queue.
+ (Default.
 #### Usage: `/partyqueue preventoverfill [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If parties can overfill a queue.\
@@ -1706,7 +1736,7 @@ Substitute yourself for the given player.
 
 ### `/points change loss`
 #### Description
- (Default: 100) Set how many points players gain for a loss (not MMR).
+ (Default.
 #### Usage: `/points change loss [value]`
 #### Arguments:
 `value`: *(Required)* Points for a loss.
@@ -1715,7 +1745,7 @@ Substitute yourself for the given player.
 
 ### `/points change win`
 #### Description
- (Default: 100) Set how many points players gain for a win (not MMR).
+ (Default.
 #### Usage: `/points change win [value]`
 #### Arguments:
 `value`: *(Required)* Points for a win.
@@ -1752,7 +1782,7 @@ Substitute yourself for the given player.
 
 ### `/points startingvalue`
 #### Description
- (Default: 0) Set how many points players start with (not MMR).
+ (Default.
 #### Usage: `/points startingvalue [value]`
 #### Arguments:
 `value`: *(Required)* Starting points value.
@@ -1799,7 +1829,7 @@ Substitute yourself for the given player.
 ## Queue Message
 ### `/queuemessage delay`
 #### Description
- (Default: 3) Sets the delay for when a new queue message comes up.
+ (Default.
 #### Usage: `/queuemessage delay [seconds]`
 #### Arguments:
 `seconds`: *(Required)* New message delay.
@@ -1808,7 +1838,7 @@ Substitute yourself for the given player.
 
 ### `/queuemessage deletions`
 #### Description
- (Default: Enabled) Sets whether old queue updates should be deleted.
+ (Default.
 #### Usage: `/queuemessage deletions [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
@@ -1818,7 +1848,7 @@ Substitute yourself for the given player.
 
 ### `/queuemessage edits`
 #### Description
- (Default: Enabled) Set whether queue updates should edit the previous message.
+ (Default.
 #### Usage: `/queuemessage edits [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
@@ -1826,19 +1856,9 @@ Substitute yourself for the given player.
 
 ---
 
-### `/queuemessage footer`
-#### Description
- (Default: None) Set a footer for the queue message.
-#### Usage: `/queuemessage footer (text) (icon_url)`
-#### Arguments:
-`text`: *(Optional)* Footer contents, or omit to remove.\
-`icon_url`: *(Optional)* -.
-
----
-
 ### `/queuemessage history`
 #### Description
- (Default: Disable) Sets whether to send a new message for every queue interaction.
+ (Default.
 #### Usage: `/queuemessage history [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
@@ -1846,31 +1866,13 @@ Substitute yourself for the given player.
 
 ---
 
-### `/queuemessage image`
-#### Description
- (Default: None) Set an image for the queue message.
-#### Usage: `/queuemessage image (image_url)`
-#### Arguments:
-`image_url`: *(Optional)* Direct URL of image, or omit to remove.
-
----
-
 ### `/queuemessage sticky`
 #### Description
- (Default: Enabled) Sets whether the queue message sticks to the bottom of the channel.
+ (Default.
 #### Usage: `/queuemessage sticky [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle the message being sticky.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-
----
-
-### `/queuemessage thumbnail`
-#### Description
- (Default: None) Set a thumbnail for the queue message.
-#### Usage: `/queuemessage thumbnail (image_url)`
-#### Arguments:
-`image_url`: *(Optional)* Direct URL of image, or omit to remove.
 
 <hr style="border:3px solid gray">
 
@@ -2096,7 +2098,7 @@ Substitute yourself for the given player.
 ## Rematch
 ### `/rematches`
 #### Description
- (Default: true) Toggle the ability to rematch.
+ (Default.
 #### Usage: `/rematches [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If you want rematches to be enabled or disabled.
@@ -2107,7 +2109,7 @@ Substitute yourself for the given player.
 >For queue types that always start when reaching the queue size,
 > requeue priority won't appear to make any changes.
 > However, there are two specific queue starting modes where it will matter:
->
+> 
 > 1) `/queuetype Matchmaking`: When the matchmaker is running, it will use the overall sum of all player priorities,
 > and use this value to increase the matchmaking range. For example, if the matchmaking range is 300 MMR, but there are
 > two players with 100 priority each, the matchmaking range for that attempted match creation will be 500 MMR,
@@ -2176,7 +2178,7 @@ Substitute yourself for the given player.
 ## Require IGN
 ### `/requireign`
 #### Description
- (Default: false) Require if players must set their IGN before they can queue.
+ (Default.
 #### Usage: `/requireign [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If you want to require that users set their IGN.\
@@ -2245,7 +2247,7 @@ Substitute yourself for the given player.
 ## Roles
 ### `/roles`
 #### Description
- (Default: None) Sets the roles for this queue, or omit to remove all.
+ (Default.
 #### Usage: `/roles (roles) (required)`
 #### Arguments:
 `roles`: *(Optional)* Enter the roles in the form Role,Role,Role,etc.\
@@ -2421,7 +2423,7 @@ Substitute yourself for the given player.
 ## Show MMR in Name
 ### `/ratinginname format`
 #### Description
- (Default: '- ($)') Sets the format for ratings in nicknames.
+ (Default.
 #### Usage: `/ratinginname format [format] [location]`
 #### Arguments:
 `format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.\
@@ -2619,7 +2621,7 @@ Substitute yourself for the given player.
 ## Temporary Setup Channels
 ### `/tempchannels name`
 #### Description
- (Default: queue-$) Naming format for temporary setup channels.
+ (Default.
 #### Usage: `/tempchannels name [name_format]`
 #### Arguments:
 `name_format`: *(Required)* Channel format, where $ will be replaced with the match number.
@@ -2628,7 +2630,7 @@ Substitute yourself for the given player.
 
 ### `/tempchannels toggle`
 #### Description
- (Default: Enabled) Sets whether to create a temporary text channel for setup.
+ (Default.
 #### Usage: `/tempchannels toggle [mode]`
 #### Arguments:
 `mode`: *(Required)* If the temporary setup channels are enabled.\
@@ -2638,7 +2640,7 @@ Substitute yourself for the given player.
 
 ### `/tempchannels type`
 #### Description
- (Default: Text Channels) Specify if the temp channels are threads or normal channels.
+ (Default.
 #### Usage: `/tempchannels type [type]`
 #### Arguments:
 `type`: *(Required)* If the new channels should be text channels, or threads of this channel.\
@@ -2678,7 +2680,7 @@ Substitute yourself for the given player.
 
 ### `/timer matchcleanup`
 #### Description
- (Default: 5400) Sets the timeout before a running game is finished.
+ (Default.
 #### Usage: `/timer matchcleanup [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Enter the time in SECONDS.
@@ -2687,7 +2689,7 @@ Substitute yourself for the given player.
 
 ### `/timer queuemessage`
 #### Description
- (Default: 3) Sets the delay for when a new queue message comes up.
+ (Default.
 #### Usage: `/timer queuemessage [seconds]`
 #### Arguments:
 `seconds`: *(Required)* New message delay.
@@ -2696,7 +2698,7 @@ Substitute yourself for the given player.
 
 ### `/timer queuereset`
 #### Description
- (Default: 3600) Sets the time before the queue is reset.
+ (Default.
 #### Usage: `/timer queuereset [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Enter the time in SECONDS.
@@ -2705,7 +2707,7 @@ Substitute yourself for the given player.
 
 ### `/timer votes`
 #### Description
- (Default: 60) Sets the timeout for voting menus.
+ (Default.
 #### Usage: `/timer votes [seconds]`
 #### Arguments:
 `seconds`: *(Required)* -.
@@ -2714,7 +2716,7 @@ Substitute yourself for the given player.
 
 ### `/timer winnervotemessage`
 #### Description
- (Default: 0) Sets the delay before enabling the winner voting message.
+ (Default.
 #### Usage: `/timer winnervotemessage [seconds]`
 #### Arguments:
 `seconds`: *(Required)* Enter the time in SECONDS.
@@ -2772,7 +2774,7 @@ Substitute yourself for the given player.
 ## Voice Channel Mode
 ### `/voicechannels mode`
 #### Description
- (Default: required) Sets whether voice channels are required, optional, or disabled.
+ (Default.
 #### Usage: `/voicechannels mode [mode]`
 #### Arguments:
 `mode`: *(Required)* The type of voice channel setting.\
@@ -2782,7 +2784,7 @@ Substitute yourself for the given player.
 
 ### `/voicechannels moveteam`
 #### Description
- (Default: After All Setup) Sets when to move players to team voice channels.
+ (Default.
 #### Usage: `/voicechannels moveteam [when]`
 #### Arguments:
 `when`: *(Required)* When to move players to team channels.\
@@ -2792,7 +2794,7 @@ Substitute yourself for the given player.
 
 ### `/voicechannels teamchannels`
 #### Description
- (Default: Enabled) Toggle creating separate voice channels for each team.
+ (Default.
 #### Usage: `/voicechannels teamchannels [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If channels are created per team.\
@@ -2834,14 +2836,14 @@ Substitute yourself for the given player.
 > - MATCH_STARTED
 > - TEAMS_CREATED
 > - MATCH_COMPLETED
->
+> 
 > Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
 > - REGISTER_PLAYER
->
+> 
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
->
+> 
 > Examples:
 > https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
