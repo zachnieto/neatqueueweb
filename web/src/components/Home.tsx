@@ -6,6 +6,7 @@ import { LoadingBar } from "./Loading";
 import CustomParticles from "./Particles";
 import Sus from "./Sus";
 import { classNames } from "../util/tailwind";
+import Guide from "./Guide";
 
 const Home = () => {
   const global = useHookstate(globalState);
@@ -18,7 +19,7 @@ const Home = () => {
 
   return (
     <div>
-      <CustomParticles />
+      <CustomParticles opacity={.1} />
       <Sus />
       <div className="h-screen flex justify-center items-center text-gray-200">
         <div className="">
