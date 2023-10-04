@@ -71,3 +71,9 @@ export type Session = {
   guilds: Guild[] | undefined;
   stats: BotStats;
 };
+
+export type CommandSectonData = {
+  title: string;
+  paragraph: any;
+  link: string;
+}

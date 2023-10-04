@@ -15,6 +15,7 @@ import Bracket from "./components/Bracket";
 import Status from "./components/Status";
 import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
+import Guide from "./components/Guide";
 
 function App() {
   const state = useHookstate(globalState);
@@ -45,6 +46,7 @@ function App() {
           <Route path="/lb/:shortUrl" element={<ShortURL />} />
           <Route path="/status" element={<Status />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/guide" element={<Guide />} />
         </Routes>
 
         <Footer />
