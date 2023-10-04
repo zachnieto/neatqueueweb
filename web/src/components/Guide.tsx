@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import Commands from "./Commands";
 
 import neatqueue from "../assets/neatqueue.svg";
+import neatqueuePNG from "../assets/neatqueue.png";
 import fileIcon from "../assets/file-icon.svg";
 
 
@@ -40,7 +41,7 @@ const Guide = () => {
                         alt="queue"
                     />
                     <img
-                        src="/mobilequeue.svg"
+                        src={neatqueuePNG} // TODO: Update SVG to outline text, to prevent font from changing
                         width={500}
                         height={500}
                         className="w-full object-cover md:hidden"
