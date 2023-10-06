@@ -67,11 +67,34 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 
 <hr style="border:3px solid gray">
 
-## Queue Message
-### `/queuemessage footer`
+## Leaderboard Config
+>Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
+> Leaderboard titles are also hyperlinks to the website version of the leaderboard.
+### `/leaderboardconfig url`
+#### Description
+ Create a custom website url for leaderboards.
+#### Usage: `/leaderboardconfig url [url]`
+#### Arguments:
+`url`: *(Required)* Custom url for this channel's leaderboard.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
+## Messages + Styling
+### `/message color`
+#### Description
+ Sets the color for all embeds in messages.
+#### Usage: `/message color [color]`
+#### Arguments:
+`color`: *(Required)* Either a color by name, or by HEX value (Ex: 00FF55).
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage footer`
 #### Description
  (Default: None) Set a footer for the queue message.
-#### Usage: `/queuemessage footer (text) (icon_url)`
+#### Usage: `/message queuemessage footer (text) (icon_url)`
 #### Arguments:
 `text`: *(Optional)* Footer contents, or omit to remove.\
 `icon_url`: *(Optional)* -.
@@ -79,20 +102,20 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 
 ---
 
-### `/queuemessage image`
+### `/message queuemessage image`
 #### Description
  (Default: None) Set an image for the queue message.
-#### Usage: `/queuemessage image (image_url)`
+#### Usage: `/message queuemessage image (image_url)`
 #### Arguments:
 `image_url`: *(Optional)* Direct URL of image, or omit to remove.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
 
-### `/queuemessage thumbnail`
+### `/message queuemessage thumbnail`
 #### Description
  (Default: None) Set a thumbnail for the queue message.
-#### Usage: `/queuemessage thumbnail (image_url)`
+#### Usage: `/message queuemessage thumbnail (image_url)`
 #### Arguments:
 `image_url`: *(Optional)* Direct URL of image, or omit to remove.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -896,16 +919,6 @@ Substitute yourself for the given player.
 
 ---
 
-### `/leaderboardconfig shorturl`
-#### Description
- Create a short url for leaderboards. Ex: 'MyGame' -> https://www.neatqueue.com/lb/MyGame.
-#### Usage: `/leaderboardconfig shorturl [url]`
-#### Arguments:
-`url`: *(Required)* Short url for this channel's leaderboard.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
 ### `/leaderboardconfig type`
 #### Description
  Toggle using the image or text leaderboard.
@@ -1492,6 +1505,105 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Messages + Styling
+### `/message queuemessage delay`
+#### Description
+ (Default: 3) Sets the delay for when a new queue message comes up.
+#### Usage: `/message queuemessage delay [seconds]`
+#### Arguments:
+`seconds`: *(Required)* New message delay.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage deletions`
+#### Description
+ (Default: Enabled) Sets whether old queue updates should be deleted.
+#### Usage: `/message queuemessage deletions [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage edits`
+#### Description
+ (Default: Enabled) Set whether queue updates should edit the previous message.
+#### Usage: `/message queuemessage edits [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage history`
+#### Description
+ (Default: Disable) Sets whether to send a new message for every queue interaction.
+#### Usage: `/message queuemessage history [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage sticky`
+#### Description
+ (Default: Enabled) Sets whether the queue message sticks to the bottom of the channel.
+#### Usage: `/message queuemessage sticky [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Toggle the message being sticky.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message winnermessage format`
+#### Description
+ Sets the format for the winner message.
+#### Usage: `/message winnermessage format [mode]`
+#### Arguments:
+`mode`: *(Required)* Formatting type.\
+&emsp;&emsp;&emsp; Options: `Detailed, Simple`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message winnermessage pin`
+#### Description
+ Sets whether the message gets pinned.
+#### Usage: `/message winnermessage pin [mode]`
+#### Arguments:
+`mode`: *(Required)* Pin mode.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message winnermessage results`
+#### Description
+ Set who can vote for the result, or if results are fully disabled.
+#### Usage: `/message winnermessage results [value]`
+#### Arguments:
+`value`: *(Required)* Who can vote, or if the match has no outcome.\
+&emsp;&emsp;&emsp; Options: `Default, Staff Only, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message winnermessage sticky`
+#### Description
+ Sets whether the message sticks to the bottom of chat.
+#### Usage: `/message winnermessage sticky [mode]`
+#### Arguments:
+`mode`: *(Required)* Sticky mode.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Miscellaneous/Utility
 ### `/misc mention teamscreated`
 #### Description
@@ -1971,61 +2083,6 @@ Substitute yourself for the given player.
 #### Usage: `/predictions toggle [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If predictions are enabled or disabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
-<hr style="border:3px solid gray">
-
-## Queue Message
-### `/queuemessage delay`
-#### Description
- (Default: 3) Sets the delay for when a new queue message comes up.
-#### Usage: `/queuemessage delay [seconds]`
-#### Arguments:
-`seconds`: *(Required)* New message delay.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage deletions`
-#### Description
- (Default: Enabled) Sets whether old queue updates should be deleted.
-#### Usage: `/queuemessage deletions [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage edits`
-#### Description
- (Default: Enabled) Set whether queue updates should edit the previous message.
-#### Usage: `/queuemessage edits [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle between editing queue updates, or sending new messages.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage history`
-#### Description
- (Default: Disable) Sets whether to send a new message for every queue interaction.
-#### Usage: `/queuemessage history [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/queuemessage sticky`
-#### Description
- (Default: Enabled) Sets whether the queue message sticks to the bottom of the channel.
-#### Usage: `/queuemessage sticky [toggle]`
-#### Arguments:
-`toggle`: *(Required)* Toggle the message being sticky.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -3119,51 +3176,6 @@ Substitute yourself for the given player.
  Generate an API token for your account.
 #### Usage: `/webhooks generatetoken`
 
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
-<hr style="border:3px solid gray">
-
-## Winner Message
-### `/winnermessage format`
-#### Description
- Sets the format for the winner message.
-#### Usage: `/winnermessage format [mode]`
-#### Arguments:
-`mode`: *(Required)* Formatting type.\
-&emsp;&emsp;&emsp; Options: `Detailed, Simple`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/winnermessage pin`
-#### Description
- Sets whether the message gets pinned.
-#### Usage: `/winnermessage pin [mode]`
-#### Arguments:
-`mode`: *(Required)* Pin mode.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/winnermessage results`
-#### Description
- Set who can vote for the result, or if results are fully disabled.
-#### Usage: `/winnermessage results [value]`
-#### Arguments:
-`value`: *(Required)* Who can vote, or if the match has no outcome.\
-&emsp;&emsp;&emsp; Options: `Default, Staff Only, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/winnermessage sticky`
-#### Description
- Sets whether the message sticks to the bottom of chat.
-#### Usage: `/winnermessage sticky [mode]`
-#### Arguments:
-`mode`: *(Required)* Sticky mode.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
