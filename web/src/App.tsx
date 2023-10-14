@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Leaderboard from "./components/Leaderboard";
 import Manage from "./components/manage/Manage";
 import Nav from "./components/Nav";

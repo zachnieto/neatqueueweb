@@ -15,9 +15,8 @@ const Guide = () => {
                         Basic NeatQueue Guide
                     </h1>
                     <p className="text-2xl font-light">
-                        NeatQueue is a queue bot that allows you to create a queue for your
-                        server. This guide will show you the basic commands to set up
-                        a queue with this amazing bot.
+                        NeatQueue is a Matchmaking/PUGs/Queue bot that helps orchestrate matches and create a competitive atmosphere in your Discord server.
+                        Check out this basic queue, and view the documentation for the full list of over 100+ commands of customization!
                     </p>
                     <Link to="https://docs.neatqueue.com" className="w-fit">
                         <button className="flex items-center p-3 cursor-pointer bg-red-700 border-none rounded w-max text-white hover:bg-red-800 transition ease-out duration-300">

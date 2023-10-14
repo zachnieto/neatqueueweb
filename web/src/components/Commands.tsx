@@ -7,18 +7,28 @@ import {CommandSectonData} from "../types";
 const command_sections: CommandSectonData[] = [
     {
         title: "Create a Queue",
-        paragraph: "Starting a Queue is very easy. You have two options to start a queue, you can use the `/startqueue` command, which will have 3 parameters for a basic queue setup, queuename, team size, and number of teams.\nThe second command you can use is /setup, which will start an interactive walkthrough to setup your queue.",
+        paragraph: "Once a queue is created, players will be able to freely start matches at their own will. To start a queue, there are a few options:\n\nYou can use the `/startqueue` command, which will have 3 parameters for a basic queue setup: queuename, team size, and number of teams.\n\nAnother command you can use is /setup, which will start an interactive walkthrough to setup your queue.\n\nNeatQueue also supports configuration sharing. You can load up a specific config using `/config load`, and save your config with `/config save`",
         link: "https://docs.neatqueue.com/#/?id=starting-a-queue",
     },
     {
         title: "Leaderboard",
-        paragraph: "To display the leaderboard of your queue, you can run `/leaderboard`. The leaderboard will show MMRs, wins, win rates, and much more!\nYou can also configure a shorturl with `/leaderboardconfig shorturl` which will generate an online leaderboard.\n\nNote: To share a leaderboard with many queues, you just need to name all the queues the same via /queuename, or set up a common `/leaderboard sharedconfig`.",
+        paragraph: "To display the leaderboard of your queue, you can run `/leaderboard`. The leaderboard will show MMRs, wins, win rates, and much more!\nYou can also configure a custom URL with `/leaderboardconfig url` which will generate an online leaderboard.\n\nNote: To share a leaderboard with many queues, you just need to name all the queues the same via /queuename, or set up a common `/leaderboard sharedconfig`.\nAlso, click the leaderboard title to see the web version!",
         link: "https://docs.neatqueue.com/#/?id=leaderboard",
     },
     {
+        title: "Sharing Stats Between Queues",
+        paragraph: "By design, player stats are stored using the queue name. This means that any queues that have the same name will share the same underlying stats system. You can change an existing queue's name with /queuename.\n\nYou can override the underlying stat system name using `/leaderboardconfig sharedstats`, which will let queues with different names have the same stats.",
+        link: "https://docs.neatqueue.com/#/?id=queue-name",
+    },
+    {
         title: "MMR Change",
-        paragraph: "This command changes the MMR change per game, with `/mmr change set` you can adjust the average MMR change for wins and losses.\nYou can also set the loser MMR change that overrides the average MMR change for losses, and if you want those values to be always the same, you can set the static parameter to true.\n\nNote: There are many more customization options for the MMR, which can be found in the documentation.",
+        paragraph: "With `/mmr change set` you can adjust the average MMR change for wins and losses.\nYou can also set the loser MMR change that overrides the average MMR change for losses, and if you want those values to be always the same, you can set the static parameter to true.\n\nNote: There are many more customization options for the MMR, which can be found in the documentation.",
         link: "https://docs.neatqueue.com/#/?id=mmr-change",
+    },
+    {
+        title: "Ranks/Auto Roles",
+        paragraph: "Reward your players by setting up ranks via `/autoroles` based on MMR, wins, games played, and others! These ranks will automatically be assigned when players are within the defined threshold.",
+        link: "https://docs.neatqueue.com/#/?id=ranksautomatically-assign-discord-roles",
     },
     {
         title: "Starting MMR",
@@ -27,7 +37,7 @@ const command_sections: CommandSectonData[] = [
     },
     {
         title: "Maps and Gamemodes",
-        paragraph: "Set the maps and gamemodes for your queue to be played with `/map add`.\nYou can also set the selection method with `/map selection`.",
+        paragraph: "Set the maps and gamemodes to be played with `/map add`.\nYou can also set the selection method with `/map selection`.",
         link: "https://docs.neatqueue.com/#/?id=maps",
     },
     {
@@ -37,7 +47,7 @@ const command_sections: CommandSectonData[] = [
     },
     {
         title: "Captain Selection",
-        paragraph: "Set the team selection method with `/captains selection`.\nChoose between 5 different methods, and select the ones you want to keep.",
+        paragraph: "Set the captain selection method with `/captains selection`.\nChoose between 5 different methods, and select the ones you want to keep.",
         link: "https://docs.neatqueue.com/#/?id=captain-selection",
     },
     {

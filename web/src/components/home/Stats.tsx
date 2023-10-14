@@ -1,14 +1,13 @@
 import { useHookstate } from "@hookstate/core";
 import { useEffect, useState } from "react";
-import { getStats } from "../services/neatqueue-service";
-import globalState from "../State";
-import { LoadingBar } from "./Loading";
-import CustomParticles from "./Particles";
-import Sus from "./Sus";
-import { classNames } from "../util/tailwind";
-import Guide from "./Guide";
+import { getStats } from "../../services/neatqueue-service";
+import globalState from "../../State";
+import { LoadingBar } from "../Loading";
+import CustomParticles from "../Particles";
+import Sus from "../Sus";
+import { classNames } from "../../util/tailwind";
 
-const Home = () => {
+const Stats = () => {
   const global = useHookstate(globalState);
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,9 +17,6 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <CustomParticles opacity={.1} />
-      <Sus />
       <div className="h-screen flex justify-center items-center text-gray-200">
         <div className="">
           <h1 className="md:text-9xl sm:text-8xl text-7xl">NeatQueue</h1>
@@ -35,7 +31,7 @@ const Home = () => {
                 {global.stats.servers.get() === -1 ? (
                   <LoadingBar />
                 ) : (
-                  global.stats.servers.get()
+                  global.stats.servers.get().toLocaleString()
                 )}
               </h1>
 
@@ -43,7 +39,7 @@ const Home = () => {
                 {global.stats.players.get() === -1 ? (
                   <LoadingBar />
                 ) : (
-                  global.stats.players.get()
+                  global.stats.players.get().toLocaleString()
                 )}
               </h1>
 
@@ -51,7 +47,7 @@ const Home = () => {
                 {global.stats.games.get() === -1 ? (
                   <LoadingBar />
                 ) : (
-                  global.stats.games.get()
+                  global.stats.games.get().toLocaleString()
                 )}
               </h1>
             </div>
@@ -73,8 +69,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
-export default Home;
+export default Stats;
