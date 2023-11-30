@@ -142,7 +142,8 @@ const Leaderboard = ({
           </h3>
         </div>
         {stats &&
-          stats[month]
+          stats[month] !== undefined
+              && stats[month]
             .sort(
               (a: LooseObject, b: LooseObject) =>
                 b?.data[sortKeys[sortKey]] - a?.data[sortKeys[sortKey]]
