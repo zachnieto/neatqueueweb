@@ -81,6 +81,11 @@ export async function getLongUrl(shortUrl: string) {
   return resp.data;
 }
 
+export async function getTranscript(guildID: string, gameNum: string) {
+  const resp = await axios.get(`${API_BASE}/api/transcript/${guildID}/${gameNum}`);
+  return resp.data;
+}
+
 export async function getStatus() {
   const resp = await axios.get(`${API_BASE}/status`, { timeout: 2000 });
   const data: NodeStatus[] = resp.data;

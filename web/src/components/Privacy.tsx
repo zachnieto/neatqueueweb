@@ -23,8 +23,7 @@ const Privacy = () => {
         <li>Leaderboard message IDs</li>
         <li>Command usage</li>
         <li>
-          Message Content (Only in NeatQueue match channels if enabled by
-          server, deleted after 30 days)
+          Message Content in match channels
         </li>
       </ul>
 

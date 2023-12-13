@@ -16,6 +16,7 @@ import Status from "./components/Status";
 import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
 import Guide from "./components/Guide";
+import Transcript from "./components/Transcript";
 
 function App() {
   const state = useHookstate(globalState);
@@ -44,6 +45,7 @@ function App() {
           {/*<Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>*/}
           <Route path="/bracket/:guildID/:tournyName" element={<Bracket />} />
           <Route path="/lb/:shortUrl" element={<ShortURL />} />
+          <Route path="/transcript/:guildID/:gameNum" element={<Transcript />} />
           <Route path="/status" element={<Status />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/guide" element={<Guide />} />
