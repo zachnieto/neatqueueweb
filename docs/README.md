@@ -171,15 +171,6 @@ View locations where to find help for setup.
 
 <hr style="border:3px solid gray">
 
-## Info
-### `/info`
-#### Description
-View information about the queue configuration.
-#### Usage: `/info`
-
-
-<hr style="border:3px solid gray">
-
 ## Leaderboard
 ### `/leaderboard`
 #### Description
@@ -518,6 +509,22 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Best Of
+### `/bestof`
+#### Description
+ Sets whether the queue is a best of 3, 5, 7, etc.
+#### Usage: `/bestof [number] (vote) (voteselection) (eligible_voters)`
+#### Arguments:
+`number`: *(Required)* Best of number.\
+`vote`: *(Optional)* Whether players can vote on the number of matches to play.\
+`voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.\
+&emsp;&emsp;&emsp; Options: `Majority, Lowest`\
+`eligible_voters`: *(Optional)* Who on the team can vote. Defaults to All if no captain selected.\
+&emsp;&emsp;&emsp; Options: `All, Captains`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Captain Selection
 ### `/captains automute`
 #### Description
@@ -548,6 +555,17 @@ Substitute yourself for the given player.
 #### Arguments:
 `mode`: *(Required)* Who gets the first pick.\
 &emsp;&emsp;&emsp; Options: `Highest Rated, Lowest Rated, Random`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/captains reshuffle`
+#### Description
+ Sets whether players can reshuffle captains in random captain selection.
+#### Usage: `/captains reshuffle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -639,7 +657,7 @@ Substitute yourself for the given player.
 ## Config Loading/Saving
 ### `/config list`
 #### Description
- List the 10 most recently created configs.
+ List the 15 most recently created configs.
 #### Usage: `/config list`
 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -766,6 +784,29 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Gamemodes
+### `/gamemode reshuffle`
+#### Description
+ Sets whether players can reshuffle gamemodes in random gamemode selection.
+#### Usage: `/gamemode reshuffle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/gamemode selection`
+#### Description
+ Choose how gamemodes are selected.
+#### Usage: `/gamemode selection [gamemode_choice]`
+#### Arguments:
+`gamemode_choice`: *(Required)* Voting, always random, ordered, or least common.\
+&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent, Ordered`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Global Queue
 ### `/globalqueue create`
 #### Description
@@ -839,6 +880,16 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Info
+### `/info`
+#### Description
+ View information about the queue configuration.
+#### Usage: `/info`
+
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Language
 ### `/language set`
 #### Description
@@ -846,7 +897,7 @@ Substitute yourself for the given player.
 #### Usage: `/language set [language]`
 #### Arguments:
 `language`: *(Required)* Server language.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Uwu, Owo`
+&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Bengali, Hindi, Turkish, Vietnamese, Uwu, Owo`
 >If there is an issue with a normal language translation, please fix here: https://crowdin.com/project/neatqueue
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -909,10 +960,22 @@ Substitute yourself for the given player.
 
 ---
 
-### `/leaderboardconfig sharedstats`
+### `/leaderboardconfig sharedstats serverwide`
+#### Description
+ Toggle having player stats be shared among all queues.
+#### Usage: `/leaderboardconfig sharedstats serverwide [toggle] (name)`
+#### Arguments:
+`toggle`: *(Required)* If player stats are server wide.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`name`: *(Optional)* Shared stats name, or omit to automatically determine.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/leaderboardconfig sharedstats set`
 #### Description
  Sets the name to use for stats storaged. Queues with the same name share stats.
-#### Usage: `/leaderboardconfig sharedstats [name]`
+#### Usage: `/leaderboardconfig sharedstats set [name]`
 #### Arguments:
 `name`: *(Required)* Shared stats configuration name.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -1108,16 +1171,6 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## MMR Change
-### `/mmr ceiling`
-#### Description
- Sets the highest mmr a player can reach in this queue.
-#### Usage: `/mmr ceiling (mmr)`
-#### Arguments:
-`mmr`: *(Optional)* Enter the peak rating, or omit to reset.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
 ### `/mmr change allow_disable`
 #### Description
  Sets if the vote to disable MMR appears.
@@ -1134,6 +1187,19 @@ Substitute yourself for the given player.
 #### Usage: `/mmr change hidden [hidden]`
 #### Arguments:
 `hidden`: *(Required)* If MMR changes are hidden.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/mmr change mode`
+#### Description
+ (Default: Per Player) Sets if MMR changes are calculated per player, or per team.
+#### Usage: `/mmr change mode [mode]`
+#### Arguments:
+`mode`: *(Required)* How MMR changes are calculated.\
+&emsp;&emsp;&emsp; Options: `Per Player, Per Team`
+>MMR multipliers will still be applied on a per-player basis. Disable multipliers to make everyone on the team
+> get the same MMR change.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1175,10 +1241,20 @@ Substitute yourself for the given player.
 
 ---
 
-### `/mmr floor`
+### `/mmr maximum`
+#### Description
+ Sets the highest mmr a player can reach in this queue.
+#### Usage: `/mmr maximum (mmr)`
+#### Arguments:
+`mmr`: *(Optional)* Enter the peak rating, or omit to reset.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/mmr minimum`
 #### Description
  Sets the lowest mmr a player can reach in this queue.
-#### Usage: `/mmr floor (mmr)`
+#### Usage: `/mmr minimum (mmr)`
 #### Arguments:
 `mmr`: *(Optional)* Enter the lowest rating, or omit to reset.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -1296,7 +1372,7 @@ Substitute yourself for the given player.
 
 ### `/player ban`
 #### Description
- Bans a player from queueing for the given duration of time.
+ Bans a player from queuing for the given duration of time.
 #### Usage: `/player ban [player] (days) (hours) (minutes) (seconds) (reason)`
 #### Arguments:
 `player`: *(Required)* The player to ban.\
@@ -1342,7 +1418,7 @@ Substitute yourself for the given player.
 
 ### `/player unban`
 #### Description
- Unban the given player from queueing.
+ Unban the given player from queuing.
 #### Usage: `/player unban [player]`
 #### Arguments:
 `player`: *(Required)* The player to unban.
@@ -1370,35 +1446,46 @@ Substitute yourself for the given player.
 `from_queue_name`: *(Required)* Queue to merge stats from.\
 `to_queue_name`: *(Required)* Queue to merge stats into.\
 `mmr_merge_strategy`: *(Optional)* How individual MMRs should be merged together.\
-&emsp;&emsp;&emsp; Options: `Maximum, Add Together, Ignore`
+&emsp;&emsp;&emsp; Options: `Maximum, Add Together, Average, Ignore`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
 
-### `/managestats resetstats all`
+### `/managestats move`
+#### Description
+ Moves the player stats from the old queue name to the new one.
+#### Usage: `/managestats move [old_name] [new_name]`
+#### Arguments:
+`old_name`: *(Required)* Old queue name with stats.\
+`new_name`: *(Required)* New name to move the stats to. Will overwrite any stats stored there.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/managestats reset all`
 #### Description
  Resets all stats for all queues, or for the inputted queue name.
-#### Usage: `/managestats resetstats all (queue_name)`
+#### Usage: `/managestats reset all (queue_name)`
 #### Arguments:
 `queue_name`: *(Optional)* The queue name to reset stats for.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
 
-### `/managestats resetstats mmr`
+### `/managestats reset mmr`
 #### Description
  Resets all MMR for all queues, or for the inputted queue name.
-#### Usage: `/managestats resetstats mmr [queue_name]`
+#### Usage: `/managestats reset mmr [queue_name]`
 #### Arguments:
 `queue_name`: *(Required)* The queue name to reset stats for.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
 
-### `/managestats resetstats player`
+### `/managestats reset player`
 #### Description
  Reset the user's data for all queues or a certain queue.
-#### Usage: `/managestats resetstats player [user] (queue_name)`
+#### Usage: `/managestats reset player [user] (queue_name)`
 #### Arguments:
 `user`: *(Required)* Enter the desired user.\
 `queue_name`: *(Optional)* Enter the queue data to remove from. Ignore to delete all data from all queues.
@@ -1407,21 +1494,6 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Maps
-### `/bestof`
-#### Description
- Sets whether the queue is a best of 3, 5, 7, etc.
-#### Usage: `/bestof [number] (vote) (voteselection) (eligible_voters)`
-#### Arguments:
-`number`: *(Required)* Best of number.\
-`vote`: *(Optional)* Whether players can vote on the number of matches to play.\
-`voteselection`: *(Optional)* Whether to pick the majority vote, or the lowest voted number.\
-&emsp;&emsp;&emsp; Options: `Majority, Lowest`\
-`eligible_voters`: *(Optional)* Who on the team can vote. Defaults to All if no captain selected.\
-&emsp;&emsp;&emsp; Options: `All, Captains`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
 ### `/map add`
 #### Description
  Adds the given map.
@@ -1455,15 +1527,24 @@ Substitute yourself for the given player.
 
 ---
 
+### `/map reshuffle`
+#### Description
+ Sets whether players can reshuffle maps in random map selection.
+#### Usage: `/map reshuffle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/map selection`
 #### Description
- Choose between map votes or always random.
-#### Usage: `/map selection [map_choice] (gamemode_choice)`
+ Choose how maps are selected.
+#### Usage: `/map selection [map_choice]`
 #### Arguments:
 `map_choice`: *(Required)* Voting, always random, or least common.\
-&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`\
-`gamemode_choice`: *(Optional)* Voting, always random, or least common.\
-&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent, Ordered`
+&emsp;&emsp;&emsp; Options: `Vote, Random, Least Frequent`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1476,6 +1557,40 @@ Substitute yourself for the given player.
 `per_team`: *(Required)* If the map vote goes team by team. Team 1 picks first map, Team 2 picks next, ...\
 `mode`: *(Required)* Who can vote.\
 &emsp;&emsp;&emsp; Options: `All, Captains`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
+## Match Start
+### `/matchstart dmplayers`
+#### Description
+ (Default: Enabled) Send a notification DM to all players when a match starts.
+#### Usage: `/matchstart dmplayers [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players are DMed on start.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/matchstart shuffleonstart`
+#### Description
+ (Default: Disabled) Shuffle the player pool on start.
+#### Usage: `/matchstart shuffleonstart [mode]`
+#### Arguments:
+`mode`: *(Required)* -.\
+&emsp;&emsp;&emsp; Options: `Disabled, Lottery, Priority`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/matchstart when`
+#### Description
+ (Default: Either) Start the match when the queue fills, or only when forcestarted.
+#### Usage: `/matchstart when [mode]`
+#### Arguments:
+`mode`: *(Required)* Condition for starting the match.\
+&emsp;&emsp;&emsp; Options: `Queue Filled, Forcestart, Either`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -1632,28 +1747,6 @@ Substitute yourself for the given player.
  Delete ALL messages in the channel except the queue message if it exists.
 #### Usage: `/misc purge`
 
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/misc shuffleonstart`
-#### Description
- (Default: Disabled) Shuffle the player pool on start.
-#### Usage: `/misc shuffleonstart [mode]`
-#### Arguments:
-`mode`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `Disabled, Lottery, Priority`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/misc startwhen`
-#### Description
- (Default: Either) Start the match when the queue fills, or only when forcestarted.
-#### Usage: `/misc startwhen [mode]`
-#### Arguments:
-`mode`: *(Required)* Condition for starting the match.\
-&emsp;&emsp;&emsp; Options: `Queue Filled, Forcestart, Either`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -1976,16 +2069,6 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Predictions
-### `/points ceiling`
-#### Description
- Sets the highest number of points a player can reach.
-#### Usage: `/points ceiling (points)`
-#### Arguments:
-`points`: *(Optional)* Enter the peak points, or omit to reset.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
 ### `/points change loss`
 #### Description
  (Default: 100) Set how many points players gain for a loss (not MMR).
@@ -2006,10 +2089,20 @@ Substitute yourself for the given player.
 
 ---
 
-### `/points floor`
+### `/points maximum`
+#### Description
+ Sets the highest number of points a player can reach.
+#### Usage: `/points maximum (points)`
+#### Arguments:
+`points`: *(Optional)* Enter the peak points, or omit to reset.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/points minimum`
 #### Description
  Sets the lowest number of points a player can reach.
-#### Usage: `/points floor (points)`
+#### Usage: `/points minimum (points)`
 #### Arguments:
 `points`: *(Optional)* Enter the lowest points value, or omit to reset.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -2315,7 +2408,7 @@ Substitute yourself for the given player.
 ## Reaction Roles
 ### `/reactionroles add`
 #### Description
- Specify a spectator role which can join any voice channel.
+ Specify roles to assign when users react to the message.
 #### Usage: `/reactionroles add [channel] [message_id] [role] [reaction] (remove_others) (queue_role)`
 #### Arguments:
 `channel`: *(Required)* Channel where message is.\
@@ -2428,10 +2521,54 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Required Votes
-### `/requiredvotes`
+### `/requiredvotes cancel`
 #### Description
- Sets the required votes to pick a winner.
-#### Usage: `/requiredvotes [type]`
+ Sets the number of votes required for cancelling a game.
+#### Usage: `/requiredvotes cancel [type]`
+#### Arguments:
+`type`: *(Required)* The type of voting requirement to be used.\
+&emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/requiredvotes default`
+#### Description
+ Sets the default number of votes required.
+#### Usage: `/requiredvotes default [type]`
+#### Arguments:
+`type`: *(Required)* The type of voting requirement to be used.\
+&emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/requiredvotes forcestart`
+#### Description
+ Sets the number of votes required for forcestarting a game.
+#### Usage: `/requiredvotes forcestart [type]`
+#### Arguments:
+`type`: *(Required)* The type of voting requirement to be used.\
+&emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/requiredvotes mvp`
+#### Description
+ Sets the number of votes required for getting MVP.
+#### Usage: `/requiredvotes mvp [type]`
+#### Arguments:
+`type`: *(Required)* The type of voting requirement to be used.\
+&emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/requiredvotes winner`
+#### Description
+ Sets the number of votes required for picking a winner.
+#### Usage: `/requiredvotes winner [type]`
 #### Arguments:
 `type`: *(Required)* The type of voting requirement to be used.\
 &emsp;&emsp;&emsp; Options: `Half, Majority, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten`
@@ -2547,11 +2684,11 @@ Substitute yourself for the given player.
 ### `/schedule time add`
 #### Description
  (BETA) Specify an execution time for the scheduled command.
-#### Usage: `/schedule time add [scheduled_command] [time] [timezone]`
+#### Usage: `/schedule time add [scheduled_command] [time] (timezone)`
 #### Arguments:
 `scheduled_command`: *(Required)* The scheduled command to add an execution time for.\
 `time`: *(Required)* Time for the command to be executed.\
-`timezone`: *(Required)* Respective timezone for the inputted time.
+`timezone`: *(Optional)* (Default: /timezone) Respective timezone for the inputted time.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -2703,7 +2840,7 @@ Substitute yourself for the given player.
  Sets the queue names to use in retrieving player stats, or omit to reset.
 #### Usage: `/ratinginname queuenames (names)`
 #### Arguments:
-`names`: *(Optional)* The queue names seperated by ',' to use for inserting ratings into '$' indicators in the format.
+`names`: *(Optional)* The queue names separated by ',' to use for inserting ratings into '$' indicators in the format.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -2765,18 +2902,61 @@ Substitute yourself for the given player.
 ## Staff
 ### `/staffrole add`
 #### Description
- Add a staff role that grants full access to all commands.
-#### Usage: `/staffrole add [role]`
+ Add a staff role that grants access to commands.
+#### Usage: `/staffrole add [role] [template]`
 #### Arguments:
-`role`: *(Required)* Staff role.
+`role`: *(Required)* Staff role.\
+`template`: *(Required)* If the role gets access to all commands or not.\
+&emsp;&emsp;&emsp; Options: `User Commands Only, All Commands`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/staffrole command allow`
+#### Description
+ Grants the staff role access to the given command.
+#### Usage: `/staffrole command allow [role] [command]`
+#### Arguments:
+`role`: *(Required)* Staff role.\
+`command`: *(Required)* The command to grant access to.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/staffrole command deny`
+#### Description
+ Removes the staff role's access to the given command.
+#### Usage: `/staffrole command deny [role] [command]`
+#### Arguments:
+`role`: *(Required)* Staff role.\
+`command`: *(Required)* The command to remove access from.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/staffrole list`
+#### Description
+ List all configured staff roles.
+#### Usage: `/staffrole list`
+
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
 
 ### `/staffrole remove`
 #### Description
- Remove a staff role that grants full access to all commands.
+ Remove a staff role.
 #### Usage: `/staffrole remove [role]`
+#### Arguments:
+`role`: *(Required)* Staff role.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/staffrole reset`
+#### Description
+ Resets the staff role to starting permissions.
+#### Usage: `/staffrole reset [role]`
 #### Arguments:
 `role`: *(Required)* Staff role.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -2800,9 +2980,9 @@ Substitute yourself for the given player.
  Starts a queue for the current channel.
 #### Usage: `/startqueue [queuename] [teamsize] (numberofteams)`
 #### Arguments:
-`queuename`: *(Required)* Enter the queue name.\
-`teamsize`: *(Required)* Enter the team size.\
-`numberofteams`: *(Optional)* Enter the number of teams.
+`queuename`: *(Required)* Name for the queue.\
+`teamsize`: *(Required)* Team size.\
+`numberofteams`: *(Optional)* Number of teams in a match.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -2850,10 +3030,10 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Team Creation
-### `/reshuffle`
+### `/teamselection reshuffle`
 #### Description
- Sets whether players can reshuffle teams in random selection.
-#### Usage: `/reshuffle [toggle]`
+ Sets whether players can reshuffle teams in random team selection.
+#### Usage: `/teamselection reshuffle [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
@@ -2861,10 +3041,10 @@ Substitute yourself for the given player.
 
 ---
 
-### `/teamselection`
+### `/teamselection set`
 #### Description
  Choose how teams will be picked.
-#### Usage: `/teamselection`
+#### Usage: `/teamselection set`
 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2884,10 +3064,10 @@ Substitute yourself for the given player.
 
 ### `/teamnames set`
 #### Description
- Speicfy the names of each team, or omit for the default behavior..
+ Specify the names of each team, or omit for the default behavior..
 #### Usage: `/teamnames set (team_names)`
 #### Arguments:
-`team_names`: *(Optional)* Comma seperated list of team names. Ex: Team 1,Team 2,...
+`team_names`: *(Optional)* Comma separated list of team names. Ex: Team 1,Team 2,...
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -2910,6 +3090,19 @@ Substitute yourself for the given player.
 #### Usage: `/tempchannels name [name_format]`
 #### Arguments:
 `name_format`: *(Required)* Channel format, where $ will be replaced with the match number.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/tempchannels permissions set`
+#### Description
+ Specify a permission to set for a role when creating the temporary channel.
+#### Usage: `/tempchannels permissions set [role] [permission] [value]`
+#### Arguments:
+`role`: *(Required)* Role to modify permissions for.\
+`permission`: *(Required)* Permission name.\
+`value`: *(Required)* Permission value.\
+&emsp;&emsp;&emsp; Options: `Deny, Allow, Default`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3019,6 +3212,17 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Timezone
+### `/timezone`
+#### Description
+ (Default: 'US/Eastern') Sets the server's timezone.
+#### Usage: `/timezone [timezone]`
+#### Arguments:
+`timezone`: *(Required)* Server's timezone.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Tournaments
 ### `/tournament create`
 #### Description
@@ -3043,7 +3247,7 @@ Substitute yourself for the given player.
 
 ### `/tournament list`
 #### Description
- (BETA) List all active tournament.
+ (BETA) List all active tournaments.
 #### Usage: `/tournament list`
 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -3091,6 +3295,19 @@ Substitute yourself for the given player.
 #### Arguments:
 `when`: *(Required)* When to move players to team channels.\
 &emsp;&emsp;&emsp; Options: `After All Setup, After Teams Created`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/voicechannels permissions set`
+#### Description
+ Specify a permission to set for a role when creating voice channels.
+#### Usage: `/voicechannels permissions set [role] [permission] [value]`
+#### Arguments:
+`role`: *(Required)* Role to modify permissions for.\
+`permission`: *(Required)* Permission name.\
+`value`: *(Required)* Permission value.\
+&emsp;&emsp;&emsp; Options: `Deny, Allow, Default`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
