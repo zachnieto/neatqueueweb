@@ -10,7 +10,7 @@ const PurchaseCredits = ({
 }) => {
   const [purchaseAmountCredits, setPurchaseAmountCredits] = useState<number>(5);
 
-  const CREDIT_MULTIPLIER = 1.08;
+  const CREDIT_MULTIPLIER = 1.07;
 
   const roundTo2Decimals = (num: number) => {
     return Math.round((num + Number.EPSILON) * 100) / 100;
