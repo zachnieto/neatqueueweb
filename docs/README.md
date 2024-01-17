@@ -68,8 +68,7 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 <hr style="border:3px solid gray">
 
 ## Leaderboard Config
->Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
-> Leaderboard titles are also hyperlinks to the website version of the leaderboard.
+>Leaderboard titles are hyperlinks to the website version of the leaderboard.
 ### `/leaderboardconfig url`
 #### Description
  Create a custom website url for leaderboards.
@@ -234,7 +233,7 @@ CAPTAIN ONLY: Disband a party.
 
 ### `/party invite`
 #### Description
-CAPTAIN ONLY: Invite a new player to the team.
+CAPTAIN ONLY: Invite a new player to the party.
 #### Usage: `/party invite [player] [party_name]`
 #### Arguments:
 `player`: *(Required)* Player to invite.\
@@ -244,7 +243,7 @@ CAPTAIN ONLY: Invite a new player to the team.
 
 ### `/party join`
 #### Description
-Join a team.
+Join a party.
 #### Usage: `/party join [party_name]`
 #### Arguments:
 `party_name`: *(Required)* The party name.
@@ -263,7 +262,7 @@ CAPTAIN ONLY: Kick a player from the party.
 
 ### `/party leave`
 #### Description
-Leave a team.
+Leave a party.
 #### Usage: `/party leave [party_name]`
 #### Arguments:
 `party_name`: *(Required)* The party name.
@@ -280,7 +279,7 @@ List your parties.
 
 ### `/party selectrole`
 #### Description
-Specify your role in the team.
+Specify your role in the party.
 #### Usage: `/party selectrole [party_name] [role]`
 #### Arguments:
 `party_name`: *(Required)* The party name.\
@@ -807,35 +806,6 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Global Queue
-### `/globalqueue create`
-#### Description
- Create a global queue. You will not be able to modify certain queue configs after.
-#### Usage: `/globalqueue create`
-
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/globalqueue join`
-#### Description
- Join a global queue. You will not be able to modify certain queue configs after.
-#### Usage: `/globalqueue join [name]`
-#### Arguments:
-`name`: *(Required)* The unique ID of the global queue.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/globalqueue leave`
-#### Description
- Unlink from the global queue.
-#### Usage: `/globalqueue leave`
-
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
-<hr style="border:3px solid gray">
-
 ## Heroes
 ### `/hero add`
 #### Description
@@ -904,8 +874,7 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Leaderboard Config
->Large servers may benefit from using Text leaderboards since uploading images multiple times a second leads to rate limits for your channel/server.
-> Leaderboard titles are also hyperlinks to the website version of the leaderboard.
+>Leaderboard titles are hyperlinks to the website version of the leaderboard.
 ### `/leaderboardconfig edits`
 #### Description
  Specify who can edit a leaderboard.
@@ -1072,6 +1041,17 @@ Substitute yourself for the given player.
 #### Usage: `/lobbychannel timer [timer]`
 #### Arguments:
 `timer`: *(Required)* (Default: 300) Timeout length in seconds.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/lobbychannel toggle`
+#### Description
+ Toggle creating a voice channel when a match is created for lobby setup.
+#### Usage: `/lobbychannel toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If a new voice channel is made for each lobby setup.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1356,16 +1336,6 @@ Substitute yourself for the given player.
 `user`: *(Required)* -.\
 `role`: *(Optional)* Enter the role for the player.\
 `team`: *(Optional)* Enter the team for the player if desired.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/player autoban`
-#### Description
- Auto ban players who cause a match to cancel by not joining the voice channel.
-#### Usage: `/player autoban (duration)`
-#### Arguments:
-`duration`: *(Optional)* Duration of time in seconds for the ban to last, or 0 to reset.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -2181,6 +2151,28 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
+## Queue Entry Methods
+### `/queueentry channel set`
+#### Description
+ (BETA) Add players to the queue when they join the voice channel.
+#### Usage: `/queueentry channel set (channel)`
+#### Arguments:
+`channel`: *(Optional)* Queue entry voice channel, or omit to remove.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/queueentry methods`
+#### Description
+ (BETA) Specify how players can join the queue.
+#### Usage: `/queueentry methods [modes]`
+#### Arguments:
+`modes`: *(Required)* The methods players can use to join the queue.\
+&emsp;&emsp;&emsp; Options: `Buttons, Voice Channel, Either`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
 ## Queue Name
 ### `/queuename`
 #### Description
@@ -2417,6 +2409,18 @@ Substitute yourself for the given player.
 `reaction`: *(Required)* Reaction that corresponds to this role.\
 `remove_others`: *(Optional)* If the user has this role, remove all other reactionroles in the message they have.\
 `queue_role`: *(Optional)* Option role for `/roles` that the user will default to.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+<hr style="border:3px solid gray">
+
+## Ready Up
+### `/readyup mode`
+#### Description
+ How players indicate they are ready to play a match.
+#### Usage: `/readyup mode [mode]`
+#### Arguments:
+`mode`: *(Required)* How players show they are ready.\
+&emsp;&emsp;&emsp; Options: `Ready Up Button, Join Lobby Voice Channel, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -3224,14 +3228,65 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Tournaments
+### `/tournament account`
+#### Description
+ Link your server to challonge using your username and api key.
+#### Usage: `/tournament account [challonge_username] [challonge_api_key]`
+#### Arguments:
+`challonge_username`: *(Required)* Challonge username.\
+`challonge_api_key`: *(Required)* Challonge API Key from https://challonge.com/settings/developer.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/tournament config autocreatematches`
+#### Description
+ (BETA) Toggle automatically creating new matches when ready.
+#### Usage: `/tournament config autocreatematches [mode]`
+#### Arguments:
+`mode`: *(Required)* Toggle automatically creating matches.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/tournament config autostartonfill`
+#### Description
+ (BETA) Toggle automatically starting the tournament when filled.
+#### Usage: `/tournament config autostartonfill [mode]`
+#### Arguments:
+`mode`: *(Required)* Toggle automatically starting on fill.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/tournament config details`
+#### Description
+ (BETA) Change the tournament details shown in the queue message.
+#### Usage: `/tournament config details (details)`
+#### Arguments:
+`details`: *(Optional)* Tournament details, or omit to remove.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/tournament create`
 #### Description
  (BETA) Create a new tournament and shows signup buttons.
-#### Usage: `/tournament create [name] [team_size] [number_of_teams]`
+#### Usage: `/tournament create [maximum_participants] (tournament_type) (auto_start_on_fill) (auto_create_matches) (team_size) (name) (url) (details) (forfeit_timer_sec) (hold_third_place_match)`
 #### Arguments:
-`name`: *(Required)* The tournament name, also the name of the queue/stats storage for determining seeding.\
-`team_size`: *(Required)* Number of players of each team.\
-`number_of_teams`: *(Required)* Maximum number of teams that can register.
+`maximum_participants`: *(Required)* Maximum number of teams that can register.\
+`tournament_type`: *(Optional)* Tournament type.\
+&emsp;&emsp;&emsp; Options: `single_elimination, double_elimination, round_robin, swiss`\
+`auto_start_on_fill`: *(Optional)* Automatically start the tournament when the participant capacity is hit.\
+`auto_create_matches`: *(Optional)* If the bot should automatically create matches when ready.\
+`team_size`: *(Optional)* Number of players on each team.\
+`name`: *(Optional)* The tournament name, also the name of the queue/stats storage for determining seeding.\
+`url`: *(Optional)* Challonge tournament URL, or omit to auto generate.\
+`details`: *(Optional)* Any extra details to show in the queue message.\
+`forfeit_timer_sec`: *(Optional)* How longer players have to join the match (in seconds) before forfeiting.\
+`hold_third_place_match`: *(Optional)* If a third place match should be played for single elimination tournaments.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3245,24 +3300,11 @@ Substitute yourself for the given player.
 
 ---
 
-### `/tournament list`
+### `/tournament refresh`
 #### Description
- (BETA) List all active tournaments.
-#### Usage: `/tournament list`
+ (BETA) Refresh necessary data from challonge and start any required matches.
+#### Usage: `/tournament refresh`
 
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/tournament setwinner`
-#### Description
- (BETA) Sets the winner for a match.
-#### Usage: `/tournament setwinner [round_number] [match_number] [team_number]`
-#### Arguments:
-`round_number`: *(Required)* -.\
-`match_number`: *(Required)* -.\
-`team_number`: *(Required)* -.\
-&emsp;&emsp;&emsp; Options: `1, 2`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3274,20 +3316,18 @@ Substitute yourself for the given player.
 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
+---
+
+### `/tournament startmatches`
+#### Description
+ (BETA) Starts the next set of ready matches.
+#### Usage: `/tournament startmatches`
+
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
 <hr style="border:3px solid gray">
 
 ## Voice Channel Mode
-### `/voicechannels mode`
-#### Description
- (Default: required) Sets whether voice channels are required, optional, or disabled.
-#### Usage: `/voicechannels mode [mode]`
-#### Arguments:
-`mode`: *(Required)* The type of voice channel setting.\
-&emsp;&emsp;&emsp; Options: `Optional, Required, Disabled`
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
 ### `/voicechannels moveteam`
 #### Description
  (Default: After All Setup) Sets when to move players to team voice channels.
