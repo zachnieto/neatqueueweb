@@ -8,7 +8,7 @@ const PurchaseCredits = ({
   purchaseAmountDollars: number;
   setPurchaseAmountDollars: Dispatch<SetStateAction<number>>;
 }) => {
-  const [purchaseAmountCredits, setPurchaseAmountCredits] = useState<number>(5);
+  const [purchaseAmountCredits, setPurchaseAmountCredits] = useState<number>(0);
 
   const CREDIT_MULTIPLIER = 1.07;
 

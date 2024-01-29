@@ -27,7 +27,6 @@ const LeaderboardItem = ({
       );
     }
 
-    console.log(rank);
     if (rank === 1) {
       setColor("border-amber-500 border-8");
     } else if (rank === 2) {

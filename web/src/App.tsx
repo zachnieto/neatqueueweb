@@ -11,7 +11,6 @@ import CustomParticles from "./components/Particles";
 import { getSession } from "./services/server-service";
 import globalState, { loadingState } from "./State";
 import ShortURL from "./components/ShortURL";
-import Bracket from "./components/Bracket";
 import Status from "./components/Status";
 import Privacy from "./components/Privacy";
 import Footer from "./components/Footer";
@@ -24,8 +23,11 @@ function App() {
   const { auth } = state.get();
 
   useEffect(() => {
-    console.log(state.get());
-    if (!auth) getSession().finally(() => loading.set(() => false));
+    if (!auth) {
+      getSession().finally(() => loading.set(false));
+    } else {
+      loading.set(false)
+    }
   }, []);
 
   return (
@@ -42,8 +44,6 @@ function App() {
             path="/leaderboard/:guildID/:channelID"
             element={<Leaderboard />}
           />
-          {/*<Route path="/leaderboard/:guildID" element={<LeaderboardMenu/>}/>*/}
-          <Route path="/bracket/:guildID/:tournyName" element={<Bracket />} />
           <Route path="/lb/:shortUrl" element={<ShortURL />} />
           <Route path="/transcript/:guildID/:gameNum" element={<Transcript />} />
           <Route path="/status" element={<Status />} />

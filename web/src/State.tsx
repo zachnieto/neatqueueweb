@@ -1,4 +1,5 @@
 import { hookstate } from "@hookstate/core";
+import { localstored } from '@hookstate/localstored';
 import { Session } from "./types";
 
 export const defaultState: Session = {
@@ -12,7 +13,8 @@ export const defaultState: Session = {
   },
 };
 
-const globalState = hookstate(defaultState);
+// @ts-ignore
+const globalState = hookstate(defaultState, localstored({key: 'session', engine: sessionStorage}));
 export const loadingState = hookstate(true);
 
 export default globalState;

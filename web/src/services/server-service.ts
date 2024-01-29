@@ -1,23 +1,19 @@
 import axios from "axios";
-import globalState, { defaultState } from "../State";
+import globalState from "../State";
 import { discordGetUser } from "./discord-service";
 import { Session } from "../types";
 
-const API_BASE = import.meta.env.VITE_SERVER;
+const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 const api = axios.create({
   withCredentials: true,
 });
 
 export const setSession = async (data: object) => {
-  const resp: Session = await api.post(`${API_BASE}api/session/set/`, {
-    params: {
-      data,
-    },
-  });
+  api.post(`${API_BASE}/session`, data);
 };
 
 export const getSession = async () => {
-  const resp = await api.get(`${API_BASE}api/session/get`);
+  const resp = await api.get(`${API_BASE}/session`);
   const data: Session = resp.data;
   globalState.auth.set(data.auth);
   globalState.user.set(data.user);
@@ -25,7 +21,7 @@ export const getSession = async () => {
 };
 
 export const endSession = async () => {
-  await api.get(`${API_BASE}api/session/reset`);
+  api.delete(`${API_BASE}/session`);
   globalState.auth.set(undefined);
   globalState.user.set(undefined);
   globalState.guilds.set(undefined);
@@ -38,37 +34,26 @@ export const requestCheckout = async (
   price: number,
   url: string
 ) => {
-  console.log({
-    userId: userId,
-    userName: userName,
-    guildId: guildId,
-    price: price,
-    url: url,
-  });
-  const resp = await api.post(`${API_BASE}checkout`, {
-    params: {
+  const resp = await api.post(`${API_BASE}/checkout`, {
       userId: userId,
       userName: userName,
       guildId: guildId,
       price: price,
       url: url,
-    },
   });
-  return resp.data;
-};
-
-export const getProducts = async () => {
-  const resp = await api.get(`${API_BASE}products`);
   return resp.data;
 };
 
 export const discordAuth = async (code: string) => {
-  const resp = await api.post(`${API_BASE}api/session/auth/`, {
-    params: {
+  const resp = await api.post(`${API_BASE}/session/auth`, {
       code: code,
-    },
   });
   globalState.auth.set(resp.data);
-  await discordGetUser(resp.data);
-  setSession(globalState.value);
+  discordGetUser(resp.data).then(user => {
+    setSession({
+      auth: globalState.auth.get(),
+      user: user,
+      guilds: globalState.guilds.get(),
+    });
+  });
 };

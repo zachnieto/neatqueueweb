@@ -52,7 +52,6 @@ const PremiumStatus = ({
 
     try {
       const prem = await purchasePremium(guildID, auth, selectedPlan);
-      console.log(prem);
       setSuccess(
         `30 days have been added to your server's premium timer at the cost of ${
           prem.plans[prem.premium.plan].price

@@ -6,7 +6,6 @@ const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 
 export const getStats = async () => {
   const resp = await axios.get(`${API_BASE}/stats`, { timeout: 2000 });
-  console.log(resp.data);
   globalState.stats.set(resp.data);
 };
 

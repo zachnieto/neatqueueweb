@@ -13,6 +13,7 @@ export const discordGetUser = async (auth: Auth) => {
   };
   const resp = await axios.get(`${API_BASE}/users/@me`, config);
   globalState.user.set(resp.data);
+  return resp.data;
 };
 
 export const discordGetGuilds = async (auth: Auth) => {
@@ -25,5 +26,9 @@ export const discordGetGuilds = async (auth: Auth) => {
   const resp = await axios.get(`${API_BASE}/users/@me/guilds`, config);
   const guilds = resp.data.filter((guild: Guild) => guild.permissions & 0x10);
   globalState.guilds.set(guilds);
-  setSession(globalState.value);
+  setSession({
+    auth: globalState.auth.get(),
+    user: globalState.user.get(),
+    guilds: guilds,
+  });
 };

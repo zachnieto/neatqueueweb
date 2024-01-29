@@ -24,7 +24,7 @@ const Credits = ({
   const state = useHookstate(globalState);
   const { user, auth } = state.get();
 
-  const [purchaseAmountDollars, setPurchaseAmountDollars] = useState<number>(5);
+  const [purchaseAmountDollars, setPurchaseAmountDollars] = useState<number>(0);
   const [transferAmountCredits, setTransferAmountCredits] = useState<number>(0);
   const [transferGuildId, setTransferGuildId] = useState<string>("");
   const [creditModalOpen, setCreditModalOpen] = useState(false);
@@ -40,7 +40,6 @@ const Credits = ({
       Number(purchaseAmountDollars.toFixed(2)),
       window.location.href
     );
-    console.log(checkout_session);
     window.location.replace(checkout_session.url);
   };
 
