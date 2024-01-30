@@ -4,10 +4,9 @@ import Stats from "./Stats";
 import Features from "./Features";
 
 const Home = () => {
-
   return (
     <div>
-      <CustomParticles opacity={.1} />
+      <CustomParticles opacity={0.1} />
       <Sus /> {/* Why did I even do this */}
       <Stats />
       {/*<Features />*/}

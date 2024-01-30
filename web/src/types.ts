@@ -76,4 +76,4 @@ export type CommandSectonData = {
   title: string;
   paragraph: any;
   link: string;
-}
+};

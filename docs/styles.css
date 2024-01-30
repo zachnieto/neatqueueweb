@@ -16,13 +16,13 @@ body {
 }
 
 :root {
-    --mono-hue: 250;
-    --mono-saturation: 10%;
-    --base-background-color: #1d1d1d;
-    --code-inline-background: rgb(43 45 49);
-    --sidebar-nav-link-border-color--active: rgb(185 28 28);
-    --sidebar-nav-link-color--active: rgb(185 28 28);
-    --heading-h1-font-weight: 600;
+  --mono-hue: 250;
+  --mono-saturation: 10%;
+  --base-background-color: #1d1d1d;
+  --code-inline-background: rgb(43 45 49);
+  --sidebar-nav-link-border-color--active: rgb(185 28 28);
+  --sidebar-nav-link-color--active: rgb(185 28 28);
+  --heading-h1-font-weight: 600;
 }
 
 .content h2 {

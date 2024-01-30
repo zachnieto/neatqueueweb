@@ -26,7 +26,7 @@ function App() {
     if (!auth) {
       getSession().finally(() => loading.set(false));
     } else {
-      loading.set(false)
+      loading.set(false);
     }
   }, []);
 
@@ -45,7 +45,10 @@ function App() {
             element={<Leaderboard />}
           />
           <Route path="/lb/:shortUrl" element={<ShortURL />} />
-          <Route path="/transcript/:guildID/:gameNum" element={<Transcript />} />
+          <Route
+            path="/transcript/:guildID/:gameNum"
+            element={<Transcript />}
+          />
           <Route path="/status" element={<Status />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/guide" element={<Guide />} />

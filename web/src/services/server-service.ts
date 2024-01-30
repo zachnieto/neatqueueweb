@@ -35,21 +35,21 @@ export const requestCheckout = async (
   url: string
 ) => {
   const resp = await api.post(`${API_BASE}/checkout`, {
-      userId: userId,
-      userName: userName,
-      guildId: guildId,
-      price: price,
-      url: url,
+    userId: userId,
+    userName: userName,
+    guildId: guildId,
+    price: price,
+    url: url,
   });
   return resp.data;
 };
 
 export const discordAuth = async (code: string) => {
   const resp = await api.post(`${API_BASE}/session/auth`, {
-      code: code,
+    code: code,
   });
   globalState.auth.set(resp.data);
-  discordGetUser(resp.data).then(user => {
+  discordGetUser(resp.data).then((user) => {
     setSession({
       auth: globalState.auth.get(),
       user: user,

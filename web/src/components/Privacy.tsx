@@ -22,9 +22,7 @@ const Privacy = () => {
         <li>Queue channel IDs</li>
         <li>Leaderboard message IDs</li>
         <li>Command usage</li>
-        <li>
-          Message Content in match channels
-        </li>
+        <li>Message Content in match channels</li>
       </ul>
 
       <h1 className="text-3xl">Data Removal</h1>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {useParams, useSearchParams} from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { getGuildChannelStats } from "../services/neatqueue-service";
 import { classNames } from "../util/tailwind";
 import LeaderboardItem from "./LeaderboardItem";
@@ -18,7 +18,7 @@ const sortKeys: any = {
   Streak: "streak",
   Peak_MMR: "peak_mmr",
   Peak_Streak: "peak_streak",
-  Win_Rate: "winrate"
+  Win_Rate: "winrate",
 };
 
 // TODO
@@ -38,7 +38,11 @@ const Leaderboard = ({
   const urlParamSort = searchParams.get("sort");
 
   const [month, setMonth] = useState("alltime");
-  const [sortKey, setSortKey] = useState(urlParamSort && Object.keys(sortKeys).includes(urlParamSort) ? urlParamSort : "MMR");
+  const [sortKey, setSortKey] = useState(
+    urlParamSort && Object.keys(sortKeys).includes(urlParamSort)
+      ? urlParamSort
+      : "MMR"
+  );
   const [stats, setStats] = useState<LooseObject>();
 
   if (guildID === undefined) guildID = passedGuildId;
@@ -58,16 +62,18 @@ const Leaderboard = ({
   const changeSort = (sortKey: string) => {
     setSortKey(sortKey);
     let updatedSearchParams = new URLSearchParams(searchParams.toString());
-    updatedSearchParams.set('sort', sortKey);
+    updatedSearchParams.set("sort", sortKey);
     setSearchParams(updatedSearchParams.toString());
-  }
+  };
 
   const scrollChangeSort = (scrollRight: boolean) => {
     const sortKeyArray = Object.keys(sortKeys);
     const idx = sortKeyArray.indexOf(sortKey);
-    const nextIdx = scrollRight ? (idx + 1) % sortKeyArray.length : (idx - 1 + sortKeyArray.length) % sortKeyArray.length;
+    const nextIdx = scrollRight
+      ? (idx + 1) % sortKeyArray.length
+      : (idx - 1 + sortKeyArray.length) % sortKeyArray.length;
     changeSort(sortKeyArray[nextIdx]);
-  }
+  };
 
   const dateOptions = { year: "numeric", month: "short" };
 
@@ -117,17 +123,20 @@ const Leaderboard = ({
         </div>
 
         <div className="md:invisible visible flex flex-row mb-3 justify-center gap-1">
-          <button className="btn-primary" onClick={() => scrollChangeSort(false)}>
-            {'<'}
+          <button
+            className="btn-primary"
+            onClick={() => scrollChangeSort(false)}
+          >
+            {"<"}
           </button>
-          <div className="btn-style">
-            {sortKey.replace("_", " ")}
-          </div>
-          <button className="btn-primary" onClick={() => scrollChangeSort(true)}>
-            {'>'}
+          <div className="btn-style">{sortKey.replace("_", " ")}</div>
+          <button
+            className="btn-primary"
+            onClick={() => scrollChangeSort(true)}
+          >
+            {">"}
           </button>
         </div>
-
 
         <div className="bg-violet-900/80 px-3 py-3 font-medium flex flex-row text-lg mb-3 shadow-xl rounded">
           <div className="my-auto mx-3 basis-5">
@@ -142,8 +151,8 @@ const Leaderboard = ({
           </h3>
         </div>
         {stats &&
-          stats[month] !== undefined
-              && stats[month]
+          stats[month] !== undefined &&
+          stats[month]
             .sort(
               (a: LooseObject, b: LooseObject) =>
                 b?.data[sortKeys[sortKey]] - a?.data[sortKeys[sortKey]]

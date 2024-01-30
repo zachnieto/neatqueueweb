@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { classNames } from "../util/tailwind";
-import {displayPercent} from "../util/utility";
+import { displayPercent } from "../util/utility";
 
 const LeaderboardItem = ({
   player,
@@ -69,7 +69,11 @@ const LeaderboardItem = ({
       ) : (
         <>
           <div className="">
-            <h1>{sortKey !== "winrate" ? parseInt(player.data[sortKey]) : displayPercent(player.data[sortKey])}</h1>
+            <h1>
+              {sortKey !== "winrate"
+                ? parseInt(player.data[sortKey])
+                : displayPercent(player.data[sortKey])}
+            </h1>
           </div>
         </>
       )}

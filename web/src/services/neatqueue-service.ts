@@ -19,16 +19,15 @@ export const getGuildChannelStats = async (
   return resp.data;
 };
 
-
 export const getPremium = async (guildID: string) => {
   const resp = await axios.get(`${API_BASE}/premium/${guildID}`);
   return resp.data;
 };
 
 export const purchasePremium = async (
-    guildID: string,
-    oauth: Auth,
-    plan: string
+  guildID: string,
+  oauth: Auth,
+  plan: string
 ) => {
   const config = {
     headers: {
@@ -37,19 +36,18 @@ export const purchasePremium = async (
   };
 
   const resp = await axios.post(
-      `${API_BASE}/premium/${guildID}/${plan}`,
-      {},
-      config
+    `${API_BASE}/premium/${guildID}/${plan}`,
+    {},
+    config
   );
   return resp.data;
 };
 
-
 export const transferCredits = async (
-    fromGuildID: string,
-    toGuildID: string,
-    amount: number,
-    oauth: Auth,
+  fromGuildID: string,
+  toGuildID: string,
+  amount: number,
+  oauth: Auth
 ) => {
   const config = {
     headers: {
@@ -58,14 +56,14 @@ export const transferCredits = async (
   };
 
   const resp = await axios.post(
-      `${API_BASE}/transfercredits`,
-      {
-        "from_guild_id": fromGuildID,
-        "to_guild_id": toGuildID,
-        "amount": amount
-      },
-      config
-  )
+    `${API_BASE}/transfercredits`,
+    {
+      from_guild_id: fromGuildID,
+      to_guild_id: toGuildID,
+      amount: amount,
+    },
+    config
+  );
 };
 
 export async function getBracket(guildID: string, tournyName: string) {
@@ -81,7 +79,9 @@ export async function getLongUrl(shortUrl: string) {
 }
 
 export async function getTranscript(guildID: string, gameNum: string) {
-  const resp = await axios.get(`${API_BASE}/api/transcript/${guildID}/${gameNum}`);
+  const resp = await axios.get(
+    `${API_BASE}/api/transcript/${guildID}/${gameNum}`
+  );
   return resp.data;
 }
 
