@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
+import {floatToNDecimals, floatToPrice} from "../../util/utility";
 
 const PurchaseCredits = ({
   purchaseAmountDollars,
@@ -12,23 +13,24 @@ const PurchaseCredits = ({
 
   const CREDIT_MULTIPLIER = 1.07;
 
-  const roundTo2Decimals = (num: number) => {
-    return Math.round((num + Number.EPSILON) * 100) / 100;
-  };
-
   return (
     <div className="grid place-items-center">
       <div className="flex">
-        <input
-          type="number"
-          onChange={(e) => {
-            const val = parseInt(e.target.value);
-            setPurchaseAmountDollars(Math.pow(val, 1 / CREDIT_MULTIPLIER));
-            setPurchaseAmountCredits(val);
-          }}
-          value={purchaseAmountCredits}
-          className="text-center rounded w-20 text-black px-2 mb-5"
-        />
+          <CurrencyInput
+              className="text-center rounded w-20 text-black px-2 mb-5"
+              name="input-name"
+              value={purchaseAmountCredits}
+              decimalsLimit={2}
+              allowNegativeValue={false}
+              // @ts-ignore
+              onValueChange={(val: number, name: string) => {
+                  const valWithDefault = val || 0;
+                  setPurchaseAmountDollars(
+                      floatToPrice(Math.pow(valWithDefault, 1 / CREDIT_MULTIPLIER))
+                  );
+                  setPurchaseAmountCredits(valWithDefault);
+              }}
+          />
         <h1 className="mx-2">Credits = </h1>
 
         <CurrencyInput
@@ -36,12 +38,14 @@ const PurchaseCredits = ({
           name="input-name"
           value={purchaseAmountDollars}
           decimalsLimit={2}
+          allowNegativeValue={false}
           prefix="$"
           // @ts-ignore
           onValueChange={(val: number, name: string) => {
-            setPurchaseAmountDollars(val);
+            const valWithDefault = val || 0;
+            setPurchaseAmountDollars(valWithDefault);
             setPurchaseAmountCredits(
-              roundTo2Decimals(Math.pow(val, CREDIT_MULTIPLIER))
+              floatToNDecimals(Math.pow(valWithDefault, CREDIT_MULTIPLIER))
             );
           }}
         />
@@ -52,7 +56,7 @@ const PurchaseCredits = ({
           const val = parseInt(e.target.value);
           setPurchaseAmountDollars(val);
           setPurchaseAmountCredits(
-            roundTo2Decimals(Math.pow(val, CREDIT_MULTIPLIER))
+            floatToNDecimals(Math.pow(val, CREDIT_MULTIPLIER))
           );
         }}
         max={200}

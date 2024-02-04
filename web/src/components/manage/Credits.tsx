@@ -7,6 +7,7 @@ import PurchaseCredits from "./PurchaseCredits";
 import { PremiumData } from "../../types";
 import TransferCredits from "./TransferCredits";
 import { transferCredits } from "../../services/neatqueue-service";
+import {floatToNDecimals, floatToNDecimalsString} from "../../util/utility";
 
 const Credits = ({
   premiumData,
@@ -37,7 +38,7 @@ const Credits = ({
       user.id,
       `${user.username}#${user.discriminator}`,
       guildID,
-      Number(purchaseAmountDollars.toFixed(2)),
+      floatToNDecimals(purchaseAmountDollars),
       window.location.href
     );
     window.location.replace(checkout_session.url);
@@ -62,7 +63,9 @@ const Credits = ({
   return (
     <>
       <div className="col-span-1 bg-stone-900 rounded shadow-md p-5 grid place-items-center">
-        <h1 className="text-3xl">Credits: {premiumData.credits.toFixed(1)}</h1>
+        <h1 className="text-3xl">
+          Credits: {floatToNDecimalsString(premiumData.credits)}
+        </h1>
         <div className="flex gap-3">
           <button
             onClick={() => setCreditModalOpen(true)}
