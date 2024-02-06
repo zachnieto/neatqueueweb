@@ -7,7 +7,7 @@ import PurchaseCredits from "./PurchaseCredits";
 import { PremiumData } from "../../types";
 import TransferCredits from "./TransferCredits";
 import { transferCredits } from "../../services/neatqueue-service";
-import {floatToNDecimals, floatToNDecimalsString} from "../../util/utility";
+import { floatToNDecimals, floatToNDecimalsString } from "../../util/utility";
 
 const Credits = ({
   premiumData,

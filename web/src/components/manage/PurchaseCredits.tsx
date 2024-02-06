@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
-import {floatToNDecimals, floatToPrice} from "../../util/utility";
+import { floatToNDecimals, floatToPrice } from "../../util/utility";
 
 const PurchaseCredits = ({
   purchaseAmountDollars,
@@ -16,21 +16,21 @@ const PurchaseCredits = ({
   return (
     <div className="grid place-items-center">
       <div className="flex">
-          <CurrencyInput
-              className="text-center rounded w-20 text-black px-2 mb-5"
-              name="input-name"
-              value={purchaseAmountCredits}
-              decimalsLimit={2}
-              allowNegativeValue={false}
-              // @ts-ignore
-              onValueChange={(val: number, name: string) => {
-                  const valWithDefault = val || 0;
-                  setPurchaseAmountDollars(
-                      floatToPrice(Math.pow(valWithDefault, 1 / CREDIT_MULTIPLIER))
-                  );
-                  setPurchaseAmountCredits(valWithDefault);
-              }}
-          />
+        <CurrencyInput
+          className="text-center rounded w-20 text-black px-2 mb-5"
+          name="input-name"
+          value={purchaseAmountCredits}
+          decimalsLimit={2}
+          allowNegativeValue={false}
+          // @ts-ignore
+          onValueChange={(val: number, name: string) => {
+            const valWithDefault = val || 0;
+            setPurchaseAmountDollars(
+              floatToPrice(Math.pow(valWithDefault, 1 / CREDIT_MULTIPLIER))
+            );
+            setPurchaseAmountCredits(valWithDefault);
+          }}
+        />
         <h1 className="mx-2">Credits = </h1>
 
         <CurrencyInput

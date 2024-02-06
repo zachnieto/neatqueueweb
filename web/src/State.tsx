@@ -13,9 +13,9 @@ export const defaultState: Session = {
   },
 };
 
-// @ts-ignore
 const globalState = hookstate(
   defaultState,
+  // @ts-ignore
   localstored({ key: "session", engine: sessionStorage })
 );
 export const loadingState = hookstate(true);
