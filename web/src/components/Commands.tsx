@@ -12,7 +12,7 @@ const command_sections: CommandSectonData[] = [
   {
     title: "Leaderboard",
     paragraph:
-      "To display the leaderboard of your queue, you can run `/leaderboard`. The leaderboard will show MMRs, wins, win rates, and much more!\nYou can also configure a custom URL with `/leaderboardconfig url` which will generate an online leaderboard.\n\nNote: To share a leaderboard with many queues, you just need to name all the queues the same via /queuename, or set up a common `/leaderboard sharedconfig`.\nAlso, click the leaderboard title to see the web version!",
+      "To display the leaderboard of your queue, you can run `/leaderboard`. The leaderboard will show MMRs, wins, win rates, and much more!\nYou can also configure a custom URL with `/leaderboardconfig url` which will generate an online leaderboard.\n\nNote: To share a leaderboard with many queues, you can either enable `/leaderboardconfig sharedstats serverwide`, set up a common `/leaderboard sharedstats`, or just name all the queues the same via `/queuename`.\nAlso, click the leaderboard title to see the web version!",
     link: "https://docs.neatqueue.com/#/?id=leaderboard",
   },
   {
