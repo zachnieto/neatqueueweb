@@ -1469,9 +1469,9 @@ Substitute yourself for the given player.
 ### `/managestats reset mmr`
 #### Description
  Resets all MMR for all queues, or for the inputted queue name.
-#### Usage: `/managestats reset mmr [queue_name]`
+#### Usage: `/managestats reset mmr (queue_name)`
 #### Arguments:
-`queue_name`: *(Required)* The queue name to reset stats for.
+`queue_name`: *(Optional)* The queue name to reset stats for.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3303,10 +3303,23 @@ Substitute yourself for the given player.
 ### `/tournament config autocreatematches`
 #### Description
  (BETA) Toggle automatically creating new matches when ready.
-#### Usage: `/tournament config autocreatematches [mode]`
+#### Usage: `/tournament config autocreatematches [mode] (tournament_url)`
 #### Arguments:
 `mode`: *(Required)* Toggle automatically creating matches.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`tournament_url`: *(Optional)* Tournament to edit.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/tournament config autocreatenewtournament`
+#### Description
+ (BETA) Toggle automatically creating new tournaments.
+#### Usage: `/tournament config autocreatenewtournament [mode] (tournament_url)`
+#### Arguments:
+`mode`: *(Required)* Change if new tournaments are automatically created.\
+&emsp;&emsp;&emsp; Options: `On Start, On Completion, Never`\
+`tournament_url`: *(Optional)* Tournament to edit.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3314,10 +3327,11 @@ Substitute yourself for the given player.
 ### `/tournament config autostartonfill`
 #### Description
  (BETA) Toggle automatically starting the tournament when filled.
-#### Usage: `/tournament config autostartonfill [mode]`
+#### Usage: `/tournament config autostartonfill [mode] (tournament_url)`
 #### Arguments:
 `mode`: *(Required)* Toggle automatically starting on fill.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`tournament_url`: *(Optional)* Tournament to edit.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3325,9 +3339,10 @@ Substitute yourself for the given player.
 ### `/tournament config details`
 #### Description
  (BETA) Change the tournament details shown in the queue message.
-#### Usage: `/tournament config details (details)`
+#### Usage: `/tournament config details (details) (tournament_url)`
 #### Arguments:
-`details`: *(Optional)* Tournament details, or omit to remove.
+`details`: *(Optional)* Tournament details, or omit to remove.\
+`tournament_url`: *(Optional)* Tournament to edit.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3335,19 +3350,20 @@ Substitute yourself for the given player.
 ### `/tournament create`
 #### Description
  (BETA) Create a new tournament and shows signup buttons.
-#### Usage: `/tournament create [maximum_participants] (tournament_type) (auto_start_on_fill) (auto_create_matches) (team_size) (name) (url) (details) (forfeit_timer_sec) (hold_third_place_match)`
+#### Usage: `/tournament create [maximum_participants] (tournament_type) (auto_start_on_fill) (auto_create_matches) (auto_create_new_tournament) (team_size) (name) (url) (details) (forfeit_timer_sec)`
 #### Arguments:
 `maximum_participants`: *(Required)* Maximum number of teams that can register.\
-`tournament_type`: *(Optional)* Tournament type.\
+`tournament_type`: *(Optional)* (Default: Single Elimination) Tournament type.\
 &emsp;&emsp;&emsp; Options: `single_elimination, double_elimination, round_robin, swiss`\
-`auto_start_on_fill`: *(Optional)* Automatically start the tournament when the participant capacity is hit.\
-`auto_create_matches`: *(Optional)* If the bot should automatically create matches when ready.\
+`auto_start_on_fill`: *(Optional)* (Default: True) Automatically start the tournament when the participant capacity is hit.\
+`auto_create_matches`: *(Optional)* (Default: True) If the bot should automatically create matches when ready.\
+`auto_create_new_tournament`: *(Optional)* (Default: On Completion) Automatically create a new tournament when this one starts/ends?.\
+&emsp;&emsp;&emsp; Options: `On Start, On Completion, Never`\
 `team_size`: *(Optional)* Number of players on each team.\
 `name`: *(Optional)* The tournament name, also the name of the queue/stats storage for determining seeding.\
 `url`: *(Optional)* Challonge tournament URL, or omit to auto generate.\
 `details`: *(Optional)* Any extra details to show in the queue message.\
-`forfeit_timer_sec`: *(Optional)* How longer players have to join the match (in seconds) before forfeiting.\
-`hold_third_place_match`: *(Optional)* If a third place match should be played for single elimination tournaments.
+`forfeit_timer_sec`: *(Optional)* How longer players have to join the match (in seconds) before forfeiting.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3355,8 +3371,9 @@ Substitute yourself for the given player.
 ### `/tournament delete`
 #### Description
  (BETA) Deletes the tournament.
-#### Usage: `/tournament delete`
-
+#### Usage: `/tournament delete (tournament_url)`
+#### Arguments:
+`tournament_url`: *(Optional)* Tournament to delete.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3364,8 +3381,9 @@ Substitute yourself for the given player.
 ### `/tournament refresh`
 #### Description
  (BETA) Refresh necessary data from challonge and start any required matches.
-#### Usage: `/tournament refresh`
-
+#### Usage: `/tournament refresh (tournament_url)`
+#### Arguments:
+`tournament_url`: *(Optional)* Tournament to refresh.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3373,8 +3391,9 @@ Substitute yourself for the given player.
 ### `/tournament start`
 #### Description
  (BETA) Start the tournament.
-#### Usage: `/tournament start`
-
+#### Usage: `/tournament start (tournament_url)`
+#### Arguments:
+`tournament_url`: *(Optional)* Tournament to start.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3382,8 +3401,9 @@ Substitute yourself for the given player.
 ### `/tournament startmatches`
 #### Description
  (BETA) Starts the next set of ready matches.
-#### Usage: `/tournament startmatches`
-
+#### Usage: `/tournament startmatches (tournament_url)`
+#### Arguments:
+`tournament_url`: *(Optional)* Tournament to start matches for.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
