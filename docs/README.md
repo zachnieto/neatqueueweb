@@ -810,10 +810,11 @@ Substitute yourself for the given player.
 ### `/gamemode reshuffle`
 #### Description
  Sets whether players can reshuffle gamemodes in random gamemode selection.
-#### Usage: `/gamemode reshuffle [toggle]`
+#### Usage: `/gamemode reshuffle [toggle] (reshuffle_limit)`
 #### Arguments:
 `toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`reshuffle_limit`: *(Optional)* How many times players can reshuffle gamemodes.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1050,7 +1051,7 @@ Substitute yourself for the given player.
 
 ### `/lobbychannel set`
 #### Description
- Specify the channel to move players to/from before/after a game.
+ Specify the voice channel to move players to/from before/after a game.
 #### Usage: `/lobbychannel set [channel]`
 #### Arguments:
 `channel`: *(Required)* Channel to drag/drop players from/to.
@@ -1234,12 +1235,15 @@ Substitute yourself for the given player.
 ### `/mmr decay`
 #### Description
  Enable/disable MMR decay and configure the values.
-#### Usage: `/mmr decay [toggle] (amount) (duration)`
+#### Usage: `/mmr decay [toggle] (amount) (amount_type) (duration) (minimum)`
 #### Arguments:
 `toggle`: *(Required)* Enable/disable MMR decay.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
-`amount`: *(Optional)* Amount of MMR to decay.\
-`duration`: *(Optional)* After how long should a player decay in seconds.
+`amount`: *(Optional)* (Default: 20) Amount of MMR to decay.\
+`amount_type`: *(Optional)* (Default: Static Value) If the amount is an static value, or a percentage of total MMR.\
+&emsp;&emsp;&emsp; Options: `Static Value, Percentage`\
+`duration`: *(Optional)* (Default: 1 week) After how long should a player decay in seconds.\
+`minimum`: *(Optional)* (Default: None) Lowest MMR a player will decay to, omit to remove.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1524,10 +1528,11 @@ Substitute yourself for the given player.
 ### `/map reshuffle`
 #### Description
  Sets whether players can reshuffle maps in random map selection.
-#### Usage: `/map reshuffle [toggle]`
+#### Usage: `/map reshuffle [toggle] (reshuffle_limit)`
 #### Arguments:
 `toggle`: *(Required)* Whether reshuffling is enabled or disabled.\
-&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`\
+`reshuffle_limit`: *(Optional)* How many times players can reshuffle maps.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1653,6 +1658,17 @@ Substitute yourself for the given player.
 #### Usage: `/message queuemessage history [toggle]`
 #### Arguments:
 `toggle`: *(Required)* Toggle between sending queue join/leaves in the channel.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/message queuemessage leaderboardbutton`
+#### Description
+ Show a 'Leaderboard' button on the queue message.
+#### Usage: `/message queuemessage leaderboardbutton [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If the leaderboard button is shown.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2195,6 +2211,41 @@ Substitute yourself for the given player.
 &emsp;&emsp;&emsp; Options: `Buttons, Voice Channel, Either`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
+---
+
+### `/queueentry price`
+#### Description
+ Set how many points a player must pay to join the queue.
+#### Usage: `/queueentry price [value] (payout_fee)`
+#### Arguments:
+`value`: *(Required)* Price in points.\
+`payout_fee`: *(Optional)* Fee to take when paying out rewards. A value of 10 means a 10% fee is applied.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/queueentry survey add`
+#### Description
+ Adds a new survey which players must respond to before queuing.
+#### Usage: `/queueentry survey add [title] [allow_other] [options] (key) (show_in_teams_message)`
+#### Arguments:
+`title`: *(Required)* Title of the survey.\
+`allow_other`: *(Required)* If players can pick "Other" and manually type their response.\
+`options`: *(Required)* Comma separated list of options.\
+`key`: *(Optional)* Key which is used to store the results for a player, or omit to use the title.\
+`show_in_teams_message`: *(Optional)* -.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/queueentry survey delete`
+#### Description
+ Delete a previously added survey.
+#### Usage: `/queueentry survey delete [title]`
+#### Arguments:
+`title`: *(Required)* Title of the survey.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
 <hr style="border:3px solid gray">
 
 ## Queue Name
@@ -2444,6 +2495,29 @@ Substitute yourself for the given player.
 
 ---
 
+### `/autoroles winrate remove`
+#### Description
+ Removes a condition where player roles are changed based on winrate.
+#### Usage: `/autoroles winrate remove [role]`
+#### Arguments:
+`role`: *(Required)* Enter the role.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/autoroles winrate set`
+#### Description
+ (Ranks) Adds a condition in which player roles are changed based on winrate.
+#### Usage: `/autoroles winrate set [role] [lower_value] [upper_value] (only_one_allowed)`
+#### Arguments:
+`role`: *(Required)* Role.\
+`lower_value`: *(Required)* The lowest winrate value (0 to 100) required to gain the role.\
+`upper_value`: *(Required)* The upper winrate value (0 to 100) to lose the role.\
+`only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other winrate autoroles will be allowed.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/autoroles wins remove`
 #### Description
  Removes a condition where player roles are changed based on wins.
@@ -2491,6 +2565,28 @@ Substitute yourself for the given player.
 #### Arguments:
 `mode`: *(Required)* How players show they are ready.\
 &emsp;&emsp;&emsp; Options: `Ready Up Button, Join Lobby Voice Channel, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/readyup replaceinactive mode`
+#### Description
+ Changes how a replacement is found.
+#### Usage: `/readyup replaceinactive mode [mode]`
+#### Arguments:
+`mode`: *(Required)* Replacement mode.\
+&emsp;&emsp;&emsp; Options: `Closest Rated, Highest Rated, Queue Priority`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/readyup replaceinactive toggle`
+#### Description
+ Toggle replacing inactive players if possible.
+#### Usage: `/readyup replaceinactive toggle [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If automatic replacement is enabled.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -3083,13 +3179,24 @@ Substitute yourself for the given player.
 
 <hr style="border:3px solid gray">
 
-## Stats
-### `/hidestats`
+## Stats Config
+### `/statsconfig hidestats`
 #### Description
  Sets whether stats are forced to be hidden (only shown to the user).
-#### Usage: `/hidestats [toggle]`
+#### Usage: `/statsconfig hidestats [toggle]`
 #### Arguments:
 `toggle`: *(Required)* If you want the stats to be always hidden.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/statsconfig rankupautorole`
+#### Description
+ Sets what autorole criteria is used for displaying rank ups in /stats.
+#### Usage: `/statsconfig rankupautorole [autorole]`
+#### Arguments:
+`autorole`: *(Required)* (Default: MMR) Which autorole to use.\
+&emsp;&emsp;&emsp; Options: `MMR, Points, Wins, Losses, Games, Streak, Winrate, MVPs`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
