@@ -40,7 +40,7 @@ export type NodeStatus = {
   status: string;
   shards: number;
   guilds: number;
-  node: number;
+  id: number;
 };
 export type InstancePricing = {
   price: number;

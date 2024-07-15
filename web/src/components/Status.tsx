@@ -42,7 +42,7 @@ const Status = () => {
           <div className="flex justify-around items-center gap-5">
             {statuses.map((status) => (
               <div className="text-6xl text-center bg-black/75 p-10 rounded-xl">
-                <h1>Node {status.node}</h1>
+                <h1>Node {status.id}</h1>
                 <h1
                   className={
                     status.status === "ONLINE"
