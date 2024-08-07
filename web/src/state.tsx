@@ -1,6 +1,6 @@
-import { hookstate } from "@hookstate/core";
-import { localstored } from "@hookstate/localstored";
-import { Session } from "./types";
+import { hookstate } from '@hookstate/core';
+import { localstored } from '@hookstate/localstored';
+import { Session } from './types';
 
 export const defaultState: Session = {
   auth: undefined,
@@ -16,8 +16,7 @@ export const defaultState: Session = {
 const globalState = hookstate(
   defaultState,
   // @ts-ignore
-  localstored({ key: "session", engine: sessionStorage })
+  localstored({ key: 'session', engine: sessionStorage })
 );
-export const loadingState = hookstate(true);
 
 export default globalState;

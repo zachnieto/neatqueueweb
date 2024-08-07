@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import CurrencyInput from "react-currency-input-field";
-import { floatToNDecimals, floatToPrice } from "../../util/utility";
+import { Dispatch, SetStateAction, useState } from 'react';
+import CurrencyInput from 'react-currency-input-field';
+import { floatToNDecimals, floatToPrice } from '../../util/utility';
 
 const PurchaseCredits = ({
   purchaseAmountDollars,

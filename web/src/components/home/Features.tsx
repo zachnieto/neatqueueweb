@@ -1,7 +1,7 @@
 const Features = () => {
   const features = [
     {
-      title: "Multiple Team Selection Modes",
+      title: 'Multiple Team Selection Modes',
       details: "Balanced, Captains, Random, Player's Choose, and Unfair",
     },
   ];

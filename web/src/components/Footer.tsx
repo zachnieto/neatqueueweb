@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Footer = () => {
             <a
               href="#"
               className="rounded-md px-3 py-2"
-              onClick={() => navigate("/privacy")}
+              onClick={() => navigate('/privacy')}
             >
               Privacy Policy
             </a>

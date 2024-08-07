@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import CurrencyInput from "react-currency-input-field";
+import { Dispatch, SetStateAction, useState } from 'react';
+import CurrencyInput from 'react-currency-input-field';
 
 const TransferCredits = ({
   transferAmountCredits,

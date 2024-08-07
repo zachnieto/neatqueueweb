@@ -1,18 +1,10 @@
-import { useHookstate } from "@hookstate/core";
-import { useEffect } from "react";
-import { discordGetGuilds } from "../services/discord-service";
-import globalState from "../State";
-import GuildCard from "./GuildCard";
+import { useHookstate } from '@hookstate/core';
+import globalState from '../state';
+import GuildCard from './GuildCard';
 
 const Dashboard = () => {
   const state = useHookstate(globalState);
-  const { auth, guilds } = state.get();
-
-  useEffect(() => {
-    if (auth && !guilds) {
-      discordGetGuilds(auth);
-    }
-  }, [auth]);
+  const { guilds } = state.get();
 
   return (
     <div className="min-h-screen">

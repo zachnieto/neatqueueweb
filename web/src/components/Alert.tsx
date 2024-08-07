@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { delay } from "../util/utility";
-import { classNames } from "../util/tailwind";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { delay } from '../util/utility';
+import { classNames } from '../util/tailwind';
 
 const Alert = ({
   value,
@@ -12,14 +12,14 @@ const Alert = ({
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
   useEffect(() => {
-    delay(10000).then(() => setValue(""));
+    delay(10000).then(() => setValue(''));
   }, [value]);
 
   if (!value) return <></>;
 
   return (
     <div>
-      <h1 className={classNames("text-3xl rounded p-1 mx-4", color)}>
+      <h1 className={classNames('text-3xl rounded p-1 mx-4', color)}>
         {value}
       </h1>
     </div>

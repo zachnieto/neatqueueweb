@@ -1,8 +1,8 @@
-import Particles from "react-tsparticles";
-import React from "react";
+import Particles from 'react-tsparticles';
+import React from 'react';
 
 const CustomParticles = ({
-  color = "#1c0037",
+  color = '#1c0037',
   clickable = true,
   opacity = 0.05,
 }: {
@@ -24,7 +24,7 @@ const CustomParticles = ({
           events: {
             onClick: {
               enable: clickable,
-              mode: "push",
+              mode: 'push',
             },
             onHover: {
               enable: true,
@@ -49,10 +49,10 @@ const CustomParticles = ({
         },
         particles: {
           color: {
-            value: "#ffffff",
+            value: '#ffffff',
           },
           links: {
-            color: "#ffffff",
+            color: '#ffffff',
             distance: 150,
             enable: true,
             opacity: opacity,
@@ -62,9 +62,9 @@ const CustomParticles = ({
             enable: true,
           },
           move: {
-            direction: "none",
+            direction: 'none',
             enable: true,
-            outMode: "bounce",
+            outMode: 'bounce',
             random: false,
             speed: 0.1,
             straight: false,
@@ -80,7 +80,7 @@ const CustomParticles = ({
             value: opacity,
           },
           shape: {
-            type: "circle",
+            type: 'circle',
           },
           size: {
             random: true,

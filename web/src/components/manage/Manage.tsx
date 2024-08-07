@@ -1,13 +1,13 @@
-import { useHookstate } from "@hookstate/core";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPremium } from "../../services/neatqueue-service";
-import globalState from "../../State";
-import Credits from "./Credits";
-import Instance from "./instance/Instance";
-import PremiumStatus from "./PremiumStatus";
-import Alert from "../Alert";
-import { Guild, PremiumData } from "../../types";
+import { useHookstate } from '@hookstate/core';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPremium } from '../../services/neatqueue-service';
+import globalState from '../../state';
+import Credits from './Credits';
+import Instance from './instance/Instance';
+import PremiumStatus from './PremiumStatus';
+import Alert from '../Alert';
+import { Guild, PremiumData } from '../../types';
 
 const Manage = () => {
   const { guildID } = useParams();
@@ -15,8 +15,8 @@ const Manage = () => {
   const [guild, setGuild] = useState<Guild>();
   const [premiumData, setPremiumData] = useState<PremiumData>();
 
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
 
   useEffect(() => {
     if (guildID) {

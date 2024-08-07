@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import globalState from "../../State";
-import ChangePlans from "./ChangePlans";
-import Extend from "./Extend";
-import Modal from "../Modal";
-import { purchasePremium } from "../../services/neatqueue-service";
-import { useHookstate } from "@hookstate/core";
-import { PremiumData, TimeLeft } from "../../types";
-import { calculateTimeLeft } from "../../util/utility";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import globalState from '../../state';
+import ChangePlans from './ChangePlans';
+import Extend from './Extend';
+import Modal from '../Modal';
+import { purchasePremium } from '../../services/neatqueue-service';
+import { useHookstate } from '@hookstate/core';
+import { PremiumData, TimeLeft } from '../../types';
+import { calculateTimeLeft } from '../../util/utility';
 
 const PremiumStatus = ({
   premiumData,
@@ -27,7 +27,7 @@ const PremiumStatus = ({
   const [extendModalOpen, setExtendModalOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>();
   const [selectedPlan, setSelectedPlan] = useState<string>(
-    premiumData.premium?.plan || ""
+    premiumData.premium?.plan || ''
   );
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const PremiumStatus = ({
               {premiumData.premium.plan}
             </h1>
             <h3>
-              For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{" "}
+              For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{' '}
               {timeLeft.minutes} Minutes
             </h3>
             <div className="flex place-content-center gap-3">

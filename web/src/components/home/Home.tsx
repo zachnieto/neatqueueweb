@@ -1,7 +1,7 @@
-import CustomParticles from "../Particles";
-import Sus from "../Sus";
-import Stats from "./Stats";
-import Features from "./Features";
+import CustomParticles from '../Particles';
+import Sus from '../Sus';
+import Stats from './Stats';
+import Features from './Features';
 
 const Home = () => {
   return (

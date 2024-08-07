@@ -1,11 +1,11 @@
-import { useHookstate } from "@hookstate/core";
-import { useEffect, useState } from "react";
-import { getStats } from "../../services/neatqueue-service";
-import globalState from "../../State";
-import { LoadingBar } from "../Loading";
-import CustomParticles from "../Particles";
-import Sus from "../Sus";
-import { classNames } from "../../util/tailwind";
+import { useHookstate } from '@hookstate/core';
+import { useEffect, useState } from 'react';
+import { getStats } from '../../services/neatqueue-service';
+import globalState from '../../state';
+import { LoadingBar } from '../Loading';
+import CustomParticles from '../Particles';
+import Sus from '../Sus';
+import { classNames } from '../../util/tailwind';
 
 const Stats = () => {
   const global = useHookstate(globalState);
@@ -56,13 +56,13 @@ const Stats = () => {
             {!loading && (
               <h1
                 className={classNames(
-                  "text-xl my-auto bg-black/50 md:mx-8 rounded-xl",
+                  'text-xl my-auto bg-black/50 md:mx-8 rounded-xl',
                   global.stats.servers.get() === -1
-                    ? "text-red-600"
-                    : "text-green-600"
+                    ? 'text-red-600'
+                    : 'text-green-600'
                 )}
               >
-                {global.stats.servers.get() === -1 ? "Offline" : "Online"}
+                {global.stats.servers.get() === -1 ? 'Offline' : 'Online'}
               </h1>
             )}
           </div>

@@ -1,6 +1,6 @@
-import axios from "axios";
-import globalState from "../State";
-import { Auth, NodeStatus, InstancePricing, PrivateInstance } from "../types";
+import axios from 'axios';
+import globalState from '../state';
+import { Auth, NodeStatus, InstancePricing, PrivateInstance } from '../types';
 
 const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 
@@ -65,13 +65,6 @@ export const transferCredits = async (
     config
   );
 };
-
-export async function getBracket(guildID: string, tournyName: string) {
-  const resp = await axios.get(
-    `${API_BASE}/api/tournament/${guildID}/${tournyName}`
-  );
-  return resp.data;
-}
 
 export async function getLongUrl(shortUrl: string) {
   const resp = await axios.get(`${API_BASE}/api/longurl/${shortUrl}`);

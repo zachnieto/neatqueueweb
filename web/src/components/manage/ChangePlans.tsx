@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { classNames } from "../../util/tailwind";
-import { Plans, PremiumData } from "../../types";
+import { Dispatch, SetStateAction, useState } from 'react';
+import { classNames } from '../../util/tailwind';
+import { Plans, PremiumData } from '../../types';
 
 const ChangePlans = ({
   plans,
@@ -27,10 +27,10 @@ const ChangePlans = ({
             <button
               onClick={() => setSelectedPlan(plan)}
               className={classNames(
-                "btn-primary mt-auto",
+                'btn-primary mt-auto',
                 selectedPlan !== undefined && selectedPlan !== plan
-                  ? "opacity-50 hover:opacity-100"
-                  : ""
+                  ? 'opacity-50 hover:opacity-100'
+                  : ''
               )}
             >
               Select

@@ -95,7 +95,7 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 #### Usage: `/message queuemessage footer (text) (icon_url)`
 #### Arguments:
 `text`: *(Optional)* Footer contents, or omit to remove.\
-`icon_url`: *(Optional)* -.
+`icon_url`: *(Optional)* 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -468,10 +468,11 @@ Substitute yourself for the given player.
 ### `/autoping set`
 #### Description
  Automatically ping the given role when the queue hits the given size.
-#### Usage: `/autoping set [role] [size]`
+#### Usage: `/autoping set [role] [size] (delete_after)`
 #### Arguments:
 `role`: *(Required)* Role to ping.\
-`size`: *(Required)* Ping when the queue hits this size.
+`size`: *(Required)* Ping when the queue hits this size.\
+`delete_after`: *(Optional)* Delete the ping after this many seconds.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 <hr style="border:3px solid gray">
@@ -531,6 +532,16 @@ Substitute yourself for the given player.
 #### Arguments:
 `toggle`: *(Required)* If players are muted.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/captains bannedrole`
+#### Description
+ Sets a role which is banned from being captain.
+#### Usage: `/captains bannedrole (role)`
+#### Arguments:
+`role`: *(Optional)* The banned role.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1294,7 +1305,7 @@ Substitute yourself for the given player.
  Sets the MMR multiplier for the given role for wins.
 #### Usage: `/mmr multipliers set [role] [multiplier]`
 #### Arguments:
-`role`: *(Required)* -.\
+`role`: *(Required)* \
 `multiplier`: *(Required)* Multiplier value. (Ex: 1.2 for a 20% boost).
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -1361,7 +1372,7 @@ Substitute yourself for the given player.
  Adds the given player to the queue.
 #### Usage: `/player add [user] (role) (team)`
 #### Arguments:
-`user`: *(Required)* -.\
+`user`: *(Required)* \
 `role`: *(Optional)* Enter the role for the player.\
 `team`: *(Optional)* Enter the team for the player if desired.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -1378,7 +1389,7 @@ Substitute yourself for the given player.
 `hours`: *(Optional)* Hours to ban for.\
 `minutes`: *(Optional)* Minutes to ban for.\
 `seconds`: *(Optional)* Seconds to ban for.\
-`reason`: *(Optional)* -.
+`reason`: *(Optional)* 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1572,12 +1583,23 @@ Substitute yourself for the given player.
 
 ---
 
+### `/matchstart removefromqueues`
+#### Description
+ (Default: Enabled) Remove players from other queues when a match starts.
+#### Usage: `/matchstart removefromqueues [toggle]`
+#### Arguments:
+`toggle`: *(Required)* If players are removed from queues on start.\
+&emsp;&emsp;&emsp; Options: `Enabled, Disabled`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/matchstart shuffleonstart`
 #### Description
  (Default: Disabled) Shuffle the player pool on start.
 #### Usage: `/matchstart shuffleonstart [mode]`
 #### Arguments:
-`mode`: *(Required)* -.\
+`mode`: *(Required)* \
 &emsp;&emsp;&emsp; Options: `Disabled, Lottery, Priority`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2134,7 +2156,7 @@ Substitute yourself for the given player.
  Sets the points multiplier for the given role.
 #### Usage: `/points multipliers set [role] [multiplier]`
 #### Arguments:
-`role`: *(Required)* -.\
+`role`: *(Required)* \
 `multiplier`: *(Required)* Multiplier value. (Ex: 1.2 for a 20% boost).
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2233,7 +2255,7 @@ Substitute yourself for the given player.
 `allow_other`: *(Required)* If players can pick "Other" and manually type their response.\
 `options`: *(Required)* Comma separated list of options.\
 `key`: *(Optional)* Key which is used to store the results for a player, or omit to use the title.\
-`show_in_teams_message`: *(Optional)* -.
+`show_in_teams_message`: *(Optional)* 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -2835,7 +2857,7 @@ Substitute yourself for the given player.
  (BETA) Toggle if the scheduled command should repeat each time daily.
 #### Usage: `/schedule repeat [scheduled_command] (repeat)`
 #### Arguments:
-`scheduled_command`: *(Required)* -.\
+`scheduled_command`: *(Required)* \
 `repeat`: *(Optional)* If times should repeat after execution.\
 &emsp;&emsp;&emsp; Options: `Enabled, Disabled`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
@@ -2999,7 +3021,7 @@ Substitute yourself for the given player.
 #### Usage: `/ratinginname format [format] [location]`
 #### Arguments:
 `format`: *(Required)* How the rating should be formatted. A '$' indicates the player's rating.\
-`location`: *(Required)* -.\
+`location`: *(Required)* \
 &emsp;&emsp;&emsp; Options: `Prefix, Suffix`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -3369,7 +3391,7 @@ Substitute yourself for the given player.
  (Default: 60) Sets the timeout for voting menus.
 #### Usage: `/timer votes [seconds]`
 #### Arguments:
-`seconds`: *(Required)* -.
+`seconds`: *(Required)* 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---

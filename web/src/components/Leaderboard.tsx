@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { getGuildChannelStats } from "../services/neatqueue-service";
-import { classNames } from "../util/tailwind";
-import LeaderboardItem from "./LeaderboardItem";
+import { useState, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { getGuildChannelStats } from '../services/neatqueue-service';
+import { classNames } from '../util/tailwind';
+import LeaderboardItem from './LeaderboardItem';
 
-type sortsVal = "mmr" | "wins" | "losses" | "totalgames";
-type sortsKey = "MMR" | "Wins" | "Losses" | "Games";
+type sortsVal = 'mmr' | 'wins' | 'losses' | 'totalgames';
+type sortsKey = 'MMR' | 'Wins' | 'Losses' | 'Games';
 type sortKeyMap = {
   sortsKey: sortsVal;
 };
 
 const sortKeys: any = {
-  MMR: "mmr",
-  Wins: "wins",
-  Losses: "losses",
-  Games: "totalgames",
-  Streak: "streak",
-  Peak_MMR: "peak_mmr",
-  Peak_Streak: "peak_streak",
-  Win_Rate: "winrate",
+  MMR: 'mmr',
+  Wins: 'wins',
+  Losses: 'losses',
+  Games: 'totalgames',
+  Streak: 'streak',
+  Peak_MMR: 'peak_mmr',
+  Peak_Streak: 'peak_streak',
+  Win_Rate: 'winrate',
 };
 
 // TODO
@@ -27,21 +27,21 @@ type LooseObject = {
 };
 
 const Leaderboard = ({
-  passedGuildId = "",
-  passedChannelId = "",
+  passedGuildId = '',
+  passedChannelId = '',
 }: {
   passedGuildId?: string;
   passedChannelId?: string;
 }) => {
   let { guildID, channelID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const urlParamSort = searchParams.get("sort");
+  const urlParamSort = searchParams.get('sort');
 
-  const [month, setMonth] = useState("alltime");
+  const [month, setMonth] = useState('alltime');
   const [sortKey, setSortKey] = useState(
     urlParamSort && Object.keys(sortKeys).includes(urlParamSort)
       ? urlParamSort
-      : "MMR"
+      : 'MMR'
   );
   const [stats, setStats] = useState<LooseObject>();
 
@@ -51,7 +51,7 @@ const Leaderboard = ({
   useEffect(() => {
     if (guildID && channelID)
       getGuildChannelStats(guildID, channelID)
-        .catch(() => console.log("Error fetching leaderboard data"))
+        .catch(() => console.log('Error fetching leaderboard data'))
         .then(setStats);
   }, []);
 
@@ -62,7 +62,7 @@ const Leaderboard = ({
   const changeSort = (sortKey: string) => {
     setSortKey(sortKey);
     let updatedSearchParams = new URLSearchParams(searchParams.toString());
-    updatedSearchParams.set("sort", sortKey);
+    updatedSearchParams.set('sort', sortKey);
     setSearchParams(updatedSearchParams.toString());
   };
 
@@ -75,7 +75,7 @@ const Leaderboard = ({
     changeSort(sortKeyArray[nextIdx]);
   };
 
-  const dateOptions = { year: "numeric", month: "short" };
+  const dateOptions = { year: 'numeric', month: 'short' };
 
   return (
     <div className="grid grid-cols-10 mx-auto max-w-7xl min-h-screen">
@@ -88,15 +88,15 @@ const Leaderboard = ({
                 key={m}
                 onClick={() => setMonth(m)}
                 className={classNames(
-                  month === m ? "bg-red-500/80" : "bg-violet-900/80",
-                  "px-2 py-1 shadow-xl text-lg mb-1 mr-3 cursor-pointer"
+                  month === m ? 'bg-red-500/80' : 'bg-violet-900/80',
+                  'px-2 py-1 shadow-xl text-lg mb-1 mr-3 cursor-pointer'
                 )}
               >
                 <h1>
-                  {m === "alltime"
-                    ? "All Time"
-                    : new Date(m + "-15").toLocaleDateString(
-                        "en-US",
+                  {m === 'alltime'
+                    ? 'All Time'
+                    : new Date(m + '-15').toLocaleDateString(
+                        'en-US',
                         /* @ts-ignore */
                         dateOptions
                       )}
@@ -113,11 +113,11 @@ const Leaderboard = ({
               key={key}
               onClick={() => changeSort(key)}
               className={classNames(
-                "btn-primary",
-                sortKey === key ? "translate-y-1" : ""
+                'btn-primary',
+                sortKey === key ? 'translate-y-1' : ''
               )}
             >
-              <h1>{key.replace("_", " ")}</h1>
+              <h1>{key.replace('_', ' ')}</h1>
             </button>
           ))}
         </div>
@@ -127,14 +127,14 @@ const Leaderboard = ({
             className="btn-primary"
             onClick={() => scrollChangeSort(false)}
           >
-            {"<"}
+            {'<'}
           </button>
-          <div className="btn-style">{sortKey.replace("_", " ")}</div>
+          <div className="btn-style">{sortKey.replace('_', ' ')}</div>
           <button
             className="btn-primary"
             onClick={() => scrollChangeSort(true)}
           >
-            {">"}
+            {'>'}
           </button>
         </div>
 
@@ -142,12 +142,12 @@ const Leaderboard = ({
           <div className="my-auto mx-3 basis-5">
             <div />
           </div>
-          <h1 className={sortKey === "MMR" ? "basis-2/4" : "basis-3/4"}>
+          <h1 className={sortKey === 'MMR' ? 'basis-2/4' : 'basis-3/4'}>
             Name
           </h1>
-          {sortKey === "MMR" && <h1 className="basis-1/4">MMR</h1>}
+          {sortKey === 'MMR' && <h1 className="basis-1/4">MMR</h1>}
           <h3 className="basis-1/4">
-            {sortKey === "MMR" ? "Win - Loss" : sortKey.replace("_", " ")}
+            {sortKey === 'MMR' ? 'Win - Loss' : sortKey.replace('_', ' ')}
           </h3>
         </div>
         {stats &&

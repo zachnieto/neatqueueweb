@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { Guild } from "../types";
+import { useNavigate } from 'react-router-dom';
+import { Guild } from '../types';
 
 const GuildCard = ({ guild }: { guild: Guild }) => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const GuildCard = ({ guild }: { guild: Guild }) => {
         src={
           guild.icon !== null
             ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
-            : "https://i.imgur.com/2X6ZRmm.png"
+            : 'https://i.imgur.com/2X6ZRmm.png'
         }
         alt="Server icon"
       />

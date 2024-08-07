@@ -1,7 +1,7 @@
-import Modal from "../../Modal";
-import { useEffect, useState } from "react";
-import { classNames } from "../../../util/tailwind";
-import globalState from "../../../State";
+import Modal from '../../Modal';
+import { useEffect, useState } from 'react';
+import { classNames } from '../../../util/tailwind';
+import globalState from '../../../state';
 import {
   deleteInstance,
   extendInstance,
@@ -12,18 +12,18 @@ import {
   startInstance,
   stopInstance,
   updateToken,
-} from "../../../services/neatqueue-service";
-import { useHookstate } from "@hookstate/core";
-import _ from "lodash";
+} from '../../../services/neatqueue-service';
+import { useHookstate } from '@hookstate/core';
+import _ from 'lodash';
 import {
   InstancePricing,
   PrivateInstance,
   PrivateInstanceState,
   TimeLeft,
-} from "../../../types";
-import { calculateTimeLeft } from "../../../util/utility";
-import ExtendModal from "./ExtendModal";
-import TerminateModal from "./TerminateModal";
+} from '../../../types';
+import { calculateTimeLeft } from '../../../util/utility';
+import ExtendModal from './ExtendModal';
+import TerminateModal from './TerminateModal';
 
 const Instance = ({
   guildID,
@@ -53,10 +53,10 @@ const Instance = ({
   const [timeLeft, setTimeLeft] = useState<TimeLeft>();
 
   const statusColor = {
-    running: "text-green-600",
-    online: "text-green-600",
-    stopped: "text-red-600",
-    offline: "text-red-600",
+    running: 'text-green-600',
+    online: 'text-green-600',
+    stopped: 'text-red-600',
+    offline: 'text-red-600',
   };
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Instance = ({
     setLoading(true);
     try {
       await purchaseInstance(guildID, auth, selectedInstance.price);
-      setSuccess("Instance is now being created");
+      setSuccess('Instance is now being created');
     } catch (e: any) {
       setError(e.response.data.detail);
     }
@@ -121,7 +121,7 @@ const Instance = ({
   const start = async () => {
     try {
       await startInstance(guildID, auth);
-      setSuccess("Instance is now starting");
+      setSuccess('Instance is now starting');
     } catch (e: any) {
       setError(e.response.data.detail);
     }
@@ -130,7 +130,7 @@ const Instance = ({
   const reboot = async () => {
     try {
       await rebootInstance(guildID, auth);
-      setSuccess("Instance is now rebooting");
+      setSuccess('Instance is now rebooting');
     } catch (e: any) {
       setError(e.response.data.detail);
     }
@@ -139,7 +139,7 @@ const Instance = ({
   const stop = async () => {
     try {
       await stopInstance(guildID, auth);
-      setSuccess("Instance is now stopping");
+      setSuccess('Instance is now stopping');
     } catch (e: any) {
       setError(e.response.data.detail);
     }
@@ -161,8 +161,8 @@ const Instance = ({
   const updateBotToken = async () => {
     try {
       await updateToken(guildID, auth, botToken!);
-      setBotToken("");
-      setSuccess("Bot token has been updated");
+      setBotToken('');
+      setSuccess('Bot token has been updated');
     } catch (e: any) {
       setError(e.response.data.detail);
     }
@@ -189,10 +189,10 @@ const Instance = ({
               <button
                 onClick={() => setSelectedInstance(instance)}
                 className={classNames(
-                  "btn-primary",
+                  'btn-primary',
                   selectedInstance !== instance
-                    ? "opacity-50 hover:opacity-100"
-                    : ""
+                    ? 'opacity-50 hover:opacity-100'
+                    : ''
                 )}
               >
                 Select
@@ -221,7 +221,7 @@ const Instance = ({
           ) : (
             <div>
               <h3 className="text-center">
-                For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{" "}
+                For Another {timeLeft.days} Days, {timeLeft.hours} Hours, and{' '}
                 {timeLeft.minutes} Minutes
               </h3>
 
@@ -239,12 +239,12 @@ const Instance = ({
               </div>
 
               <h1 className="text-2xl text-center mt-5">
-                Instance Status:{" "}
+                Instance Status:{' '}
                 <span
                   className={
                     statusColor[
                       privateInstance.instance as keyof typeof statusColor
-                    ] || "text-yellow-400"
+                    ] || 'text-yellow-400'
                   }
                 >
                   {_.capitalize(privateInstance.instance)}
@@ -252,7 +252,7 @@ const Instance = ({
               </h1>
 
               <h1 className="text-2xl text-center mb-5">
-                Bot Status:{" "}
+                Bot Status:{' '}
                 <span
                   className={
                     statusColor[privateInstance.bot as keyof typeof statusColor]
@@ -265,7 +265,7 @@ const Instance = ({
               <div className="flex gap-3 justify-center">
                 <button
                   onClick={start}
-                  disabled={privateInstance.instance !== "stopped" || loading}
+                  disabled={privateInstance.instance !== 'stopped' || loading}
                   className="btn-primary"
                 >
                   Start
@@ -273,7 +273,7 @@ const Instance = ({
 
                 <button
                   onClick={reboot}
-                  disabled={privateInstance.instance !== "running" || loading}
+                  disabled={privateInstance.instance !== 'running' || loading}
                   className="btn-primary"
                 >
                   Reboot
@@ -281,7 +281,7 @@ const Instance = ({
 
                 <button
                   onClick={stop}
-                  disabled={privateInstance.instance !== "running" || loading}
+                  disabled={privateInstance.instance !== 'running' || loading}
                   className="btn-primary"
                 >
                   Stop

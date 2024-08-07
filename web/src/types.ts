@@ -9,6 +9,7 @@ export type User =
       username: string;
       avatar: string;
       discriminator: string;
+      admin: boolean;
     }
   | undefined;
 export type Guild = {
@@ -47,8 +48,8 @@ export type InstancePricing = {
   name: string;
 };
 
-export type PrivateInstanceState = "running" | "stopped" | "terminated";
-export type PrivateInstanceBotState = "online" | "offline";
+export type PrivateInstanceState = 'running' | 'stopped' | 'terminated';
+export type PrivateInstanceBotState = 'online' | 'offline';
 
 export type PrivateInstance = {
   id: string;

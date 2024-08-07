@@ -1,27 +1,24 @@
-import axios from "axios";
-import globalState from "../State";
-import { discordGetUser } from "./discord-service";
-import { Session } from "../types";
+import axios from 'axios';
+import globalState from '../state';
+import { Session } from '../types';
 
 const API_BASE = import.meta.env.VITE_NEATQUEUE_API;
 const api = axios.create({
   withCredentials: true,
+  baseURL: API_BASE,
 });
 
-export const setSession = async (data: object) => {
-  api.post(`${API_BASE}/session`, data);
-};
-
 export const getSession = async () => {
-  const resp = await api.get(`${API_BASE}/session`);
+  const resp = await api.get(`/session`);
   const data: Session = resp.data;
+  console.log(data);
   globalState.auth.set(data.auth);
   globalState.user.set(data.user);
   globalState.guilds.set(data.guilds);
 };
 
 export const endSession = async () => {
-  api.delete(`${API_BASE}/session`);
+  api.delete(`/session`);
   globalState.auth.set(undefined);
   globalState.user.set(undefined);
   globalState.guilds.set(undefined);
@@ -34,7 +31,7 @@ export const requestCheckout = async (
   price: number,
   url: string
 ) => {
-  const resp = await api.post(`${API_BASE}/checkout`, {
+  const resp = await api.post(`/checkout`, {
     userId: userId,
     userName: userName,
     guildId: guildId,
@@ -45,15 +42,17 @@ export const requestCheckout = async (
 };
 
 export const discordAuth = async (code: string) => {
-  const resp = await api.post(`${API_BASE}/session/auth`, {
+  const resp = await api.post(`/session/auth`, {
     code: code,
   });
-  globalState.auth.set(resp.data);
-  discordGetUser(resp.data).then((user) => {
-    setSession({
-      auth: globalState.auth.get(),
-      user: user,
-      guilds: globalState.guilds.get(),
-    });
-  });
+  const data = resp.data;
+  globalState.auth.set(data.auth);
+  globalState.user.set(data.user);
+  globalState.guilds.set(data.guilds);
+  console.log(data);
+};
+
+export const fetchCoolifyAPIToken = async () => {
+  const resp = await api.get(`/coolifyapitoken`);
+  return resp.data;
 };

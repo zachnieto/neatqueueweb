@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { getStatus } from "../services/neatqueue-service";
-import { NodeStatus } from "../types";
+import { useEffect, useState } from 'react';
+import { getStatus } from '../services/neatqueue-service';
+import { NodeStatus } from '../types';
 
 const Status = () => {
   const [statuses, setStatuses] = useState<NodeStatus[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [overallStatus, setOverallStatus] = useState<string>("HEALTHY");
+  const [overallStatus, setOverallStatus] = useState<string>('HEALTHY');
   const [overallStatusColor, setOverallStatusColor] =
-    useState<string>("text-yellow-400");
+    useState<string>('text-yellow-400');
 
   useEffect(() => {
     getStatus()
@@ -17,17 +17,17 @@ const Status = () => {
   }, []);
 
   useEffect(() => {
-    const healthies = statuses.filter((s) => s.status === "ONLINE").length;
+    const healthies = statuses.filter((s) => s.status === 'ONLINE').length;
 
     if (healthies === statuses.length) {
-      setOverallStatus("Healthy");
-      setOverallStatusColor("text-green-400");
+      setOverallStatus('Healthy');
+      setOverallStatusColor('text-green-400');
     } else if (healthies === 0) {
-      setOverallStatus("Offline");
-      setOverallStatusColor("text-red-400");
+      setOverallStatus('Offline');
+      setOverallStatusColor('text-red-400');
     } else {
-      setOverallStatus("Degraded");
-      setOverallStatusColor("text-yellow-400");
+      setOverallStatus('Degraded');
+      setOverallStatusColor('text-yellow-400');
     }
   }, [statuses]);
 
@@ -45,9 +45,9 @@ const Status = () => {
                 <h1>Node {status.id}</h1>
                 <h1
                   className={
-                    status.status === "ONLINE"
-                      ? "text-green-400"
-                      : "text-red-400"
+                    status.status === 'ONLINE'
+                      ? 'text-green-400'
+                      : 'text-red-400'
                   }
                 >
                   {status.status}

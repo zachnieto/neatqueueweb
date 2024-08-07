@@ -1,13 +1,13 @@
-import { useHookstate } from "@hookstate/core";
-import { useState } from "react";
-import { requestCheckout } from "../../services/server-service";
-import globalState from "../../State";
-import Modal from "../Modal";
-import PurchaseCredits from "./PurchaseCredits";
-import { PremiumData } from "../../types";
-import TransferCredits from "./TransferCredits";
-import { transferCredits } from "../../services/neatqueue-service";
-import { floatToNDecimals, floatToNDecimalsString } from "../../util/utility";
+import { useHookstate } from '@hookstate/core';
+import { useState } from 'react';
+import { requestCheckout } from '../../services/server-service';
+import globalState from '../../state';
+import Modal from '../Modal';
+import PurchaseCredits from './PurchaseCredits';
+import { PremiumData } from '../../types';
+import TransferCredits from './TransferCredits';
+import { transferCredits } from '../../services/neatqueue-service';
+import { floatToNDecimals, floatToNDecimalsString } from '../../util/utility';
 
 const Credits = ({
   premiumData,
@@ -27,7 +27,7 @@ const Credits = ({
 
   const [purchaseAmountDollars, setPurchaseAmountDollars] = useState<number>(0);
   const [transferAmountCredits, setTransferAmountCredits] = useState<number>(0);
-  const [transferGuildId, setTransferGuildId] = useState<string>("");
+  const [transferGuildId, setTransferGuildId] = useState<string>('');
   const [creditModalOpen, setCreditModalOpen] = useState(false);
   const [transferModalOpen, setTransferModalOpen] = useState(false);
 

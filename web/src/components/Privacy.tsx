@@ -28,7 +28,7 @@ const Privacy = () => {
       <h1 className="text-3xl">Data Removal</h1>
       <ul className="list-disc text-xl">
         <li>
-          Server-specific player stats are able to be deleted via{" "}
+          Server-specific player stats are able to be deleted via{' '}
           <code>/resetstats</code>
         </li>
         <li>

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { classNames } from "../util/tailwind";
-import imposter from "../assets/imposter.webp";
-import { delay } from "../util/utility";
+import { useEffect, useState } from 'react';
+import { classNames } from '../util/tailwind';
+import imposter from '../assets/imposter.webp';
+import { delay } from '../util/utility';
 
 const Sus = () => {
   const [started, setStarted] = useState(false);
@@ -9,7 +9,7 @@ const Sus = () => {
   const INTERVAL = 15 * 1000 * 60; // 15 minutes
 
   const loop = async () => {
-    console.log("You were not the imposter...");
+    console.log('You were not the imposter...');
     setStarted(true);
     await delay(DURATION);
 
@@ -29,7 +29,7 @@ const Sus = () => {
         `w-24 h-24 absolute top-1/2 -z-[1]`,
         started
           ? `off-screen-right duration-[15000ms] slow-spin ease-linear`
-          : "off-screen-left"
+          : 'off-screen-left'
       )}
     />
   );

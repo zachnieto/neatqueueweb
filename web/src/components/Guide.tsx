@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import Commands from "./Commands";
+import { Link } from 'react-router-dom';
+import Commands from './Commands';
 
-import neatqueue from "../assets/neatqueue.svg";
-import neatqueuePNG from "../assets/neatqueue.png";
-import fileIcon from "../assets/file-icon.svg";
+import neatqueue from '../assets/neatqueue.svg';
+import neatqueuePNG from '../assets/neatqueue.png';
+import fileIcon from '../assets/file-icon.svg';
 
 const Guide = () => {
   return (
