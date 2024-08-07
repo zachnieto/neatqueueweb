@@ -132,25 +132,25 @@ export default function Nav() {
                   </div>
                 </div>
               </div>
-                <div
-                  className=" inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
-                  onClick={user ? logout : login}
+              <div
+                className=" inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
+                onClick={user ? logout : login}
+              >
+                <a
+                  className="text-white rounded-md px-3 py-2 text-lg font-medium nav-link relative"
+                  href="#"
                 >
-                  <a
-                    className="text-white rounded-md px-3 py-2 text-lg font-medium nav-link relative"
-                    href="#"
-                  >
-                    {user ? 'Logout' : 'Login'}
-                  </a>
+                  {user ? 'Logout' : 'Login'}
+                </a>
 
-                  {user?.avatar && (
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`}
-                      alt=""
-                    />
-                  )}
-                </div>
+                {user?.avatar && (
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`}
+                    alt=""
+                  />
+                )}
+              </div>
             </div>
           </div>
 

@@ -9,7 +9,7 @@ export default function Modal({
   submitText,
 }: {
   onSubmit?: (...args: any[]) => Promise<void>;
-  setVisibility: (visiblitity: boolean) => void;
+  setVisibility: (visibility: boolean) => void;
   title: string;
   submitText: string;
   component?: ReactElement;
@@ -19,14 +19,14 @@ export default function Modal({
 
   return (
     <>
-      <div className="justify-center items-center flex fixed inset-0 z-50 ">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl">
-          <div className="rounded shadow-lg relative flex flex-col w-full bg-stone-900 outline-none focus:outline-none">
+      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
+        <div className="relative w-full max-w-screen-lg max-h-screen my-6 mx-auto">
+          <div className="rounded shadow-lg relative flex flex-col w-full h-auto max-h-screen bg-stone-900 outline-none focus:outline-none">
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200">
               <h3 className="text-3xl font-semibold">{title}</h3>
             </div>
-            <div className="relative p-6 flex-auto">
-              <>{component}</>
+            <div className="relative p-6 flex-auto overflow-y-auto">
+              {component}
             </div>
             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
               <button
