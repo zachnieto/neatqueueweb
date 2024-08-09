@@ -3,15 +3,15 @@ import { useHookstate } from '@hookstate/core';
 import globalState from '../../state';
 
 const LoggedInRoutes = () => {
-  const state = useHookstate(globalState);
-  const { user } = state.get();
+    const state = useHookstate(globalState);
+    const { user } = state.get();
 
-  if (!user?.id) {
-    window.open(import.meta.env.VITE_DISCORD_AUTH, '_self');
-    return <></>;
-  }
+    if (!user?.id) {
+        window.open(import.meta.env.VITE_DISCORD_AUTH, '_self');
+        return <></>;
+    }
 
-  return <Outlet />;
+    return <Outlet />;
 };
 
 export default LoggedInRoutes;

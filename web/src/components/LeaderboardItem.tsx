@@ -1,84 +1,78 @@
-import { useEffect, useState } from 'react';
 import { classNames } from '../util/tailwind';
 import { displayPercent } from '../util/utility';
 
 const LeaderboardItem = ({
-  player,
-  rank,
-  sortKey,
+    player,
+    rank,
+    sortKey,
 }: {
-  player: any;
-  rank: number;
-  sortKey: string;
+    player: any;
+    rank: number;
+    sortKey: string;
 }) => {
-  const [arrowClass, setArrowClass] = useState('');
-  const [color, setColor] = useState('');
+    let arrowClass = '';
+    if (sortKey === 'mmr' && player.data.rank !== rank) {
+        arrowClass =
+            'w-2 h-2 border-t-2 border-l-2 md:w-4 md:h-4 md:border-t-4 md:border-l-4 border-solid ';
 
-  useEffect(() => {
-    if (sortKey !== 'mmr') {
-      setArrowClass('');
-    } else if (player.data.rank > rank) {
-      setArrowClass(
-        'w-4 h-4 border-t-4 border-l-4 border-solid rotate-45 -rotate border-t-green-400 border-l-green-400 translate-y-.5'
-      );
-    } else if (player.data.rank < rank) {
-      setArrowClass(
-        'w-4 h-4 border-t-4 border-l-4 border-solid -rotate-[135deg] -rotate border-t-red-700 border-l-red-700 -translate-y-1'
-      );
+        arrowClass +=
+            player.data.rank > rank
+                ? `rotate-45 border-t-green-400 border-l-green-400 translate-y-0.5`
+                : `-rotate-[135deg] border-t-red-700 border-l-red-700 -translate-y-1`;
     }
 
+    let borderColorClass = '';
     if (rank === 1) {
-      setColor('border-amber-500 border-8');
+        borderColorClass = 'border-amber-500 md:border-8 border-4';
     } else if (rank === 2) {
-      setColor('border-gray-500 border-8');
+        borderColorClass = 'border-gray-500 md:border-8 border-4';
     } else if (rank === 3) {
-      setColor('border-orange-800 border-8');
+        borderColorClass = 'border-orange-800 md:border-8 border-4';
     } else {
-      setColor('');
+        borderColorClass = 'border-transparent md:border-8 border-4';
     }
-  }, [rank, player, sortKey]);
 
-  return (
-    <div
-      className={classNames(
-        color,
-        'bg-violet-900/80 border-orange rounded text-white px-3 py-3 font-medium shadow-xl flex flex-row xl:text-5xl lg:text-3xl md:text-xl my-1'
-      )}
-    >
-      <div className="my-auto mx-3 basis-5">
-        <div className={arrowClass} />
-      </div>
+    return (
+        <div
+            className={classNames(
+                borderColorClass,
+                'bg-violet-900/80 border-orange rounded text-white md:py-2 sm:py-1 font-medium shadow-xl flex flex-row xl:text-5xl lg:text-3xl md:text-xl my-1'
+            )}
+        >
+            <div className="my-auto md:mx-3 mx-2 basis-5">
+                <div className={arrowClass} />
+            </div>
 
-      <div className={sortKey === 'mmr' ? 'basis-2/4' : 'basis-3/4'}>
-        <h1 className="">
-          {rank}. {player.name}
-        </h1>
-      </div>
+            <div className={sortKey === 'mmr' ? 'basis-2/4' : 'basis-3/4'}>
+                <h1 className="md:text-3xl sm:text-lg">
+                    {rank}. {player.name}
+                </h1>
+            </div>
 
-      {sortKey === 'mmr' ? (
-        <>
-          <div className="basis-1/4">
-            <h1>{parseInt(player.data[sortKey])}</h1>
-          </div>
-          <div className="basis-1/4">
-            <h1>
-              ({player.data.wins} - {player.data.losses})
-            </h1>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="">
-            <h1>
-              {sortKey !== 'winrate'
-                ? parseInt(player.data[sortKey])
-                : displayPercent(player.data[sortKey])}
-            </h1>
-          </div>
-        </>
-      )}
-    </div>
-  );
+            {sortKey === 'mmr' ? (
+                <>
+                    <div className="basis-1/4">
+                        <h1 className="md:text-3xl sm:text-lg">
+                            {parseInt(player.data[sortKey])}
+                        </h1>
+                    </div>
+                    <div className="basis-1/4">
+                        <h1 className="md:text-3xl sm:text-lg">
+                            ({player.data.wins} - {player.data.losses})
+                        </h1>
+                    </div>
+                </>
+            ) : (
+                <div className="basis-1/4">
+                    <h1 className="md:text-3xl sm:text-lg">
+                        {sortKey !== 'winrate'
+                            ? parseInt(player.data[sortKey])
+                            : displayPercent(player.data[sortKey])}
+                    </h1>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default LeaderboardItem;

@@ -23,47 +23,50 @@ import LoggedInRoutes from './components/routes/LoggedInRoutes';
 const queryClient = new QueryClient();
 
 function App() {
-  useEffect(() => {
-    getSession();
-  }, []);
+    useEffect(() => {
+        getSession();
+    }, []);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className="container-fluid px-5 relative">
-        <>
-          <CustomParticles color={''} clickable={false} />
+    return (
+        <QueryClientProvider client={queryClient}>
+            <div className="container-fluid px-5 relative">
+                <>
+                    <CustomParticles color={''} clickable={false} />
 
-          <Nav />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/leaderboard/:guildID/:channelID"
-              element={<Leaderboard />}
-            />
-            <Route path="/lb/:shortUrl" element={<ShortURL />} />
-            <Route
-              path="/transcript/:guildID/:gameNum"
-              element={<Transcript />}
-            />
-            <Route path="/status" element={<Status />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/guide" element={<Guide />} />
+                    <Nav />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route
+                            path="/leaderboard/:guildID/:channelID"
+                            element={<Leaderboard />}
+                        />
+                        <Route path="/lb/:shortUrl" element={<ShortURL />} />
+                        <Route
+                            path="/transcript/:guildID/:gameNum"
+                            element={<Transcript />}
+                        />
+                        <Route path="/status" element={<Status />} />
+                        <Route path="/privacy" element={<Privacy />} />
+                        <Route path="/guide" element={<Guide />} />
 
-            <Route element={<LoggedInRoutes />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/manage/:guildID" element={<Manage />} />
-            </Route>
+                        <Route element={<LoggedInRoutes />}>
+                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route
+                                path="/manage/:guildID"
+                                element={<Manage />}
+                            />
+                        </Route>
 
-            <Route element={<AdminRoutes />}>
-              <Route path="/admin" element={<Admin />} />
-            </Route>
-          </Routes>
+                        <Route element={<AdminRoutes />}>
+                            <Route path="/admin" element={<Admin />} />
+                        </Route>
+                    </Routes>
 
-          <Footer />
-        </>
-      </div>
-    </QueryClientProvider>
-  );
+                    <Footer />
+                </>
+            </div>
+        </QueryClientProvider>
+    );
 }
 
 export default App;

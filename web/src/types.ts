@@ -1,80 +1,80 @@
 export type BotStats = {
-  servers: number;
-  players: number;
-  games: number;
+    servers: number;
+    players: number;
+    games: number;
 };
 export type User =
-  | {
-      id: string;
-      username: string;
-      avatar: string;
-      discriminator: string;
-      admin: boolean;
-    }
-  | undefined;
+    | {
+          id: string;
+          username: string;
+          avatar: string;
+          discriminator: string;
+          admin: boolean;
+      }
+    | undefined;
 export type Guild = {
-  permissions: number;
-  name: string;
-  icon: string;
-  id: string;
+    permissions: number;
+    name: string;
+    icon: string;
+    id: string;
 };
 export type Auth = { token_type: string; access_token: string } | undefined;
 export type Plan = {
-  price: number;
-  details: string;
-  max_players: number;
-  max_queues: number;
-  daily_games: number;
+    price: number;
+    details: string;
+    max_players: number;
+    max_queues: number;
+    daily_games: number;
 };
 export type Plans = { [key: string]: Plan };
 export type PremiumData = {
-  premium:
-    | {
-        until: number;
-        plan: string;
-      }
-    | undefined;
-  credits: number;
-  plans: Plans;
+    premium:
+        | {
+              until: number;
+              plan: string;
+          }
+        | undefined;
+    credits: number;
+    plans: Plans;
 };
 export type NodeStatus = {
-  status: string;
-  shards: number;
-  guilds: number;
-  id: number;
+    status: string;
+    shards: number;
+    guilds: number;
+    id: number;
 };
 export type InstancePricing = {
-  price: number;
-  name: string;
+    price: number;
+    name: string;
 };
 
 export type PrivateInstanceState = 'running' | 'stopped' | 'terminated';
 export type PrivateInstanceBotState = 'online' | 'offline';
 
 export type PrivateInstance = {
-  id: string;
-  instance: PrivateInstanceState;
-  bot: PrivateInstanceBotState;
-  until: number;
-  price: number;
+    id: string;
+    instance: PrivateInstanceState;
+    bot: PrivateInstanceBotState;
+    until: number;
+    price: number;
 };
 
 export type TimeLeft = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
 };
 
 export type Session = {
-  auth: Auth;
-  user: User;
-  guilds: Guild[] | undefined;
-  stats: BotStats;
+    auth: Auth;
+    user: User;
+    guilds: Guild[] | undefined;
+    stats: BotStats;
 };
 
 export type CommandSectonData = {
-  title: string;
-  paragraph: any;
-  link: string;
+    title: string;
+    paragraph: any;
+    link: string;
 };

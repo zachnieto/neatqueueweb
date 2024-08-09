@@ -1,116 +1,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Poppins:wght@100;400&display=swap');
 body {
-  margin: 0;
-  font-family: 'Josefin Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(29, 29, 29);
-  color: white;
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(29, 29, 29);
+    color: white;
 }
 
 /* Remove number input arrows */
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #tsparticles {
-  position: absolute !important;
-  z-index: -1 !important;
+    position: absolute !important;
+    z-index: -1 !important;
 }
 
 .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: #ffffff;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
 }
 
 .nav-link:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .loading-spinner {
-  width: 5em;
-  height: 5em;
+    width: 5em;
+    height: 5em;
 }
 
 .loading-bar {
-  width: 3em;
+    width: 3em;
 }
 
 .arrow {
-  width: 15px;
-  height: 15px;
-  border-top: 5px solid #000;
-  border-left: 5px solid #000;
+    width: 15px;
+    height: 15px;
+    border-top: 5px solid #000;
+    border-left: 5px solid #000;
 }
 
 .btn-style {
-  @apply bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium;
+    @apply bg-violet-900 text-white rounded-md px-3 py-2 text-xl font-medium;
 }
 
 .btn-primary {
-  @apply btn-style hover:translate-y-1 transition-all;
+    @apply btn-style hover:translate-y-1 transition-all;
 }
 
 .btn-primary:disabled {
-  @apply opacity-50 cursor-not-allowed;
+    @apply opacity-50 cursor-not-allowed;
 }
 
 .off-screen-left {
-  left: -25vw;
+    left: -25vw;
 }
 
 .off-screen-right {
-  left: 125vw;
+    left: 125vw;
 }
 
 @keyframes slow-spin {
-  to {
-    transform: rotate(360deg);
-  }
+    to {
+        transform: rotate(360deg);
+    }
 }
 .slow-spin {
-  animation: spin 5s linear infinite;
+    animation: spin 5s linear infinite;
 }
 
 .brackets-viewer {
-  /* Colors */
-  --primary-background: rgba(0, 0, 0, 0) !important;
-  --secondary-background: rgba(0, 0, 0, 0) !important;
-  --match-background: rgba(0, 0, 0, 0.4) !important;
-  --font-color: #d9d9d9 !important;
-  --win-color: #50b649 !important;
-  --loss-color: #e61a1a !important;
-  --label-color: grey !important;
-  --hint-color: #a7a7a7 !important;
-  --connector-color: #9e9e9e !important;
-  --border-color: #d9d9d9 !important;
-  --border-hover-color: #b6b5b5 !important;
+    /* Colors */
+    --primary-background: rgba(0, 0, 0, 0) !important;
+    --secondary-background: rgba(0, 0, 0, 0) !important;
+    --match-background: rgba(0, 0, 0, 0.4) !important;
+    --font-color: #d9d9d9 !important;
+    --win-color: #50b649 !important;
+    --loss-color: #e61a1a !important;
+    --label-color: grey !important;
+    --hint-color: #a7a7a7 !important;
+    --connector-color: #9e9e9e !important;
+    --border-color: #d9d9d9 !important;
+    --border-hover-color: #b6b5b5 !important;
 
-  /* Sizes */
-  --text-size: 15px !important;
-  --round-margin: 40px !important;
-  --match-width: 150px !important;
-  --match-horizontal-padding: 8px !important;
-  --match-vertical-padding: 6px !important;
-  --connector-border-width: 2px !important;
-  --match-border-width: 1px !important;
-  --match-border-radius: 0.3em !important;
+    /* Sizes */
+    --text-size: 15px !important;
+    --round-margin: 40px !important;
+    --match-width: 150px !important;
+    --match-horizontal-padding: 8px !important;
+    --match-vertical-padding: 6px !important;
+    --connector-border-width: 2px !important;
+    --match-border-width: 1px !important;
+    --match-border-radius: 0.3em !important;
 
-  height: 100% !important;
+    height: 100% !important;
 }
 
 code {
-  @apply rounded p-1;
-  background-color: rgba(0, 0, 0, 0.4);
+    @apply rounded p-1;
+    background-color: rgba(0, 0, 0, 0.4);
 }
