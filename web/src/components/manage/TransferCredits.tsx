@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import CurrencyInput from 'react-currency-input-field';
+import { Dispatch, SetStateAction } from 'react';
 
 const TransferCredits = ({
     transferAmountCredits,
@@ -13,7 +12,7 @@ const TransferCredits = ({
     setTransferGuildId: Dispatch<SetStateAction<string>>;
 }) => {
     return (
-        <div className="grid grid-cols-2 grid-rows-2 gap-1 place-items-end items-center">
+        <div className="grid grid-cols-2 grid-rows-2 gap-1 place-items-center">
             <h1 className="mx-2 text-xl">Credits</h1>
             <input
                 type="number"
@@ -22,7 +21,7 @@ const TransferCredits = ({
                     setTransferAmountCredits(val);
                 }}
                 value={transferAmountCredits}
-                className="text-center rounded w-1/2 text-black px-2 place-self-start"
+                className="text-center rounded text-black px-2"
             />
             <h1 className="mx-2 text-xl">Server ID</h1>
             <input

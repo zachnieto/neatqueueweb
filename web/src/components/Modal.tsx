@@ -20,7 +20,7 @@ export default function Modal({
     return (
         <>
             <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
-                <div className="relative w-full max-w-screen-lg max-h-screen my-6 mx-auto">
+                <div className="relative w-full max-w-fit max-h-fit my-6 mx-auto">
                     <div className="rounded shadow-lg relative flex flex-col w-full h-auto max-h-screen bg-stone-900 outline-none focus:outline-none">
                         <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200">
                             <h3 className="text-3xl font-semibold">{title}</h3>

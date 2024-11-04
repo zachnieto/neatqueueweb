@@ -77,12 +77,12 @@ const Credits = ({
                     >
                         Buy
                     </button>
-                    {/*<button*/}
-                    {/*    onClick={() => setTransferModalOpen(true)}*/}
-                    {/*    className="btn-primary"*/}
-                    {/*>*/}
-                    {/*    Transfer*/}
-                    {/*</button>*/}
+                    <button
+                        onClick={() => setTransferModalOpen(true)}
+                        className="btn-primary"
+                    >
+                        Transfer
+                    </button>
                 </div>
             </div>
 

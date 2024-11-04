@@ -58,8 +58,8 @@ export const transferCredits = async (
     const resp = await axios.post(
         `${API_BASE}/transfercredits`,
         {
-            from_guild_id: fromGuildID,
-            to_guild_id: toGuildID,
+            server_id: fromGuildID,
+            target_server_id: toGuildID,
             amount: amount,
         },
         config

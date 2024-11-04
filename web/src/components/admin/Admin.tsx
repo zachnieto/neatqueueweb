@@ -92,7 +92,7 @@ const Admin = () => {
             <div className="flex justify-center gap-4 my-10">
                 <button
                     className="btn-primary"
-                    disabled={disableActions}
+                    disabled={loading}
                     onClick={() => restartApps.mutate(nodes.map((n) => n.uuid))}
                 >
                     Full Restart {nodes.length} NeatQueue Nodes
