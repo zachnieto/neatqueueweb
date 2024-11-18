@@ -81,10 +81,12 @@ Starting a queue is super simple with NeatQueue, just run one of the following c
 ## Messages + Styling
 ### `/message color`
 #### Description
- Sets the color for all embeds in messages.
-#### Usage: `/message color [color]`
+ Sets the color for all embeds and/or buttons in messages.
+#### Usage: `/message color (color) (button_color)`
 #### Arguments:
-`color`: *(Required)* Either a color by name, or by HEX value (Ex: 00FF55).
+`color`: *(Optional)* Either a color by name, or by HEX value (Ex: 00FF55).\
+`button_color`: *(Optional)* Button color name.\
+&emsp;&emsp;&emsp; Options: `Blurple, Gray, Green, Red, Random`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -902,7 +904,7 @@ Substitute yourself for the given player.
 #### Usage: `/language set [language]`
 #### Arguments:
 `language`: *(Required)* Server language.\
-&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Bengali, Hindi, Turkish, Vietnamese, Uwu, Owo`
+&emsp;&emsp;&emsp; Options: `English, Spanish, French, Portuguese, Japanese, Russian, German, Italian, Ukrainian, Polish, Hebrew, Arabic, Bengali, Hindi, Turkish, Vietnamese, Chinese Traditional, Uwu, Owo`
 >If there is an issue with a normal language translation, please fix here: https://crowdin.com/project/neatqueue
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -1394,10 +1396,19 @@ Substitute yourself for the given player.
 
 ---
 
-### `/player banlist`
+### `/player banlist clear`
+#### Description
+ Clears the ban list.
+#### Usage: `/player banlist clear`
+
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/player banlist show`
 #### Description
  View the player ban list.
-#### Usage: `/player banlist`
+#### Usage: `/player banlist show`
 
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2351,6 +2362,32 @@ Substitute yourself for the given player.
 
 ---
 
+### `/autoroles leaderboardposition remove`
+#### Description
+ Removes a leaderboard position role.
+#### Usage: `/autoroles leaderboardposition remove [role] [stat]`
+#### Arguments:
+`role`: *(Required)* Enter the role.\
+`stat`: *(Required)* Stat which autoroles leaderboard position applies to.\
+&emsp;&emsp;&emsp; Options: `MMR, Peak MMR, Points, MVPs, Games, Wins, Losses, Winrate, Streak, Peak Streak`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/autoroles leaderboardposition set`
+#### Description
+ Adds a condition to give players a role based on leaderboard position.
+#### Usage: `/autoroles leaderboardposition set [role] [stat] [lower_value] (upper_value)`
+#### Arguments:
+`role`: *(Required)* Enter the role.\
+`stat`: *(Required)* Type of leaderboard stat to use.\
+&emsp;&emsp;&emsp; Options: `MMR, Peak MMR, Points, MVPs, Games, Wins, Losses, Winrate, Streak, Peak Streak`\
+`lower_value`: *(Required)* (Inclusive) Leaderboard position range 1.\
+`upper_value`: *(Optional)* (Inclusive) Leaderboard position range 2, or omit for no range.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/autoroles losses remove`
 #### Description
  Removes a condition where player roles are changed based on losses.
@@ -2492,27 +2529,6 @@ Substitute yourself for the given player.
 `lower_value`: *(Required)* The lowest number of streaks required to gain the role.\
 `upper_value`: *(Required)* The upper number of streaks to lose the role.\
 `only_one_allowed`: *(Optional)* (Default: True) If this role is assigned, no other streaks autoroles will be allowed.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/autoroles topplayers remove`
-#### Description
- Removes a top player role.
-#### Usage: `/autoroles topplayers remove [role]`
-#### Arguments:
-`role`: *(Required)* Enter the role.
-#### Usage Permissions: `Staff Role or Manage Channels Permission`
-
----
-
-### `/autoroles topplayers set`
-#### Description
- Conditionally add/remove a role based on leaderboard position.
-#### Usage: `/autoroles topplayers set [role] [number]`
-#### Arguments:
-`role`: *(Required)* Enter the role for the top players.\
-`number`: *(Required)* Enter the number of players who can have this role.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -3202,6 +3218,27 @@ Substitute yourself for the given player.
 <hr style="border:3px solid gray">
 
 ## Stats Config
+### `/statsconfig graph games`
+#### Description
+ Sets the maximum number of games to show in /stats.
+#### Usage: `/statsconfig graph games (limit)`
+#### Arguments:
+`limit`: *(Optional)* (Default: 30) Max number of games to show.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/statsconfig graph xaxis`
+#### Description
+ Sets the x-axis labels type in /stats.
+#### Usage: `/statsconfig graph xaxis [data]`
+#### Arguments:
+`data`: *(Required)* (Default: Dates) Which data to show on the x-axis in the stats graph.\
+&emsp;&emsp;&emsp; Options: `Dates, Games`
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
 ### `/statsconfig hidestats`
 #### Description
  Sets whether stats are forced to be hidden (only shown to the user).
@@ -3605,10 +3642,14 @@ Substitute yourself for the given player.
 
 ## Webhooks
 >Webhooks receive information about a match as it is being setup.
+> Each webhook will contain an "action" key in the payload.
 > Currently supported actions are:
+> - JOIN_QUEUE
+> - LEAVE_QUEUE
 > - MATCH_STARTED
 > - TEAMS_CREATED
 > - MATCH_COMPLETED
+> - SUBSTITUTION
 > 
 > Additionally, if you have `/requireregister mode: Custom API`, you will receive a webhook with action
 > - REGISTER_PLAYER
@@ -3616,9 +3657,6 @@ Substitute yourself for the given player.
 > containing various information about the user, as well as the account they are attempting to register.
 > You must either reply with a json object containing at least a "rating" key (ex: {"rating": 1000}), to specify the
 > rating that the player should be registered with, or any non 200 status response to display to the user.
-> 
-> Examples:
-> https://webhook.site/#!/695c599b-fc6d-4a23-aaee-ce170e355fb3/7051d907-b47b-4b05-acc8-96464fa6c565/1
 ### `/webhooks add`
 #### Description
  Add a new webhook to receive queue information.
