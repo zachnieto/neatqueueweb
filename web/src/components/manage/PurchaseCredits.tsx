@@ -9,10 +9,9 @@ const PurchaseCredits = ({
     purchaseAmountDollars: number;
     setPurchaseAmountDollars: Dispatch<SetStateAction<number>>;
 }) => {
-    const [purchaseAmountCredits, setPurchaseAmountCredits] =
-        useState<number>(0);
-
+    
     const CREDIT_MULTIPLIER = 1.07;
+    const [purchaseAmountCredits, setPurchaseAmountCredits] = useState<number>(Math.pow(purchaseAmountDollars, CREDIT_MULTIPLIER));
 
     return (
         <div className="grid place-items-center">
@@ -22,6 +21,7 @@ const PurchaseCredits = ({
                     name="input-name"
                     value={purchaseAmountCredits}
                     decimalsLimit={2}
+                    min={1}
                     allowNegativeValue={false}
                     // @ts-ignore
                     onValueChange={(val: number, name: string) => {
@@ -41,6 +41,7 @@ const PurchaseCredits = ({
                     name="input-name"
                     value={purchaseAmountDollars}
                     decimalsLimit={2}
+                    min={1}
                     allowNegativeValue={false}
                     prefix="$"
                     // @ts-ignore
@@ -65,6 +66,7 @@ const PurchaseCredits = ({
                     );
                 }}
                 max={200}
+                min={1}
                 type="range"
                 value={purchaseAmountDollars}
                 className="w-full h-1 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-700"

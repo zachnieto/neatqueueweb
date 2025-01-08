@@ -26,7 +26,7 @@ const Credits = ({
     const { user, auth } = state.get();
 
     const [purchaseAmountDollars, setPurchaseAmountDollars] =
-        useState<number>(0);
+        useState<number>(1);
     const [transferAmountCredits, setTransferAmountCredits] =
         useState<number>(0);
     const [transferGuildId, setTransferGuildId] = useState<string>('');
@@ -35,6 +35,11 @@ const Credits = ({
 
     const handlePurchaseCredits = async () => {
         if (!user || !guildID) return;
+        
+        if (purchaseAmountDollars <= 0) {
+            setError("Purchase amount must be greater than $0");
+            return;
+        }
 
         const checkout_session = await requestCheckout(
             user.id,
