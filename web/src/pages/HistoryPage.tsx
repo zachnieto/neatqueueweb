@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { format, subDays, addDays } from 'date-fns';
 import Alert from '../components/Alert';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import Loading from '../components/Loading';
 
 interface Player {
   name: string;
@@ -54,7 +55,9 @@ export default function HistoryPage() {
   const [selectedQueue, setSelectedQueue] = useState<string>('all');
   const [availableQueues, setAvailableQueues] = useState<string[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const LIMIT_SIZE = 100;
+  const [currentPage, setCurrentPage] = useState(1);
+  const LIMIT_SIZE = 1000;
+  const MATCHES_PER_PAGE = 30;
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -65,12 +68,7 @@ export default function HistoryPage() {
         const endDate = format(addDays(today, 1), 'yyyy-MM-dd');
         
         const response = await fetch(
-          `https://api.neatqueue.com/api/history/${serverId}?limit=${LIMIT_SIZE}&start_date=${startDate}&end_date=${endDate}`,
-          {
-            headers: {
-              'Authorization': 'APIKEY'
-            }
-          }
+          `https://api.neatqueue.com/api/history/${serverId}?limit=${LIMIT_SIZE}&start_date=${startDate}&end_date=${endDate}`
         );
 
         if (!response.ok) {
@@ -110,8 +108,20 @@ export default function HistoryPage() {
     .filter(match => match.winner !== -1 && match.winner !== -2)
     .sort((a, b) => b.game_num - a.game_num);
 
+  // Paginación
+  const totalPages = Math.ceil(completedMatches.length / MATCHES_PER_PAGE);
+  const paginatedMatches = completedMatches.slice(
+    (currentPage - 1) * MATCHES_PER_PAGE,
+    currentPage * MATCHES_PER_PAGE
+  );
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo(0, 0);
+  };
+
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -206,8 +216,8 @@ export default function HistoryPage() {
           </div>
         )}
 
-        {/* Partidas completadas - código existente sin cambios */}
-        {completedMatches.map((match) => (
+        {/* Partidas completadas usando paginatedMatches en lugar de completedMatches */}
+        {paginatedMatches.map((match) => (
           <div 
             key={`${match.game}_${match.game_num}`} 
             className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700/50"
@@ -291,6 +301,31 @@ export default function HistoryPage() {
           </div>
         )}
       </div>
+
+      {/* Paginación */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-4 mt-8">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeftIcon className="h-5 w-5" />
+          </button>
+          
+          <span className="text-gray-400">
+            Page {currentPage} of {totalPages}
+          </span>
+          
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronRightIcon className="h-5 w-5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 } 
