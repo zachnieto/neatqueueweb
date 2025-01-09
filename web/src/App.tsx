@@ -19,6 +19,7 @@ import Admin from './components/admin/Admin';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AdminRoutes from './components/routes/AdminRoutes';
 import LoggedInRoutes from './components/routes/LoggedInRoutes';
+import HistoryPage from './pages/HistoryPage';
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,8 @@ function App() {
                         <Route element={<AdminRoutes />}>
                             <Route path="/admin" element={<Admin />} />
                         </Route>
+
+                        <Route path="/history/:serverId" element={<HistoryPage />} />
                     </Routes>
 
                     <Footer />
