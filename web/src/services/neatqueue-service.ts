@@ -19,8 +19,14 @@ export const getGuildChannelStats = async (
     return resp.data;
 };
 
-export const getPremium = async (guildID: string) => {
-    const resp = await axios.get(`${API_BASE}/premium/${guildID}`);
+export const getPremium = async (guildID: string, oauth: Auth) => {
+    const config = {
+        headers: {
+            authorization: `${oauth?.token_type} ${oauth?.access_token}`,
+        },
+    };
+
+    const resp = await axios.get(`${API_BASE}/premium/${guildID}`, config);
     return resp.data;
 };
 
