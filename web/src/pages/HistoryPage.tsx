@@ -127,7 +127,7 @@ export default function HistoryPage() {
   if (error) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Alert type="error" message={error} />
+        <Alert color="bg-red-600" value={error} setValue={setError} />
       </div>
     );
   }

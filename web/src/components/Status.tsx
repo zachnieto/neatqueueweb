@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getStatus } from '../services/neatqueue-service';
 import { NodeStatus } from '../types';
-import Loading from './Loading';
 
 const Status = () => {
     const [statuses, setStatuses] = useState<NodeStatus[]>([]);
@@ -31,10 +30,6 @@ const Status = () => {
             setOverallStatusColor('text-yellow-400');
         }
     }, [statuses]);
-
-    if (loading) {
-        return <Loading />;
-    }
 
     return (
         <div className="h-screen flex justify-center items-center">

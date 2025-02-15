@@ -21,8 +21,8 @@ export type CoolifyApplication = {
 const NEATQUEUE_PROD_ENV_ID = 34;
 
 const Admin = () => {
-    const [error, setError] = useState<string>('');
-    const [success, setSuccess] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const [selectedApplications, setSelectedApplications] = useState<string[]>(
         []

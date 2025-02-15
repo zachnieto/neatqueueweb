@@ -1,39 +1,29 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { delay } from '../util/utility';
+import { classNames } from '../util/tailwind';
 
-interface AlertProps {
-    message?: string;
-    type?: 'error' | 'success' | 'warning' | 'info';
-    // Props antiguos para mantener compatibilidad
-    value?: string;
-    setValue?: Dispatch<SetStateAction<string>>;
-    color?: string;
-}
+const Alert = ({
+    value,
+    color,
+    setValue,
+}: {
+    value: string | null;
+    color: string;
+    setValue: Dispatch<SetStateAction<string | null>>;
+}) => {
+    useEffect(() => {
+        delay(10000).then(() => setValue(null));
+    }, [value]);
 
-export default function Alert({ message, type, value, color }: AlertProps) {
-    // Si se usa el nuevo formato (message + type)
-    if (message && type) {
-        const bgColor = {
-            error: 'bg-red-500',
-            success: 'bg-green-500',
-            warning: 'bg-yellow-500',
-            info: 'bg-blue-500'
-        }[type];
+    if (!value) return <></>;
 
-        return (
-            <div className={`${bgColor} text-white p-4 rounded-lg mb-4`}>
-                {message}
-            </div>
-        );
-    }
-
-    // Si se usa el formato antiguo (value + color)
-    if (value && color) {
-        return (
-            <div className={`${color} text-white p-4 rounded-lg mb-4`}>
+    return (
+        <div>
+            <h1 className={classNames('text-3xl rounded p-1 mx-4', color)}>
                 {value}
-            </div>
-        );
-    }
+            </h1>
+        </div>
+    );
+};
 
-    return null;
-}
+export default Alert;
