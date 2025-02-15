@@ -9,6 +9,7 @@ import {
 } from '../../services/coolify-service';
 import Application from './Application';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import Loading from '../Loading';
 
 export type CoolifyApplication = {
     name: string;
@@ -20,8 +21,8 @@ export type CoolifyApplication = {
 const NEATQUEUE_PROD_ENV_ID = 34;
 
 const Admin = () => {
-    const [error, setError] = useState<string>('');
-    const [success, setSuccess] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const [selectedApplications, setSelectedApplications] = useState<string[]>(
         []
@@ -76,6 +77,10 @@ const Admin = () => {
     const loading =
         startApps.isPending || restartApps.isPending || stopApps.isPending;
     const disableActions = loading || !selectedApplications.length;
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className="min-h-screen">

@@ -7,12 +7,12 @@ const Alert = ({
     color,
     setValue,
 }: {
-    value: string;
+    value: string | null;
     color: string;
-    setValue: Dispatch<SetStateAction<string>>;
+    setValue: Dispatch<SetStateAction<string | null>>;
 }) => {
     useEffect(() => {
-        delay(10000).then(() => setValue(''));
+        delay(10000).then(() => setValue(null));
     }, [value]);
 
     if (!value) return <></>;

@@ -15,8 +15,8 @@ const Manage = () => {
     const [guild, setGuild] = useState<Guild>();
     const [premiumData, setPremiumData] = useState<PremiumData>();
 
-    const [error, setError] = useState<string>('');
-    const [success, setSuccess] = useState<string>('');
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     useEffect(() => {
         if (guildID) {
