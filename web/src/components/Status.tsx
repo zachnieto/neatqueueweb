@@ -32,33 +32,33 @@ const Status = () => {
     }, [statuses]);
 
     return (
-        <div className="h-screen flex justify-center items-center">
+        <div className="min-h-screen flex justify-center items-center p-4">
             {!loading && (
-                <div className="flex flex-col items-center gap-5">
-                    <h1 className="w-fit text-6xl text-center bg-black/75 p-10 rounded-xl">
+                <div className="flex flex-col items-center gap-4 w-full max-w-6xl">
+                    <h1 className="w-fit text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center bg-black/75 p-3 sm:p-4 md:p-6 rounded-xl">
                         Status:{' '}
                         <span className={overallStatusColor}>
                             {overallStatus}
                         </span>
                     </h1>
 
-                    <div className="flex justify-around items-center gap-5">
+                    <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 w-full">
                         {statuses.map((status) => (
-                            <div className="text-6xl text-center bg-black/75 p-10 rounded-xl">
-                                <h1>Node {status.id}</h1>
+                            <div key={status.id} className="text-center bg-black/75 p-3 sm:p-4 md:p-6 rounded-xl min-w-[200px] sm:min-w-[250px]">
+                                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2">Node {status.id}</h1>
                                 <h1
-                                    className={
+                                    className={`text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 ${
                                         status.status === 'ONLINE'
                                             ? 'text-green-400'
                                             : 'text-red-400'
-                                    }
+                                    }`}
                                 >
                                     {status.status}
                                 </h1>
-                                <h1 className="text-3xl">
+                                <h1 className="text-sm sm:text-base md:text-lg lg:text-xl">
                                     Shards: {status.shards}
                                 </h1>
-                                <h1 className="text-3xl">
+                                <h1 className="text-sm sm:text-base md:text-lg lg:text-xl">
                                     Servers: {status.guilds}
                                 </h1>
                             </div>
