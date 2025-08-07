@@ -144,15 +144,6 @@ Compare your stats to the given player.
 
 <hr style="border:3px solid gray">
 
-## Donate
-### `/donate`
-#### Description
-Donate to help NeatQueue development.
-#### Usage: `/donate`
-
-
-<hr style="border:3px solid gray">
-
 ## Force Start
 ### `/forcestart`
 #### Description
@@ -211,6 +202,15 @@ CAPTAIN ONLY: Designate a new captain if you are the current one.
 #### Arguments:
 `player`: *(Required)* The new captain.\
 `party_name`: *(Required)* The team name.
+
+---
+
+### `/party clear`
+#### Description
+CAPTAIN ONLY: Remove all members from the party except the captain.
+#### Usage: `/party clear [party_name]`
+#### Arguments:
+`party_name`: *(Required)* The party name.
 
 ---
 
@@ -980,7 +980,7 @@ Substitute yourself for the given player.
 
 ### `/leaderboardconfig sharedstats set`
 #### Description
- Sets the name to use for stats storaged. Queues with the same name share stats.
+ Sets the name to use for stats storage. Queues with the same name share stats.
 #### Usage: `/leaderboardconfig sharedstats set [name]`
 #### Arguments:
 `name`: *(Required)* Shared stats configuration name.
@@ -1074,7 +1074,7 @@ Substitute yourself for the given player.
 
 ### `/lobbychannel timer`
 #### Description
- Specify how long players have to join the voice channel before the match is cancelled.
+ Specify how long players have to ready up before the match is cancelled.
 #### Usage: `/lobbychannel timer [timer]`
 #### Arguments:
 `timer`: *(Required)* (Default: 300) Timeout length in seconds.
@@ -1109,7 +1109,7 @@ Substitute yourself for the given player.
 #### Usage: `/lobbydetails location [location]`
 #### Arguments:
 `location`: *(Required)* Where to show lobby details.\
-&emsp;&emsp;&emsp; Options: `DMs, Teams Message`
+&emsp;&emsp;&emsp; Options: `Direct Message, Teams Message, Both`
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
@@ -1224,10 +1224,11 @@ Substitute yourself for the given player.
 ### `/mmr change set`
 #### Description
  (Default: 50) Sets the MMR change per game.
-#### Usage: `/mmr change set [amount] (loser_mmr) (static)`
+#### Usage: `/mmr change set [amount] (loser_mmr) (tie_mmr) (static)`
 #### Arguments:
 `amount`: *(Required)* The average MMR change for wins and losses.\
 `loser_mmr`: *(Optional)* Override the MMR change for losses.\
+`tie_mmr`: *(Optional)* Override the MMR change for ties.\
 `static`: *(Optional)* If the MMR change should ALWAYS be this value.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
@@ -2801,6 +2802,28 @@ Substitute yourself for the given player.
 #### Usage: `/bannedroles remove [role]`
 #### Arguments:
 `role`: *(Required)* Enter the banned role.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/rolelimit remove`
+#### Description
+ Remove the limit for a role.
+#### Usage: `/rolelimit remove [role]`
+#### Arguments:
+`role`: *(Required)* The role to remove the limit for.
+#### Usage Permissions: `Staff Role or Manage Channels Permission`
+
+---
+
+### `/rolelimit set`
+#### Description
+ Set the maximum number of players with this Discord role allowed in the queue.
+#### Usage: `/rolelimit set [role] [limit] (roles)`
+#### Arguments:
+`role`: *(Required)* The primary role to limit.\
+`limit`: *(Required)* The maximum number of players allowed.\
+`roles`: *(Optional)* Optional comma-separated list of additional role IDs or mentions to include in the same limit.
 #### Usage Permissions: `Staff Role or Manage Channels Permission`
 
 ---
