@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { getGuildChannelStats } from '../services/neatqueue-service';
 import { classNames } from '../util/tailwind';
 import LeaderboardItem from './LeaderboardItem';
+import DownloadCSV from './DownloadCSV';
 
 type SortKey =
     | 'mmr'
@@ -165,6 +166,7 @@ const Leaderboard = ({
                             <h1>{displaySortKey(key)}</h1>
                         </button>
                     ))}
+                    <DownloadCSV data={stats} />
                 </div>
 
                 <div className="md:hidden flex flex-row mb-3 justify-center gap-1">
@@ -183,6 +185,9 @@ const Leaderboard = ({
                     >
                         {'>'}
                     </button>
+                    <div className="ml-4">
+                        <DownloadCSV data={stats} />
+                    </div>
                 </div>
 
                 <div className="bg-violet-900/80 px-3 py-3 font-medium flex flex-row text-lg mb-3 shadow-xl rounded">
