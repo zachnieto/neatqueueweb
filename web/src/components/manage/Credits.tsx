@@ -1,127 +1,123 @@
-import { useHookstate } from '@hookstate/core';
-import { useState } from 'react';
-import { requestCheckout } from '../../services/server-service';
-import globalState from '../../state';
-import Modal from '../Modal';
-import PurchaseCredits from './PurchaseCredits';
-import { PremiumData } from '../../types';
-import TransferCredits from './TransferCredits';
-import { transferCredits } from '../../services/neatqueue-service';
-import { floatToNDecimals, floatToNDecimalsString } from '../../util/utility';
+import { useHookstate } from "@hookstate/core";
+import { useState } from "react";
+import { transferCredits } from "../../services/neatqueue-service";
+import { requestCheckout } from "../../services/server-service";
+import globalState from "../../state";
+import type { PremiumData } from "../../types";
+import { floatToNDecimals, floatToNDecimalsString } from "../../util/utility";
+import Modal from "../Modal";
+import PurchaseCredits from "./PurchaseCredits";
+import TransferCredits from "./TransferCredits";
 
 const Credits = ({
-    premiumData,
-    refreshPremiumData,
-    guildID,
-    setError,
-    setSuccess,
+	premiumData,
+	refreshPremiumData,
+	guildID,
+	setError,
+	setSuccess,
 }: {
-    premiumData: PremiumData;
-    refreshPremiumData: () => void;
-    guildID: string;
-    setError: (s: string) => void;
-    setSuccess: (s: string) => void;
+	premiumData: PremiumData;
+	refreshPremiumData: () => void;
+	guildID: string;
+	setError: (s: string) => void;
+	setSuccess: (s: string) => void;
 }) => {
-    const state = useHookstate(globalState);
-    const { user, auth } = state.get();
+	const state = useHookstate(globalState);
+	const { user, auth } = state.get();
 
-    const [purchaseAmountDollars, setPurchaseAmountDollars] =
-        useState<number>(1);
-    const [transferAmountCredits, setTransferAmountCredits] =
-        useState<number>(0);
-    const [transferGuildId, setTransferGuildId] = useState<string>('');
-    const [creditModalOpen, setCreditModalOpen] = useState(false);
-    const [transferModalOpen, setTransferModalOpen] = useState(false);
+	const [purchaseAmountDollars, setPurchaseAmountDollars] = useState<number>(1);
+	const [transferAmountCredits, setTransferAmountCredits] = useState<number>(0);
+	const [transferGuildId, setTransferGuildId] = useState<string>("");
+	const [creditModalOpen, setCreditModalOpen] = useState(false);
+	const [transferModalOpen, setTransferModalOpen] = useState(false);
 
-    const handlePurchaseCredits = async () => {
-        if (!user || !guildID) return;
-        
-        if (purchaseAmountDollars <= 0) {
-            setError("Purchase amount must be greater than $0");
-            return;
-        }
+	const handlePurchaseCredits = async () => {
+		if (!user || !guildID) return;
 
-        const checkout_session = await requestCheckout(
-            user.id,
-            `${user.username}#${user.discriminator}`,
-            guildID,
-            floatToNDecimals(purchaseAmountDollars),
-            window.location.href
-        );
-        window.location.replace(checkout_session.url);
-    };
+		if (purchaseAmountDollars <= 0) {
+			setError("Purchase amount must be greater than $0");
+			return;
+		}
 
-    const handleTransferCredits = async () => {
-        if (!user || !guildID) return;
-        try {
-            await transferCredits(
-                guildID,
-                transferGuildId,
-                transferAmountCredits,
-                auth
-            );
-            setSuccess(
-                `Successfully transferred ${transferAmountCredits} credits`
-            );
-            await refreshPremiumData();
-        } catch (e: any) {
-            setError(e.response.data.detail);
-        }
-    };
+		const checkout_session = await requestCheckout(
+			user.id,
+			`${user.username}#${user.discriminator}`,
+			guildID,
+			floatToNDecimals(purchaseAmountDollars),
+			window.location.href,
+		);
+		window.location.replace(checkout_session.url);
+	};
 
-    return (
-        <>
-            <div className="col-span-1 bg-stone-900 rounded shadow-md p-5 grid place-items-center">
-                <h1 className="text-3xl">
-                    Credits: {floatToNDecimalsString(premiumData.credits)}
-                </h1>
-                <div className="flex gap-3">
-                    <button
-                        onClick={() => setCreditModalOpen(true)}
-                        className="btn-primary"
-                    >
-                        Buy
-                    </button>
-                    <button
-                        onClick={() => setTransferModalOpen(true)}
-                        className="btn-primary"
-                    >
-                        Transfer
-                    </button>
-                </div>
-            </div>
+	const handleTransferCredits = async () => {
+		if (!user || !guildID) return;
+		try {
+			await transferCredits(
+				guildID,
+				transferGuildId,
+				transferAmountCredits,
+				auth,
+			);
+			setSuccess(`Successfully transferred ${transferAmountCredits} credits`);
+			await refreshPremiumData();
+		} catch (e: any) {
+			setError(e.response.data.detail);
+		}
+	};
 
-            <Modal
-                onSubmit={handlePurchaseCredits}
-                visible={creditModalOpen}
-                setVisibility={setCreditModalOpen}
-                title="Purchase Credits"
-                submitText="Purchase"
-                component={
-                    <PurchaseCredits
-                        purchaseAmountDollars={purchaseAmountDollars}
-                        setPurchaseAmountDollars={setPurchaseAmountDollars}
-                    />
-                }
-            />
+	return (
+		<>
+			<div className="col-span-1 bg-stone-900 rounded shadow-md p-5 grid place-items-center">
+				<h1 className="text-3xl">
+					Credits: {floatToNDecimalsString(premiumData.credits)}
+				</h1>
+				<div className="flex gap-3">
+					<button
+						onClick={() => setCreditModalOpen(true)}
+						className="btn-primary"
+					>
+						Buy
+					</button>
+					<button
+						onClick={() => setTransferModalOpen(true)}
+						className="btn-primary"
+					>
+						Transfer
+					</button>
+				</div>
+			</div>
 
-            <Modal
-                onSubmit={handleTransferCredits}
-                visible={transferModalOpen}
-                setVisibility={setTransferModalOpen}
-                title="Transfer Credits"
-                submitText="Transfer"
-                component={
-                    <TransferCredits
-                        transferAmountCredits={transferAmountCredits}
-                        setTransferAmountCredits={setTransferAmountCredits}
-                        transferGuildId={transferGuildId}
-                        setTransferGuildId={setTransferGuildId}
-                    />
-                }
-            />
-        </>
-    );
+			<Modal
+				onSubmit={handlePurchaseCredits}
+				visible={creditModalOpen}
+				setVisibility={setCreditModalOpen}
+				title="Purchase Credits"
+				submitText="Purchase"
+				component={
+					<PurchaseCredits
+						purchaseAmountDollars={purchaseAmountDollars}
+						setPurchaseAmountDollars={setPurchaseAmountDollars}
+					/>
+				}
+			/>
+
+			<Modal
+				onSubmit={handleTransferCredits}
+				visible={transferModalOpen}
+				setVisibility={setTransferModalOpen}
+				title="Transfer Credits"
+				submitText="Transfer"
+				component={
+					<TransferCredits
+						transferAmountCredits={transferAmountCredits}
+						setTransferAmountCredits={setTransferAmountCredits}
+						transferGuildId={transferGuildId}
+						setTransferGuildId={setTransferGuildId}
+					/>
+				}
+			/>
+		</>
+	);
 };
 
 export default Credits;
