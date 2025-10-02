@@ -19,6 +19,34 @@ export const getGuildChannelStats = async (
     return resp.data;
 };
 
+export const getLeaderboardV2 = async (
+    guildID: string,
+    channelID: string,
+    page: number = 1,
+    months?: string[],
+    includeFields?: string[],
+    excludeFields?: string[]
+) => {
+    const params = new URLSearchParams({
+        page: page.toString(),
+    });
+
+    if (months && months.length > 0) {
+        months.forEach(month => params.append('months', month));
+    }
+    if (includeFields && includeFields.length > 0) {
+        includeFields.forEach(field => params.append('include_fields', field));
+    }
+    if (excludeFields && excludeFields.length > 0) {
+        excludeFields.forEach(field => params.append('exclude_fields', field));
+    }
+
+    const resp = await axios.get(
+        `${API_BASE}/api/v2/leaderboard/${guildID}/${channelID}?${params.toString()}`
+    );
+    return resp.data;
+};
+
 export const getPremium = async (guildID: string, oauth: Auth) => {
     const config = {
         headers: {
@@ -111,7 +139,8 @@ export async function getInstance(guildID: string, oauth: Auth) {
 export const purchaseInstance = async (
     guildID: string,
     oauth: Auth,
-    price: number
+    price: number,
+    botToken: string
 ) => {
     const config = {
         headers: {
@@ -122,8 +151,8 @@ export const purchaseInstance = async (
     const resp = await axios.post(
         `${API_BASE}/api/instance/new`,
         {
-            price,
-            guildID,
+            details: { price, guildID },
+            token: { token: botToken },
         },
         config
     );
@@ -216,6 +245,25 @@ export const updateToken = async (
         {
             token: botToken,
         },
+        config
+    );
+    return resp.data;
+};
+
+export const setAutoRenew = async (
+    guildID: string,
+    oauth: Auth,
+    enabled: boolean
+) => {
+    const config = {
+        headers: {
+            authorization: `${oauth?.token_type} ${oauth?.access_token}`,
+        },
+    };
+
+    const resp = await axios.put(
+        `${API_BASE}/api/instance/autorenew/${guildID}?enabled=${enabled}`,
+        {},
         config
     );
     return resp.data;

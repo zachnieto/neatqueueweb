@@ -57,6 +57,7 @@ export type PrivateInstance = {
     bot: PrivateInstanceBotState;
     until: number;
     price: number;
+    autoRenew?: boolean;
 };
 
 export type TimeLeft = {
@@ -77,4 +78,60 @@ export type CommandSectonData = {
     title: string;
     paragraph: any;
     link: string;
+};
+
+// New API v2 Types
+export type LeaderboardFilters = {
+    months: string[];
+    include_fields: string[];
+    exclude_fields: string[];
+};
+
+export type PlayerData = {
+    mmr: number;
+    wins: number;
+    losses: number;
+    streak: number;
+    totalgames: number;
+    decay: number;
+    ign: string | null;
+    peak_mmr: number;
+    peak_streak: number;
+    rank: number | null;
+    winrate: number;
+    current_rank: number;
+};
+
+export type LeaderboardPlayer = {
+    id: string;
+    name: string;
+    avatar_url: string;
+    color: number;
+    data: PlayerData;
+    stats: PlayerData; // Alias for backward compatibility
+};
+
+export type PaginationInfo = {
+    first_page: number;
+    previous_page: number | null;
+    current_page: number;
+    next_page: number | null;
+    per_page: number;
+    total_pages: number;
+    total_items: number;
+};
+
+export type MonthData = {
+    month: string;
+    data: LeaderboardPlayer[];
+    pagination: PaginationInfo;
+};
+
+export type LeaderboardV2Response = {
+    server_id: number;
+    channel_id: number;
+    queue_name: string;
+    filters: LeaderboardFilters;
+    available_months: string[];
+    months: MonthData[];
 };

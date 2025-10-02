@@ -12,6 +12,7 @@ import {
     startInstance,
     stopInstance,
     updateToken,
+    setAutoRenew,
 } from '../../../services/neatqueue-service';
 import { useHookstate } from '@hookstate/core';
 import _ from 'lodash';
@@ -44,10 +45,23 @@ const Instance = ({
         useState<boolean>(false);
     const [instanceTypes, setInstanceTypes] = useState<InstancePricing[]>([]);
     const [selectedInstance, setSelectedInstance] = useState<InstancePricing>();
-    const [botToken, setBotToken] = useState<string>();
+    const [botToken, setBotToken] = useState<string>("");
+    const [autoRenew, setAutoRenewState] = useState<boolean>(false);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [initialLoading, setInitialLoading] = useState<boolean>(true);
+
+    const [currentAction, setCurrentAction] = useState<
+        | null
+        | 'purchase'
+        | 'extend'
+        | 'start'
+        | 'reboot'
+        | 'stop'
+        | 'terminate'
+        | 'updateToken'
+        | 'toggleAutoRenew'
+    >(null);
 
     const [privateInstance, setPrivateInstance] = useState<PrivateInstance>();
 
@@ -90,24 +104,29 @@ const Instance = ({
     const updateInstanceState = async () => {
         const data = await getInstance(guildID, auth);
         setPrivateInstance(data);
+        setAutoRenewState(!!data?.autoRenew);
     };
 
     const handlePurchase = async () => {
-        if (!selectedInstance) return;
+        if (!selectedInstance || !botToken) return;
         setLoading(true);
+        setCurrentAction('purchase');
         try {
-            await purchaseInstance(guildID, auth, selectedInstance.price);
+            await purchaseInstance(guildID, auth, selectedInstance.price, botToken!);
             setSuccess('Instance is now being created');
         } catch (e: any) {
             setError(e.response.data.detail);
         }
         setLoading(false);
+        setCurrentAction(null);
     };
 
     const handleExtend = async () => {
         if (!privateInstance) return;
 
         try {
+            setLoading(true);
+            setCurrentAction('extend');
             await extendInstance(guildID, auth);
             setSuccess(
                 `30 days have been added to the instance at a price of ${privateInstance.price} credits`
@@ -116,38 +135,58 @@ const Instance = ({
             await updateInstanceState();
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
     const start = async () => {
         try {
+            setLoading(true);
+            setCurrentAction('start');
             await startInstance(guildID, auth);
             setSuccess('Instance is now starting');
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
     const reboot = async () => {
         try {
+            setLoading(true);
+            setCurrentAction('reboot');
             await rebootInstance(guildID, auth);
             setSuccess('Instance is now rebooting');
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
     const stop = async () => {
         try {
+            setLoading(true);
+            setCurrentAction('stop');
             await stopInstance(guildID, auth);
             setSuccess('Instance is now stopping');
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
     const terminate = async () => {
         try {
+            setLoading(true);
+            setCurrentAction('terminate');
             const refund = await deleteInstance(guildID, auth);
             setSuccess(
                 `Instance has been deleted, and you have been refunded ${refund.toFixed(
@@ -156,16 +195,40 @@ const Instance = ({
             );
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
     const updateBotToken = async () => {
         try {
+            setLoading(true);
+            setCurrentAction('updateToken');
             await updateToken(guildID, auth, botToken!);
             setBotToken('');
             setSuccess('Bot token has been updated');
         } catch (e: any) {
             setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
+        }
+    };
+
+    const toggleAutoRenew = async () => {
+        try {
+            setLoading(true);
+            setCurrentAction('toggleAutoRenew');
+            const newVal = !autoRenew;
+            await setAutoRenew(guildID, auth, newVal);
+            setAutoRenewState(newVal);
+            setSuccess(`Auto-renew ${newVal ? 'enabled' : 'disabled'}`);
+        } catch (e: any) {
+            setError(e.response.data.detail);
+        } finally {
+            setLoading(false);
+            setCurrentAction(null);
         }
     };
 
@@ -204,6 +267,15 @@ const Instance = ({
                     </div>
                 ))}
             </div>
+
+            <div className="flex justify-center items-center mt-7 gap-2">
+                <h1 className="text-xl">Bot Token (required): </h1>
+                <input
+                    onChange={(e) => setBotToken(e.target.value)}
+                    value={botToken}
+                    className="text-center rounded w-80 text-black px-2"
+                />
+            </div>
         </div>
     );
 
@@ -217,6 +289,7 @@ const Instance = ({
                     (!privateInstance || !timeLeft ? (
                         <button
                             className="btn-primary"
+                            disabled={loading}
                             onClick={() => setInstanceModalOpen(true)}
                         >
                             Buy
@@ -236,6 +309,7 @@ const Instance = ({
 
                                 <button
                                     onClick={() => setExtendModalOpen(true)}
+                                    disabled={loading}
                                     className="btn-primary"
                                 >
                                     Extend
@@ -269,6 +343,10 @@ const Instance = ({
                             </h1>
 
                             <div className="flex gap-3 justify-center">
+                                <div className="flex items-center gap-2 mr-4">
+                                    <input id="autoRenew" type="checkbox" checked={autoRenew} onChange={toggleAutoRenew} />
+                                    <label htmlFor="autoRenew">Auto-renew</label>
+                                </div>
                                 <button
                                     onClick={start}
                                     disabled={
@@ -277,7 +355,7 @@ const Instance = ({
                                     }
                                     className="btn-primary"
                                 >
-                                    Start
+                                    {currentAction === 'start' ? 'Starting…' : 'Start'}
                                 </button>
 
                                 <button
@@ -288,7 +366,7 @@ const Instance = ({
                                     }
                                     className="btn-primary"
                                 >
-                                    Reboot
+                                    {currentAction === 'reboot' ? 'Rebooting…' : 'Reboot'}
                                 </button>
 
                                 <button
@@ -299,7 +377,7 @@ const Instance = ({
                                     }
                                     className="btn-primary"
                                 >
-                                    Stop
+                                    {currentAction === 'stop' ? 'Stopping…' : 'Stop'}
                                 </button>
 
                                 <button
@@ -324,7 +402,7 @@ const Instance = ({
                                     onClick={updateBotToken}
                                     className="btn-primary"
                                 >
-                                    Set
+                                    {currentAction === 'updateToken' ? 'Setting…' : 'Set'}
                                 </button>
                             </div>
                         </div>

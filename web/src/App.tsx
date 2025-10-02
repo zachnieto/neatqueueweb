@@ -1,4 +1,3 @@
-import { useHookstate } from '@hookstate/core';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -20,6 +19,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AdminRoutes from './components/routes/AdminRoutes';
 import LoggedInRoutes from './components/routes/LoggedInRoutes';
 import HistoryPage from './pages/HistoryPage';
+import LeaderboardV2 from './components/LeaderboardV2';
 
 const queryClient = new QueryClient();
 
@@ -40,6 +40,10 @@ function App() {
                         <Route
                             path="/leaderboard/:guildID/:channelID"
                             element={<Leaderboard />}
+                        />
+                        <Route
+                            path="/leaderboardv2/:guildID/:channelID"
+                            element={<LeaderboardV2 />}
                         />
                         <Route path="/lb/:shortUrl" element={<ShortURL />} />
                         <Route
