@@ -8,19 +8,10 @@ import { classNames } from "../util/tailwind";
 import { displayPercent } from "../util/utility";
 
 type PlayerData = LeaderboardPlayer["stats"];
-type SortKey =
-	| "mmr"
-	| "wins"
-	| "losses"
-	| "wl"
-	| "totalgames"
-	| "streak"
-	| "peak_mmr"
-	| "peak_streak"
-	| "winrate";
+type SortKey = Exclude<keyof PlayerData, "ign" | "rank" | "decay"> | "wl";
 type SortDirection = "asc" | "desc";
 
-const AVAILABLE_STATS: SortKey[] = [
+const TABLE_STATS: SortKey[] = [
 	"mmr",
 	"wl",
 	"wins",
@@ -32,6 +23,8 @@ const AVAILABLE_STATS: SortKey[] = [
 	"winrate",
 ];
 
+const EXPANDED_STATS: SortKey[] = ["current_rank", ...TABLE_STATS];
+
 const STAT_LABELS: Record<SortKey, string> = {
 	mmr: "MMR",
 	wl: "W/L",
@@ -42,6 +35,7 @@ const STAT_LABELS: Record<SortKey, string> = {
 	peak_mmr: "Peak MMR",
 	peak_streak: "Peak Streak",
 	winrate: "Win Rate",
+	current_rank: "Rank",
 };
 
 const DEFAULT_COLUMNS: SortKey[] = ["mmr", "wl", "winrate"];
@@ -50,6 +44,43 @@ interface LeaderboardProps {
 	passedGuildId?: string;
 	passedChannelId?: string;
 }
+
+interface MonthSelectorProps {
+	availableMonths: string[];
+	selectedMonth: string;
+	onMonthChange: (month: string) => void;
+	formatMonthDisplay: (month: string) => string;
+}
+
+const MonthSelector = ({
+	availableMonths,
+	selectedMonth,
+	onMonthChange,
+	formatMonthDisplay,
+}: MonthSelectorProps) => {
+	if (availableMonths.length <= 1 || availableMonths[0] === "alltime") {
+		return null;
+	}
+
+	return (
+		<div className="flex flex-col">
+			<label className="text-xs text-gray-400 mb-1.5 font-medium uppercase tracking-wide">
+				Time Period
+			</label>
+			<select
+				value={selectedMonth}
+				onChange={(e) => onMonthChange(e.target.value)}
+				className="w-full bg-neutral-900 text-white border border-neutral-700 rounded-lg px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-neutral-600 cursor-pointer hover:bg-neutral-800 transition-colors"
+			>
+				{availableMonths.map((month: string) => (
+					<option key={month} value={month}>
+						{formatMonthDisplay(month)}
+					</option>
+				))}
+			</select>
+		</div>
+	);
+};
 
 const Leaderboard = ({
 	passedGuildId = "",
@@ -131,10 +162,10 @@ const Leaderboard = ({
 				if (prev.length === 1) return prev;
 				return prev.filter((c) => c !== column);
 			} else {
-				// Add the column and sort by AVAILABLE_STATS order
+				// Add the column and sort by TABLE_STATS order
 				const newColumns = [...prev, column];
 				return newColumns.sort(
-					(a, b) => AVAILABLE_STATS.indexOf(a) - AVAILABLE_STATS.indexOf(b),
+					(a, b) => TABLE_STATS.indexOf(a) - TABLE_STATS.indexOf(b),
 				);
 			}
 		});
@@ -293,84 +324,81 @@ const Leaderboard = ({
 					</h1>
 				</div>
 
-				<div
-					className={classNames(
-						"grid gap-6",
-						leaderboardData.available_months.length > 1 &&
-							leaderboardData.available_months[0] !== "alltime"
-							? "grid-cols-1 lg:grid-cols-12"
-							: "grid-cols-1",
-					)}
-				>
-					{/* Sidebar - Month & Sort Controls */}
-					{leaderboardData.available_months.length > 1 &&
-						leaderboardData.available_months[0] !== "alltime" && (
-							<div className="lg:col-span-3 space-y-6">
-								{/* Time Period Selector */}
-								<div className="bg-neutral-900 rounded-xl border border-neutral-700 p-6 shadow-2xl">
-									<h2 className="text-lg font-bold text-white mb-4">
-										Time Period
-									</h2>
-									<div className="space-y-2">
-										{leaderboardData.available_months.map((month: string) => (
-											<button
-												key={month}
-												onClick={() => {
-													setSelectedMonth(month);
-													setCurrentPage(1);
-												}}
-												className={classNames(
-													"w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200",
-													selectedMonth === month
-														? "bg-neutral-700 text-white shadow-lg scale-105"
-														: "bg-neutral-800 text-gray-300 hover:bg-neutral-700 hover:scale-102",
-												)}
-											>
-												{formatMonthDisplay(month)}
-											</button>
-										))}
-									</div>
-								</div>
-							</div>
-						)}
+			<div className="space-y-4">
+				{/* Mobile Month Selector - Separate on mobile */}
+				<div className="md:hidden">
+					<div className="bg-neutral-800 rounded-xl border border-neutral-700 p-2 shadow-2xl">
+						<MonthSelector
+							availableMonths={leaderboardData.available_months}
+							selectedMonth={selectedMonth}
+							onMonthChange={(month) => {
+								setSelectedMonth(month);
+								setCurrentPage(1);
+							}}
+							formatMonthDisplay={formatMonthDisplay}
+						/>
+					</div>
+				</div>
 
-					{/* Column Toggle Controls */}
-					<div
-						className={classNames(
-							"bg-neutral-800 rounded-xl border border-neutral-700 p-2 md:p-4 shadow-2xl",
-							leaderboardData.available_months.length > 1 &&
-								leaderboardData.available_months[0] !== "alltime"
-								? "lg:col-span-3"
-								: "",
-						)}
-					>
-						<div className="flex flex-wrap gap-1 md:gap-2">
-							{AVAILABLE_STATS.map((stat: SortKey) => (
-								<button
-									key={stat}
-									onClick={() => toggleColumn(stat)}
-									className={classNames(
-										"px-2 py-1 md:px-3 md:py-1.5 rounded-md font-medium transition-all duration-200 text-xs",
-										visibleColumns.includes(stat)
-											? "bg-neutral-700 text-white shadow-md"
-											: "bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-gray-200",
-									)}
-								>
-									{STAT_LABELS[stat]}
-								</button>
-							))}
+				{/* Column Toggle Controls with Desktop Month Selector */}
+				<div className="bg-neutral-800 rounded-xl border border-neutral-700 p-2 md:p-4 shadow-2xl">
+					{/* Desktop: Combined layout */}
+					<div className="hidden md:flex md:items-end md:gap-4 mb-4">
+						<div className="flex-1">
+							<label className="text-xs text-gray-400 mb-1.5 font-medium uppercase tracking-wide block">
+								Displayed Stats
+							</label>
+							<div className="flex flex-wrap gap-2">
+								{TABLE_STATS.map((stat: SortKey) => (
+									<button
+										key={stat}
+										onClick={() => toggleColumn(stat)}
+										className={classNames(
+											"px-3 py-1.5 rounded-md font-medium transition-all duration-200 text-xs",
+											visibleColumns.includes(stat)
+												? "bg-neutral-700 text-white shadow-md"
+												: "bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-gray-200",
+										)}
+									>
+										{STAT_LABELS[stat]}
+									</button>
+								))}
+							</div>
+						</div>
+						<div className="w-48 flex-shrink-0">
+							<MonthSelector
+								availableMonths={leaderboardData.available_months}
+								selectedMonth={selectedMonth}
+								onMonthChange={(month) => {
+									setSelectedMonth(month);
+									setCurrentPage(1);
+								}}
+								formatMonthDisplay={formatMonthDisplay}
+							/>
 						</div>
 					</div>
 
+					{/* Mobile: Just column toggles */}
+					<div className="md:hidden flex flex-wrap gap-1">
+						{TABLE_STATS.map((stat: SortKey) => (
+							<button
+								key={stat}
+								onClick={() => toggleColumn(stat)}
+								className={classNames(
+									"px-2 py-1 rounded-md font-medium transition-all duration-200 text-xs",
+									visibleColumns.includes(stat)
+										? "bg-neutral-700 text-white shadow-md"
+										: "bg-neutral-800 text-gray-400 hover:bg-neutral-700 hover:text-gray-200",
+								)}
+							>
+								{STAT_LABELS[stat]}
+							</button>
+						))}
+					</div>
+				</div>
+
 					{/* Main Leaderboard */}
-					<div
-						className={classNames(
-							leaderboardData.available_months.length > 1 &&
-								leaderboardData.available_months[0] !== "alltime"
-								? "lg:col-span-9"
-								: "",
-						)}
-					>
+					<div>
 						{/* Desktop Table View */}
 						<div className="hidden md:block bg-neutral-900 rounded-xl border border-neutral-700 shadow-2xl overflow-hidden">
 							{/* Table Header */}
@@ -457,6 +485,9 @@ const Leaderboard = ({
 															<img
 																src={player.avatar_url ?? "/pixelart-logo.png"}
 																alt={player.name}
+																onError={(e) => {
+																	e.currentTarget.src = "/pixelart-logo.png";
+																}}
 																className="w-12 h-12 rounded-full border-2 border-neutral-600 shadow-lg"
 															/>
 															<div className="min-w-0">
@@ -521,7 +552,7 @@ const Leaderboard = ({
 												>
 													<div className="border-t border-neutral-800 px-6 py-4 bg-neutral-800/50">
 														<div className="grid grid-cols-5 gap-3">
-															{AVAILABLE_STATS.map((stat) => {
+															{EXPANDED_STATS.map((stat) => {
 																if (stat === "winrate") {
 																	const winrateValue =
 																		player?.stats?.winrate || 0;
@@ -774,7 +805,7 @@ const Leaderboard = ({
 											>
 												<div className="border-t border-neutral-700 p-3 bg-neutral-900/50">
 													<div className="grid grid-cols-3 gap-2">
-														{AVAILABLE_STATS.map((stat) => {
+														{EXPANDED_STATS.map((stat) => {
 															if (stat === "winrate") {
 																const winrateValue =
 																	player?.stats?.winrate || 0;
