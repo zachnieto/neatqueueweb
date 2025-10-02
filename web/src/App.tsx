@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import Guide from "./components/Guide";
 import Home from "./components/home/Home";
 import Leaderboard from "./components/Leaderboard";
-import LeaderboardV2 from "./components/LeaderboardV2";
 import Manage from "./components/manage/Manage";
 import Nav from "./components/Nav";
 import CustomParticles from "./components/Particles";
@@ -40,10 +39,6 @@ function App() {
 						<Route
 							path="/leaderboard/:guildID/:channelID"
 							element={<Leaderboard />}
-						/>
-						<Route
-							path="/leaderboardv2/:guildID/:channelID"
-							element={<LeaderboardV2 />}
 						/>
 						<Route path="/lb/:shortUrl" element={<ShortURL />} />
 						<Route

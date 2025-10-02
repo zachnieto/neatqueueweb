@@ -37,7 +37,7 @@ export const getLeaderboardV2 = async (
 	});
 
 	if (months && months.length > 0) {
-		months.forEach((month) => params.append("months", month));
+		months.forEach((month) => params.append("month", month));
 	}
 	if (includeFields && includeFields.length > 0) {
 		includeFields.forEach((field) => params.append("include_fields", field));
